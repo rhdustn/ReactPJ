@@ -1,5 +1,6 @@
 import styled, {keyframes} from 'styled-components'
 
+// 전체
 export const PlanBottomBox = styled.div`
     width: 100%; height: auto;
     box-sizing: border-box;
@@ -7,6 +8,7 @@ export const PlanBottomBox = styled.div`
     padding: 10px 10px 70px 10px;
 `
 
+// 하루 일정
 export const PerDayBox = styled.div`
     width: 100%; height: auto;
     position: relative;
@@ -26,7 +28,6 @@ export const PerDayDate = styled.div`
         margin: 0 10px 0 0;
     }
 `
-
 export const PerDayAttraction = styled.div`
     width: 100%; height: auto;
     display: flex; flex-direction: column;
@@ -76,7 +77,19 @@ export const RoutePlace = styled.div`
         border-radius: 10px;
     }
 `
+export const EditPlanBtn = styled.div`
+    padding: 15px;
+    box-sizing: border-box;
+    width: 100%; height: 20px;
+    display: flex; justify-content: center; align-items: center;
+    border-radius: 5px;
+    border: 1px solid silver;
+    color: #277bc0;
+    font-size: 16px; font-weight: bold;
+    cursor: pointer;
+`
 
+// 저장 버튼
 export const BtnBox = styled.div`
     width: 100%; height: auto;
     padding: 10px 30px 10px 30px;

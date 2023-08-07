@@ -1,5 +1,5 @@
 import React from 'react'
-import { PlanBottomBox, PerDayBox, PerDayDate, PerDayAttraction, RouteBox, RouteNumber, RoutePlace, BtnBox, SavePlanBtn } from './PlanBottom.styled'
+import { PlanBottomBox, PerDayBox, PerDayDate, PerDayAttraction, RouteBox, RouteNumber, RoutePlace, BtnBox, SavePlanBtn, EditPlanBtn } from './PlanBottom.styled'
 
 import city from '../../img/places/city.jpeg'
 
@@ -57,6 +57,11 @@ const PerDay = ({period, index, place}) => {
                         )
                     })}
                 </PerDayAttraction>
+
+                {/* 장소 편집 버튼 */}
+                <BtnBox>
+                    <EditPlanBtn>장소 편집</EditPlanBtn>
+                </BtnBox>
             </PerDayBox>
         </>
     )
