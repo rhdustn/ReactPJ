@@ -12,15 +12,15 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path='/' element={isMobile ? <>모바일이다!</> :<Main />} />
-        <Route path='/plan' element={isMobile ? <>모바일이다!</> :<Plan />} />
+        <Route path="/" element={isMobile ? <Main /> : <>모바일이다!</>} />
+        <Route path="/plan" element={isMobile ? <Plan /> : <>모바일이다!</>} />
         <Route
           path="/mypage"
-          element={isMobile ? <>모바일이다!</> : <Mypage />}
+          element={isMobile ? <Mypage /> : <>모바일이다!</>}
         />
         <Route
           path="/editproflie"
-          element={isMobile ? <>와! 모바일!</> : <EditProflie />}
+          element={isMobile ? <EditProflie /> : <>모바일이다!</>}
         />
       </Routes>
     </div>
