@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import { Provider } from 'react-redux';
+// import { Provider } from 'react-redux';
 // store import 해오고 아래 Provider로 감싸기
 
 import { BrowserRouter } from 'react-router-dom';
@@ -12,6 +12,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
+  
   <BrowserRouter>
     <App />
   </BrowserRouter>
