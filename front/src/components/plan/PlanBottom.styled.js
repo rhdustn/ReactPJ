@@ -4,20 +4,17 @@ export const PlanBottomBox = styled.div`
     width: 100%; height: auto;
     box-sizing: border-box;
     display: flex; flex-direction: column;
-    border: 1px solid;
-    padding: 10px;
+    padding: 10px 10px 70px 10px;
 `
 
 export const PerDayBox = styled.div`
     width: 100%; height: auto;
-    border: 1px solid;
     position: relative;
-    padding: 20px 0 20px 0;
+    padding: 30px 0 30px 0;
 `
 export const PerDayDate = styled.div`
-    width: 100%; height: 20px;
+    width: 100%; height: 30px;
     position: absolute; top: 0;
-    border: 1px solid;
     display: flex;
 
     & p {
@@ -32,7 +29,6 @@ export const PerDayDate = styled.div`
 
 export const PerDayAttraction = styled.div`
     width: 100%; height: auto;
-    border: 1px solid;
     display: flex; flex-direction: column;
 `
 export const RouteBox = styled.div`
@@ -43,6 +39,7 @@ export const RouteNumber = styled.div`
     width: 10%; height: 100%;
     display: flex;
     justify-content: center; align-items: center;
+    position: relative;
 
     & div {
         width: 22px; height: 22px;
@@ -52,10 +49,17 @@ export const RouteNumber = styled.div`
         color: white;
         font-size: 12px; font-weight: bold;
     }
+    & span {
+        height: 100%; width: 1px;
+        background-color: silver;
+        position: absolute;
+        z-index: -10;
+    }
 `
 export const RoutePlace = styled.div`
     width: 90%; height: 100%;
     display: flex; justify-content: center; align-items: center;
+    position: relative;
 
     & div {
         width: 100%; height: 90%;
@@ -67,6 +71,25 @@ export const RoutePlace = styled.div`
         box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.35);
     }
     & div img {
-        height: 100%;
+        height: 80%;
+        position: absolute; right: 10px;
+        border-radius: 10px;
     }
+`
+
+export const BtnBox = styled.div`
+    width: 100%; height: auto;
+    padding: 10px 30px 10px 30px;
+    box-sizing: border-box;
+`
+export const SavePlanBtn = styled.div`
+    padding: 15px;
+    box-sizing: border-box;
+    width: 100%; height: 20px;
+    display: flex; justify-content: center; align-items: center;
+    border-radius: 15px;
+    background-color: #277bc0;
+    color: white;
+    font-size: 16px; font-weight: bold;
+    cursor: pointer;
 `

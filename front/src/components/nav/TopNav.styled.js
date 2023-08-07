@@ -6,6 +6,7 @@ export const TopNavBox = styled.div`
     position: fixed; top: 0;
     background-color: white;
     display: flex;
+    z-index: 100;
 `
 export const TopNavBtn = styled.div`
     width: 50px; height: 100%;
