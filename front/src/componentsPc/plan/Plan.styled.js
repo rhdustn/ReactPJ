@@ -1,14 +1,5 @@
 import styled, { keyframes } from "styled-components";
 
-export const PlanBottomBox = styled.div`
-  width: 100%;
-  height: auto;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  padding: 10px 10px 70px 10px;
-`;
-
 export const PerDayBox = styled.div`
   width: 100%;
   height: auto;
@@ -24,7 +15,7 @@ export const PerDayDate = styled.div`
 
   & p {
     margin: 0;
-    font-size: 14px;
+    font-size: 20px;
   }
   & span {
     font-weight: bold;
@@ -40,7 +31,7 @@ export const PerDayAttraction = styled.div`
 `;
 export const RouteBox = styled.div`
   width: 100%;
-  height: 80px;
+  height: 100px;
   display: flex;
 `;
 export const RouteNumber = styled.div`
@@ -56,11 +47,12 @@ export const RouteNumber = styled.div`
     height: 22px;
     border-radius: 100%;
     background-color: #277bc0;
+    padding: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
-    font-size: 12px;
+    font-size: 17px;
     font-weight: bold;
   }
   & span {
@@ -120,15 +112,41 @@ export const SavePlanBtn = styled.div`
   cursor: pointer;
 `;
 
+export const PlanBottomBox = styled.div`
+  width: 50%;
+  height: auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 10px 70px 10px;
+`;
+
+
 export const PlanMidBox = styled.div`
-  width: 100%;
-  height: 200px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%);
+  
+  width: 40%;
+  height: 80%;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: start;
-  border: 1px solid;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
   padding: 10px;
+  & #gmp-map {
+        width : 100%;
+        height: 100%;
+        background-color: yellow;
+  }
+
+  html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+  }
 `;
 
 export const PlanTopBox = styled.div`
@@ -142,15 +160,15 @@ export const PlanTopBox = styled.div`
 `;
 
 export const Title = styled.div`
-  font-size: 24px;
+  font-size: 44px;
   font-weight: bold;
   padding: 5px 0 5px 0;
 `;
 export const Date = styled.div`
-  font-size: 12px;
+  font-size: 30px;
   padding: 5px 0 5px 0;
 `;
 export const Selected = styled.div`
-  font-size: 12px;
+  font-size: 18px;
   padding: 0 0 5px 0;
 `;

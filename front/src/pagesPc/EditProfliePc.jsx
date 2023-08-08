@@ -10,6 +10,7 @@ import styled from "styled-components";
 
 const EditProflie = () => {
   const Main = styled.div`
+ 
     width: 400px;
     height: 800px;
     position: relative;

@@ -23,8 +23,15 @@ function App() {
     background-size: 100% 100vh;
     background-repeat: no-repeat;
   `;
+
+  const PlanBody = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100vh;
+  `
   return (
-    <div className="App">
+    <div className='App'>
       <Routes>
         <Route
           path="/"
@@ -41,19 +48,21 @@ function App() {
           }
         />
         <Route
-          path="/plan"
+          path='/plan'
           element={
             isMobile ? (
               <Plan />
             ) : (
               <PcBody>
-                <PlanPc />
+                <PlanBody>
+                  <PlanPc />
+                </PlanBody>
               </PcBody>
             )
           }
         />
         <Route
-          path="/mypage"
+          path='/mypage'
           element={
             isMobile ? (
               <Mypage />
@@ -65,7 +74,7 @@ function App() {
           }
         />
         <Route
-          path="/editproflie"
+          path='/editproflie'
           element={
             isMobile ? (
               <EditProflie />
