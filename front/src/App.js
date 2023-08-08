@@ -15,15 +15,17 @@ function App() {
     width: 80%;
     margin: auto;
   `;
+
+  const PlanBody = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100vh;
+  `
   return (
     <div className='App'>
       <Routes>
-        <Route
-          path='/'
-          element={
-            isMobile ? (
-              <Main />
-            ) : (
+        <Route path='/' element={ isMobile ? (<Main />) : (
               <MobileBody>
                 <MainPc />
               </MobileBody>
@@ -37,7 +39,9 @@ function App() {
               <Plan />
             ) : (
               <MobileBody>
-                <PlanPc />
+                <PlanBody>
+                  <PlanPc />
+                </PlanBody>
               </MobileBody>
             )
           }

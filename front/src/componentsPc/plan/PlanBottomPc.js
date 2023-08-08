@@ -46,7 +46,7 @@ const PerDayPc = ({period, index, place}) => {
                                 <RouteNumber>
                                     <span></span>
                                     <div>{index+1}</div>
-                                    </RouteNumber>
+                                </RouteNumber>
                                 <RoutePlace>
                                     <div>
                                         {value}

@@ -18,8 +18,9 @@ const Plan = () => {
       <TopNavPc />
 
       <PlanTopPc />
-      <PlanMidPc />
+
       <PlanBottomPc />
+      <PlanMidPc />
       
       <BottomNavPc page={'plan'} />
     </>

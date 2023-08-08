@@ -5,8 +5,9 @@ const PlanMidPc = () => {
   return (
     <>
       <PlanMidBox>
-        지도
+        asdasds
       </PlanMidBox>
+      <br/>
     </>
   )
 }
