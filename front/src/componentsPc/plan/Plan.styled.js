@@ -31,7 +31,7 @@ export const PerDayAttraction = styled.div`
 `;
 export const RouteBox = styled.div`
   width: 100%;
-  height: 120px;
+  height: 100px;
   display: flex;
 `;
 export const RouteNumber = styled.div`
@@ -136,6 +136,17 @@ export const PlanMidBox = styled.div`
   align-items: start;
   box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
   padding: 10px;
+  & #gmp-map {
+        width : 100%;
+        height: 100%;
+        background-color: yellow;
+  }
+
+  html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+  }
 `;
 
 export const PlanTopBox = styled.div`
