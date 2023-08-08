@@ -39,12 +39,12 @@ const PerDay = ({period, index, place}) => {
 
     // 관광지 검색 & 추가 페이지로 이동
     const moveToAdd = (id) => { // 해당 plan의 해당 날짜에 대한 id
-        nav(`/addPlace/${id}`)
+        nav(`/addPlace/${id}?day=${id}`)
     }
 
     // 관광지 편집 페이지로 이동
     const moveToEdit = (id) => {
-        nav(`/editPlace/${id}`)
+        nav(`/editPlace/${id}?day=${id}`)
     }
 
     return (

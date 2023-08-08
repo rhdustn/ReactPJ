@@ -8,7 +8,9 @@ const TopNav = () => {
   const nav = useNavigate();
 
   const moveToBack = () => {
-    nav('/planAll');
+    console.log('moveToBack 실행')
+    // 일정 페이지에서 누르면 마이페이지로 넘어가기
+    // AddPlace, EditPlace에서 누르면 일정 페이지로 넘어가기
   }
 
   return (

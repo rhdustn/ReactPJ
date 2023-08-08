@@ -31,8 +31,8 @@ export const PlanMidBox = styled.div`
     box-sizing: border-box;
     display: flex; flex-direction: column;
     align-items: start;
-    border: 1px solid;
     padding: 10px;
+    background-color: black;
 `
 
 // ---------------------------------- //
