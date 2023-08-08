@@ -117,13 +117,14 @@ export const RoutePlace = styled.div`
 export const EditPlanBtn = styled.div`
     padding: 15px;
     box-sizing: border-box;
-    width: 100%; height: 20px;
+    width: 50%; height: 20px;
     display: flex; justify-content: center; align-items: center;
     border-radius: 5px;
     border: 1px solid silver;
     color: #277bc0;
     font-size: 14px; font-weight: bold;
     cursor: pointer;
+    margin: 0 5px 0 5px;
 `
 
 // 저장 버튼
@@ -131,6 +132,7 @@ export const BtnBox = styled.div`
     width: 100%; height: auto;
     padding: 10px 30px 10px 30px;
     box-sizing: border-box;
+    display: flex;
 `
 export const SavePlanBtn = styled.div`
     padding: 15px;

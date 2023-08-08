@@ -2,7 +2,7 @@ import "./App.css";
 
 import { Routes, Route } from "react-router-dom";
 
-import { Main, Plan, Mypage, EditProflie } from "./pages";
+import { Main, PlanAll, Plan, AddPlace, EditPlace, Mypage, EditProflie } from "./pages";
 import { useMediaQuery } from "react-responsive";
 
 function App() {
@@ -13,7 +13,11 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={isMobile ? <Main /> : <>모바일이다!</>} />
+        <Route path="/planAll" element={isMobile ? <PlanAll /> : <>모바일이다!</>} />
         <Route path="/plan" element={isMobile ? <Plan /> : <>모바일이다!</>} />
+        <Route path="/addPlace/:id" element={isMobile ? <AddPlace /> : <>모바일이다!</>} />
+        <Route path="/editPlace/:id" element={isMobile ? <EditPlace /> : <>모바일이다!</>} />
+        
         <Route
           path="/mypage"
           element={isMobile ? <Mypage /> : <>모바일이다!</>}
