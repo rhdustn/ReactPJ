@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { MainTopBox, LogoBox, TextBox, InputBox, DateBoxWrap, DateBox } from './MainTop.styled'
+import { MainTopBox, LogoBox, TextBox, InputBox } from './Main.styled'
 
 import logo2 from '../../img/icons/logo2.png'
 import mainText from '../../img/icons/mainText.png'

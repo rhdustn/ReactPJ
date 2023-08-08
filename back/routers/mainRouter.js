@@ -1,6 +1,6 @@
 const router = require("express").Router();
-const {} = require("../controllers/mainControllers");
+const {testcon} = require("../controllers/mainControllers");
 
-// router.post("/", );
+router.get("/", testcon);
 
 module.exports = router;

@@ -3,7 +3,7 @@ const express = require("express");
 require("dotenv").config();
 const session = require("express-session");
 const { sequelize } = require("./models");
-// const cors = require("cors");
+const cors = require("cors");
 const app = express();
 const mainRouter = require("./routers/mainRouter");
 // gptAPI 테스트 -----20230807 zerohoney
@@ -13,10 +13,10 @@ const testGPT = require("./routers/testGPT");
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-// app.use(cors({
-//     origin : ["http://localhost:"],
-//     credentials : true
-// }))
+app.use(cors({
+    origin : ["http://localhost:3000"],
+    credentials : true
+}))
 
 app.use(
   session({
@@ -25,6 +25,8 @@ app.use(
     saveUninitialized: false,
   })
 );
+
+console.log("123123");
 
 sequelize
   .sync({ force: false })
@@ -35,7 +37,9 @@ sequelize
     console.log(err);
   });
 
+
 app.use("/", mainRouter);
+
 
 // gptAPI 테스트 -----20230807 zerohoney
 app.use("/openAI", testGPT);

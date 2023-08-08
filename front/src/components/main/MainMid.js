@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import 'animate.css'
 
-import { MainMidBox, BigLabel, DateBoxWrap, DateBox } from './MainMid.styled'
+import { MainMidBox, BigLabel, DateBoxWrap, DateBox } from './Main.styled'
 
 const MainMid = ({dateSelected}) => {
     const [startDate, setStart] = useState('');

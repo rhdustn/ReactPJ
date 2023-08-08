@@ -1,7 +1,7 @@
 import React from 'react'
 import { PlanTopBox, Title, Date, Selected } from './Plan.styled'
 
-const PlanTop = () => {
+const PlanTopPc = () => {
     // main 페이지에서 입력한 정보
     let location = '후쿠오카';
     let date = '2023.08.28 ~ 2023.08.31';
@@ -31,4 +31,4 @@ const PlanTop = () => {
   )
 }
 
-export default PlanTop
+export default PlanTopPc
