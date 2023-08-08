@@ -1,5 +1,4 @@
 import styled, {keyframes} from 'styled-components'
-import { FadeInAni } from './MainTopPc.styled'
 
 export const MainTopBox = styled.div`
     width: 100%; height: auto;
