@@ -16,10 +16,10 @@ function App() {
     margin: auto;
   `;
   return (
-    <div className="App">
+    <div className='App'>
       <Routes>
         <Route
-          path="/"
+          path='/'
           element={
             isMobile ? (
               <Main />
@@ -31,7 +31,7 @@ function App() {
           }
         />
         <Route
-          path="/plan"
+          path='/plan'
           element={
             isMobile ? (
               <Plan />
@@ -43,7 +43,7 @@ function App() {
           }
         />
         <Route
-          path="/mypage"
+          path='/mypage'
           element={
             isMobile ? (
               <Mypage />
@@ -55,7 +55,7 @@ function App() {
           }
         />
         <Route
-          path="/editproflie"
+          path='/editproflie'
           element={
             isMobile ? (
               <EditProflie />

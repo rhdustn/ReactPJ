@@ -127,7 +127,7 @@ export const PlanMidBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: start;
-  border: 1px solid;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
   padding: 10px;
 `;
 
@@ -142,15 +142,15 @@ export const PlanTopBox = styled.div`
 `;
 
 export const Title = styled.div`
-  font-size: 24px;
+  font-size: 44px;
   font-weight: bold;
   padding: 5px 0 5px 0;
 `;
 export const Date = styled.div`
-  font-size: 12px;
+  font-size: 30px;
   padding: 5px 0 5px 0;
 `;
 export const Selected = styled.div`
-  font-size: 12px;
+  font-size: 18px;
   padding: 0 0 5px 0;
 `;
