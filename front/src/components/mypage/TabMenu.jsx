@@ -1,38 +1,13 @@
 import React, { useState } from 'react';
-import styled from "styled-components";
-
-const TabMain = styled.div`
-  position: absolute;
-  top: 40%;
-`;
-
-const TabsContainer = styled.div`
-  display: flex;
-`;
-
-const TabButton = styled.button`
-  width: 100px;
-  background-color: ${(props) => (props.active ? 'white' : 'white')};
-  color: #676767;
-  padding: 10px 20px;
-  border: none;
-  border-bottom: 2px solid ${(props) => (props.active ? '#5da0ff' : 'white')};
-  cursor: pointer;
-`;
-
-const Content = styled.div`
-  background-color: #f5f5f5;
-  height: 400px;
-  border-radius: 0 0 5px 5px;
-`;
+import { TabMain,TabButton,TabsContainer,Content } from './mypage.styled';
 
 const TapMenu = () => {
   const [tab, setTab] = useState(0);
   const tabArr = [
-    { name: "My Trip", content: "content1" },
-    { name: "Review", content: "content2" },
-    { name: "Comments", content: "content3" },
-    { name: "Alarm", content: "content4" }
+    { name: "My Trip", content: "My Trip" },
+    { name: "Review", content: "Review" },
+    { name: "Comments", content: "Comments" },
+    { name: "Alarm", content: "Alarm" }
   ];
 
   const selectMenuHandler = (index) => {

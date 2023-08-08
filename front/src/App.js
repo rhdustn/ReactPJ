@@ -2,7 +2,7 @@ import "./App.css";
 
 import { Routes, Route } from "react-router-dom";
 
-import { Main, Plan, AddPlace, EditPlace, Mypage, EditProflie } from "./pages";
+import { Main, Plan, AddPlace, EditPlace, Mypage, EditProflie,Board,BoardDetail } from "./pages";
 import { EditProfliePc, MainPc, MypagePc, PlanPc } from "./pagesPc";
 import { useMediaQuery } from "react-responsive";
 import { styled } from "styled-components";

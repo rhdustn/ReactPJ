@@ -1,14 +1,6 @@
 import React from 'react'
-import styled from "styled-components"
+import { Text } from './mypage.styled'
 
-const Text = styled.div`
-position: absolute;  
-  left: 50%;
-  top: 45%;
-  transform: translate(-50%, -45%);
-width: 250px;
-font-size: 12px;
-`
 
 const EditText = () => {
   return (

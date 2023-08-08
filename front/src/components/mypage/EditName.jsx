@@ -1,15 +1,6 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import { StyledProfileName } from './mypage.styled';
 
-const StyledProfileName = styled.div`
-  position: absolute;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -30%);
-  font-weight: 600;
-  cursor: pointer;
-  border-bottom: 2px solid #64a7fe;
-`;
 
 const EditName = ({ setProfileBtnChange }) => {
   const [editing, setEditing] = useState(false);

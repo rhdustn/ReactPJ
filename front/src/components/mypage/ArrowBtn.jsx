@@ -1,18 +1,8 @@
 import React from 'react'
-import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { StyleArrow,StyledImage } from './mypage.styled';
 
 
-const StyleArrow = styled.div`
-  position: absolute;
-  left: 10%;
-  top: 3%;
-  cursor: pointer;
-`;
-
-const StyledImage = styled.img`
-  width: 30px;
-`;
 
 const ArrowBtn = () => {
     const navigate = useNavigate();
