@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 
-import { BottomNavBox, BottomNavBtn } from './BottomNav.styled'
+import { BottomNavBox, BottomNavBtn } from './Nav.styled'
 
 import home1 from '../../img/icons/home1.png'
 import home2 from '../../img/icons/home2.png'

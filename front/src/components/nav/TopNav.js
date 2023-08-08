@@ -1,5 +1,5 @@
 import React from 'react'
-import { PlanInfoBox, TopNavBox, TopNavBtn, PlanInfoTitle, PlantInfoDate } from './TopNav.styled'
+import { PlanInfoBox, TopNavBox, TopNavBtn, PlanInfoTitle, PlantInfoDate } from './Nav.styled'
 
 import back from '../../img/icons/back.png'
 

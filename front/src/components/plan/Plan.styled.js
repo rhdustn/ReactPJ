@@ -1,6 +1,43 @@
 import styled, {keyframes} from 'styled-components'
 
-// 전체
+// PlanTop
+export const PlanTopBox = styled.div`
+    width: 100%; height: auto;
+    box-sizing: border-box;
+    display: flex; flex-direction: column;
+    align-items: start;
+    padding: 50px 10px 10px 10px;
+`
+
+export const Title = styled.div`
+    font-size: 24px;
+    font-weight: bold;
+    padding: 5px 0 5px 0;
+`
+export const Date = styled.div`
+    font-size: 12px;
+    padding: 5px 0 5px 0;
+`
+export const Selected = styled.div`
+    font-size: 12px;
+    padding: 0 0 5px 0;
+`
+
+// ---------------------------------- //
+
+// PlanMid
+export const PlanMidBox = styled.div`
+    width: 100%; height: 200px;
+    box-sizing: border-box;
+    display: flex; flex-direction: column;
+    align-items: start;
+    border: 1px solid;
+    padding: 10px;
+`
+
+// ---------------------------------- //
+
+// PlanBottom
 export const PlanBottomBox = styled.div`
     width: 100%; height: auto;
     box-sizing: border-box;
@@ -85,7 +122,7 @@ export const EditPlanBtn = styled.div`
     border-radius: 5px;
     border: 1px solid silver;
     color: #277bc0;
-    font-size: 16px; font-weight: bold;
+    font-size: 14px; font-weight: bold;
     cursor: pointer;
 `
 
