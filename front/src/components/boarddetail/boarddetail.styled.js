@@ -6,14 +6,20 @@ height: 800px;
 `
 const ImgBoxContainer = styled.div`
 width: 400px;
-height: 330px;
+height: 250px;
+display: flex;
+overflow: hidden;
 `
 const ImgBox = styled.div`
 /* 나중에 이미지를 넣게 된다면 width를 100%만 주고 height는 안줌  */
 width: 400px;
-height: 300px;
 background-color: beige;
+display: flex;
+transition: transform 0.3s ease;
 `
+ const Image = styled.img`
+  width: 400px;
+`;
 const TitleStyle = styled.div`
     box-sizing: border-box;
     overflow-wrap: break-word;
@@ -94,6 +100,6 @@ const BtnStyle = styled.button`
 `
 
 export {
-    Main, ImgBoxContainer, ImgBox, TitleStyle, SubContentStyle,
+    Main, ImgBoxContainer, ImgBox,Image, TitleStyle, SubContentStyle,
     Popup, PopupContent, DayList, DayListli,BtnStyle
 }
