@@ -2,7 +2,16 @@ import "./App.css";
 
 import { Routes, Route } from "react-router-dom";
 
-import { Main, Plan, AddPlace, EditPlace, Mypage, EditProflie,Board,BoardDetail } from "./pages";
+import {
+  Main,
+  Plan,
+  AddPlace,
+  EditPlace,
+  Mypage,
+  EditProflie,
+  Board,
+  BoardDetail,
+} from "./pages";
 import { EditProfliePc, MainPc, MypagePc, PlanPc } from "./pagesPc";
 import { useMediaQuery } from "react-responsive";
 import { styled } from "styled-components";
@@ -29,9 +38,9 @@ function App() {
     flex-wrap: wrap;
     width: 100%;
     height: 100vh;
-  `
+  `;
   return (
-    <div className='App'>
+    <div className="App">
       <Routes>
         <Route
           path="/"
@@ -48,7 +57,7 @@ function App() {
           }
         />
         <Route
-          path='/plan'
+          path="/plan"
           element={
             isMobile ? (
               <Plan />
@@ -61,11 +70,17 @@ function App() {
             )
           }
         />
-        <Route path="/addPlace/:id" element={isMobile ? <AddPlace /> : <>모바일이다!</>} />
-        <Route path="/editPlace/:id" element={isMobile ? <EditPlace /> : <>모바일이다!</>} />
-        
         <Route
-          path='/mypage'
+          path="/addPlace/:id"
+          element={isMobile ? <AddPlace /> : <>모바일이다!</>}
+        />
+        <Route
+          path="/editPlace/:id"
+          element={isMobile ? <EditPlace /> : <>모바일이다!</>}
+        />
+
+        <Route
+          path="/mypage"
           element={
             isMobile ? (
               <Mypage />
@@ -77,7 +92,7 @@ function App() {
           }
         />
         <Route
-          path='/editproflie'
+          path="/editproflie"
           element={
             isMobile ? (
               <EditProflie />
@@ -87,6 +102,14 @@ function App() {
               </PcBody>
             )
           }
+        />
+        <Route
+          path="/board"
+          element={isMobile ? <Board /> : <>모바일이다!</>}
+        />
+        <Route
+          path="/boarddetail"
+          element={isMobile ? <BoardDetail /> : <>모바일이다!</>}
         />
       </Routes>
     </div>
