@@ -3,7 +3,6 @@ import { FadeInAni } from './MainTopPc.styled'
 
 export const MainTopBox = styled.div`
     width: 100%; height: auto;
-    background-color: #277bc0;
     border-radius: 0 0 30px 30px;
     padding: 10px;
     box-sizing: border-box;
