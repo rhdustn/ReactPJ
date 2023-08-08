@@ -2,7 +2,7 @@ import "./App.css";
 
 import { Routes, Route } from "react-router-dom";
 
-import { Main, Plan, Mypage, EditProflie } from "./pages";
+import { Main, Plan, AddPlace, EditPlace, Mypage, EditProflie } from "./pages";
 import { EditProfliePc, MainPc, MypagePc, PlanPc } from "./pagesPc";
 import { useMediaQuery } from "react-responsive";
 import { styled } from "styled-components";
@@ -61,6 +61,9 @@ function App() {
             )
           }
         />
+        <Route path="/addPlace/:id" element={isMobile ? <AddPlace /> : <>모바일이다!</>} />
+        <Route path="/editPlace/:id" element={isMobile ? <EditPlace /> : <>모바일이다!</>} />
+        
         <Route
           path='/mypage'
           element={
