@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-// import BottomNav from '../componentsPc/nav/BottomNav'
-import PlanTop from '../componentsPc/plan/PlanTopPc'
-// import TopNav from '../componentsPc/nav/TopNav'
-import PlanMid from '../componentsPc/plan/PlanMidPc'
-import PlanBottom from '../componentsPc/plan/PlanBottomPc'
+import BottomNavPc from '../componentsPc/nav/BottomNavPc'
+import PlanTopPc from '../componentsPc/plan/PlanTopPc'
+import TopNavPc from '../componentsPc/nav/TopNavPc'
+import PlanMidPc from '../componentsPc/plan/PlanMidPc'
+import PlanBottomPc from '../componentsPc/plan/PlanBottomPc'
 
 const Plan = () => {
   const [dayNum, setDayNum] = useState();
@@ -15,13 +15,13 @@ const Plan = () => {
 
   return (
     <>
-      <TopNav />
+      <TopNavPc />
 
-      <PlanTop />
-      <PlanMid />
-      <PlanBottom />
+      <PlanTopPc />
+      <PlanMidPc />
+      <PlanBottomPc />
       
-      <BottomNav page={'plan'} />
+      <BottomNavPc page={'plan'} />
     </>
   )
 }
