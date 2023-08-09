@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {useNavigate} from 'react-router-dom'
 
 import { BottomNavBox, BottomNavBtn } from './Nav.styled'
@@ -13,7 +13,21 @@ import star2 from '../../img/icons/star2.png'
 const BottomNav = ({page}) => {
     const nav = useNavigate();
 
-    const [selected, setSelect] = useState(2);
+    const [icons, setIcon] = useState({
+        home : home1,
+        plan : plan2,
+        star : star2
+    })
+
+    useEffect(() => {
+        if(page == 'page') {
+            setIcon({
+                home : home2,
+                plan : plan1,
+                star : star2
+            })
+        }
+    }, [icons])
 
     const moveTo = (num) => {
         if(num == 0) {
@@ -32,15 +46,15 @@ const BottomNav = ({page}) => {
         <>
         <BottomNavBox>
             <BottomNavBtn onClick={() => moveTo(0)}>
-                <img src={home1}></img>
+                <img src={icons.home}></img>
                 <p>홈</p>    
             </BottomNavBtn>
             <BottomNavBtn onClick={() => moveTo(1)}>
-                <img src={plan2}></img>
+                <img src={icons.plan}></img>
                 <p>일정</p>
             </BottomNavBtn>
             <BottomNavBtn onClick={() => moveTo(2)}>
-                <img src={star2}></img>
+                <img src={icons.star}></img>
                 <p>리뷰</p>
             </BottomNavBtn>
             <BottomNavBtn onClick={() => moveTo(3)}>

@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import styled, {keyframes} from 'styled-components'
+import React, { useEffect, useState } from 'react'
 import 'animate.css'
 
 import BottomNav from '../components/nav/BottomNav'
@@ -8,18 +7,6 @@ import MainTop from '../components/main/MainTop'
 import MainMid from '../components/main/MainMid'
 import MainBottom from '../components/main/MainBottom'
 
-
-// fadeIn
-const FadeInAni = keyframes`
-    from {
-        opacity: 0;
-    }to {
-        opacity: 1;
-    }
-`
-const FadeInMainMid = styled(MainMid)`
-    animation: ${FadeInAni} 15s ease-in-out;
-`
 
 const Main = () => {
     const [isSearched, setSearch] = useState(false);
@@ -41,6 +28,12 @@ const Main = () => {
         setDate(true);
     }
 
+    useEffect(() => {
+        if(isSearched) {
+            // showDate();
+        }
+    }, [isSearched])
+
 
     return (
         <>
@@ -48,9 +41,11 @@ const Main = () => {
         {isSearched && <MainMid dateSelected={dateSelected} />}
         {isDated && <MainBottom page={'main'} />}
 
-        <BottomNav />
+        <BottomNav page={'main'} />
         </>
     )
 }
+
+
 
 export default Main

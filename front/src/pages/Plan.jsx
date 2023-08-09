@@ -8,11 +8,6 @@ import PlanBottom from '../components/plan/PlanBottom'
 const Plan = () => {
   const [dayNum, setDayNum] = useState();
 
-  // 지도 받아오기
-  const getMap = () => {
-
-  }
-
   return (
     <>
       <TopNav />

@@ -3,7 +3,7 @@ import 'animate.css'
 
 import { MainMidBox, BigLabel, DateBoxWrap, DateBox } from './Main.styled'
 
-const MainMid = ({dateSelected}) => {
+const MainMid = ({dateSelected, isSearched}) => {
     const [startDate, setStart] = useState('');
     const [endDate, setEnd] = useState('');
 
