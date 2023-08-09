@@ -41,77 +41,77 @@ function App() {
   `;
   return (
     <div className="App">
-      <Routes>
-        <Route
-          path="/"
-          element={
-            isMobile ? (
-              <Main />
-            ) : (
-              <MainPcBody>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              isMobile ? (
+                <Main />
+              ) : (
+                <MainPcBody>
+                  <PcBody>
+                    <MainPc />
+                  </PcBody>
+                </MainPcBody>
+              )
+            }
+          />
+          <Route
+            path="/plan"
+            element={
+              isMobile ? (
+                <Plan />
+              ) : (
                 <PcBody>
-                  <MainPc />
+                  <PlanBody>
+                    <PlanPc />
+                  </PlanBody>
                 </PcBody>
-              </MainPcBody>
-            )
-          }
-        />
-        <Route
-          path="/plan"
-          element={
-            isMobile ? (
-              <Plan />
-            ) : (
-              <PcBody>
-                <PlanBody>
-                  <PlanPc />
-                </PlanBody>
-              </PcBody>
-            )
-          }
-        />
-        <Route
-          path="/addPlace/:id"
-          element={isMobile ? <AddPlace /> : <>모바일이다!</>}
-        />
-        <Route
-          path="/editPlace/:id"
-          element={isMobile ? <EditPlace /> : <>모바일이다!</>}
-        />
+              )
+            }
+          />
+          <Route
+            path="/addPlace/:id"
+            element={isMobile ? <AddPlace /> : <>모바일이다!</>}
+          />
+          <Route
+            path="/editPlace/:id"
+            element={isMobile ? <EditPlace /> : <>모바일이다!</>}
+          />
 
-        <Route
-          path="/mypage"
-          element={
-            isMobile ? (
-              <Mypage />
-            ) : (
-              <PcBody>
-                <MypagePc />
-              </PcBody>
-            )
-          }
-        />
-        <Route
-          path="/editproflie"
-          element={
-            isMobile ? (
-              <EditProflie />
-            ) : (
-              <PcBody>
-                <EditProfliePc />
-              </PcBody>
-            )
-          }
-        />
-        <Route
-          path="/board"
-          element={isMobile ? <Board /> : <>모바일이다!</>}
-        />
-        <Route
-          path="/boarddetail"
-          element={isMobile ? <BoardDetail /> : <>모바일이다!</>}
-        />
-      </Routes>
+          <Route
+            path="/mypage"
+            element={
+              isMobile ? (
+                <Mypage />
+              ) : (
+                <PcBody>
+                  <MypagePc />
+                </PcBody>
+              )
+            }
+          />
+          <Route
+            path="/editproflie"
+            element={
+              isMobile ? (
+                <EditProflie />
+              ) : (
+                <PcBody>
+                  <EditProfliePc />
+                </PcBody>
+              )
+            }
+          />
+          <Route
+            path="/board"
+            element={isMobile ? <Board /> : <>모바일이다!</>}
+          />
+          <Route
+            path="/boarddetail"
+            element={isMobile ? <BoardDetail /> : <>모바일이다!</>}
+          />
+        </Routes>
     </div>
   );
 }
