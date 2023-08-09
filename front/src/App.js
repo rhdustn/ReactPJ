@@ -3,6 +3,8 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 
 import {
+  Signup,
+  Login,
   Main,
   Plan,
   AddPlace,
@@ -42,6 +44,16 @@ function App() {
   return (
     <div className="App">
       <Routes>
+        <Route
+          path="/signup"
+          element={isMobile ? <Signup /> : <>모바일이다!</>}
+        />
+        <Route
+          path="/login"
+          element={isMobile ? <Login /> : <>모바일이다!</>}
+        />
+
+
         <Route
           path="/"
           element={

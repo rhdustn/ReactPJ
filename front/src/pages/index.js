@@ -1,3 +1,6 @@
+import Signup from "./Signup"
+import Login from "./Login"
+
 import Main from "./Main";
 import Plan from "./Plan";
 import AddPlace from "./AddPlace";
@@ -9,6 +12,8 @@ import Board from "./Board";
 import BoardDetail from "./BoardDetail";
 
 export {
+  Signup,
+  Login,
   Main,
   Plan,
   Mypage,
