@@ -42,11 +42,6 @@ const PerDay = ({period, index, place}) => {
         nav(`/addPlace/${id}?day=${id}`)
     }
 
-    // 관광지 편집 페이지로 이동
-    const moveToEdit = (id) => {
-        nav(`/editPlace/${id}?day=${id}`)
-    }
-
     return (
         <>
             <PerDayBox>
@@ -78,7 +73,6 @@ const PerDay = ({period, index, place}) => {
                 {/* 장소 편집 버튼 */}
                 <BtnBox>
                     <EditPlanBtn onClick={() => {moveToAdd(index)}}>장소 추가</EditPlanBtn>
-                    <EditPlanBtn onClick={() => {moveToEdit(index)}}>일정 편집</EditPlanBtn>
                 </BtnBox>
             </PerDayBox>
         </>

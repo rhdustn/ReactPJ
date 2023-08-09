@@ -32,7 +32,15 @@ export const PlanMidBox = styled.div`
     display: flex; flex-direction: column;
     align-items: start;
     padding: 10px;
-    background-color: black;
+
+    & div {
+        width: 100%; height: 100%;
+    }
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
 `
 
 // ---------------------------------- //

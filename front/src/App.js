@@ -8,7 +8,6 @@ import {
   Main,
   Plan,
   AddPlace,
-  EditPlace,
   Mypage,
   EditProflie,
   Board,
@@ -85,10 +84,6 @@ function App() {
           <Route
             path="/addPlace/:id"
             element={isMobile ? <AddPlace /> : <>모바일이다!</>}
-          />
-          <Route
-            path="/editPlace/:id"
-            element={isMobile ? <EditPlace /> : <>모바일이다!</>}
           />
 
           <Route
