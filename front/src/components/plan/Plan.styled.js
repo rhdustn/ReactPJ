@@ -1,5 +1,43 @@
 import styled, {keyframes} from 'styled-components'
 
+// PlanTop
+export const PlanTopBox = styled.div`
+    width: 100%; height: auto;
+    box-sizing: border-box;
+    display: flex; flex-direction: column;
+    align-items: start;
+    padding: 50px 10px 10px 10px;
+`
+
+export const Title = styled.div`
+    font-size: 24px;
+    font-weight: bold;
+    padding: 5px 0 5px 0;
+`
+export const Date = styled.div`
+    font-size: 12px;
+    padding: 5px 0 5px 0;
+`
+export const Selected = styled.div`
+    font-size: 12px;
+    padding: 0 0 5px 0;
+`
+
+// ---------------------------------- //
+
+// PlanMid
+export const PlanMidBox = styled.div`
+    width: 100%; height: 200px;
+    box-sizing: border-box;
+    display: flex; flex-direction: column;
+    align-items: start;
+    padding: 10px;
+    background-color: black;
+`
+
+// ---------------------------------- //
+
+// PlanBottom
 export const PlanBottomBox = styled.div`
     width: 100%; height: auto;
     box-sizing: border-box;
@@ -7,6 +45,7 @@ export const PlanBottomBox = styled.div`
     padding: 10px 10px 70px 10px;
 `
 
+// 하루 일정
 export const PerDayBox = styled.div`
     width: 100%; height: auto;
     position: relative;
@@ -26,7 +65,6 @@ export const PerDayDate = styled.div`
         margin: 0 10px 0 0;
     }
 `
-
 export const PerDayAttraction = styled.div`
     width: 100%; height: auto;
     display: flex; flex-direction: column;
@@ -76,11 +114,25 @@ export const RoutePlace = styled.div`
         border-radius: 10px;
     }
 `
+export const EditPlanBtn = styled.div`
+    padding: 15px;
+    box-sizing: border-box;
+    width: 50%; height: 20px;
+    display: flex; justify-content: center; align-items: center;
+    border-radius: 5px;
+    border: 1px solid silver;
+    color: #277bc0;
+    font-size: 14px; font-weight: bold;
+    cursor: pointer;
+    margin: 0 5px 0 5px;
+`
 
+// 저장 버튼
 export const BtnBox = styled.div`
     width: 100%; height: auto;
     padding: 10px 30px 10px 30px;
     box-sizing: border-box;
+    display: flex;
 `
 export const SavePlanBtn = styled.div`
     padding: 15px;

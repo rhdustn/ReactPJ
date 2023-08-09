@@ -1,5 +1,5 @@
 import React from 'react'
-import { PlanTopBox, Title, Date, Selected } from './PlanTop.styled'
+import { PlanTopBox, Title, Date, Selected } from './Plan.styled'
 
 const PlanTop = () => {
     // main 페이지에서 입력한 정보

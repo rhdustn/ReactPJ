@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react'
 
-import { BigLabel } from './MainMid.styled'
-import { MainBottomBox, SmallLabel, SelectBox, Select, BtnBox, MakePlanBtn } from './MainBottom.styled'
+import { MainBottomBox, BigLabel, SmallLabel, SelectBox, Select, BtnBox, MakePlanBtn } from './Main.styled'
 
 const MainBottom = () => {
     let withArr = ['혼자', '친구와', '연인과', '배우자와', '아이와', '부모님과', '반려동물과'];

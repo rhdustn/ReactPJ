@@ -1,31 +1,7 @@
 import React, { useState, useRef } from 'react';
-import styled from 'styled-components';
 
-const StyledProfileImg = styled.div`
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  background-color: #ffd8de;
-  position: absolute;  
-  left: 50%;
-  top: 15%;
-  transform: translate(-50%, -15%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer; 
-  background-image: ${(props) => (props.preview ? `url(${props.preview})` : 'none')};
-  background-size: cover;
-  background-position: center;
-`;
+import { StyledProfileImg,InputBtn } from './mypage.styled';
 
-const InputBtn = styled.div`
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%,-40%);
-  display: none; 
-`;
 
 const EditImg = () => {
   const [selectedFile, setSelectedFile] = useState(null);
