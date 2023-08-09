@@ -23,6 +23,7 @@ export const Title = styled.div`
 `
 export const InputBox = styled.div`
     width: 90%; height: auto;
+    position: relative;
 `
 export const Label = styled.label`
     font-size: 20px;
@@ -34,11 +35,20 @@ export const Input = styled.input`
     outline: none;
     box-sizing: border-box;
     margin: 0 0 10px 0;
+    padding: 0 60px 0 5px;
 `
 export const Text = styled.div`
-    width: 100%; height: 10px;
+    width: 100%; height: 20px;
     font-size: 12px;
     text-align: end;
+    color: ${(props) => props.color || 'silver'};
+`
+export const ChkBtn = styled.div`
+    width: 100px; height: 10px;
+    font-size: 12px; font-weight: bold;
+    text-align: end;
+    color: silver;
+    position: absolute; right: 10px; top: 30px;
 `
 export const TryBtn = styled.div`
     width: 100%; height: 40px;
