@@ -147,18 +147,55 @@ const AddStyle = styled.button`
     border: 1px solid rgb(54, 143, 255);
     background-color: rgb(54, 143, 255);
     color: white;
+    margin-top: 10px;
 `
 const imgStyle = {
-  width: '18px',
+  width: '18px'
+  
 };
 
 const CommentContainer = styled.div`
 width: 400px;
 height: 400px;
+position: relative;
 `
+const CommentFormdiv = styled.div`
+list-style: none;
+width: 400px;
+height: 40px;
+border-top: 2px solid;
+border-color: rgb(239, 239, 239);;
+position: absolute;
+bottom: 0%;
+display: flex;
+justify-content: space-between;
+justify-content: center;
+align-items: center;
+`
+const CommentInput = styled.input`
+  width: 300px;
+  height: 38px;
+  border: none;
+
+`
+const CommentBtn = styled.button`
+border: none;
+font-size: 15px;
+background-color: white;
+font-weight: bold;
+ color:lightblue;
+outline: none;
+position: absolute;
+right: 1%;
+top: 50%;
+transform: translate(-1%,-50%);
+
+`
+
 
 export {
     Main, ImgBoxContainer, ImgBox,Image, TitleStyle, SubContentStyle,
     Popup, PopupContent, DayList, DayListli,BtnStyle,ImageBtnPre,ImageBtnNext,
-    BoardLine,BoardPlanContainer,AddStyle,imgStyle,CommentContainer
+    BoardLine,BoardPlanContainer,AddStyle,imgStyle,CommentContainer,CommentFormdiv,
+    CommentInput,CommentBtn
 }
