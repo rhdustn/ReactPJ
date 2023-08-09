@@ -6,20 +6,44 @@ height: 800px;
 `
 const ImgBoxContainer = styled.div`
 width: 400px;
-height: 250px;
+height: 280px;
 display: flex;
 overflow: hidden;
+position: relative;
 `
 const ImgBox = styled.div`
 /* 나중에 이미지를 넣게 된다면 width를 100%만 주고 height는 안줌  */
-width: 400px;
+width: 1200px;
+height: 250px;
 background-color: beige;
 display: flex;
 transition: transform 0.3s ease;
+
 `
  const Image = styled.img`
   width: 400px;
+  height: 250px;
+  overflow-y: hidden;
 `;
+const ImageBtnPre = styled.button`
+position: absolute;
+top: 50%;
+background: none;
+color: white;
+z-index: 2;
+border: none;
+transform: translate(0,-50%);
+`
+const ImageBtnNext = styled.button`
+position: absolute;
+background: none;
+color: white;
+right: 0%;
+top: 50%;
+z-index: 2;
+border: none;
+transform: translate(0,-50%);
+`
 const TitleStyle = styled.div`
     box-sizing: border-box;
     overflow-wrap: break-word;
@@ -98,8 +122,43 @@ const BtnStyle = styled.button`
     border-radius: 3px;
     margin: 5px;
 `
+const BoardLine = styled.div`
+width: 400px;
+height: 10px;
+background-color: rgb(239, 239, 239);
+margin-top: 30px;
+`
+const BoardPlanContainer = styled.div`
+width: 400px;
+height: 600px;
+border: 1px solid;
+`
+const AddStyle = styled.button`
+    width: 150px;
+    height: 50px;
+    display: inline-block;
+    float: none;
+    font-weight: bold;
+    text-align: center;
+    font-size: 14px;
+    line-height: 17px;
+    border-radius: 4px;
+    padding: 7px 12px;
+    border: 1px solid rgb(54, 143, 255);
+    background-color: rgb(54, 143, 255);
+    color: white;
+`
+const imgStyle = {
+  width: '18px',
+};
+
+const CommentContainer = styled.div`
+width: 400px;
+height: 400px;
+`
 
 export {
     Main, ImgBoxContainer, ImgBox,Image, TitleStyle, SubContentStyle,
-    Popup, PopupContent, DayList, DayListli,BtnStyle
+    Popup, PopupContent, DayList, DayListli,BtnStyle,ImageBtnPre,ImageBtnNext,
+    BoardLine,BoardPlanContainer,AddStyle,imgStyle,CommentContainer
 }
