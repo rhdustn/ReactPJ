@@ -44,7 +44,7 @@ app.use("/", mainRouter);
 // gptAPI 테스트 -----20230807 zerohoney
 app.use("/openAI", testGPT);
 
-const server = app.listen(8000, () => {
+const server = app.listen(8080, () => {
   console.log("server on");
 });
 

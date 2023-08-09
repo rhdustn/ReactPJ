@@ -1,7 +1,6 @@
 import "./App.css";
 
 import { Routes, Route } from "react-router-dom";
-
 import {
   Main,
   Plan,
@@ -40,7 +39,7 @@ function App() {
     height: 100vh;
   `;
   return (
-    <div className="App">
+      <div className="App">
         <Routes>
           <Route
             path="/"
@@ -112,7 +111,7 @@ function App() {
             element={isMobile ? <BoardDetail /> : <>모바일이다!</>}
           />
         </Routes>
-    </div>
+      </div>
   );
 }
 
