@@ -41,8 +41,8 @@ const MainBottom = ({choiceSelected}) => {
     }
 
     useEffect(() => {
-        console.log("누구와 : ", choiceIndex1)
-        console.log("여행스타일 : ", choiceIndex2)
+        // console.log("누구와 : ", choiceIndex1)
+        // console.log("여행스타일 : ", choiceIndex2)
 
         if(choiceIndex1.length > 0 && choiceIndex2.length > 0) {
             setAll(true);

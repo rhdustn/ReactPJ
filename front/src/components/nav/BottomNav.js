@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {useNavigate} from 'react-router-dom'
+import {useNavigate, useLocation} from 'react-router-dom'
 
 import { BottomNavBox, BottomNavBtn } from './Nav.styled'
 
@@ -10,8 +10,11 @@ import plan2 from '../../img/icons/plan2.png'
 import star1 from '../../img/icons/star1.png'
 import star2 from '../../img/icons/star2.png'
 
-const BottomNav = ({page}) => {
+const BottomNav = () => {
     const nav = useNavigate();
+
+    const page = useLocation().pathname;
+    console.log(page)
 
     const [icons, setIcon] = useState({
         home : home1,
@@ -20,44 +23,38 @@ const BottomNav = ({page}) => {
     })
 
     useEffect(() => {
-        if(page == 'page') {
+        if(page == '/plan') {
             setIcon({
                 home : home2,
                 plan : plan1,
                 star : star2
             })
+        }else if(page == '/board') {
+            setIcon({
+                home : home2,
+                plan : plan2,
+                star : star1
+            })
         }
-    }, [icons])
+    }, [])
 
-    const moveTo = (num) => {
-        if(num == 0) {
-            nav('/')
-        }else if(num == 1) {
-            nav('/plan')
-            // nav('/planAll')
-        }else if(num == 2) {
-            nav('/board')
-        }else if(num == 3) {
-            nav('/mypage')
-        }
-    }
 
     return (
         <>
         <BottomNavBox>
-            <BottomNavBtn onClick={() => moveTo(0)}>
+            <BottomNavBtn onClick={() => nav('/')}>
                 <img src={icons.home}></img>
                 <p>홈</p>    
             </BottomNavBtn>
-            <BottomNavBtn onClick={() => moveTo(1)}>
+            <BottomNavBtn onClick={() => nav('/plan')}>
                 <img src={icons.plan}></img>
                 <p>일정</p>
             </BottomNavBtn>
-            <BottomNavBtn onClick={() => moveTo(2)}>
+            <BottomNavBtn onClick={() => nav('/board')}>
                 <img src={icons.star}></img>
                 <p>리뷰</p>
             </BottomNavBtn>
-            <BottomNavBtn onClick={() => moveTo(3)}>
+            <BottomNavBtn onClick={() => nav('/mypage')}>
                 <img src={home2} className='profile_img'></img>
                 <p>마이페이지</p>
             </BottomNavBtn>

@@ -28,7 +28,7 @@ const AddPlace = () => {
 
     return (
         <>
-        <TopNav />
+        <TopNav isScrolled={true} />
 
         <AddPlaceMid page={'add'} day={day} placeArr={suggested} choiceIndex={choiceIndex} setChoice={setChoice} />
         {show && <AddPlaceBottom suggested={suggested} choiceIndex={choiceIndex} />}
