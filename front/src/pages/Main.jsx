@@ -6,11 +6,16 @@ import BottomNav from '../components/nav/BottomNav'
 import MainTop from '../components/main/MainTop'
 import MainMid from '../components/main/MainMid'
 import MainBottom from '../components/main/MainBottom'
+import { Loading1 } from '../components/loading/Loading'
 
 
 const Main = () => {
+    // gpt에 요청할 content
+    const [content, setContent] = useState('');
+
     const [isSearched, setSearch] = useState(false);
     const [isDated, setDate] = useState(false);
+    const [isChoiced, setChoice] = useState(false);
 
     const locationSearched = (location) => {
         console.log(location);
@@ -28,18 +33,19 @@ const Main = () => {
         setDate(true);
     }
 
-    useEffect(() => {
-        if(isSearched) {
-            // showDate();
-        }
-    }, [isSearched])
+    const choiceSelected = (choiceIndex1, choiceIndex2) => {
+        console.log(choiceIndex1)
+        console.log(choiceIndex2)
+        setChoice(true);
+    }
 
 
     return (
         <>
         <MainTop locationSearched={locationSearched} />
         {isSearched && <MainMid dateSelected={dateSelected} />}
-        {isDated && <MainBottom page={'main'} />}
+        {isDated && <MainBottom page={'main'} choiceSelected={choiceSelected} />}
+        {isChoiced && <Loading1 />}
 
         <BottomNav page={'main'} />
         </>

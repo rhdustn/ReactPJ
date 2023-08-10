@@ -1,5 +1,15 @@
 import styled, {keyframes} from 'styled-components'
 
+// animation
+const fadeInAni = keyframes`
+    from {
+        opacity: 0;
+    }to {
+        opacity: 1;
+    }
+`
+
+
 // MainTop
 export const MainTopBox = styled.div`
     width: 100%; height: auto;
@@ -65,6 +75,7 @@ export const MainMidBox = styled.div`
     display: flex; flex-direction: column;
     align-items: center;
     margin: 0 0 10px 0;
+    animation: ${fadeInAni} 0.5s ease-in-out;
 `
 export const BigLabel = styled.div`
     width: 100%;
@@ -106,6 +117,7 @@ export const MainBottomBox = styled.div`
     align-items: center;
     margin: 0 0 10px 0;
     padding: 0 0 70px 0;
+    animation: ${fadeInAni} 0.5s ease-in-out;
 `
 export const SmallLabel = styled.div`
     width: 100%;
@@ -149,4 +161,5 @@ export const MakePlanBtn = styled.div`
     color: white;
     font-size: 16px; font-weight: bold;
     cursor: pointer;
+    animation: ${fadeInAni} 0.5s ease-in-out;
 `

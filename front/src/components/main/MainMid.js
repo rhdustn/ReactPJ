@@ -10,7 +10,17 @@ const MainMid = ({dateSelected, isSearched}) => {
     const today = new Date().toISOString().split('T')[0];
 
     const handleStarteDate = (e) => {
+        // 시작 날짜
+        const newStartDate = e.target.value;
         setStart(e.target.value);
+
+        // 끝 날짜를 시작 날짜의 일주일 뒤까지만 선택할 수 있게
+        const newMaxDate = new Date(newStartDate);
+        newMaxDate.setDate(newMaxDate.getDate() + 7);
+        const formattedMaxDate = newMaxDate.toISOString().split('T')[0];
+
+        let endDateInput = document.getElementById("end-date");
+        endDateInput.max = formattedMaxDate;
         setEnd('')
     }
 
@@ -34,7 +44,7 @@ const MainMid = ({dateSelected, isSearched}) => {
             </DateBox>
             ~
             <DateBox>
-                <input type='date' value={endDate} min={startDate} onChange={handleEndDate}></input>
+                <input id='end-date' type='date' value={endDate} min={startDate} onChange={handleEndDate}></input>
             </DateBox>
         </DateBoxWrap>
     </MainMidBox>
