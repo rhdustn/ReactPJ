@@ -1,7 +1,8 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import { PlanMidBox } from './Plan.styled'
 
-const PlanMid = () => {
+const PlanMid = ({isScrolled}) => {
+
   const initMap = () => {
     const myLatLng = {
       lat: 40.12150192260742,
@@ -27,9 +28,21 @@ const PlanMid = () => {
     initMap();
   }, []);
 
+  useEffect(() => {
+    const mapBox = document.getElementById("gmp-map-box");
+
+    if(isScrolled) {
+      mapBox.style.position = 'fixed'
+      mapBox.style.top = '50px'
+    }else {
+      mapBox.style.position = 'relative'
+      mapBox.style.top = '0'
+    }
+  }, [isScrolled])
+
   return (
     <>
-      <PlanMidBox>
+      <PlanMidBox id='gmp-map-box'>
         <div id="gmp-map"></div>
       </PlanMidBox>
     </>

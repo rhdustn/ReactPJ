@@ -1,4 +1,12 @@
-import styled from 'styled-components'
+import styled, {keyframes} from 'styled-components'
+
+const fadeInAni = keyframes`
+    from {
+        opacity: 0;
+    }to {
+        opacity: 1;
+    }
+`
 
 // BottomNav
 export const BottomNavBox = styled.div`
@@ -18,7 +26,7 @@ export const BottomNavBtn = styled.div`
     cursor: pointer;
 
     & img {
-        height: 60%;
+        height: 50%;
     }
     & .profile_img {
         border-radius: 100%;
@@ -54,6 +62,7 @@ export const PlanInfoBox = styled.div`
     display: flex; flex-direction: column;
     justify-content: center;
     align-items: start;
+    animation: ${fadeInAni} 0.5s ease-in-out;
 `
 export const PlanInfoTitle = styled.p`
     font-size: 14px;

@@ -14,7 +14,6 @@ const BottomNav = () => {
     const nav = useNavigate();
 
     const page = useLocation().pathname;
-    console.log(page)
 
     const [icons, setIcon] = useState({
         home : home1,

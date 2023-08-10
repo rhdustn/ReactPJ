@@ -13,7 +13,7 @@ const Plan = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      const scrollThreshold = 80;
+      const scrollThreshold = 101;
       
       if (scrollY > scrollThreshold) {
         setIsScrolled(true);
@@ -33,8 +33,8 @@ const Plan = () => {
       <TopNav isScrolled={isScrolled} />
 
       <PlanTop />
-      <PlanMid />
-      <PlanBottom />
+      <PlanMid isScrolled={isScrolled} />
+      <PlanBottom isScrolled={isScrolled} />
       
       <BottomNav page={'plan'} />
     </>

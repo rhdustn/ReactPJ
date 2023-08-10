@@ -5,8 +5,7 @@ import city from '../../img/places/city.jpeg'
 import { useNavigate } from 'react-router-dom';
 
 // 지도 아래 일정 부분
-const PlanBottom = () => {
-
+const PlanBottom = ({isScrolled}) => {
 
     // 일정 며칠인지
     let periodArr = ['8.28', '8.29', '8.30', '8.31'];
@@ -17,11 +16,19 @@ const PlanBottom = () => {
         ['유후인']
     ]
 
-
+    useEffect(() => {
+        const bottomBox = document.getElementById("bottom-box");
+    
+        if(isScrolled) {
+            bottomBox.style.padding = '210px 10px 70px 10px'
+        }else {
+            bottomBox.style.padding = '10px 10px 70px 10px'
+        }
+      }, [isScrolled])
 
     return (
         <>
-        <PlanBottomBox>
+        <PlanBottomBox id='bottom-box'>
             {periodArr.map((value, index) => {
                 return <PerDay key={index} period={value} index={index+1} place={placeArr[index]} />
             })}
