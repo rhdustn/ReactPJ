@@ -34,6 +34,8 @@ function App() {
   const PcBody = styled.div`
     width: 80%;
     margin: auto;
+    position: relative;
+    min-height: 100vh;
   `;
   const MainPcBody = styled.div`
     width: 100%;
@@ -54,11 +56,27 @@ function App() {
       <Routes>
         <Route
           path="/signup"
-          element={isMobile ? <Signup /> : <>모바일이다!</>}
+          element={
+            isMobile ? (
+              <Signup />
+            ) : (
+              <PcBody>
+                <SignupPc />
+              </PcBody>
+            )
+          }
         />
         <Route
           path="/login"
-          element={isMobile ? <Login /> : <>모바일이다!</>}
+          element={
+            isMobile ? (
+              <Login />
+            ) : (
+              <PcBody>
+                <LoginPc />
+              </PcBody>
+            )
+          }
         />
 
         <Route
