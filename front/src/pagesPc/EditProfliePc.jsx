@@ -8,7 +8,7 @@ import {
 } from "../componentsPc/mypage";
 import styled from "styled-components";
 
-const EditProflie = () => {
+const EditProfliePc = () => {
   const Main = styled.div`
  
     width: 400px;
@@ -32,4 +32,4 @@ const EditProflie = () => {
   );
 };
 
-export default EditProflie;
+export default EditProfliePc;

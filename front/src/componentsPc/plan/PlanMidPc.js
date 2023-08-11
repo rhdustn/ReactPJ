@@ -1,5 +1,5 @@
 import React, {useEffect, useRef} from 'react'
-import { PlanMidBox } from './Plan.styled'
+import { PlanMidBox } from './PlanPc.styled'
 
 const PlanMidPc = () => {
   // 위도, 경도에 따른 위치 마커 찍어주기
