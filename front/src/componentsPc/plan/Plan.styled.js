@@ -139,13 +139,17 @@ export const PlanMidBox = styled.div`
   & #gmp-map {
         width : 100%;
         height: 100%;
-        background-color: yellow;
   }
 
   html, body {
         height: 100%;
         margin: 0;
         padding: 0;
+  }
+
+  & #test1{
+    width: 100%;
+    height: 100%;
   }
 `;
 

@@ -1,5 +1,5 @@
 const express = require("express");
-// const dot = require("dotenv").config();
+const dot = require("dotenv").config();
 require("dotenv").config();
 const session = require("express-session");
 const { sequelize } = require("./models");
