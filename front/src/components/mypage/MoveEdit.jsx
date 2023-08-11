@@ -1,12 +1,8 @@
 import React from 'react'
 import { useNavigate } from 'react-router'
-import { styled } from 'styled-components'
+import { EditNavigate } from './mypage.styled'
 
-const EditNavigate = styled.div`
-position: absolute;
-right: 10%;
-top: 5%;
-`
+
 
 const MoveEdit = () => {
     const navigate = useNavigate()

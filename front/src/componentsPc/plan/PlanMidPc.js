@@ -83,7 +83,7 @@ const PlanMidPc = () => {
       <br/>
 
     </>
-  )
-}
+  );
+};
 
-export default PlanMidPc
+export default PlanMidPc;

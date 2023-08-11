@@ -1,5 +1,5 @@
 import React from 'react'
-import { PlanMidBox } from './PlanMid.styled'
+import { PlanMidBox } from './Plan.styled'
 
 const PlanMid = () => {
   return (
