@@ -2,10 +2,11 @@ import "./App.css";
 
 import { Routes, Route } from "react-router-dom";
 import {
+  Signup,
+  Login,
   Main,
   Plan,
   AddPlace,
-  EditPlace,
   Mypage,
   EditProflie,
   Board,
@@ -41,6 +42,16 @@ function App() {
   return (
       <div className="App">
         <Routes>
+        <Route
+          path="/signup"
+          element={isMobile ? <Signup /> : <>모바일이다!</>}
+        />
+        <Route
+          path="/login"
+          element={isMobile ? <Login /> : <>모바일이다!</>}
+        />
+
+
           <Route
             path="/"
             element={
@@ -72,10 +83,6 @@ function App() {
           <Route
             path="/addPlace/:id"
             element={isMobile ? <AddPlace /> : <>모바일이다!</>}
-          />
-          <Route
-            path="/editPlace/:id"
-            element={isMobile ? <EditPlace /> : <>모바일이다!</>}
           />
 
           <Route

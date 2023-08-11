@@ -3,26 +3,17 @@ import { AddPlaceMidBox, Title, PlaceBox, ImgBox, PlaceName, SelectBtnBox, Selec
 
 import city from '../../img/places/city.jpeg'
 
-const AddPlaceMid = ({page, day, placeArr, choiceIndex, setChoice}) => {
-    let p;
-    let btn;
-    if(page == 'add') {
-        p = '추천'
-        btn = '선택'
-    }else if(page == 'edit') {
-        p = '선택'
-        btn = '삭제'
-    }
+const AddPlaceMid = ({page, day, suggested, choiceIndex, setChoice}) => {
 
-    const isChoice = (index) => {
-        if(choiceIndex.indexOf(index) !== -1) {
-            let arr = choiceIndex.filter((value) => value !== index)
+    const isChoice = (value) => {
+        if(choiceIndex.indexOf(value) !== -1) {
+            let arr = choiceIndex.filter((va) => va !== value)
             setChoice(arr);
         }else {
             if(choiceIndex == '') {
-                setChoice([index])
+                setChoice([value])
             }else {
-                setChoice([...choiceIndex, index]);
+                setChoice([...choiceIndex, value]);
             }
         }
     }
@@ -31,15 +22,15 @@ const AddPlaceMid = ({page, day, placeArr, choiceIndex, setChoice}) => {
   return (
     <>
       <AddPlaceMidBox>
-        <Title>day{day} {p} 장소</Title>
-        {placeArr.map((value, index) => {
-            if(choiceIndex.indexOf(index) == -1) {
+        <Title>day{day} 추천 장소</Title>
+        {suggested.map((value, index) => {
+            if(choiceIndex.indexOf(value) == -1) {
                 return (
                     <PlaceBox key={index}>
                         <ImgBox><img src={city}></img></ImgBox>
                         <PlaceName>{value}</PlaceName>
                         <SelectBtnBox>
-                            <SelectBtn onClick={() => {isChoice(index)}} back={'#edebeb'} font={'#9b9a9a'}>{btn}</SelectBtn>
+                            <SelectBtn onClick={() => {isChoice(value)}} back={'#edebeb'} font={'#9b9a9a'}>선택</SelectBtn>
                         </SelectBtnBox>
                     </PlaceBox>
                 )
@@ -50,7 +41,7 @@ const AddPlaceMid = ({page, day, placeArr, choiceIndex, setChoice}) => {
                         <PlaceName>{value}</PlaceName>
                         <SelectBtnBox>
                             
-                            <SelectBtn onClick={() => {isChoice(index)}} back={'#277bc0'} font={'white'}>{btn}</SelectBtn>
+                            <SelectBtn onClick={() => {isChoice(value)}} back={'#277bc0'} font={'white'}>선택</SelectBtn>
                         </SelectBtnBox>
                     </PlaceBox>
                 )

@@ -4,7 +4,7 @@ import { AddBtn, Selected, ShowSelectedBox } from './Place.styled'
 
 import city from '../../img/places/city.jpeg'
 
-const AddPlaceBottom = ({suggested, choiceIndex}) => {
+const AddPlaceBottom = ({choiceIndex}) => {
     useEffect(() => {
         console.log(choiceIndex)
     }, [])
@@ -13,11 +13,10 @@ const AddPlaceBottom = ({suggested, choiceIndex}) => {
     <>
       <ShowSelectedBox>
         {choiceIndex.map((value, index) => {
-            console.log(suggested[value]);
             return (
-                <Selected>
+                <Selected key={index}>
                     <img src={city}></img>
-                    <div>{suggested[value]}</div>
+                    <div>{value}</div>
                 </Selected>
             )
         })}

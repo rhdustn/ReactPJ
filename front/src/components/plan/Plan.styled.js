@@ -32,7 +32,17 @@ export const PlanMidBox = styled.div`
     display: flex; flex-direction: column;
     align-items: start;
     padding: 10px;
-    background-color: black;
+    z-index: 100;
+    background-color: white;
+
+    & div {
+        width: 100%; height: 100%;
+    }
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
 `
 
 // ---------------------------------- //
@@ -50,11 +60,17 @@ export const PerDayBox = styled.div`
     width: 100%; height: auto;
     position: relative;
     padding: 30px 0 30px 0;
+
+    &:hover {
+        background-color: #edebeb;
+    }
 `
 export const PerDayDate = styled.div`
     width: 100%; height: 30px;
     position: absolute; top: 0;
-    display: flex;
+    display: flex; align-items: center;
+    padding: 0 10px 0 10px;
+    box-sizing: border-box;
 
     & p {
         margin: 0;
@@ -66,7 +82,7 @@ export const PerDayDate = styled.div`
     }
 `
 export const PerDayAttraction = styled.div`
-    width: 100%; height: auto;
+    width: calc(100% - 10px); height: auto;
     display: flex; flex-direction: column;
 `
 export const RouteBox = styled.div`
@@ -117,7 +133,7 @@ export const RoutePlace = styled.div`
 export const EditPlanBtn = styled.div`
     padding: 15px;
     box-sizing: border-box;
-    width: 50%; height: 20px;
+    width: 100%; height: 20px;
     display: flex; justify-content: center; align-items: center;
     border-radius: 5px;
     border: 1px solid silver;
@@ -125,6 +141,7 @@ export const EditPlanBtn = styled.div`
     font-size: 14px; font-weight: bold;
     cursor: pointer;
     margin: 0 5px 0 5px;
+    background-color: white;
 `
 
 // 저장 버튼

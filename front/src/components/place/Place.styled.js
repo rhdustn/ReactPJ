@@ -1,4 +1,12 @@
-import styled from 'styled-components'
+import styled, {keyframes} from 'styled-components'
+
+const fadeInAni = keyframes`
+    from {
+        opacity: 0;
+    }to {
+        opacity: 1;
+    }
+`
 
 // AddPlaceTop
 export const AddPlaceTopBox = styled.div`
@@ -51,7 +59,11 @@ export const PlaceBox = styled.div`
     width: 100%; height: 60px;
     display: flex;
     align-items: center;
-    position: relative;;
+    position: relative;
+
+    &:hover {
+        background-color: #edebeb;
+    }
 `
 export const ImgBox = styled.div`
     width: 40px; height: 40px;
@@ -92,6 +104,7 @@ export const ShowSelectedBox = styled.div`
     background-color: #edebeb;
     display: flex; align-items: center;
     overflow-x: scroll;
+    animation: ${fadeInAni} 0.5s ease-in-out;
 `
 export const Selected = styled.div`
     width: 70px; height: 80px;
@@ -122,4 +135,5 @@ export const AddBtn = styled.div`
     font-weight: bold;
     position: fixed; bottom: 0;
     display: flex; justify-content: center; align-items: center;
+    animation: ${fadeInAni} 0.5s ease-in-out;
 `
