@@ -90,6 +90,7 @@ const slideInFromBottom = keyframes`
     transform: translateY(0);
   }
 `;
+
 const PopupContent = styled.div`
 position: absolute;
 bottom:0%;
@@ -159,6 +160,14 @@ width: 400px;
 height: 400px;
 position: relative;
 `
+
+const CommentMain = styled.div`
+width: 400px;
+height: 340px;
+overflow: scroll;
+position: relative;
+
+`
 const CommentFormdiv = styled.div`
 list-style: none;
 width: 400px;
@@ -183,19 +192,66 @@ border: none;
 font-size: 15px;
 background-color: white;
 font-weight: bold;
- color:lightblue;
+color:lightblue;
 outline: none;
 position: absolute;
 right: 1%;
 top: 50%;
 transform: translate(-1%,-50%);
 
+&:hover {
+    color: rgb(54, 143, 255);
+  }
+
 `
+const CommentProflieImg = styled.div`
+width: 30px;
+height: 30px;
+border: 1px solid;
+border-radius: 50%;
+`
+
+const CommentContain = styled.div`
+  width: 400px;
+  border-top: 2px solid lightgray;
+  position: relative;
+ padding: 5px;
+
+ 
+` 
+const CommentContain2 = styled.div`
+  /* position: absolute; */
+  position: relative;
+  width: 300px;
+  top: 50%;
+  left: 40%;
+  transform: translate(-40%,-50%);
+  display: flex;
+  flex-direction: column;
+    align-items: flex-start;
+`
+const Recommentdiv = styled.div`
+    position: absolute;
+    right: 10%;
+    top: 30%;
+    `
+const Recommentbox = styled.div`
+position: absolute;
+left: 16%;
+bottom: 0%;
+transform: translate(-16%);
+
+  border: none;
+
+
+`
+
 
 
 export {
     Main, ImgBoxContainer, ImgBox,Image, TitleStyle, SubContentStyle,
     Popup, PopupContent, DayList, DayListli,BtnStyle,ImageBtnPre,ImageBtnNext,
-    BoardLine,BoardPlanContainer,AddStyle,imgStyle,CommentContainer,CommentFormdiv,
-    CommentInput,CommentBtn
+    BoardLine,BoardPlanContainer,AddStyle,imgStyle,CommentContainer,CommentMain,CommentFormdiv,
+    CommentInput,CommentBtn,CommentProflieImg,CommentContain,CommentContain2,Recommentdiv,
+    Recommentbox
 }
