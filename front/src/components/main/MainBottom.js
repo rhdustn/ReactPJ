@@ -28,7 +28,6 @@ const MainBottom = ({choiceSelected}) => {
             }else {
                 setChoice1([...choiceIndex1, value]);
             }
-            choiceSelected(choiceIndex1, choiceIndex2)
         }
     }
     // 여행 스타일
@@ -42,11 +41,12 @@ const MainBottom = ({choiceSelected}) => {
             }else {
                 setChoice2([...choiceIndex2, value]);
             }
-            choiceSelected(choiceIndex1, choiceIndex2)
         }
     }
 
     useEffect(() => {
+        choiceSelected(choiceIndex1, choiceIndex2)
+
         if (choiceIndex1.length > 0 && choiceIndex2.length > 0) {
             setAll(true);
         } else {
