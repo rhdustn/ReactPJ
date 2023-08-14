@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import styled, { keyframes } from "styled-components";
 import "animate.css";
+// import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import BottomNavPc from "../componentsPc/nav/BottomNavPc";
 
 import MainTopPc from "../componentsPc/main/MainTopPc";
 import MainMidPc from "../componentsPc/main/MainMidPc";
 import MainBottomPc from "../componentsPc/main/MainBottomPc";
-
+import { useDispatch, useSelector } from "react-redux";
+import { insert } from "../redux/features/dataForGpt";
 // fadeIn
 const FadeInAni = keyframes`
     from {
@@ -23,6 +25,13 @@ const FadeInMainMid = styled(MainMidPc)`
 const Main = () => {
   const [isSearched, setSearch] = useState(false);
   const [isDated, setDate] = useState(false);
+  // QueryClient 인스턴스 생성
+  // const queryClient = new QueryClient();
+  //   gpt리덕스 관리 변수
+  const gptData = useSelector((state) => {
+    return state.gptSlice;
+  });
+  const gptDispatch = useDispatch();
 
   const locationSearched = (location) => {
     console.log(location);
@@ -32,6 +41,7 @@ const Main = () => {
     } else {
       // 지역이 제대로 검색 되었을 시
       setSearch(true);
+      gptDispatch(insert({ ...gptData, location: location }));
     }
   };
 
@@ -46,7 +56,12 @@ const Main = () => {
       {isSearched && (
         <MainMidPc dateSelected={dateSelected} isSearched={isSearched} />
       )}
-      {isDated && <MainBottomPc page={"main"} isDated={isDated} />}
+
+      {isDated && (
+        // <QueryClientProvider client={queryClient}  contextSharing={true}>
+          <MainBottomPc page={"main"} isDated={isDated} />
+        // </QueryClientProvider>
+      )}
 
       <BottomNavPc />
     </>

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from "react";
 
 import { MainBottomBox, BigLabel, SmallLabel, SelectBox, Select, BtnBox, MakePlanBtn } from './Main.styled'
 import { useNavigate } from 'react-router-dom';
@@ -11,7 +11,7 @@ const MainBottom = ({choiceSelected}) => {
     const [choiceIndex1, setChoice1] = useState('');
     const [choiceIndex2, setChoice2] = useState('');
 
-    const [choiceAll, setAll] = useState(false);
+  const [choiceAll, setAll] = useState(false);
 
     // 누구와
     const isChoice1 = (value) => {
@@ -44,13 +44,12 @@ const MainBottom = ({choiceSelected}) => {
         // console.log("누구와 : ", choiceIndex1)
         // console.log("여행스타일 : ", choiceIndex2)
 
-        if(choiceIndex1.length > 0 && choiceIndex2.length > 0) {
-            setAll(true);
-        }else {
-            setAll(false);
-        }
-    }, [choiceIndex1, choiceIndex2])
-
+    if (choiceIndex1.length > 0 && choiceIndex2.length > 0) {
+      setAll(true);
+    } else {
+      setAll(false);
+    }
+  }, [choiceIndex1, choiceIndex2]);
 
     return (
         <>
@@ -88,4 +87,4 @@ const MainBottom = ({choiceSelected}) => {
     )
 }
 
-export default MainBottom
+export default MainBottom;

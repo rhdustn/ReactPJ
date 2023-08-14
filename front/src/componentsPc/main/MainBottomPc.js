@@ -9,7 +9,12 @@ import {
   BtnBox,
   MakePlanBtn,
 } from "./MainPc.styled";
-
+import { useDispatch, useSelector } from "react-redux";
+// gpt에 대한 reducer
+import { insert } from "../../redux/features/dataForGpt";
+import { useMutation, useQuery } from "react-query";
+import axios from "axios";
+import { store } from "../../redux/store/store";
 const MainBottomPc = ({ isDated }) => {
   let withArr = [
     "혼자",
@@ -37,6 +42,35 @@ const MainBottomPc = ({ isDated }) => {
 
   const [choiceIndex1, setChoice1] = useState("");
   const [choiceIndex2, setChoice2] = useState("");
+  // gpt의 응답
+  const [gptAnswer, setGptAnswer] = useState("");
+  // 키값으로 가져온 gpt의 대답중 key에 값이 불규칙적이므로 index로 불러오기 위헤 Object.keys(obj); 를 사용하여 key의 인덱스를 저장할거임
+  // const [ansKey, setAnsKey] = useState("");
+  //   gpt에게 보낼 일련의 데이터
+  const gptDispatch = useDispatch();
+  const gptData = useSelector((state) => {
+    return state.gptSlice;
+  });
+
+  // post로 gptData를 서버로 보내는 함수
+  const sendDataToGpt = async () => {
+    axios
+      .post("http://localhost:8080/openAI", { gptData })
+      .then((res) => {
+        // gpt응답 여기서 state에 저장
+        const data = JSON.parse(res.data.content);
+        setGptAnswer(data);
+        // const keys = Object.keys(data);
+        // setAnsKey(keys);
+        console.log(JSON.parse(res.data.content));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  // useMutation으로 비동기적 처리
+  const gptQuery = useMutation(sendDataToGpt);
 
   const [choiceAll, setAll] = useState(false);
   // 스크롤 내려오는 함수
@@ -51,12 +85,23 @@ const MainBottomPc = ({ isDated }) => {
   const isChoice1 = (index) => {
     if (choiceIndex1.indexOf(index) !== -1) {
       let arr = choiceIndex1.filter((value) => value !== index);
+      let dataArr = gptData.choiceDataWho.filter((value) => {
+        return value !== withArr[index];
+      });
       setChoice1(arr);
+      gptDispatch(insert({ ...gptData, choiceDataWho: dataArr }));
     } else {
       if (choiceIndex1 == "") {
         setChoice1([index]);
+        gptDispatch(insert({ ...gptData, choiceDataWho: [withArr[index]] }));
       } else {
         setChoice1([...choiceIndex1, index]);
+        gptDispatch(
+          insert({
+            ...gptData,
+            choiceDataWho: [...gptData["choiceDataWho"], withArr[index]],
+          })
+        );
       }
     }
   };
@@ -64,19 +109,33 @@ const MainBottomPc = ({ isDated }) => {
   const isChoice2 = (index) => {
     if (choiceIndex2.indexOf(index) !== -1) {
       let arr = choiceIndex2.filter((value) => value !== index);
+      let dataArr = gptData.choiceDataHow.filter((value) => {
+        return value !== whichArr[index];
+      });
       setChoice2(arr);
+
+      gptDispatch(insert({ ...gptData, choiceDataHow: dataArr }));
     } else {
       if (choiceIndex2 == "") {
         setChoice2([index]);
+        gptDispatch(insert({ ...gptData, choiceDataHow: [whichArr[index]] }));
       } else {
         setChoice2([...choiceIndex2, index]);
+        gptDispatch(
+          insert({
+            ...gptData,
+            choiceDataHow: [...gptData["choiceDataHow"], whichArr[index]],
+          })
+        );
       }
     }
   };
 
+
   useEffect(() => {
     console.log("누구와 : ", choiceIndex1);
     console.log("여행스타일 : ", choiceIndex2);
+    console.log("gpt데이터:", gptData);
 
     if (choiceIndex1.length > 0 && choiceIndex2.length > 0) {
       setAll(true);
@@ -94,6 +153,32 @@ const MainBottomPc = ({ isDated }) => {
 
   return (
     <>
+      {gptAnswer !== "" ? (
+        <>
+          <h1>{gptAnswer.location}에 대한 추천 관광지 리스트 입니다</h1>
+        </>
+      ) : (
+        <></>
+      )}
+      {gptAnswer !== "" ? (
+        gptAnswer.attractions.map((value) => {
+          return (
+            <ul>
+              <li>{value.name}</li>
+              <li>{value.detail}</li>
+              <ul>
+                
+              <li>위도:{value.attractionLocation.latitude}</li>
+              <li>경도:{value.attractionLocation.longitude}</li>
+
+              </ul>
+            </ul>
+          );
+        })
+      ) : (
+        <></>
+      )}
+
       <MainBottomBox id="mainBottomBoxPc">
         <BigLabel>어떤 스타일의 여행을 할 계획인가요?</BigLabel>
         <SmallLabel>누구와</SmallLabel>
@@ -159,7 +244,14 @@ const MainBottomPc = ({ isDated }) => {
 
         {choiceAll && (
           <BtnBox>
-            <MakePlanBtn>완료</MakePlanBtn>
+            <MakePlanBtn
+              onClick={() => {
+                // 마지막 날짜 변경후 버튼 클릭시 실행
+                gptQuery.mutate(gptData);
+              }}
+            >
+              완료
+            </MakePlanBtn>
           </BtnBox>
         )}
       </MainBottomBox>

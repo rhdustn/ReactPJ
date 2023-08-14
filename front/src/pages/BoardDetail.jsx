@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Main } from '../components/boarddetail/boarddetail.styled';
-import { ImgSlice, Title, SubContent, DayBtn, PlanBtn, DayPopup } from '../components/boarddetail';
+import { ImgSlice, Title, SubContent, DayBtn, PlanBtn,
+   DayPopup,BoardPlan,Comment } from '../components/boarddetail';
 
 const BoardDetail = () => {
   const [popup, setPopup] = useState(false);
@@ -22,6 +23,8 @@ const BoardDetail = () => {
           <PlanBtn />
         </div>
         {popup && <DayPopup onClose={() => setPopup(false)} />}
+        <BoardPlan/>
+        <Comment/>
       </Main>
     </div>
   );

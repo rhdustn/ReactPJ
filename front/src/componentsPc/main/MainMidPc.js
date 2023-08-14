@@ -2,10 +2,16 @@ import React, { useEffect, useState } from "react";
 import "animate.css";
 
 import { MainMidBox, BigLabel, DateBoxWrap, DateBox } from "./MainPc.styled";
-
+import { useDispatch, useSelector } from "react-redux";
+import { insert } from "../../redux/features/dataForGpt";
 const MainMidPc = ({ dateSelected, isSearched }) => {
   const [startDate, setStart] = useState("");
   const [endDate, setEnd] = useState("");
+  //   gpt리덕스 관리 변수
+  const gptData = useSelector((state) => {
+    return state.gptSlice;
+  });
+  const gptDispatch = useDispatch();
   // 스크롤 내려오는 함수
   const goToDateScroll = () => {
     const ele = document.querySelector("#mainMidBoxPc");
@@ -27,6 +33,7 @@ const MainMidPc = ({ dateSelected, isSearched }) => {
   useEffect(() => {
     if (startDate != "" && endDate != "") {
       dateSelected(startDate, endDate);
+      gptDispatch(insert({ ...gptData, date: `${startDate}~${endDate}` }));
     }
   }, [endDate]);
   useEffect(() => {

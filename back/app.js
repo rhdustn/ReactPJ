@@ -1,5 +1,5 @@
 const express = require("express");
-// const dot = require("dotenv").config();
+const dot = require("dotenv").config();
 require("dotenv").config();
 const session = require("express-session");
 const { sequelize } = require("./models");
@@ -44,7 +44,7 @@ app.use("/", mainRouter);
 // gptAPI 테스트 -----20230807 zerohoney
 app.use("/openAI", testGPT);
 
-const server = app.listen(8000, () => {
+const server = app.listen(8080, () => {
   console.log("server on");
 });
 

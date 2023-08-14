@@ -1,5 +1,5 @@
 import React from 'react'
-import { PlanBottomBox, PerDayBox, PerDayDate, PerDayAttraction, RouteBox, RouteNumber, RoutePlace, BtnBox, SavePlanBtn } from './Plan.styled'
+import { PlanBottomBox, PerDayBox, PerDayDate, PerDayAttraction, RouteBox, RouteNumber, RoutePlace, BtnBox, SavePlanBtn } from './PlanPc.styled'
 
 import city from '../../img/places/city.jpeg'
 

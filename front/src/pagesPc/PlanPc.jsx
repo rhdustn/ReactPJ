@@ -5,7 +5,7 @@ import TopNavPc from "../componentsPc/nav/TopNavPc";
 import PlanMidPc from "../componentsPc/plan/PlanMidPc";
 import PlanBottomPc from "../componentsPc/plan/PlanBottomPc";
 
-const Plan = () => {
+const PlanPc = () => {
   const [dayNum, setDayNum] = useState();
 
   // 지도 받아오기
@@ -26,4 +26,4 @@ const Plan = () => {
   );
 };
 
-export default Plan;
+export default PlanPc;
