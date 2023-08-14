@@ -4,24 +4,22 @@ import { AddBtn, Selected, ShowSelectedBox } from './Place.styled'
 
 import city from '../../img/places/city.jpeg'
 
-const AddPlaceBottom = ({choiceIndex}) => {
-    useEffect(() => {
-        console.log(choiceIndex)
-    }, [])
-
+const AddPlaceBottom = ({choiceIndex, tryComplete}) => {
+  
   return (
     <>
       <ShowSelectedBox>
         {choiceIndex.map((value, index) => {
             return (
                 <Selected key={index}>
+                    <p>{index+1}</p>
                     <img src={city}></img>
                     <div>{value}</div>
                 </Selected>
             )
         })}
       </ShowSelectedBox>
-      <AddBtn>선택완료</AddBtn>
+      <AddBtn onClick={tryComplete}>선택완료</AddBtn>
     </>
   )
 }

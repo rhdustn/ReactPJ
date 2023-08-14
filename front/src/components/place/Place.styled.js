@@ -7,6 +7,14 @@ const fadeInAni = keyframes`
         opacity: 1;
     }
 `
+const moveAni = keyframes`
+    from {
+        transform: translateX(50px);
+    }to {
+        transform: translateX(0px);
+    }
+`
+
 
 // AddPlaceTop
 export const AddPlaceTopBox = styled.div`
@@ -46,7 +54,7 @@ export const AddPlaceMidBox = styled.div`
     box-sizing: border-box;
     display: flex; flex-direction: column;
     align-items: center;
-    padding: 60px 10px 0 10px;
+    padding: 60px 10px 160px 10px;
 `
 export const Title = styled.div`
     width: 100%; height: 30px;
@@ -99,27 +107,42 @@ export const SelectBtn = styled.div`
 
 // AddPlaceBottom
 export const ShowSelectedBox = styled.div`
-    width: 100%; height: 100px;
+    width: 100%; height: auto;
     position: fixed; bottom: 40px;
     background-color: #edebeb;
-    display: flex; align-items: center;
+    display: flex; flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
     overflow-x: scroll;
+    overflow-y: hidden;
+    padding: 10px 5px 5px 5px;
     animation: ${fadeInAni} 0.5s ease-in-out;
 `
 export const Selected = styled.div`
     width: 70px; height: 80px;
     position: relative;
+    animation: ${moveAni} 0.5s ease-in-out;
 
+    & p {
+        width: 20px; height: 20px;
+        z-index: 200;
+        position: absolute; top: -11px; left: 5px;
+        background-color: #277bc0;
+        border-radius: 100%;
+        display: flex; justify-content: center; align-items: center;
+        color: white;
+        font-size: 12px; font-weight: bold;
+    }
     & img {
-        width: 40px; height: 40px;
+        width: 50px; height: 50px;
         position: absolute; top: 10px;
         left: 50%;
         transform: translateX(-50%);
     }
     & div {
-        width: 40px; height: 20px;
+        width: 50px; height: 20px;
         margin: 0;
-        position: absolute; top: 55px;
+        position: absolute; top: 65px;
         left: 50%;
         transform: translateX(-50%);
         overflow: hidden;

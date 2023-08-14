@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import 'animate.css'
+import { useMutation } from 'react-query'
 
 import BottomNav from '../components/nav/BottomNav'
 
@@ -62,6 +62,9 @@ const Main = () => {
     useEffect(() => {
         console.log(content);
     }, [isChoiced])
+
+
+
 
 
     return (

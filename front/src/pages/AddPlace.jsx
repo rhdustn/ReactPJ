@@ -15,10 +15,9 @@ const AddPlace = () => {
     const [show, setShow] = useState(false);
 
     // gpt 추천 관광지
-    let suggested = ['나카스', '오호리 공원', '덴진 지하상가', '하카타 역']
+    let suggested = ['나카스', '오호리 공원', '덴진 지하상가', '하카타 역', '유후인', '어쩌고', '저쩌고', '1', '2', '3', '4', '5', '6', '7']
 
     useEffect(() => {
-        console.log(choiceIndex)
         if(choiceIndex.length > 0) {
             setShow(true)
         }else {
@@ -26,12 +25,17 @@ const AddPlace = () => {
         }
     }, [choiceIndex])
 
+    // 선택 완료
+    const tryComplete = () => {
+        console.log(choiceIndex)
+    }
+
     return (
         <>
         <TopNav isScrolled={true} />
 
         <AddPlaceMid page={'add'} day={day} suggested={suggested} choiceIndex={choiceIndex} setChoice={setChoice} />
-        {show && <AddPlaceBottom choiceIndex={choiceIndex} />}
+        {show && <AddPlaceBottom choiceIndex={choiceIndex} tryComplete={tryComplete} />}
         </>
     )
 }
