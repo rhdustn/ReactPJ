@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { PlanInfoBox, TopNavBox, TopNavBtn, PlanInfoTitle, PlantInfoDate } from './Nav.styled'
 
 import back from '../../img/icons/back.png'
@@ -13,19 +13,30 @@ const TopNav = ({isScrolled, gptAnswerSaved}) => {
     // AddPlace, EditPlace에서 누르면 일정 페이지로 넘어가기
   }
 
-  return (
-    <>
-      <TopNavBox>
-        <TopNavBtn onClick={moveToBack}><img src={back}></img></TopNavBtn>
-        {isScrolled &&        
-        <PlanInfoBox>
-            <PlanInfoTitle>{gptAnswerSaved.location} 여행</PlanInfoTitle>
-            <PlantInfoDate>{gptAnswerSaved.startDate} ~ {gptAnswerSaved.endDate}</PlantInfoDate>
-        </PlanInfoBox>
-        }
-      </TopNavBox>
-    </>
-  )
+  if(gptAnswerSaved == undefined) {
+    return (
+      <>
+        <TopNavBox>
+          <TopNavBtn onClick={moveToBack}><img src={back}></img></TopNavBtn>
+        </TopNavBox>
+      </>
+    )
+  }else {
+    return (
+      <>
+        <TopNavBox>
+          <TopNavBtn onClick={moveToBack}><img src={back}></img></TopNavBtn>
+          {isScrolled &&        
+          <PlanInfoBox>
+              <PlanInfoTitle>{gptAnswerSaved.location} 여행</PlanInfoTitle>
+              <PlantInfoDate>{gptAnswerSaved.startDate} ~ {gptAnswerSaved.endDate}</PlantInfoDate>
+          </PlanInfoBox>
+          }
+        </TopNavBox>
+      </>
+    )
+  }
+
 }
 
 export default TopNav

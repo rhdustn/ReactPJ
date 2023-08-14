@@ -60,6 +60,7 @@ export const PerDayBox = styled.div`
     width: 100%; height: auto;
     position: relative;
     padding: 30px 0 30px 0;
+    border-radius: 10px;
 
     &:hover {
         background-color: #edebeb;
