@@ -4,7 +4,7 @@ import { PlanInfoBox, TopNavBox, TopNavBtn, PlanInfoTitle, PlantInfoDate } from 
 import back from '../../img/icons/back.png'
 import { useNavigate } from 'react-router-dom'
 
-const TopNav = ({isScrolled}) => {
+const TopNav = ({isScrolled, gptAnswerSaved}) => {
   const nav = useNavigate();
 
   const moveToBack = () => {
@@ -19,8 +19,8 @@ const TopNav = ({isScrolled}) => {
         <TopNavBtn onClick={moveToBack}><img src={back}></img></TopNavBtn>
         {isScrolled &&        
         <PlanInfoBox>
-            <PlanInfoTitle>후쿠오카 여행</PlanInfoTitle>
-            <PlantInfoDate>2023.08.28 ~ 2023.08.31</PlantInfoDate>
+            <PlanInfoTitle>{gptAnswerSaved.location} 여행</PlanInfoTitle>
+            <PlantInfoDate>{gptAnswerSaved.startDate} ~ {gptAnswerSaved.endDate}</PlantInfoDate>
         </PlanInfoBox>
         }
       </TopNavBox>

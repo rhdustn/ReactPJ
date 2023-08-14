@@ -5,10 +5,20 @@ import city from '../../img/places/city.jpeg'
 import { useNavigate } from 'react-router-dom';
 
 // 지도 아래 일정 부분
-const PlanBottom = ({isScrolled}) => {
+const PlanBottom = ({isScrolled, gptAnswerSaved}) => {
+    const {location, attractions, startDate, endDate, option1, option2} = gptAnswerSaved;
+
+    let sd = new Date(startDate);
+    let ed = new Date(endDate);
+
+    let periodArr = [];
+    while (sd <= ed) {
+        periodArr.push((sd.getMonth() + 1) + '.' + sd.getDate());
+        sd.setDate(sd.getDate() + 1);
+    }
 
     // 일정 며칠인지
-    let periodArr = ['8.28', '8.29', '8.30', '8.31'];
+    // let periodArr = ['8.28', '8.29', '8.30', '8.31'];
     let placeArr = [
         ['캐널시티', '이치란 본사', '후쿠오카 타워', '시사이드 모모치 해변공원'],
         ['유후인'],

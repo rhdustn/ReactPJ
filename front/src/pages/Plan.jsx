@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 
 import BottomNav from '../components/nav/BottomNav'
 import TopNav from '../components/nav/TopNav'
@@ -6,9 +7,12 @@ import TopNav from '../components/nav/TopNav'
 import PlanTop from '../components/plan/PlanTop'
 import PlanMid from '../components/plan/PlanMid'
 import PlanBottom from '../components/plan/PlanBottom'
+import NoPlan from '../components/plan/NoPlan'
 
 const Plan = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+
+  const gptAnswerSaved = useSelector((state) => {return state.gptAnswerSave})
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,19 +30,34 @@ const Plan = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
+
   }, []);
 
-  return (
-    <>
-      <TopNav isScrolled={isScrolled} />
+  useEffect(() => {
+    console.log(gptAnswerSaved)
+  }, [gptAnswerSaved])
 
-      <PlanTop />
-      <PlanMid isScrolled={isScrolled} />
-      <PlanBottom isScrolled={isScrolled} />
-      
+  if(gptAnswerSaved.location == '') {
+    return (
+      <>
+      <TopNav/>
+      <NoPlan />
       <BottomNav page={'plan'} />
     </>
-  )
+    )
+  }else {
+    return (
+      <>
+        <TopNav isScrolled={isScrolled} gptAnswerSaved={gptAnswerSaved} />
+  
+        <PlanTop gptAnswerSaved={gptAnswerSaved} />
+        <PlanMid isScrolled={isScrolled} />
+        <PlanBottom isScrolled={isScrolled} gptAnswerSaved={gptAnswerSaved} />
+        
+        <BottomNav page={'plan'} />
+      </>
+    )
+  }
 }
 
 export default Plan
