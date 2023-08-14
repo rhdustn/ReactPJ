@@ -11,6 +11,7 @@ import {
   EditProflie,
   Board,
   BoardDetail,
+  Post
 } from "./pages";
 import {
   EditProfliePc,
@@ -157,6 +158,16 @@ function App() {
               <PcBody>
                 <BoardDetailPc />
               </PcBody>
+            )
+          }
+        />
+        <Route
+          path="/post"
+          element={
+            isMobile ? (
+              <Post />
+            ) : (
+              "pc 버전 post"
             )
           }
         />

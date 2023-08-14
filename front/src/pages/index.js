@@ -9,6 +9,7 @@ import Mypage from "./Mypage";
 import EditProflie from "./EditProflie";
 import Board from "./Board";
 import BoardDetail from "./BoardDetail";
+import Post from "./Post";
 
 export {
   Signup,
@@ -20,4 +21,5 @@ export {
   Board,
   BoardDetail,
   AddPlace,
+  Post
 };

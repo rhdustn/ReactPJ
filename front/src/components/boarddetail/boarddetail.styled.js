@@ -175,7 +175,7 @@ height: 40px;
 border-top: 2px solid;
 border-color: rgb(239, 239, 239);;
 position: absolute;
-bottom: 0%;
+bottom: 6%;
 display: flex;
 justify-content: space-between;
 justify-content: center;

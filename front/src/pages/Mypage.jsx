@@ -1,6 +1,7 @@
 import React from 'react'
 import { MypageImg, TapMenu, MypageName, MoveEdit } from '../components/mypage'
 import styled from 'styled-components';
+import BottomNav from '../components/nav/BottomNav';
 
 const Main = styled.div`
 width: 400px;
@@ -19,6 +20,7 @@ const Mypage = () => {
       <MypageImg />
       <MypageName />
       <TapMenu />
+      <BottomNav/>
       </Main>
 
 
