@@ -7,6 +7,9 @@ const CommentForm = ({onCommentSubmit}) => {
 
     const handleSubmit = (e) => {
       e.preventDefault();
+      if (inputComment === '') {
+        return;
+      }
       onCommentSubmit(inputComment);
       setInputComment('');
       console.log(inputComment)

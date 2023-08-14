@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { CommentContainer } from './boarddetail.styled'
+import { CommentContainer,CommentMain } from './boarddetail.styled'
 import {CommentList,CommentForm} from './index'
 
 const Comment = () => {
@@ -11,8 +11,9 @@ const Comment = () => {
   return (
     <div>
       <CommentContainer>
-      Comment
+      <CommentMain>
       <CommentList comments={comment}/>
+      </CommentMain>
       <CommentForm onCommentSubmit={CommentSubmit}/>
       </CommentContainer>
       </div>
