@@ -1,15 +1,22 @@
 import React, { useEffect, useState } from 'react'
-import { useMutation } from 'react-query'
+import { useDispatch, useSelector } from "react-redux";
+
+import { insert } from "../redux/features/dataForGpt";
 
 import BottomNav from '../components/nav/BottomNav'
-
 import MainTop from '../components/main/MainTop'
 import MainMid from '../components/main/MainMid'
 import MainBottom from '../components/main/MainBottom'
 import { Loading1, Loading2 } from '../components/loading/Loading'
+import { PopupBox, PopupBtn } from '../components/main/Main.styled';
 
 
 const Main = () => {
+    const dispatch = useDispatch();
+    const gptData = useSelector((state) => {
+        return state.gptSlice;
+    })
+
     // gpt에 요청할 content
     const [content, setContent] = useState({
         location : '',
@@ -59,12 +66,25 @@ const Main = () => {
         })
     }
 
+    // 다 
     useEffect(() => {
         console.log(content);
-    }, [isChoiced])
+
+        // dispatch 전송
+        if(isChoiced) {
+            dispatch(insert({...gptData,
+                location : content.location,
+                date : `${content.startDate}~${content.endDate}`,
+                choiceDataWho : content.option1,
+                choiceDataHow : content.option2
+            }))
+        }
+    }, [content])
 
 
-
+    // useEffect(() => {
+    //     console.log(gptData)
+    // }, [gptData])
 
 
     return (
@@ -72,12 +92,27 @@ const Main = () => {
         <MainTop locationSearched={locationSearched} />
         {isSearched && <MainMid dateSelected={dateSelected} />}
         {isDated && <MainBottom page={'main'} choiceSelected={choiceSelected} />}
-        {isChoiced && <Loading2 />}
 
         <BottomNav page={'main'} />
         </>
     )
 }
+
+// const Popup = () => {
+//     return (
+//         <>
+//             <PopupBox>
+//                 <PopupBtn>
+//                     <p>일정 만들러가기</p>
+//                     <div className='btns'>
+//                         <div className='btn btn1'>출발</div>
+//                         <div className='btn btn2'>취소</div>
+//                     </div>
+//                 </PopupBtn>
+//             </PopupBox>
+//         </>
+//     )
+// }
 
 
 

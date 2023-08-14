@@ -163,3 +163,49 @@ export const MakePlanBtn = styled.div`
     cursor: pointer;
     animation: ${fadeInAni} 0.5s ease-in-out;
 `
+
+
+// ---------------------------------- //
+
+// Popup
+export const PopupBox = styled.div`
+    width: 100vw; height: 100vh;
+    background-color: rgba(255, 255, 255, 0.5);
+    z-index: 100;
+    position: fixed; top: 0;
+`
+
+export const PopupBtn = styled.div`
+    width: 250px; height: 100px;
+    border-radius: 10px;
+    position: fixed; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 5px 15px 0px #277bc0;
+    z-index: 200;
+    background-color: white;
+    overflow: hidden;
+
+    & p {
+        width: 100%; height: 50%;
+        margin: 0; padding: 0;
+        display: flex; justify-content: center; align-items: center;
+        font-size: 20px;
+    }
+
+    & .btns {
+        width: 100%; height: 50%;
+        display: flex; justify-content: center; align-items: center;
+
+    }
+    & .btns .btn {
+        width: 60px; height: 30px;
+        border-radius: 10px;
+        background-color: #277bc0;
+        margin: 0 10px 0 10px;
+        color: white;
+        display: flex; justify-content: center; align-items: center;
+    }
+    & .btns .btn.btn2 {
+        background-color: #ff3131;
+    }
+`
