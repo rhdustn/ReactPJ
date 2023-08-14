@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from 'react-router-dom';
+import { useMutation } from "react-query";
+import axios from 'axios'
+
+import { save, reset } from "../../redux/features/dataForGpt";
 
 import { MainBottomBox, BigLabel, SmallLabel, SelectBox, Select, BtnBox, MakePlanBtn } from './Main.styled'
-import { useNavigate } from 'react-router-dom';
+import { Loading2 } from "../loading/Loading";
 
-const MainBottom = ({choiceSelected}) => {
+const MainBottom = ({choiceSelected, startDate, endDate}) => {
+    const nav = useNavigate();
+
+    const dispatch = useDispatch();
     const gptData = useSelector((state) => {
         return state.gptSlice;
     })
@@ -16,6 +24,9 @@ const MainBottom = ({choiceSelected}) => {
     const [choiceIndex2, setChoice2] = useState('');
 
     const [choiceAll, setAll] = useState(false);
+
+    const [gptAnswer, setGptAnswer] = useState("");
+    const [isLoading, setLoading] = useState(false);
 
     // 누구와
     const isChoice1 = (value) => {
@@ -54,9 +65,47 @@ const MainBottom = ({choiceSelected}) => {
         }
     }, [choiceIndex1, choiceIndex2]);
 
+
+    // post로 gptData를 서버로 보내는 함수
+    const sendDataToGpt = async () => {
+        setLoading(true)
+        axios
+        .post("http://localhost:8080/openAI", { gptData })
+        .then((res) => {
+            // gpt응답 여기서 state에 저장
+            const data = JSON.parse(res.data.content);
+            setGptAnswer(data);
+            setLoading(false)
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    };
+
+    // useMutation으로 비동기적 처리
+    const gptQuery = useMutation(sendDataToGpt);
+
     useEffect(() => {
-        console.log(gptData)
-    }, [gptData])
+        console.log(gptAnswer)
+        if(gptAnswer) {
+            dispatch(save({
+                location : gptAnswer.location,
+                attractions : gptAnswer.attractions,
+                startDate : startDate,
+                endDate : endDate,
+                option1 : choiceIndex1,
+                option2 : choiceIndex2
+            }))
+        }
+    }, [gptAnswer])
+
+    const gptAnswerSaved = useSelector((state) => {return state.gptAnswerSave})
+    useEffect(() => {
+        if(gptAnswerSaved.attractions.length > 0) {
+            console.log("넘어가기?")
+            nav('/plan')
+        }
+    }, [gptAnswerSaved])
 
     return (
         <>
@@ -86,10 +135,12 @@ const MainBottom = ({choiceSelected}) => {
 
             {choiceAll &&
             <BtnBox>
-                <MakePlanBtn>완료</MakePlanBtn>
+                <MakePlanBtn onClick={() => {gptQuery.mutate(gptData)}}>완료</MakePlanBtn>
             </BtnBox>
             }
         </MainBottomBox>
+
+        {isLoading && <Loading2 />}
         </>
     )
 }

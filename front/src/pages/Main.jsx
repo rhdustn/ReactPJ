@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 
-import { insert } from "../redux/features/dataForGpt";
+import { insert, reset } from "../redux/features/dataForGpt";
 
 import BottomNav from '../components/nav/BottomNav'
 import MainTop from '../components/main/MainTop'
@@ -68,8 +68,6 @@ const Main = () => {
 
     // 다 
     useEffect(() => {
-        console.log(content);
-
         // dispatch 전송
         if(isChoiced) {
             dispatch(insert({...gptData,
@@ -82,16 +80,16 @@ const Main = () => {
     }, [content])
 
 
-    // useEffect(() => {
-    //     console.log(gptData)
-    // }, [gptData])
+    useEffect(() => {
+        dispatch(reset())
+    }, [])
 
 
     return (
         <>
         <MainTop locationSearched={locationSearched} />
         {isSearched && <MainMid dateSelected={dateSelected} />}
-        {isDated && <MainBottom page={'main'} choiceSelected={choiceSelected} />}
+        {isDated && <MainBottom page={'main'} choiceSelected={choiceSelected} startDate={content.startDate} endDate={content.endDate} />}
 
         <BottomNav page={'main'} />
         </>
