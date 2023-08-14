@@ -89,6 +89,7 @@ export const TryBtn = styled.div`
   justify-content: center;
   align-items: center;
   margin: 10px 0 0 0;
+  cursor: pointer;
 `;
 
 export const SignupBottomBox = styled.div`
