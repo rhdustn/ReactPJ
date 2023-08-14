@@ -82,7 +82,7 @@ const SignupMid = ({ page }) => {
     if (nickname === undefined) {
       return;
     } else {
-      // useMutation 사용해s서 axios post 보내기
+      // useMutation 사용해서 axios post 보내기
 
       const duplicateNickNameResult = await axios.post(
         "/user/duplicateNickName",
@@ -126,6 +126,18 @@ const SignupMid = ({ page }) => {
       navigate("/login");
     }
   };
+
+
+  const login = async () => {
+    const loginClick = await axios.post("/user/login", {
+      user_id,
+      user_pw
+    });
+    console.log("액시오스 거친후", loginClick);
+  }
+
+  const loginMutation = useMutation(login);
+  
 
   // 닉네임 중복 체크 react-query
   const signUpMutation = useMutation(signUp);
@@ -299,15 +311,17 @@ const SignupMid = ({ page }) => {
           <Title>{page}</Title>
           <InputBox>
             <Label>아이디</Label>
-            <Input type="text"></Input>
+            <Input type="text" name="user_id" onChange={(e)=>setId(e.target.value)}></Input>
             <Text color={textColor.idColor}>{textId}</Text>
           </InputBox>
           <InputBox>
             <Label>비밀번호</Label>
-            <Input type="password"></Input>
+            <Input type="password" name="user_pw" onChange={(e)=>setPw(e.target.value)}></Input>
             <Text color={textColor.pwColor}>{textPw}</Text>
 
-            <TryBtn>{page}</TryBtn>
+            <TryBtn onClick={()=>{
+              loginMutation.mutate();
+            }}>{page}</TryBtn>
           </InputBox>
         </SignupMidBox>
       </>
