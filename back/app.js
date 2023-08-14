@@ -14,33 +14,6 @@ const multer = require("multer");
 // 회원가입,로그인 기능이 있는 라우터
 const userRouter = require("./routers/user");
 
-// 필요한 패키지 import
-const cheerio = require("cheerio");
-const axios = require("axios");
-const iconv = require("iconv-lite");
-const searchQuery = "후쿠오카";
-const encodedSearchQuery = encodeURIComponent(searchQuery);
-const url = `
-https://pixabay.com/ko/images/search/${encodedSearchQuery}
-`;
-
-//api로 '/goods/add/crawling' 요청이 오면
-//해당 url로 GET요청! arraybuffer(html과 유사)로 데이터를 받는다.
-app.get("/test", async (req, res) => {
-  const getHtml = async () => {
-    try {
-      return await axios.get(
-        "https://lostark.game.onstove.com/Profile/Character/%EB%AA%A8%EC%BD%94%EC%BD%94%EB%B3%BC%EB%94%B0%EA%B5%AC%EB%B9%A0%EB%8A%94%EC%86%8C%EB%A6%AC"
-      );
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  getHtml().then((html) => {
-    const $ = cheerio.load(html);
-    console.log($.html);
-  });
-});
 
 // Multer 설정
 const storage = multer.diskStorage({
