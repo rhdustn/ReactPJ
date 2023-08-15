@@ -129,15 +129,47 @@ const SignupMid = ({ page }) => {
 
 
   const login = async () => {
+    if (!user_pw) {
+      const userPwInput = document.querySelector("input[name='user_pw']");
+      userPwInput.style.border = "1px solid red";
+      userPwInput.focus();
+    }
+    if (!user_id) {
+      const userIdInput = document.querySelector("input[name='user_id']");
+      userIdInput.style.border = "1px solid red";
+      userIdInput.focus();
+    }
+    if (!user_id || !user_pw) {
+      return;
+    }
+    
     const loginClick = await axios.post("/user/login", {
       user_id,
       user_pw
+    },{
+      headers: {
+        'Content-Type': 'application/json'
+      }
     });
-    console.log("액시오스 거친후", loginClick);
+
+    if(loginClick.data == "id_non-existent"){
+      setTextId("존재하지 않는 아이디입니다. 다시 입력 부탁드립니다.^^");
+      setTextColor({...textColor, idColor: "red"});
+      document.querySelector("input[name='user_id']").style.border = "1px solid red";
+    }else{
+      setTextId("");
+      document.querySelector("input[name='user_id']").style.border = "1px solid blue";
+    }
+
+  }
+
+  const pw = async () => {
+    console.log("1");
   }
 
   const loginMutation = useMutation(login);
-  
+
+  // ---------------------------------
 
   // 닉네임 중복 체크 react-query
   const signUpMutation = useMutation(signUp);

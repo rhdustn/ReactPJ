@@ -33,43 +33,90 @@ const PlanMidPc = () => {
   // 위도, 경도 주변 관광지 마커 찍어주기
   const mapRef = useRef(null);
 
+  // useEffect(() => {
+  //   function initMap() {
+  //     const mapCenter = { lat: 37.538231, lng: 127.125900 };
+
+  //     const map = new window.google.maps.Map(mapRef.current, {
+  //       center: mapCenter,
+  //       zoom: 15,
+  //     });
+
+  //     const request = {
+  //       location: mapCenter,
+  //       radius: '500', // 5km 반경 내에서 검색
+  //       // 5000 5km
+  //       types: ['tourist_attraction'], // 관광지 타입
+  //     };
+
+  //     const service = new window.google.maps.places.PlacesService(map);
+
+  //     service.nearbySearch(request, (results, status) => {
+  //       if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+  //         for (const place of results) {
+  //           const marker = new window.google.maps.Marker({
+  //             position: place.geometry.location,
+  //             map: map,
+  //             title: place.name,
+  //           });
+  //         }
+  //       }
+  //     });
+  //   }
+
+  //   const googleMapScript = document.createElement('script');
+  //   googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=
+  //   ${process.env.REACT_APP_BCA}&libraries=places`;
+  //   googleMapScript.async = true;
+  //   googleMapScript.onload = initMap;
+  //   document.head.appendChild(googleMapScript);
+  // }, []);
+
+
   useEffect(() => {
-    function initMap() {
-      const mapCenter = { lat: 37.538231, lng: 127.125900 };
+    const origin = { lat: 37.7749, lng: -122.4194 }; // San Francisco, CA
+    const destination = { lat: 34.0522, lng: -118.2437 }; // Los Angeles, CA
+    const API_KEY = 'YOUR_GOOGLE_MAPS_API_KEY';
 
-      const map = new window.google.maps.Map(mapRef.current, {
-        center: mapCenter,
-        zoom: 15,
-      });
+    // 구글맵 클라이언트 초기화
+    const map = new window.google.maps.Map(mapRef.current, {
+      center: origin,
+      zoom: 8,
+    });
 
-      const request = {
-        location: mapCenter,
-        radius: '500', // 5km 반경 내에서 검색
-        // 5000 5km
-        types: ['tourist_attraction'], // 관광지 타입
-      };
+    // 거리 서비스 생성
+    const distanceService = new window.google.maps.DistanceMatrixService();
 
-      const service = new window.google.maps.places.PlacesService(map);
+    // 거리 정보 및 교통정보 가져오기
+    distanceService.getDistanceMatrix(
+      {
+        origins: [origin],
+        destinations: [destination],
+        travelMode: 'DRIVING',
+        drivingOptions: {
+          departureTime: new Date(),
+        },
+        unitSystem: window.google.maps.UnitSystem.METRIC,
+        avoidHighways: false,
+        avoidTolls: false,
+        key: API_KEY,
+      },
+      (response, status) => {
+        if (status === 'OK') {
+          const element = response.rows[0].elements[0];
+          const durationText = element.duration_in_traffic.text;
+          const distanceText = element.distance.text;
 
-      service.nearbySearch(request, (results, status) => {
-        if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-          for (const place of results) {
-            const marker = new window.google.maps.Marker({
-              position: place.geometry.location,
-              map: map,
-              title: place.name,
-            });
-          }
+          const outputDiv = document.getElementById('output');
+          outputDiv.innerHTML = `
+            <p>Estimated travel time: ${durationText}</p>
+            <p>Distance: ${distanceText}</p>
+          `;
+        } else {
+          console.error('Error fetching data');
         }
-      });
-    }
-
-    const googleMapScript = document.createElement('script');
-    googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=
-    ${process.env.REACT_APP_BCA}&libraries=places`;
-    googleMapScript.async = true;
-    googleMapScript.onload = initMap;
-    document.head.appendChild(googleMapScript);
+      }
+    );
   }, []);
 
   return (
@@ -78,7 +125,10 @@ const PlanMidPc = () => {
         {/* <div id='gmp-map'></div> */}
 
         {/* <div ref={mapRef} style={{ width: '100%', height: '500px' }}></div> */}
-        <div id='test1' ref={mapRef}></div>
+        {/* <div id='test1' ref={mapRef}></div> */}
+
+        <div ref={mapRef} style={{ width: '100%', height: '500px' }}></div>
+        <div id="output"></div>
       </PlanMidBox>
       <br/>
 
