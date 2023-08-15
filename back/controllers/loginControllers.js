@@ -10,8 +10,8 @@ exports.loginClick = async (req, res)=>{
         const front_id = req.body.user_id;
         const front_pw = req.body.user_pw;
 
-        console.log(front_id);
-        console.log(front_pw);
+        // console.log(front_id);
+        // console.log(front_pw);
         
         const useridExist = await User.findOne({where:{user_id : front_id}});
         if(useridExist == null){
@@ -24,9 +24,10 @@ exports.loginClick = async (req, res)=>{
             if(same){
                 let token = jwt.sign({
                     front_id,
-                },process.env.ACCESS_TOKEN_KEY,{
-                    expiresIn : "30m"
+                },process.env.ACCESSTOKENKEY,{
+                    expiresIn : "30m",
                 });
+                // req.session.access_token = token;
                 res.json("login_success");
                 // 프론트쪽에서 받아서 화면 전환시킬것.
             }else{
