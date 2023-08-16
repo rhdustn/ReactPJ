@@ -1,24 +1,26 @@
-import React, { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
-import BottomNav from '../components/nav/BottomNav'
-import TopNav from '../components/nav/TopNav'
+import BottomNav from "../components/nav/BottomNav";
+import TopNav from "../components/nav/TopNav";
 
-import PlanTop from '../components/plan/PlanTop'
-import PlanMid from '../components/plan/PlanMid'
-import PlanBottom from '../components/plan/PlanBottom'
-import NoPlan from '../components/plan/NoPlan'
+import PlanTop from "../components/plan/PlanTop";
+import PlanMid from "../components/plan/PlanMid";
+import PlanBottom from "../components/plan/PlanBottom";
+import NoPlan from "../components/plan/NoPlan";
 
 const Plan = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
-  const gptAnswerSaved = useSelector((state) => {return state.gptAnswerSave})
+  const gptAnswerSaved = useSelector((state) => {
+    return state.gptAnswerSave;
+  });
 
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const scrollThreshold = 101;
-      
+
       if (scrollY > scrollThreshold) {
         setIsScrolled(true);
       } else {
@@ -26,38 +28,37 @@ const Plan = () => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
-
   }, []);
 
   useEffect(() => {
-    console.log(gptAnswerSaved)
-  }, [gptAnswerSaved])
+    console.log(gptAnswerSaved);
+  }, [gptAnswerSaved]);
 
-  if(gptAnswerSaved.location == '') {
+  if (gptAnswerSaved.location == "") {
     return (
       <>
-      <TopNav/>
-      <NoPlan />
-      <BottomNav page={'plan'} />
-    </>
-    )
-  }else {
+        <TopNav />
+        <NoPlan />
+        <BottomNav page={"plan"} />
+      </>
+    );
+  } else {
     return (
       <>
         <TopNav isScrolled={isScrolled} gptAnswerSaved={gptAnswerSaved} />
-  
+
         <PlanTop gptAnswerSaved={gptAnswerSaved} />
         <PlanMid isScrolled={isScrolled} />
         <PlanBottom isScrolled={isScrolled} gptAnswerSaved={gptAnswerSaved} />
-        
-        <BottomNav page={'plan'} />
-      </>
-    )
-  }
-}
 
-export default Plan
+        <BottomNav page={"plan"} />
+      </>
+    );
+  }
+};
+
+export default Plan;

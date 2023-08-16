@@ -72,9 +72,13 @@ const PlanMidPc = () => {
     document.head.appendChild(googleMapScript);
   }, []);
 
+
+
+
+
   return (
     <>
-      <PlanMidBox>
+      <PlanMidBox id='gmp-map-box'>
         {/* <div id='gmp-map'></div> */}
 
         {/* <div ref={mapRef} style={{ width: '100%', height: '500px' }}></div> */}

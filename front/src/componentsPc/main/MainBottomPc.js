@@ -11,11 +11,14 @@ import {
 } from "./MainPc.styled";
 import { useDispatch, useSelector } from "react-redux";
 // gpt에 대한 reducer
-import { insert } from "../../redux/features/dataForGpt";
+import { insert, save } from "../../redux/features/dataForGpt";
 import { useMutation, useQuery } from "react-query";
 import axios from "axios";
 import { store } from "../../redux/store/store";
-const MainBottomPc = ({ isDated }) => {
+import { useNavigate } from "react-router-dom";
+const MainBottomPc = ({ isDated, choiceSelected, startDate, endDate }) => {
+  const nav = useNavigate();
+
   let withArr = [
     "혼자",
     "친구와",
@@ -44,6 +47,7 @@ const MainBottomPc = ({ isDated }) => {
   const [choiceIndex2, setChoice2] = useState("");
   // gpt의 응답
   const [gptAnswer, setGptAnswer] = useState("");
+  const [isLoading, setLoading] = useState(false);
   // 키값으로 가져온 gpt의 대답중 key에 값이 불규칙적이므로 index로 불러오기 위헤 Object.keys(obj); 를 사용하여 key의 인덱스를 저장할거임
   // const [ansKey, setAnsKey] = useState("");
   //   gpt에게 보낼 일련의 데이터
@@ -62,6 +66,7 @@ const MainBottomPc = ({ isDated }) => {
         setGptAnswer(data);
         // const keys = Object.keys(data);
         // setAnsKey(keys);
+        setLoading(false);
         console.log(JSON.parse(res.data.content));
       })
       .catch((err) => {
@@ -131,11 +136,11 @@ const MainBottomPc = ({ isDated }) => {
     }
   };
 
-
   useEffect(() => {
     console.log("누구와 : ", choiceIndex1);
     console.log("여행스타일 : ", choiceIndex2);
     console.log("gpt데이터:", gptData);
+    choiceSelected(choiceIndex1, choiceIndex2);
 
     if (choiceIndex1.length > 0 && choiceIndex2.length > 0) {
       setAll(true);
@@ -144,41 +149,39 @@ const MainBottomPc = ({ isDated }) => {
     }
   }, [choiceIndex1, choiceIndex2]);
 
+  useEffect(() => {
+    console.log(gptAnswer);
+    if (gptAnswer) {
+      gptDispatch(
+        save({
+          location: gptAnswer.location,
+          attractions: gptAnswer.attractions,
+          startDate: startDate,
+          endDate: endDate,
+          option1: choiceIndex1,
+          option2: choiceIndex2,
+        })
+      );
+    }
+  }, [gptAnswer]);
+
   //   스크롤이 내려가는 함수를 useEffect로 감지 및 실행 zerohoney
   useEffect(() => {
     if (isDated) {
       goToTagScroll();
     }
   }, [isDated]);
-
+  const gptAnswerSaved = useSelector((state) => {
+    return state.gptAnswerSave;
+  });
+  useEffect(() => {
+    if (gptAnswerSaved.attractions.length > 0) {
+      console.log(gptAnswerSaved);
+      nav("/plan");
+    }
+  }, [gptAnswerSaved]);
   return (
     <>
-      {gptAnswer !== "" ? (
-        <>
-          <h1>{gptAnswer.location}에 대한 추천 관광지 리스트 입니다</h1>
-        </>
-      ) : (
-        <></>
-      )}
-      {gptAnswer !== "" ? (
-        gptAnswer.attractions.map((value) => {
-          return (
-            <ul>
-              <li>{value.name}</li>
-              <li>{value.detail}</li>
-              <ul>
-                
-              <li>위도:{value.attractionLocation.latitude}</li>
-              <li>경도:{value.attractionLocation.longitude}</li>
-
-              </ul>
-            </ul>
-          );
-        })
-      ) : (
-        <></>
-      )}
-
       <MainBottomBox id="mainBottomBoxPc">
         <BigLabel>어떤 스타일의 여행을 할 계획인가요?</BigLabel>
         <SmallLabel>누구와</SmallLabel>

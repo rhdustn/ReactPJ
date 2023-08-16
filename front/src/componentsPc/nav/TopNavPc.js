@@ -1,22 +1,33 @@
-import React from 'react'
-import { PlanInfoBox, TopNavBox, TopNavBtn, PlanInfoTitle, PlantInfoDate } from './NavPc.styled'
+import React from "react";
+import {
+  PlanInfoBox,
+  TopNavBox,
+  TopNavBtn,
+  PlanInfoTitle,
+  PlantInfoDate,
+} from "./NavPc.styled";
 
-import back from '../../img/icons/back.png'
+import back from "../../img/icons/back.png";
 
-const TopNavPc = () => {
-
+const TopNavPc = ({ isScrolled, gptAnswerSaved }) => {
   return (
     <>
       <TopNavBox>
-        <TopNavBtn><img src={back}></img></TopNavBtn>
+        <TopNavBtn>
+          <img src={back}></img>
+        </TopNavBtn>
         {/* 스크롤 내려가면 뜰 부분 */}
-        <PlanInfoBox>
-            <PlanInfoTitle>후쿠오카 여행</PlanInfoTitle>
-            <PlantInfoDate>2023.08.28 ~ 2023.08.31</PlantInfoDate>
-        </PlanInfoBox>
+        {isScrolled && (
+          <PlanInfoBox>
+            <PlanInfoTitle>{gptAnswerSaved.location}</PlanInfoTitle>
+            <PlantInfoDate>
+              {gptAnswerSaved.startDate} ~ {gptAnswerSaved.endDate}
+            </PlantInfoDate>
+          </PlanInfoBox>
+        )}
       </TopNavBox>
     </>
-  )
-}
+  );
+};
 
-export default TopNavPc
+export default TopNavPc;
