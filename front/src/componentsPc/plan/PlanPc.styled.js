@@ -141,7 +141,7 @@ export const PlanMidBox = styled.div`
         height: 100%;
   }
 
-  html, body {
+  & html, body {
         height: 100%;
         margin: 0;
         padding: 0;
@@ -149,6 +149,28 @@ export const PlanMidBox = styled.div`
 
   & #test1{
     width: 100%;
+    height: 100%;
+  }
+  /* 3번째 테스트 */
+  & #container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+  }
+
+  & #sidebar {
+    flex-basis: 15rem;
+    flex-grow: 1;
+    padding: 1rem;
+    max-width: 30rem;
+    height: 100%;
+    box-sizing: border-box;
+    overflow: auto;
+  }
+
+  & #map {
+    flex-basis: 0;
+    flex-grow: 4;
     height: 100%;
   }
 `;

@@ -11,28 +11,28 @@ const PlanTopPc = () => {
   const [picImgArr, setPicImgArr] = useState([]);
   // gpt에서 받아올 정보
 
-  const getAttPic = async ({ queryKey }) => {
-    const apiKey = process.env.REACT_APP_PIXABAY_API_KEY;
-console.log(apiKey)
-    var URL =
-      "https://pixabay.com/api/?key=" +
-      apiKey +
-      "&q=" +
-      encodeURIComponent("red roses");
+//   const getAttPic = async ({ queryKey }) => {
+//     const apiKey = process.env.REACT_APP_PIXABAY_API_KEY;
+// console.log(apiKey)
+//     var URL =
+//       "https://pixabay.com/api/?key=" +
+//       apiKey +
+//       "&q=" +
+//       encodeURIComponent("red roses");
 
-    const getAttPicRes = await axios.get(URL);
-    console.log(getAttPicRes.data);
-    return getAttPicRes.data;
-  };
-  const getAttPicQuery = useQuery(["getAttPic", "오사카"], getAttPic, {
-    staleTime: 120 * 1000,
-    onSuccess: (data) => {
-      setPicImgArr([...picImgArr, data]);
-    },
-  });
-  useEffect(() => {
-    // getAttPicQuery.refetch();
-  }, []);
+//     const getAttPicRes = await axios.get(URL);
+//     console.log(getAttPicRes.data);
+//     return getAttPicRes.data;
+//   };
+  // const getAttPicQuery = useQuery(["getAttPic", "오사카"], getAttPic, {
+  //   staleTime: 120 * 1000,
+  //   onSuccess: (data) => {
+  //     setPicImgArr([...picImgArr, data]);
+  //   },
+  // });
+  // useEffect(() => {
+  //   // getAttPicQuery.refetch();
+  // }, []);
   return (
     <>
       <PlanTopBox>
