@@ -90,6 +90,20 @@ export const RoutePlace = styled.div`
   }
 `;
 
+export const EditPlanBtn = styled.div`
+    padding: 15px;
+    box-sizing: border-box;
+    width: 100%; height: 20px;
+    display: flex; justify-content: center; align-items: center;
+    border-radius: 5px;
+    border: 1px solid silver;
+    color: #277bc0;
+    font-size: 14px; font-weight: bold;
+    cursor: pointer;
+    margin: 0 5px 0 5px;
+    background-color: white;
+`
+
 export const BtnBox = styled.div`
   width: 100%;
   height: auto;
@@ -121,33 +135,33 @@ export const PlanBottomBox = styled.div`
   padding: 10px 10px 70px 10px;
 `;
 
-
 export const PlanMidBox = styled.div`
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translateY(-50%);
-  
+
   width: 40%;
   height: 80%;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: start;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   padding: 10px;
   & #gmp-map {
-        width : 100%;
-        height: 100%;
+    width: 100%;
+    height: 100%;
   }
 
-  & html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
+  html,
+  body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
   }
 
-  & #test1{
+  & #test1 {
     width: 100%;
     height: 100%;
   }
@@ -197,4 +211,49 @@ export const Date = styled.div`
 export const Selected = styled.div`
   font-size: 18px;
   padding: 0 0 5px 0;
+`;
+
+// NoPlan
+export const NoPlanBox = styled.div`
+  width: 100%;
+  height: calc(100vh - 110px);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  padding: 50px 10px 10px 10px;
+`;
+export const NoPlanText = styled.div`
+  width: 100%;
+  height: 80px;
+  font-size: 26px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+export const NoPlanBtns = styled.div`
+  width: 100%;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+`;
+export const NoPlanBtn = styled.div`
+  width: 220px;
+  height: 40px;
+  border: 3px solid #277bc0;
+  border-radius: 10px;
+  color: #277bc0;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    background-color: #277bc0;
+    color: white;
+  }
 `;
