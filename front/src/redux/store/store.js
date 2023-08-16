@@ -1,10 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { gptAnswerSave, gptSlice } from "../features/dataForGpt";
+import { gptAnswerSave, gptSlice, userChoiceSave } from "../features/dataForGpt";
 
 const store = configureStore({
   reducer: {
     gptSlice: gptSlice.reducer,
-    gptAnswerSave: gptAnswerSave.reducer
+    gptAnswerSave: gptAnswerSave.reducer,
+    userChoiceSave: userChoiceSave.reducer
   },
 });
 

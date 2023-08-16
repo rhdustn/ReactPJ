@@ -72,8 +72,8 @@ export const Line = styled.div`
     border-bottom: 1px solid silver;
 `
 export const PlaceBox = styled.div`
-    width: 100%; min-height: 70px;
-    max-height: 90px;
+    width: 100%; min-height: 90px;
+    max-height:110px;
     display: flex; flex-direction: column;
     flex-wrap: wrap;
     box-sizing: border-box;
