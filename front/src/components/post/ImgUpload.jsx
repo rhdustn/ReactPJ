@@ -1,47 +1,38 @@
-import React, { useRef, useState } from 'react'
-import { UploadImg,UploadImgContain,ImgInputBtn } from './post.style'
+import React, { useRef, useState } from 'react';
+import { UploadImg, UploadImgContain, ImgInputBtn } from './post.style';
 
 const ImgUpload = () => {
-    const [selectedFile, setSelectedFile] = useState(null);
-    const [imagePreview, setImagePreview] = useState(null);
-    const fileInputRef = useRef(null);
-    const handleFileChange = (event) => {
-        const file = event.target.files[0];
-        setSelectedFile(file);
-    
-        if (file) {
-          const reader = new FileReader();
-          reader.onloadend = () => {
-            setImagePreview(reader.result);
-          };
-          reader.readAsDataURL(file);
-        } else {
-          setImagePreview(null);
-        }
-      };
-    
-      const handleButtonClick = () => {
-        fileInputRef.current.click();
-      };
+  const [showImages, setShowImages] = useState([]); 
+
+  const addImages = (e) => {
+    const imgList = e.target.files; 
+    let images = [];
+
+    for (let i = 0; i < imgList.length; i++) {
+      const imageURL = URL.createObjectURL(imgList[i]);
+      images.push(imageURL);
+    }
+
+    setShowImages([...showImages, ...images]);
+  };
+
   return (
     <div>
-        <UploadImgContain> 
+      <UploadImgContain>
         <ImgInputBtn>
-        <input
-          type="file"
-          name="file"
-          onChange={handleFileChange}
-          ref={fileInputRef} 
-          style={{ display: 'none' }}
-        />
-        <button type="button" onClick={handleButtonClick}>
-          파일 등록하기
-        </button>
+          <input
+            type="file"
+            name="file"
+            multiple 
+            onChange={addImages} 
+          />
         </ImgInputBtn>
-        </UploadImgContain>
-        <UploadImg/>
+      </UploadImgContain>
+      {showImages.map((imageURL, index) => (
+        <UploadImg key={index} src={imageURL} alt={`Image ${index}`} />
+      ))}
     </div>
-  )
-}
+  );
+};
 
-export default ImgUpload
+export default ImgUpload;
