@@ -6,14 +6,14 @@ export const gptSlice = createSlice({
     choiceDataWho: [],
     choiceDataHow: [],
     location: "",
-    date:'',
+    date: "",
   },
   reducers: {
     insert: (state, action) => {
       state.choiceDataWho = action.payload.choiceDataWho;
       state.choiceDataHow = action.payload.choiceDataHow;
       state.location = action.payload.location;
-      state.date=action.payload.date
+      state.date = action.payload.date;
     },
   },
 });
@@ -26,7 +26,7 @@ export const gptAnswerSave = createSlice({
     startDate: "",
     endDate: "",
     option1: [],
-    option2: []
+    option2: [],
   },
   reducers: {
     save: (state, action) => {
@@ -39,14 +39,31 @@ export const gptAnswerSave = createSlice({
     },
     reset: (state, action) => {
       state.location = "";
-      state.attractions = []
-      state.startDate = ""
-      state.endDate = ""
-      state.option1 = []
-      state.option2 = []
-    }
-  }
-})
+      state.attractions = [];
+      state.startDate = "";
+      state.endDate = "";
+      state.option1 = [];
+      state.option2 = [];
+    },
+  },
+});
+
+// 이미지 url이 포함된 gpt답변이다. 관광지의 이름과 위도경도,이미지,디테일이 들어간다.
+export const attractionsWithImg = createSlice({
+  name: "attractionsWithImg",
+  initialState: [],
+  reducers: {
+    saveAttractionsWithImg: (state, action) => {
+      state.push({
+        attractionLocation: action.payload.attractionLocation,
+        detail: action.payload.detail,
+        img: action.payload.img,
+        name: action.payload.name,
+      });
+    },
+  },
+});
 
 export const { insert } = gptSlice.actions;
 export const { save, reset } = gptAnswerSave.actions;
+export const { saveAttractionsWithImg } = attractionsWithImg.actions;
