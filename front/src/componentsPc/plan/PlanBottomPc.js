@@ -16,6 +16,8 @@ import city from "../../img/places/city.jpeg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useQueries, useQuery } from "react-query";
+import { useDispatch, useSelector } from "react-redux";
+import { saveAttractionsWithImg } from "../../redux/features/dataForGpt";
 
 // 지도 아래 일정 부분
 const PlanBottomPc = ({ isScrolled, gptAnswerSaved }) => {
@@ -33,8 +35,12 @@ const PlanBottomPc = ({ isScrolled, gptAnswerSaved }) => {
   // attractions을 반복시키기위해 만든 임시 state
   const [attArrForMap, setAttArrForMap] = useState("");
 
-  // 이미지 url이 포함된 새로운attractions state
-  const [attractionsWithImg, setAttractionsWithImg] = useState([]);
+  // 이미지 url이 포함된 새로운attractions state(redux)
+  const attractionsWithImg = useSelector((state) => {
+    return state.attractionsWithImg;
+  });
+  // attractionsWithImg를 저장하는 dispatch
+  const attractionsWithImgDispatch = useDispatch();
 
   // 여기서 부터
   const getAttPic = async (queryKey) => {
@@ -56,9 +62,9 @@ const PlanBottomPc = ({ isScrolled, gptAnswerSaved }) => {
         queryFn: () => getAttPic(value.name),
         staleTime: 60 * 60 * 1000,
         onSuccess: (data) => {
-          setAttractionsWithImg((state) => {
-            return [...state, { ...value, img: data }];
-          });
+          attractionsWithImgDispatch(
+            saveAttractionsWithImg({ ...value, img: data })
+          );
         },
       };
     })
@@ -82,6 +88,10 @@ const PlanBottomPc = ({ isScrolled, gptAnswerSaved }) => {
     });
     setAttArrForMap(temp);
   }, [attractions]);
+
+useEffect(()=>{
+  console.log(attractionsWithImg,'리덕스')
+},[attractionsWithImg])
 
   return (
     <>
