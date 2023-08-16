@@ -64,18 +64,19 @@ export const Title = styled.div`
     box-sizing: border-box;
 `
 export const PlaceBox = styled.div`
-    width: 100%; height: 60px;
+    width: 100%; height: 80px;
     display: flex;
     align-items: center;
     position: relative;
+    border: 1px solid;
 
     &:hover {
-        background-color: #edebeb;
+        background-color: rgba(0, 0, 0, 0.05);
     }
 `
 export const ImgBox = styled.div`
     width: 40px; height: 40px;
-    position: absolute; left: 5px;
+    position: absolute; left: 5px; top: 10px;
     overflow: hidden;
 
     & img {
@@ -84,10 +85,20 @@ export const ImgBox = styled.div`
 `
 export const PlaceName = styled.div`
     width: calc(100% - 125px);
-    height: 100%;
+    height: auto;
     display: flex; align-items: center;
-    position: absolute; left: 55px;
+    position: absolute; left: 55px; top: 10px;
     font-weight: bold;
+`
+export const PlaceDetail = styled.div`
+    width: calc(100% - 125px);
+    height: 37px;
+    position: absolute; left: 55px; top: 50px;
+    transform: translateY(-50%);
+    font-size: 12px;
+    text-align: start;
+    overflow: hidden;
+    text-overflow: ellipsis;
 `
 export const SelectBtnBox = styled.div`
     width: 50px; height: 100%;

@@ -60,6 +60,7 @@ export const PerDayBox = styled.div`
     width: 100%; height: auto;
     position: relative;
     padding: 30px 0 30px 0;
+    border-radius: 10px;
 
     &:hover {
         background-color: #edebeb;
@@ -161,4 +162,41 @@ export const SavePlanBtn = styled.div`
     color: white;
     font-size: 16px; font-weight: bold;
     cursor: pointer;
+`
+
+
+// ---------------------------------- //
+
+// NoPlan
+export const NoPlanBox = styled.div`
+    width: 100%; height: calc(100vh - 110px);
+    box-sizing: border-box;
+    display: flex; flex-direction: column;
+    align-items: start; justify-content: center;
+    padding: 50px 10px 10px 10px;
+`
+export const NoPlanText = styled.div`
+    width: 100%; height: 80px;
+    font-size: 26px;
+    display: flex; justify-content: center; align-items: center;
+`
+export const NoPlanBtns = styled.div`
+    width: 100%; height: 120px;
+    display: flex; justify-content: center; align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+`
+export const NoPlanBtn = styled.div`
+    width: 220px; height: 40px;
+    border: 3px solid #277bc0;
+    border-radius: 10px;
+    color: #277bc0;
+    font-weight: bold;
+    display: flex; 
+    justify-content: center; align-items: center;
+
+    &:hover {
+        background-color: #277bc0;
+        color: white;
+    }
 `

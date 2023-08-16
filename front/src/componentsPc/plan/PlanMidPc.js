@@ -35,7 +35,7 @@ const PlanMidPc = () => {
 
   useEffect(() => {
     function initMap() {
-      const mapCenter = { lat: 37.538231, lng: 127.125900 };
+      const mapCenter = { lat: 40.692642188968186, lng: -74.0397641563072 };
 
       const map = new window.google.maps.Map(mapRef.current, {
         center: mapCenter,
@@ -44,7 +44,7 @@ const PlanMidPc = () => {
 
       const request = {
         location: mapCenter,
-        radius: '500', // 5km 반경 내에서 검색
+        radius: '5000', // 5km 반경 내에서 검색
         // 5000 5km
         types: ['tourist_attraction'], // 관광지 타입
       };
@@ -54,11 +54,15 @@ const PlanMidPc = () => {
       service.nearbySearch(request, (results, status) => {
         if (status === window.google.maps.places.PlacesServiceStatus.OK) {
           for (const place of results) {
+            console.log("1");
+            console.log(place.name);
+            // console.log(results);
             const marker = new window.google.maps.Marker({
               position: place.geometry.location,
               map: map,
               title: place.name,
             });
+            // console.log("포지션", place.geometry.location);
           }
         }
       });
@@ -72,13 +76,28 @@ const PlanMidPc = () => {
     document.head.appendChild(googleMapScript);
   }, []);
 
+
+
+
+
   return (
     <>
-      <PlanMidBox>
+      <PlanMidBox id='gmp-map-box'>
         {/* <div id='gmp-map'></div> */}
 
-        {/* <div ref={mapRef} style={{ width: '100%', height: '500px' }}></div> */}
+        {/* 2번째 */}
+        <div ref={mapRef} style={{ width: '100%', height: '100%' }}></div>
         <div id='test1' ref={mapRef}></div>
+
+        {/* 3번째 */}
+        {/* <div id="container">
+          <div id="map"></div>
+          <div id="sidebar">
+            <p>Total Distance: <span id="total"></span></p>
+            <div id="panel"></div>
+          </div>
+        </div> */}
+
       </PlanMidBox>
       <br/>
 

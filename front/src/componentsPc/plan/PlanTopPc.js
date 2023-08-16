@@ -1,34 +1,34 @@
-import React from 'react'
-import { PlanTopBox, Title, Date, Selected } from './PlanPc.styled'
-
-const PlanTopPc = () => {
-    // main 페이지에서 입력한 정보
-    let location = '후쿠오카';
-    let date = '2023.08.28 ~ 2023.08.31';
-    let who = ['혼자', '반려동물과'];
-    let which = ['체험·액티비티', 'SNS 핫플레이스'];
-    // gpt에서 받아올 정보
-    
+import React, { useEffect, useState } from "react";
+import { PlanTopBox, Title, Date, Selected } from "./PlanPc.styled";
+import { useQuery } from "react-query";
+import axios from "axios";
+const PlanTopPc = ({ gptAnswerSaved }) => {
+  // gpt에서 받아온 정보
+  const { location, attractions, startDate, endDate, option1, option2 } =
+    gptAnswerSaved;
 
 
   return (
     <>
       <PlanTopBox>
+      
         <Title>{location} 여행</Title>
-        <Date>{date}</Date>
+        <Date>
+          {startDate} ~ {endDate}
+        </Date>
         <Selected>
-            {who.map((value, index) => {
-                return `${value} `
-            })}
+          {option1.map((value, index) => {
+            return `${value} `;
+          })}
         </Selected>
         <Selected>
-            {which.map((value, index) => {
-                return `${value} `
-            })}
+          {option2.map((value, index) => {
+            return `${value} `;
+          })}
         </Selected>
       </PlanTopBox>
     </>
-  )
-}
+  );
+};
 
-export default PlanTopPc
+export default PlanTopPc;

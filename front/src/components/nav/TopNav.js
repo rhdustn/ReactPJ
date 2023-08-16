@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { PlanInfoBox, TopNavBox, TopNavBtn, PlanInfoTitle, PlantInfoDate } from './Nav.styled'
 
 import back from '../../img/icons/back.png'
 import { useNavigate } from 'react-router-dom'
 
-const TopNav = ({isScrolled}) => {
+const TopNav = ({isScrolled, gptAnswerSaved}) => {
   const nav = useNavigate();
 
   const moveToBack = () => {
@@ -13,19 +13,30 @@ const TopNav = ({isScrolled}) => {
     // AddPlace, EditPlace에서 누르면 일정 페이지로 넘어가기
   }
 
-  return (
-    <>
-      <TopNavBox>
-        <TopNavBtn onClick={moveToBack}><img src={back}></img></TopNavBtn>
-        {isScrolled &&        
-        <PlanInfoBox>
-            <PlanInfoTitle>후쿠오카 여행</PlanInfoTitle>
-            <PlantInfoDate>2023.08.28 ~ 2023.08.31</PlantInfoDate>
-        </PlanInfoBox>
-        }
-      </TopNavBox>
-    </>
-  )
+  if(gptAnswerSaved == undefined) {
+    return (
+      <>
+        <TopNavBox>
+          <TopNavBtn onClick={moveToBack}><img src={back}></img></TopNavBtn>
+        </TopNavBox>
+      </>
+    )
+  }else {
+    return (
+      <>
+        <TopNavBox>
+          <TopNavBtn onClick={moveToBack}><img src={back}></img></TopNavBtn>
+          {isScrolled &&        
+          <PlanInfoBox>
+              <PlanInfoTitle>{gptAnswerSaved.location} 여행</PlanInfoTitle>
+              <PlantInfoDate>{gptAnswerSaved.startDate} ~ {gptAnswerSaved.endDate}</PlantInfoDate>
+          </PlanInfoBox>
+          }
+        </TopNavBox>
+      </>
+    )
+  }
+
 }
 
 export default TopNav

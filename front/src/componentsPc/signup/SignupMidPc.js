@@ -129,15 +129,55 @@ const SignupMid = ({ page }) => {
 
 
   const login = async () => {
+    if (!user_pw) {
+      const userPwInput = document.querySelector("input[name='user_pw']");
+      userPwInput.style.border = "1px solid red";
+      userPwInput.focus();
+    }
+    if (!user_id) {
+      const userIdInput = document.querySelector("input[name='user_id']");
+      userIdInput.style.border = "1px solid red";
+      userIdInput.focus();
+    }
+    if (!user_id || !user_pw) {
+      return;
+    }
+    
     const loginClick = await axios.post("/user/login", {
       user_id,
       user_pw
+    },{
+      headers: {
+        'Content-Type': 'application/json'
+      }
     });
-    console.log("액시오스 거친후", loginClick);
+
+    if(loginClick.data == "id_non-existent"){
+      document.querySelector("input[name='user_id']").focus();
+      setTextId("존재하지 않는 아이디입니다. 다시 입력 부탁드립니다.^^");
+      setTextColor({...textColor, idColor: "red"});
+      document.querySelector("input[name='user_id']").style.border = "1px solid red";
+    }else{
+      // 존재하는 아이디를 입력했을때
+      setTextId("");
+      document.querySelector("input[name='user_id']").style.border = "1px solid blue";
+      
+      if(loginClick.data == "login_success"){
+        // 로그인 성공
+        navigate("/");
+      }else if(loginClick.data == "id_exist_but_pw_wrong"){
+        // 비밀번호 틀렸을때
+        setTextPw("비밀번호 확인하세요!!");
+        document.querySelector("input[name='user_pw']").focus();
+        document.querySelector("input[name='user_pw']").style.border = "1px solid red";
+      }
+    }
+
   }
 
   const loginMutation = useMutation(login);
-  
+
+  // ---------------------------------
 
   // 닉네임 중복 체크 react-query
   const signUpMutation = useMutation(signUp);
