@@ -35,7 +35,7 @@ const BottomNav = () => {
                 star : star1
             })
         }
-    }, [])
+    }, [])   
 
 
     return (

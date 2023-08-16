@@ -25,6 +25,11 @@ const Container = styled.div`
 display: flex;
 margin-left: 20px;
 `
+const MovePost = styled.div`
+position: absolute;
+right: 10%;
+top: 4%;
+`
 
 const TextBox = styled.div`
 position: relative;
@@ -64,5 +69,5 @@ font-size: 19px;
 font-weight: 600;
 
 `
-export {Main,ImgBox,Container,TextBox,ProflieImg,SmallText,SubTitle}
+export {Main,ImgBox,Container,TextBox,ProflieImg,SmallText,SubTitle,MovePost}
 
