@@ -99,8 +99,8 @@ useEffect(()=>{
         {attArrForMap.length !== 0 &&
         attArrForMap.length === attractionsWithImg.length ? (
           attArrForMap.map((value, index) => {
-            console.log(attractionsWithImg[index], "맵");
-            console.log("위도, 경도", attractionsWithImg[index].attractionLocation);
+            // console.log(attractionsWithImg[index], "맵");
+            // console.log("위도, 경도", attractionsWithImg[index].attractionLocation);
             return (
               <PerDayPc
                 key={index}
