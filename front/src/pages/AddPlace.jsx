@@ -6,6 +6,8 @@ import AddPlaceTop from '../components/place/AddPlaceTop'
 import AddPlaceMid from '../components/place/AddPlaceMid'
 import AddPlaceBottom from '../components/place/AddPlaceBottom'
 import { useSelector } from 'react-redux'
+import PlanMid from '../components/plan/PlanMid'
+import { Padding } from '../components/place/Place.styled'
 
 const AddPlace = () => {
     const location = useLocation();
@@ -14,6 +16,7 @@ const AddPlace = () => {
 
     const [choiceIndex, setChoice] = useState('');
     const [show, setShow] = useState(false);
+    const [midHeight, setMidHeight] = useState('calc(100vh - 250px)')
 
     // gpt 추천 관광지
     const gptAnswerSaved = useSelector((state) => {return state.gptAnswerSave})
@@ -25,12 +28,19 @@ const AddPlace = () => {
     }, [])
 
     useEffect(() => {
+        console.log(choiceIndex)
         if(choiceIndex.length > 0) {
             setShow(true)
         }else {
             setShow(false);
         }
     }, [choiceIndex])
+
+    useEffect(() => {
+        if(show) {
+            setMidHeight('calc(100vh - 400px)')
+        }
+    }, [show])
 
     // 선택 완료
     const tryComplete = () => {
@@ -39,9 +49,13 @@ const AddPlace = () => {
 
     return (
         <>
-        <TopNav isScrolled={true} />
+        <TopNav isScrolled={true} gptAnswerSaved={gptAnswerSaved} />
+        
+        {/* 지도 */}
+        <Padding />
+        <PlanMid />
 
-        <AddPlaceMid page={'add'} day={day} suggested={gptAnswerSaved.attractions} choiceIndex={choiceIndex} setChoice={setChoice} />
+        <AddPlaceMid page={'add'} day={day} suggested={gptAnswerSaved.attractions} choiceIndex={choiceIndex} setChoice={setChoice} midHeight={midHeight} />
         {show && <AddPlaceBottom choiceIndex={choiceIndex} tryComplete={tryComplete} />}
         </>
     )

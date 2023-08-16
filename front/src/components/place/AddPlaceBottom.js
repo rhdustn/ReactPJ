@@ -14,7 +14,7 @@ const AddPlaceBottom = ({choiceIndex, tryComplete}) => {
                 <Selected key={index}>
                     <p>{index+1}</p>
                     <img src={city}></img>
-                    <div>{value}</div>
+                    <div>{value.name}</div>
                 </Selected>
             )
         })}

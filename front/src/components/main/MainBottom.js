@@ -82,6 +82,8 @@ const MainBottom = ({ choiceSelected, startDate, endDate }) => {
   };
 
   useEffect(() => {
+    console.log(choiceIndex1)
+    console.log(choiceIndex2)
     choiceSelected(choiceIndex1, choiceIndex2);
 
     if (choiceIndex1.length > 0 && choiceIndex2.length > 0) {
