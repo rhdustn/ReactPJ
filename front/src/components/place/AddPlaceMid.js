@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { AddPlaceMidBox, Title, PlaceBox, ImgBox, PlaceName, SelectBtnBox, SelectBtn } from './Place.styled'
+import { AddPlaceMidBox, Title, PlaceBox, ImgBox, PlaceName, SelectBtnBox, SelectBtn, PlaceDetail } from './Place.styled'
 
 import city from '../../img/places/city.jpeg'
 
@@ -28,7 +28,8 @@ const AddPlaceMid = ({page, day, suggested, choiceIndex, setChoice}) => {
                 return (
                     <PlaceBox key={index}>
                         <ImgBox><img src={city}></img></ImgBox>
-                        <PlaceName>{value}</PlaceName>
+                        <PlaceName>{value.name}</PlaceName>
+                        <PlaceDetail>{value.detail}</PlaceDetail>
                         <SelectBtnBox>
                             <SelectBtn onClick={() => {isChoice(value)}} back={'#edebeb'} font={'#9b9a9a'}>선택</SelectBtn>
                         </SelectBtnBox>
@@ -38,7 +39,8 @@ const AddPlaceMid = ({page, day, suggested, choiceIndex, setChoice}) => {
                 return (
                     <PlaceBox key={index}>
                         <ImgBox><img src={city}></img></ImgBox>
-                        <PlaceName>{value}</PlaceName>
+                        <PlaceName>{value.name}</PlaceName>
+                        <PlaceDetail>{value.detail}</PlaceDetail>
                         <SelectBtnBox>
                             
                             <SelectBtn onClick={() => {isChoice(value)}} back={'#277bc0'} font={'white'}>선택</SelectBtn>

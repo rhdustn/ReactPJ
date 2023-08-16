@@ -12,19 +12,20 @@ const PlanBottom = ({isScrolled, gptAnswerSaved}) => {
     let ed = new Date(endDate);
 
     let periodArr = [];
+    let placeArr = [];
+    // const [placeArr, setPlaceArr] = useState([[''], [''], ['']]);
+
     while (sd <= ed) {
         periodArr.push((sd.getMonth() + 1) + '.' + sd.getDate());
         sd.setDate(sd.getDate() + 1);
+
+        placeArr.push([])
     }
 
-    // 일정 며칠인지
-    // let periodArr = ['8.28', '8.29', '8.30', '8.31'];
-    let placeArr = [
-        ['캐널시티', '이치란 본사', '후쿠오카 타워', '시사이드 모모치 해변공원'],
-        ['유후인'],
-        ['유후인'],
-        ['유후인']
-    ]
+    useEffect(() => {
+        console.log(placeArr);
+    }, [])
+
 
     useEffect(() => {
         const bottomBox = document.getElementById("bottom-box");
@@ -34,7 +35,8 @@ const PlanBottom = ({isScrolled, gptAnswerSaved}) => {
         }else {
             bottomBox.style.padding = '10px 10px 70px 10px'
         }
-      }, [isScrolled])
+    }, [isScrolled])
+      
 
     return (
         <>
