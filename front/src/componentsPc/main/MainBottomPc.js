@@ -11,12 +11,13 @@ import {
 } from "./MainPc.styled";
 import { useDispatch, useSelector } from "react-redux";
 // gpt에 대한 reducer
-import { insert, save } from "../../redux/features/dataForGpt";
+import { insert, save, save2 } from "../../redux/features/dataForGpt";
 import { useMutation, useQuery } from "react-query";
 import axios from "axios";
 import loading from "../../img/icons/loading2.gif";
 import { store } from "../../redux/store/store";
 import { useNavigate } from "react-router-dom";
+import { Loading2 } from "../loading/LoadingPc";
 const MainBottomPc = ({
   isDated,
   choiceSelected,
@@ -65,11 +66,11 @@ const MainBottomPc = ({
   const gptData = useSelector((state) => {
     return state.gptSlice;
   });
-
+  const dispatch = useDispatch();
   // post로 gptData를 서버로 보내는 함수
   const sendDataToGpt = async () => {
     axios
-      .post("http://localhost:8080/openAI", { gptData })
+      .post("/openAI", { gptData })
       .then((res) => {
         // gpt응답 여기서 state에 저장
         const data = JSON.parse(res.data.content);
@@ -99,14 +100,6 @@ const MainBottomPc = ({
   // 스크롤 내려오는 함수
   const goToTagScroll = () => {
     const ele = document.querySelector("#mainBottomBoxPc");
-    if (ele) {
-      ele.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  // 로딩 스크롤 내려오는 함수
-  const goToLoadingScroll = () => {
-    const ele = document.querySelector("#loadingContainer");
     if (ele) {
       ele.scrollIntoView({ behavior: "smooth" });
     }
@@ -189,15 +182,28 @@ const MainBottomPc = ({
         })
       );
     }
+
+    let sd = new Date(startDate);
+    let ed = new Date(endDate);
+    let periodArr = [];
+    while (sd <= ed) {
+      periodArr.push(sd.getMonth() + 1 + "." + sd.getDate());
+      sd.setDate(sd.getDate() + 1);
+    }
+    periodArr.map((value, index) => {
+      dispatch(
+        save2({
+          day: (index + 1).toString(),
+          plan: [],
+        })
+      );
+    });
   }, [gptAnswer]);
 
   //   스크롤이 내려가는 함수를 useEffect로 감지 및 실행 zerohoney
   useEffect(() => {
     if (isDated) {
       goToTagScroll();
-    }
-    if (isLoading) {
-      goToLoadingScroll();
     }
   }, [isDated, isLoading]);
   const gptAnswerSaved = useSelector((state) => {
@@ -291,19 +297,7 @@ const MainBottomPc = ({
               </MakePlanBtn>
             </BtnBox>
           )}
-          {isLoading && (
-            <LoadingContainer id="loadingContainer">
-              <img
-                src={loading}
-                style={{
-                  width: "100vw",
-                  height: "100vh",
-                  opacity: "0.8",
-                }}
-                alt="로딩 이미지"
-              ></img>
-            </LoadingContainer>
-          )}
+          {isLoading && <Loading2></Loading2>}
         </MainBottomBox>
       )}
     </>

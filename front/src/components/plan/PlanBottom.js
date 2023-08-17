@@ -19,15 +19,17 @@ import { useQueries } from "react-query";
 import axios from "axios";
 import { saveAttractionsWithImg } from "../../redux/features/dataForGpt";
 import { useDispatch, useSelector } from "react-redux";
-
+import { Loading2 } from "../../componentsPc/loading/LoadingPc";
 // 지도 아래 일정 부분
 const PlanBottom = ({ isScrolled, gptAnswerSaved, userChoiceSaved }) => {
-    const { location, attractions, startDate, endDate, option1, option2 } =
+  const { location, attractions, startDate, endDate, option1, option2 } =
     gptAnswerSaved;
 
   // attractions을 반복시키기위해 만든 임시 state
   const [attArrForMap, setAttArrForMap] = useState("");
 
+  // period
+  const [periodArr, setPeriodArr] = useState([]);
   // 이미지 url이 포함된 새로운attractions state(redux)
   const attractionsWithImg = useSelector((state) => {
     return state.attractionsWithImg;
@@ -79,17 +81,17 @@ const PlanBottom = ({ isScrolled, gptAnswerSaved, userChoiceSaved }) => {
   let sd = new Date(startDate);
   let ed = new Date(endDate);
 
-    let periodArr = [];
     while (sd <= ed) {
-        periodArr.push((sd.getMonth() + 1) + '.' + sd.getDate());
-        sd.setDate(sd.getDate() + 1);
+      temp.push(sd.getMonth() + 1 + "." + sd.getDate());
+      sd.setDate(sd.getDate() + 1);
     }
+    setPeriodArr(temp);
+  }, [attractions]);
 
-    const { planPerDay } = userChoiceSaved;
-    useEffect(() => {
-      console.log(planPerDay)
-    }, [planPerDay])
-
+  const { planPerDay } = userChoiceSaved;
+  useEffect(() => {
+    console.log(planPerDay);
+  }, [planPerDay]);
 
     // 스크롤 일정 이상 넘어가면
     useEffect(() => {

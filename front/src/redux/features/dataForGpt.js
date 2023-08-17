@@ -78,23 +78,27 @@ export const attractionsWithImg = createSlice({
 export const userChoiceSave = createSlice({
   name: "userChoiceSave",
   initialState: {
-    planPerDay : [{
-      day : '',
-      plan : []
-    }]
+    planPerDay: [
+      {
+        day: "",
+        plan: [],
+      },
+    ],
   },
-  reducers : {
+  reducers: {
     save2: (state, action) => {
       const { day, plan } = action.payload;
-      
-      if(state.planPerDay.day == '') {
-        console.log('여기')
-        state.planPerDay.day = day
-        state.planPerDay.plan = plan
-      }else {
+
+      if (state.planPerDay.day == "") {
+        console.log("여기");
+        state.planPerDay.day = day;
+        state.planPerDay.plan = plan;
+      } else {
         // 이미 해당 day에 값이 있는지 확인
-        const existingDayIndex = state.planPerDay.findIndex(item => item.day === day);
-        
+        const existingDayIndex = state.planPerDay.findIndex(
+          (item) => item.day === day
+        );
+
         if (existingDayIndex !== -1) {
           // 이미 해당 day에 값이 있는 경우, 해당 day의 plan을 변경
           state.planPerDay[existingDayIndex].plan = plan;
@@ -103,9 +107,9 @@ export const userChoiceSave = createSlice({
           state.planPerDay.push({ day, plan });
         }
       }
-    }
-  }
-})
+    },
+  },
+});
 
 export const { insert } = gptSlice.actions;
 export const { save, reset } = gptAnswerSave.actions;
