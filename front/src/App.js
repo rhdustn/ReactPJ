@@ -12,6 +12,7 @@ import {
   Board,
   BoardDetail,
   Post,
+  Admin
 } from "./pages";
 import {
   EditProfliePc,
@@ -167,6 +168,8 @@ function App() {
           }
         />
         <Route path="/post" element={isMobile ? <Post /> : "pc 버전 post"} />
+
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </div>
   );
