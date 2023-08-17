@@ -3,64 +3,57 @@ import { PlanMidBox } from './PlanPc.styled'
 import { useSelector, useDispatch } from 'react-redux';
 
 const PlanMidPc = () => {
-  const attraction = useSelector(state => state.attractionsWithImg);
-  const [finalAttraction, setFinalAttraction] = useState(null);
+  // const attraction = useSelector(state => state.attractionsWithImg);
+  // const [finalAttraction, setFinalAttraction] = useState(null);
 
 
-  useEffect(() => {
-    // console.log("1 :", attraction);
-    setFinalAttraction(attraction);
-  }, [attraction]);
+  // useEffect(() => {
+  //   // console.log("1 :", attraction);
+  //   setFinalAttraction(attraction);
+  // }, [attraction]);
 
-  useEffect(() => {
-    // console.log("2 :", finalAttraction);
-    // 최종 변경된 attraction 값을 사용하여 원하는 작업 수행
-  }, [finalAttraction]);
+  // useEffect(() => {
+  //   // console.log("2 :", finalAttraction);
+  //   // 최종 변경된 attraction 값을 사용하여 원하는 작업 수행
+  // }, [finalAttraction]);
 
 
-  useEffect(()=>{
-    const locations = [];
-    console.log("3 : ", finalAttraction);
-    if(finalAttraction != null && finalAttraction.length !== 0){
-      for(let i=0; i<finalAttraction.length; i++){
-        // console.log("위도: ", finalAttraction[i].attractionLocation.latitude);
-        // console.log("경도: ", finalAttraction[i].attractionLocation.longitude);
-        // console.log("-----");
-
-        // --------------------------
-        locations.push({ lat: finalAttraction[i].attractionLocation.latitude, lng: finalAttraction[i].attractionLocation.longitude, title: "Location 2" });
-
-        // const locations = [
-        //   { lat: 37.82003874891632, lng: -122.47816927208792, title: "Location 1" }, // 금문교
-        //   { lat: 37.7749, lng: -122.4194, title: "Location 2" },
-        //   { lat: 37.8057752, lng: -122.4294758, title: "Location 3" }, //피셔맨즈 와프
-        // ];
-        
-      }
-      console.log("최종", locations);
-      function initMap2(locations) {
-        const map = new window.google.maps.Map(document.getElementById("gmp-map"), {
-          zoom: 10,
-          center: { lat: Number(locations[0].lat), lng: Number(locations[0].lng) },
-          fullscreenControl: false,
-          zoomControl: true,
-          streetViewControl: false,
-        });
+  // useEffect(()=>{
+  //   const locations = [];
+  //   console.log("3 : ", finalAttraction);
+  //   if(finalAttraction != null && finalAttraction.length !== 0){
+  //     for(let i=0; i<finalAttraction.length; i++){
+  //       // console.log("위도: ", finalAttraction[i].attractionLocation.latitude);
+  //       // console.log("경도: ", finalAttraction[i].attractionLocation.longitude);
+  //       locations.push({ lat: finalAttraction[i].attractionLocation.latitude, lng: finalAttraction[i].attractionLocation.longitude, title: "Location 2" });        
+  //     }
+  //     function initMap2(locations) {
+  //       const map = new window.google.maps.Map(document.getElementById("gmp-map"), {
+  //         zoom: 10,
+  //         center: { lat: Number(locations[0].lat), lng: Number(locations[0].lng) },
+  //         fullscreenControl: false,
+  //         zoomControl: true,
+  //         streetViewControl: false,
+  //       });
       
-        locations.forEach((location,index) => {
-          new window.google.maps.Marker({
-            position: { lat: Number(locations[index].lat), lng: Number(locations[index].lng) },
-            map,
-            title: location.title,
-          });
-        });
-      }
+  //       locations.forEach((location,index) => {
+  //         new window.google.maps.Marker({
+  //           position: { lat: Number(locations[index].lat), lng: Number(locations[index].lng) },
+  //           map,
+  //           title: location.title,
+  //         });
+  //       });
+  //     }
       
-      initMap2(locations);
-      // -------------------------------
+  //     initMap2(locations);
+  //     // -------------------------------
 
-    }
-  }, [finalAttraction]);
+  //   }
+  // }, [finalAttraction]);
+
+
+
+
 
   // useEffect(()=>{
   //   const locations = [
@@ -97,26 +90,26 @@ const PlanMidPc = () => {
 
   // 위도, 경도에 따른 위치 마커 찍어주기
   // useEffect(()=>{
-    // usehook 에서 사용되니까 참조할 객체가 없음
-    // function initMap2() {
-    //   const myLatLng = {
-    //     lat: 40.12150192260742,
-    //     lng: -100.45039367675781
-    //   };
-    //   const map = new window.google.maps.Map(document.getElementById("gmp-map"), {
-    //     zoom: 4,
-    //     center: myLatLng,
-    //     fullscreenControl: false,
-    //     zoomControl: true,
-    //     streetViewControl: false
-    //   });
-    //   new window.google.maps.Marker({
-    //     position: myLatLng,
-    //     map,
-    //     title: "My location"
-    //   });
-    // }
-    // initMap2();
+  //   // usehook 에서 사용되니까 참조할 객체가 없음
+  //   function initMap2() {
+  //     const myLatLng = {
+  //       lat: 40.12150192260742,
+  //       lng: -100.45039367675781
+  //     };
+  //     const map = new window.google.maps.Map(document.getElementById("gmp-map"), {
+  //       zoom: 4,
+  //       center: myLatLng,
+  //       fullscreenControl: false,
+  //       zoomControl: true,
+  //       streetViewControl: false
+  //     });
+  //     new window.google.maps.Marker({
+  //       position: myLatLng,
+  //       map,
+  //       title: "My location"
+  //     });
+  //   }
+  //   initMap2();
 
   // }, []);
 
@@ -126,51 +119,67 @@ const PlanMidPc = () => {
 
   
   // 위도, 경도 주변 관광지 마커 찍어주기
-  // const mapRef = useRef(null);
+  const mapRef = useRef(null);
 
-  // useEffect(() => {
-  //   function initMap() {
-  //     const mapCenter = { lat: 40.692642188968186, lng: -74.0397641563072 };
+  let lat = 40.75079276451464;
+  let lng = -73.98064905864807;
 
-  //     const map = new window.google.maps.Map(mapRef.current, {
-  //       center: mapCenter,
-  //       zoom: 15,
-  //     });
+  useEffect(() => {
+    function initMap() {
+      const mapCenter = { lat: lat, lng: lng };
 
-  //     const request = {
-  //       location: mapCenter,
-  //       radius: '5000', // 5km 반경 내에서 검색
-  //       // 5000 5km
-  //       types: ['tourist_attraction'], // 관광지 타입
-  //     };
+      const map = new window.google.maps.Map(mapRef.current, {
+        center: mapCenter,
+        zoom: 15,
+      });
 
-  //     const service = new window.google.maps.places.PlacesService(map);
+      const request = {
+        location: mapCenter,
+        radius: '5000',
+        // 5000 5km 반경 내에서 검색
+        // 500 500m 반경 내에서 검색
+        types: ['tourist_attraction'], // 관광지 타입
+      };
 
-  //     service.nearbySearch(request, (results, status) => {
-  //       if (status === window.google.maps.places.PlacesServiceStatus.OK) {
-  //         for (const place of results) {
-  //           // console.log("1");
-  //           // console.log("place : ", place);
-  //           // console.log(place.name);
-  //           // console.log(results);
-  //           const marker = new window.google.maps.Marker({
-  //             position: place.geometry.location,
-  //             map: map,
-  //             title: place.name,
-  //           });
-  //           // console.log("포지션", place.geometry.location);
-  //         }
-  //       }
-  //     });
-  //   }
+      const service = new window.google.maps.places.PlacesService(map);
 
-  //   const googleMapScript = document.createElement('script');
-  //   googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=
-  //   ${process.env.REACT_APP_GOOGLEMAP_API_KEY}&libraries=places`;
-  //   googleMapScript.async = true;
-  //   googleMapScript.onload = initMap;
-  //   document.head.appendChild(googleMapScript);
-  // }, []);
+      service.nearbySearch(request, (results, status) => {
+        if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+          // 평점 이상
+          const filterResults = results.filter(place => place.rating >= 4.0);
+
+          for (const place of filterResults.slice(0,5)) {
+            console.log("place : ", place);
+            // console.log("place.photos : ", place.photos);
+            // console.log(place.name);
+            const marker = new window.google.maps.Marker({
+              position: place.geometry.location,
+              map: map,
+              title: place.name,
+            });
+          }
+
+          // for (const place of results) {
+          //   console.log("place : ", place);
+          //   // console.log("place.photos : ", place.photos);
+          //   // console.log(place.name);
+          //   const marker = new window.google.maps.Marker({
+          //     position: place.geometry.location,
+          //     map: map,
+          //     title: place.name,
+          //   });
+          // }
+        }
+      });
+    }
+
+    const googleMapScript = document.createElement('script');
+    googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=
+    ${process.env.REACT_APP_GOOGLEMAP_API_KEY}&libraries=places`;
+    googleMapScript.async = true;
+    googleMapScript.onload = initMap;
+    document.head.appendChild(googleMapScript);
+  }, []);
 
 
 
@@ -276,11 +285,10 @@ const PlanMidPc = () => {
     <>
       <PlanMidBox>
         {/* 1번째 */}
-        <div id='gmp-map'></div>
+        {/* <div id='gmp-map'></div> */}
 
         {/* 2번째 */}
-        {/* <div ref={mapRef} style={{ width: '100%', height: '100%' }}></div>
-        <div id='test1' ref={mapRef}></div> */}
+        <div id='test1' ref={mapRef}></div>
 
         {/* 3번째 */}
         {/* <div id="container">

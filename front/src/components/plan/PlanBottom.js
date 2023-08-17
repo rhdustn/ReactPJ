@@ -17,8 +17,6 @@ import {
 
 import city from "../../img/places/city.jpeg";
 import { useNavigate } from "react-router-dom";
-import { useQueries } from "react-query";
-import axios from "axios";
 import { saveAttractionsWithImg } from "../../redux/features/dataForGpt";
 import { useDispatch, useSelector } from "react-redux";
 
