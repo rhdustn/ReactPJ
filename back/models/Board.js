@@ -20,6 +20,10 @@ class Board extends Sequelize.Model {
           type: Sequelize.INTEGER,
           allowNull: false,
         },
+        images: {
+          type: Sequelize.STRING,
+          allowNull: false,
+        },
         users_id: {
           type: Sequelize.INTEGER,
           allowNull: true,

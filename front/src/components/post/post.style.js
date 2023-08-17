@@ -13,6 +13,7 @@ const PostTitle = styled.input`
   line-height: 1.2;
   letter-spacing: 0px;
   outline: none;
+  margin-top: 15px;
 
   &:focus {
     border-color: #007bff; /* 포커스 시 테두리 색 변경 */
@@ -39,12 +40,10 @@ height: 600px;
 const PostBtn = styled.button`
     width: 150px;
     height: 50px;
-    display: inline-block;
     float: none;
     font-weight: bold;
     text-align: center;
     font-size: 14px;
-    line-height: 17px;
     border-radius: 4px;
     padding: 7px 12px;
     border: 1px solid rgb(54, 143, 255);
@@ -54,9 +53,11 @@ const PostBtn = styled.button`
 `
 const UploadImgContain = styled.div`
 position: relative;
-width: 100%;
+width: 400px;
 height: 300px;
-border: 1px solid;
+background: #E2E2E2;
+display: flex;
+overflow-x: scroll;
 `
 const UploadImg = styled.div`
 margin-top: 10ox;
@@ -75,20 +76,36 @@ const ImgInputBtn = styled.div`
   display: none; 
 `;
 
-const ImgPreview = styled.div`
-width: 100%;
-  background-color: #ffd8de;
-  position: absolute;  
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer; 
-  background-image: ${(props) => (props.preview ? `url(${props.preview})` : 'none')};
-  background-size: cover;
-  background-position: center;
-`;
+const ShowImg = styled.div`
+width: 400px;
+height: 300px;
+`
+const UploadBtn = styled.button`
+width: 100px;
+height: 30px;
+border-radius: 10px;
+background-color: rgb(54, 143, 255);
+position: absolute;
+transform: translate(-50%);
+color:white;
+border: none;
+`
+const DeleteBtn = styled.button`
+position: absolute;
+border: none;
+font-size: 20px;
+color: red;
+background-color: transparent;
+`
+const ImgContain = styled.div`
+position: relative;
+`
+const ImgStyle = styled.img`
+width: 200px;
+height: 300px;
+`
 
 
 export {PostContent,PostTitle,PostPlanContainer,PostBtn,UploadImgContain,UploadImg
-,ImgInputBtn,ImgPreview
+,ImgInputBtn,ShowImg,UploadBtn,DeleteBtn,ImgContain,ImgStyle
 }

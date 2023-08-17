@@ -1,36 +1,50 @@
 import React, { useRef, useState } from 'react';
-import { UploadImg, UploadImgContain, ImgInputBtn } from './post.style';
+import { UploadImgContain,UploadBtn,DeleteBtn,ShowImg,ImgContain,ImgStyle } from './post.style';
 
 const ImgUpload = () => {
-  const [showImages, setShowImages] = useState([]); 
+  const [imageFiles, setImageFiles] = useState([]);
 
-  const addImages = (e) => {
-    const imgList = e.target.files; 
-    let images = [];
+  const handleFileChange = (e) => {
+    const selectedFiles = Array.from(e.target.files);
+    setImageFiles([...imageFiles, ...selectedFiles]);
+  };
+  const handleImageDelete = (index) => {
+    const updatedFiles = imageFiles.filter((_, i) => i !== index);
+    setImageFiles(updatedFiles);
+  };
 
-    for (let i = 0; i < imgList.length; i++) {
-      const imageURL = URL.createObjectURL(imgList[i]);
-      images.push(imageURL);
-    }
+  const inputRef = useRef(null);
 
-    setShowImages([...showImages, ...images]);
+  const handleAddButtonClick = () => {
+    inputRef.current.click();
   };
 
   return (
     <div>
       <UploadImgContain>
-        <ImgInputBtn>
-          <input
-            type="file"
-            name="file"
-            multiple 
-            onChange={addImages} 
-          />
-        </ImgInputBtn>
+        {imageFiles.map((file, index) => (
+          <ShowImg key={index} style={{ display: 'flex', alignItems: 'center' }}>
+            <ImgContain>
+            <DeleteBtn onClick={() => handleImageDelete(index)}>🗙</DeleteBtn>
+            <ImgStyle
+              src={URL.createObjectURL(file)}
+              alt={`Image ${index}`}
+            />
+         </ImgContain> 
+         </ShowImg>
+        ))}
+        <input
+          type="file"
+          multiple
+          style={{ display: 'none' }}
+          ref={inputRef}
+          onChange={handleFileChange}
+        />
       </UploadImgContain>
-      {showImages.map((imageURL, index) => (
-        <UploadImg key={index} src={imageURL} alt={`Image ${index}`} />
-      ))}
+      <br/>
+      <UploadBtn onClick={handleAddButtonClick}>Add Images</UploadBtn>
+      <br/>
+      <br/>
     </div>
   );
 };
