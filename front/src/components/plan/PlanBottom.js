@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useQueries } from 'react-query'
+import axios from 'axios'
+
 import {
   PlanBottomBox,
   PerDayBox,
@@ -20,8 +23,8 @@ import { saveAttractionsWithImg } from "../../redux/features/dataForGpt";
 import { useDispatch, useSelector } from "react-redux";
 
 // 지도 아래 일정 부분
-const PlanBottom = ({ isScrolled, gptAnswerSaved }) => {
-  const { location, attractions, startDate, endDate, option1, option2 } =
+const PlanBottom = ({ isScrolled, gptAnswerSaved, userChoiceSaved }) => {
+    const { location, attractions, startDate, endDate, option1, option2 } =
     gptAnswerSaved;
 
   // attractions을 반복시키기위해 만든 임시 state
@@ -65,58 +68,43 @@ const PlanBottom = ({ isScrolled, gptAnswerSaved }) => {
   let sd = new Date(startDate);
   let ed = new Date(endDate);
 
-  let periodArr = [];
-  let placeArr = [];
-  // const [placeArr, setPlaceArr] = useState([[''], [''], ['']]);
-
-  while (sd <= ed) {
-    periodArr.push(sd.getMonth() + 1 + "." + sd.getDate());
-    sd.setDate(sd.getDate() + 1);
-
-    placeArr.push([]);
-  }
-
-  useEffect(() => {
-    console.log(placeArr);
-  }, []);
-
-  useEffect(() => {
-    const bottomBox = document.getElementById("bottom-box");
-
-    if (isScrolled) {
-      bottomBox.style.padding = "210px 10px 70px 10px";
-    } else {
-      bottomBox.style.padding = "10px 10px 70px 10px";
+    let periodArr = [];
+    while (sd <= ed) {
+        periodArr.push((sd.getMonth() + 1) + '.' + sd.getDate());
+        sd.setDate(sd.getDate() + 1);
     }
-  }, [isScrolled]);
 
-  return (
-    <>
-      <PlanBottomBox id="bottom-box">
-      {attArrForMap.length !== 0 &&
-        attArrForMap.length === attractionsWithImg.length ? (
-          attArrForMap.map((value, index) => {
-            console.log(attractionsWithImg[index], "맵");
-            return (
-              <PerDay
-                key={index}
-                period={value}
-                index={index + 1}
-                place={attractionsWithImg[index]}
-                imgSrc={attractionsWithImg[index].img}
-              />
-            );
-          })
-        ) : (
-          <></>
-        )}
-        <BtnBox>
-          <SavePlanBtn>저장</SavePlanBtn>
-        </BtnBox>
-      </PlanBottomBox>
-    </>
-  );
-};
+    const { planPerDay } = userChoiceSaved;
+    useEffect(() => {
+      console.log(planPerDay)
+    }, [planPerDay])
+
+
+    // 스크롤 일정 이상 넘어가면
+    useEffect(() => {
+        const bottomBox = document.getElementById("bottom-box");
+    
+        if(isScrolled) {
+            bottomBox.style.padding = '210px 10px 70px 10px'
+        }else {
+            bottomBox.style.padding = '10px 10px 70px 10px'
+        }
+    }, [isScrolled])
+      
+
+    return (
+        <>
+        <PlanBottomBox id='bottom-box'>
+            {periodArr.map((value, index) => {
+                return <PerDay key={index} period={value} index={index+1} place={planPerDay[index+1].plan} />
+            })}
+            <BtnBox>
+                <SavePlanBtn>저장</SavePlanBtn>
+            </BtnBox>
+        </PlanBottomBox>
+        </>
+    )
+}
 
 // 1일마다 관광지 보여주는 부분
 const PerDay = ({ period, index, place, imgSrc }) => {
@@ -150,7 +138,7 @@ const PerDay = ({ period, index, place, imgSrc }) => {
                 </RouteNumber>
                 <RoutePlace>
                   <div>
-                    {value}
+                    <p>{value.name}</p>
                     <img src={city}></img>
                   </div>
                 </RoutePlace>

@@ -125,6 +125,9 @@ export const RoutePlace = styled.div`
         box-sizing: border-box;
         box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.35);
     }
+    & div p {
+        width: 70%; text-align: start;
+    }
     & div img {
         height: 80%;
         position: absolute; right: 10px;

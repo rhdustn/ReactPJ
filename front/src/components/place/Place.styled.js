@@ -50,64 +50,93 @@ export const InputBox = styled.div`
 
 // AddPlaceMid
 export const AddPlaceMidBox = styled.div`
-    width: 100%; height: auto;
+    width: 100%;
+    height: ${(props) => props.midHeight || 'calc(100vh - 250px'};
     box-sizing: border-box;
     display: flex; flex-direction: column;
     align-items: center;
-    padding: 60px 10px 160px 10px;
+    padding: 10px 10px 10px 10px;
+    overflow: scroll;
 `
 export const Title = styled.div`
     width: 100%; height: 30px;
     text-align: start;
     font-weight: bold;
-    padding: 0 5px 0 5px;
+    padding: 10px 5px 10px 5px;
     box-sizing: border-box;
+    color: ${(props) => props.color || 'black'};
+    font-size: ${(props) => props.size || '14px'};
+`
+export const Line = styled.div`
+    width: 100%;
+    border-bottom: 1px solid silver;
 `
 export const PlaceBox = styled.div`
-    width: 100%; height: 80px;
-    display: flex;
-    align-items: center;
-    position: relative;
-    border: 1px solid;
+    width: 100%; min-height: 90px;
+    max-height:110px;
+    display: flex; flex-direction: column;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    padding: 10px 0 10px 0;
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+`
+export const NearPlaceBox = styled.div`
+    width: 100%; min-height: 70px;
+    max-height: 90px;
+    display: flex; flex-direction: column;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    padding: 10px 0 10px 0;
 
     &:hover {
         background-color: rgba(0, 0, 0, 0.05);
     }
 `
 export const ImgBox = styled.div`
-    width: 40px; height: 40px;
-    position: absolute; left: 5px; top: 10px;
+    width: 50px; height: 100%;
     overflow: hidden;
+    display: flex; justify-content: center; align-items: start;
+    box-sizing: border-box;
 
     & img {
-        height: 100%;
+        width: 40px;
+        height: 40px;
     }
 `
 export const PlaceName = styled.div`
-    width: calc(100% - 125px);
-    height: auto;
-    display: flex; align-items: center;
-    position: absolute; left: 55px; top: 10px;
+    width: calc(100% - 120px);
+    height: 16px;
     font-weight: bold;
+    box-sizing: border-box;
+    text-align: start;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 `
 export const PlaceDetail = styled.div`
-    width: calc(100% - 125px);
-    height: 37px;
-    position: absolute; left: 55px; top: 50px;
-    transform: translateY(-50%);
+    width: calc(100% - 120px);
+    height: 48px;
     font-size: 12px;
     text-align: start;
     overflow: hidden;
     text-overflow: ellipsis;
+    box-sizing: border-box;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
 `
 export const SelectBtnBox = styled.div`
-    width: 50px; height: 100%;
+    width: 60px; height: 100%;
     display: flex; justify-content: center; align-items: center;
-    position: absolute; right: 5px;
+    box-sizing: border-box;
 `
 export const SelectBtn = styled.div`
     font-size: 14px; font-weight: bold;
-    width: 100%; height: 30px;
+    width: 90%; height: 30px;
     border-radius: 25px;
     background-color: ${(props) => props.back || '#edebeb'};
     color: ${(props) => props.font || '#9b9a9a'};
@@ -118,15 +147,13 @@ export const SelectBtn = styled.div`
 
 // AddPlaceBottom
 export const ShowSelectedBox = styled.div`
-    width: 100%; height: auto;
-    position: fixed; bottom: 40px;
+    width: 100%; height: 100px;
     background-color: #edebeb;
-    display: flex; flex-direction: row;
+    display: flex; flex-direction: column;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: center; justify-content: center;
     overflow-x: scroll;
     overflow-y: hidden;
-    padding: 10px 5px 5px 5px;
     animation: ${fadeInAni} 0.5s ease-in-out;
 `
 export const Selected = styled.div`
@@ -163,11 +190,18 @@ export const Selected = styled.div`
     }
 `
 export const AddBtn = styled.div`
-    width: 100%; height: 40px;
+    width: 100%; height: 50px;
     background-color: #277bc0;
     color: white;
     font-weight: bold;
     position: fixed; bottom: 0;
     display: flex; justify-content: center; align-items: center;
     animation: ${fadeInAni} 0.5s ease-in-out;
+`
+
+
+
+
+export const Padding = styled.div`
+    width: 100%; height: 50px;
 `
