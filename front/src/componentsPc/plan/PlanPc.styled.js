@@ -164,6 +164,7 @@ export const PlanMidBox = styled.div`
   & #test1 {
     width: 100%;
     height: 100%;
+    background-color: yellow;
   }
   /* 3번째 테스트 */
   & #container {

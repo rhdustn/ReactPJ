@@ -24,6 +24,14 @@ const PlanBottomPc = ({ isScrolled, gptAnswerSaved }) => {
   // 일정 며칠인지
   const { location, attractions, startDate, endDate, option1, option2 } =
     gptAnswerSaved;
+    // 오사카, // gpt가 뽑아낸 추천지역
+
+    // console.log("attractions.length : ", attractions.length);
+    // for(let i=0; i<3; i++){
+    //   console.log("3번" + JSON.stringify(attractions[i].attractionLocation) );
+    // }
+
+
   // attractions을 반복시키기위해 만든 임시 state
   const [attArrForMap, setAttArrForMap] = useState("");
 
@@ -81,9 +89,9 @@ const PlanBottomPc = ({ isScrolled, gptAnswerSaved }) => {
     setAttArrForMap(temp);
   }, [attractions]);
 
-useEffect(()=>{
-  console.log(attractionsWithImg,'리덕스')
-},[attractionsWithImg])
+// useEffect(()=>{
+//   console.log(attractionsWithImg,'리덕스')
+// },[attractionsWithImg])
 
   return (
     <>
@@ -91,7 +99,8 @@ useEffect(()=>{
         {attArrForMap.length !== 0 &&
         attArrForMap.length === attractionsWithImg.length ? (
           attArrForMap.map((value, index) => {
-            console.log(attractionsWithImg[index], "맵");
+            // console.log(attractionsWithImg[index], "맵");
+            // console.log("위도, 경도", attractionsWithImg[index].attractionLocation);
             return (
               <PerDayPc
                 key={index}
