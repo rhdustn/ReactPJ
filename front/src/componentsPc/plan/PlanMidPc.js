@@ -1,71 +1,126 @@
-import React, {useEffect, useRef} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import { PlanMidBox } from './PlanPc.styled'
 import { useSelector, useDispatch } from 'react-redux';
 
 const PlanMidPc = () => {
+  const attraction = useSelector(state => state.attractionsWithImg);
+  const [finalAttraction, setFinalAttraction] = useState(null);
 
-  
-  const attractionLocation2 = useSelector(state => state.attractionsWithImg);
+
+  useEffect(() => {
+    // console.log("1 :", attraction);
+    setFinalAttraction(attraction);
+  }, [attraction]);
+
+  useEffect(() => {
+    // console.log("2 :", finalAttraction);
+    // 최종 변경된 attraction 값을 사용하여 원하는 작업 수행
+  }, [finalAttraction]);
+
 
   useEffect(()=>{
-    if (attractionLocation2) {
-    console.log("맞니", attractionLocation2[0].attractionLocation);
+    const locations = [];
+    console.log("3 : ", finalAttraction);
+    if(finalAttraction != null && finalAttraction.length !== 0){
+      for(let i=0; i<finalAttraction.length; i++){
+        // console.log("위도: ", finalAttraction[i].attractionLocation.latitude);
+        // console.log("경도: ", finalAttraction[i].attractionLocation.longitude);
+        // console.log("-----");
+
+        // --------------------------
+        locations.push({ lat: finalAttraction[i].attractionLocation.latitude, lng: finalAttraction[i].attractionLocation.longitude, title: "Location 2" });
+
+        // const locations = [
+        //   { lat: 37.82003874891632, lng: -122.47816927208792, title: "Location 1" }, // 금문교
+        //   { lat: 37.7749, lng: -122.4194, title: "Location 2" },
+        //   { lat: 37.8057752, lng: -122.4294758, title: "Location 3" }, //피셔맨즈 와프
+        // ];
+        
+      }
+      console.log("최종", locations);
+      function initMap2(locations) {
+        const map = new window.google.maps.Map(document.getElementById("gmp-map"), {
+          zoom: 10,
+          center: { lat: Number(locations[0].lat), lng: Number(locations[0].lng) },
+          fullscreenControl: false,
+          zoomControl: true,
+          streetViewControl: false,
+        });
       
+        locations.forEach((location,index) => {
+          new window.google.maps.Marker({
+            position: { lat: Number(locations[index].lat), lng: Number(locations[index].lng) },
+            map,
+            title: location.title,
+          });
+        });
+      }
+      
+      initMap2(locations);
+      // -------------------------------
+
     }
-
-  }, [attractionLocation2]);
-
-  // const gptextract = useSelector((state)=>{
-  //   return state.attractionLocation;
-  // });
-
-  // const attractionsWithImgDispatch = useDispatch();
-
-  // console.log("맞아1?", gptextract);
-
+  }, [finalAttraction]);
 
   // useEffect(()=>{
-  //   console.log("맞아?", attractionsWithImg);
-  // }, [attractionsWithImg]);
+  //   const locations = [
+  //     { lat: 37.82003874891632, lng: -122.47816927208792, title: "Location 1" }, // 금문교
+  //     { lat: 37.7749, lng: -122.4194, title: "Location 2" },
+  //     { lat: 37.8057752, lng: -122.4294758, title: "Location 3" }, //피셔맨즈 와프
+  //   ];
 
-  // console.log("가져와짐?", JSON.stringify(gptextract) );
+  //   function initMap2(locations) {
+  //     const map = new window.google.maps.Map(document.getElementById("gmp-map"), {
+  //       zoom: 12,
+  //       center: { lat: 37.82003874891632, lng: -122.47816927208792 },
+  //       fullscreenControl: false,
+  //       zoomControl: true,
+  //       streetViewControl: false,
+  //     });
+    
+  //     locations.forEach((location) => {
+  //       new window.google.maps.Marker({
+  //         position: { lat: location.lat, lng: location.lng },
+  //         map,
+  //         title: location.title,
+  //       });
+  //     });
+  //   }
+    
+  //   initMap2(locations);
 
-
-
-
-
-
-
-
+  // });
 
 
 
 
 
   // 위도, 경도에 따른 위치 마커 찍어주기
-  useEffect(()=>{
+  // useEffect(()=>{
     // usehook 에서 사용되니까 참조할 객체가 없음
-    function initMap2() {
-      const myLatLng = {
-        lat: 40.12150192260742,
-        lng: -100.45039367675781
-      };
-      const map = new window.google.maps.Map(document.getElementById("gmp-map"), {
-        zoom: 4,
-        center: myLatLng,
-        fullscreenControl: false,
-        zoomControl: true,
-        streetViewControl: false
-      });
-      new window.google.maps.Marker({
-        position: myLatLng,
-        map,
-        title: "My location"
-      });
-    }
-    initMap2();
+    // function initMap2() {
+    //   const myLatLng = {
+    //     lat: 40.12150192260742,
+    //     lng: -100.45039367675781
+    //   };
+    //   const map = new window.google.maps.Map(document.getElementById("gmp-map"), {
+    //     zoom: 4,
+    //     center: myLatLng,
+    //     fullscreenControl: false,
+    //     zoomControl: true,
+    //     streetViewControl: false
+    //   });
+    //   new window.google.maps.Marker({
+    //     position: myLatLng,
+    //     map,
+    //     title: "My location"
+    //   });
+    // }
+    // initMap2();
 
-  }, []);
+  // }, []);
+
+
 
 
 
@@ -116,6 +171,10 @@ const PlanMidPc = () => {
   //   googleMapScript.onload = initMap;
   //   document.head.appendChild(googleMapScript);
   // }, []);
+
+
+
+
 
   // 위도, 경도에 따른 시작지와 도착지 사이의 경로 및 시간 설정
   // useEffect(()=>{
