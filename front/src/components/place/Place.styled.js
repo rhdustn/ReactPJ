@@ -108,19 +108,26 @@ export const ImgBox = styled.div`
 `
 export const PlaceName = styled.div`
     width: calc(100% - 120px);
-    height: auto;
-    display: flex;
+    height: 16px;
     font-weight: bold;
     box-sizing: border-box;
+    text-align: start;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 `
 export const PlaceDetail = styled.div`
     width: calc(100% - 120px);
-    height: auto;
+    height: 48px;
     font-size: 12px;
     text-align: start;
     overflow: hidden;
     text-overflow: ellipsis;
     box-sizing: border-box;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
 `
 export const SelectBtnBox = styled.div`
     width: 60px; height: 100%;

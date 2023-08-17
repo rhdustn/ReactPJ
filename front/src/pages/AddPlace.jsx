@@ -65,6 +65,12 @@ const AddPlace = () => {
         console.log(userChoiceSaved)
     }, [userChoiceSaved])
 
+    useEffect(() => {
+        let index = Number(day);
+        let arr = userChoiceSaved.planPerDay[index].plan;
+        setChoice(arr);
+    }, [])
+
     return (
         <>
         <TopNav isScrolled={true} gptAnswerSaved={gptAnswerSaved} />

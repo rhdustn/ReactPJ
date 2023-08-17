@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useMutation } from "react-query";
 import axios from "axios";
 
-import { save, reset } from "../../redux/features/dataForGpt";
+import { save, reset, save2 } from "../../redux/features/dataForGpt";
 
 import {
   MainBottomBox,
@@ -125,6 +125,24 @@ const MainBottom = ({ choiceSelected, startDate, endDate }) => {
           option2: choiceIndex2,
         })
       );
+
+      // redux - useChoiceSave 초기화 하는 부분
+      let sd = new Date(startDate);
+      let ed = new Date(endDate);
+      let periodArr = [];
+      while (sd <= ed) {
+          periodArr.push((sd.getMonth() + 1) + '.' + sd.getDate());
+          sd.setDate(sd.getDate() + 1);
+      }
+      periodArr.map((value, index) => {
+        dispatch(
+          save2({
+              day: (index+1).toString(),
+              plan: []
+          })
+        )
+      })
+
     }
   }, [gptAnswer]);
 

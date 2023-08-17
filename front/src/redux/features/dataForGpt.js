@@ -61,6 +61,7 @@ export const userChoiceSave = createSlice({
       const { day, plan } = action.payload;
       
       if(state.planPerDay.day == '') {
+        console.log('여기')
         state.planPerDay.day = day
         state.planPerDay.plan = plan
       }else {

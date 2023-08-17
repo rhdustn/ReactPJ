@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useQueries } from 'react-query'
+import axios from 'axios'
+
 import {
   PlanBottomBox,
   PerDayBox,
@@ -14,31 +17,78 @@ import {
 
 import city from "../../img/places/city.jpeg";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { save2 } from "../../redux/features/dataForGpt";
 
 // 지도 아래 일정 부분
-const PlanBottom = ({ isScrolled, gptAnswerSaved }) => {
-  const { location, attractions, startDate, endDate, option1, option2 } =
+const PlanBottom = ({ isScrolled, gptAnswerSaved, userChoiceSaved }) => {
+    const { location, attractions, startDate, endDate, option1, option2 } =
     gptAnswerSaved;
 
-  let sd = new Date(startDate);
-  let ed = new Date(endDate);
+    // 이미지 가져오기
+    const [attArrForMap, setAttArrForMap] = useState("");
+    const [attractionsWithImg, setAttractionsWithImg] = useState([]);
+
+    const getAttPic = async (queryKey) => {
+      const apiKey = process.env.REACT_APP_PIXABAY_API_KEY;
+      var URL =
+        "https://pixabay.com/api/?key=" +
+        apiKey +
+        "&q=" +
+        encodeURIComponent(queryKey);
+
+      const getAttPicRes = await axios.get(URL);
+      return getAttPicRes.data;
+    };
+
+    const getAttPicQuerys = useQueries(
+      attractions.map((value) => {
+        return {
+          queryKey: ["getAttPic", value.name],
+          queryFn: () => getAttPic(value.name),
+          staleTime: 60 * 60 * 1000,
+          onSuccess: (data) => {
+            setAttractionsWithImg((state) => {
+              return [...state, { ...value, img: data }];
+            });
+          },
+        };
+      })
+    );
+
+    useEffect(() => {
+      //  attractions state를 jsx에 쓰기 위하여 만든 임시 배열AttArrForMap에 0을 저장하는 로직
+      // 이미지를 저장하는 로직
+      let temp = [];
+      attractions.forEach((value, index) => {
+        temp.push(0);
+      });
+      setAttArrForMap(temp);
+    }, [attractions]);
+    
+    useEffect(() => {
+      console.log(attArrForMap)
+      console.log(attractionsWithImg)
+    }, [attractionsWithImg])
+
+
+    // 월.일 만 뽑아내기
+    let sd = new Date(startDate);
+    let ed = new Date(endDate);
 
     let periodArr = [];
-    let placeArr = [];
-    // const [placeArr, setPlaceArr] = useState([[''], [''], ['']]);
-
     while (sd <= ed) {
         periodArr.push((sd.getMonth() + 1) + '.' + sd.getDate());
         sd.setDate(sd.getDate() + 1);
-
-        placeArr.push([])
     }
 
+    const { planPerDay } = userChoiceSaved;
     useEffect(() => {
-        console.log(placeArr);
-    }, [])
+      console.log(planPerDay)
+    }, [planPerDay])
 
 
+    // 스크롤 일정 이상 넘어가면
     useEffect(() => {
         const bottomBox = document.getElementById("bottom-box");
     
@@ -54,7 +104,7 @@ const PlanBottom = ({ isScrolled, gptAnswerSaved }) => {
         <>
         <PlanBottomBox id='bottom-box'>
             {periodArr.map((value, index) => {
-                return <PerDay key={index} period={value} index={index+1} place={placeArr[index]} />
+                return <PerDay key={index} period={value} index={index+1} place={planPerDay[index+1].plan} />
             })}
             <BtnBox>
                 <SavePlanBtn>저장</SavePlanBtn>
@@ -96,7 +146,7 @@ const PerDay = ({ period, index, place }) => {
                 </RouteNumber>
                 <RoutePlace>
                   <div>
-                    {value}
+                    <p>{value.name}</p>
                     <img src={city}></img>
                   </div>
                 </RoutePlace>
