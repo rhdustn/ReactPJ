@@ -1,47 +1,52 @@
-import React, { useRef, useState } from 'react'
-import { UploadImg,UploadImgContain,ImgInputBtn } from './post.style'
+import React, { useRef, useState } from 'react';
+import { UploadImgContain,UploadBtn,DeleteBtn,ShowImg,ImgContain,ImgStyle } from './post.style';
 
 const ImgUpload = () => {
-    const [selectedFile, setSelectedFile] = useState(null);
-    const [imagePreview, setImagePreview] = useState(null);
-    const fileInputRef = useRef(null);
-    const handleFileChange = (event) => {
-        const file = event.target.files[0];
-        setSelectedFile(file);
-    
-        if (file) {
-          const reader = new FileReader();
-          reader.onloadend = () => {
-            setImagePreview(reader.result);
-          };
-          reader.readAsDataURL(file);
-        } else {
-          setImagePreview(null);
-        }
-      };
-    
-      const handleButtonClick = () => {
-        fileInputRef.current.click();
-      };
+  const [imageFiles, setImageFiles] = useState([]);
+
+  const handleFileChange = (e) => {
+    const selectedFiles = Array.from(e.target.files);
+    setImageFiles([...imageFiles, ...selectedFiles]);
+  };
+  const handleImageDelete = (index) => {
+    const updatedFiles = imageFiles.filter((_, i) => i !== index);
+    setImageFiles(updatedFiles);
+  };
+
+  const inputRef = useRef(null);
+
+  const handleAddButtonClick = () => {
+    inputRef.current.click();
+  };
+
   return (
     <div>
-        <UploadImgContain> 
-        <ImgInputBtn>
+      <UploadImgContain>
+        {imageFiles.map((file, index) => (
+          <ShowImg key={index} style={{ display: 'flex', alignItems: 'center' }}>
+            <ImgContain>
+            <DeleteBtn onClick={() => handleImageDelete(index)}>🗙</DeleteBtn>
+            <ImgStyle
+              src={URL.createObjectURL(file)}
+              alt={`Image ${index}`}
+            />
+         </ImgContain> 
+         </ShowImg>
+        ))}
         <input
           type="file"
-          name="file"
-          onChange={handleFileChange}
-          ref={fileInputRef} 
+          multiple
           style={{ display: 'none' }}
+          ref={inputRef}
+          onChange={handleFileChange}
         />
-        <button type="button" onClick={handleButtonClick}>
-          파일 등록하기
-        </button>
-        </ImgInputBtn>
-        </UploadImgContain>
-        <UploadImg/>
+      </UploadImgContain>
+      <br/>
+      <UploadBtn onClick={handleAddButtonClick}>Add Images</UploadBtn>
+      <br/>
+      <br/>
     </div>
-  )
-}
+  );
+};
 
-export default ImgUpload
+export default ImgUpload;

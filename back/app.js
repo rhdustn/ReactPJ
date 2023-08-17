@@ -13,6 +13,7 @@ const testGPT = require("./routers/testGPT");
 const multer = require("multer");
 // 회원가입,로그인 기능이 있는 라우터
 const userRouter = require("./routers/user");
+const postRouter = require("./routers/postRouter")
 
 
 // Multer 설정
@@ -58,6 +59,7 @@ sequelize
   });
 
 app.use("/", mainRouter);
+app.use("/post",postRouter)
 
 app.use("/user", upload.single("image"), userRouter);
 
