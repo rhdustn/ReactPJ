@@ -77,7 +77,8 @@ const PlanBottom = ({ isScrolled, gptAnswerSaved, userChoiceSaved }) => {
   
   // 여기까지 이미지를 api로 받아오는 로직, attractionsWithImg에 기존 attraction값에 img가 추가로 들어감.
 
-  
+  useEffect(() => {
+    let temp = [];
   let sd = new Date(startDate);
   let ed = new Date(endDate);
 
