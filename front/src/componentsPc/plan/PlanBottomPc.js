@@ -81,9 +81,9 @@ const PlanBottomPc = ({ isScrolled, gptAnswerSaved, userChoiceSaved }) => {
     }
     setPeriodArr(temp);
   }, [attractions]);
-  // useEffect(()=>{
-  //   console.log(attractionsWithImg,'리덕스')
-  // },[attractionsWithImg])
+  useEffect(()=>{
+    console.log(attractionsWithImg,'리덕스')
+  },[attractionsWithImg])
 
   return (
     <>

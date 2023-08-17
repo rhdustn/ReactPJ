@@ -57,6 +57,7 @@ export const TopNavBtn = styled.div`
 
   & img {
     width: 40%;
+    cursor: pointer;
   }
 `;
 

@@ -70,7 +70,7 @@ const MainBottomPc = ({
   // post로 gptData를 서버로 보내는 함수
   const sendDataToGpt = async () => {
     axios
-      .post("http://localhost:8080/openAI", { gptData })
+      .post("/openAI", { gptData })
       .then((res) => {
         // gpt응답 여기서 state에 저장
         const data = JSON.parse(res.data.content);
