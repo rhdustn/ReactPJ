@@ -36,6 +36,11 @@ const PlanPc = () => {
     console.log(gptAnswerSaved);
   }, [gptAnswerSaved]);
 
+  // 유저의 선택된 여행정보 가져오기
+  const userChoiceSaved = useSelector((state) => {
+    return state.userChoiceSave;
+  });
+
   // 지도 받아오기
   const getMap = () => {};
 
@@ -55,9 +60,9 @@ const PlanPc = () => {
       <TopNavPc gptAnswerSaved={gptAnswerSaved} />
 
       <PlanTopPc gptAnswerSaved={gptAnswerSaved} />
-      <PlanMidPc  />
+      <PlanMidPc />
 
-      <PlanBottomPc gptAnswerSaved={gptAnswerSaved} />
+      <PlanBottomPc gptAnswerSaved={gptAnswerSaved} userChoiceSaved={userChoiceSaved}/>
 
       <BottomNavPc page={"plan"} />
     </>
