@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useQueries } from 'react-query'
-import axios from 'axios'
 
 import {
   PlanBottomBox,
@@ -21,15 +19,17 @@ import { useQueries } from "react-query";
 import axios from "axios";
 import { saveAttractionsWithImg } from "../../redux/features/dataForGpt";
 import { useDispatch, useSelector } from "react-redux";
-
+import { Loading2 } from "../../componentsPc/loading/LoadingPc";
 // 지도 아래 일정 부분
 const PlanBottom = ({ isScrolled, gptAnswerSaved, userChoiceSaved }) => {
-    const { location, attractions, startDate, endDate, option1, option2 } =
+  const { location, attractions, startDate, endDate, option1, option2 } =
     gptAnswerSaved;
 
   // attractions을 반복시키기위해 만든 임시 state
   const [attArrForMap, setAttArrForMap] = useState("");
 
+  // period
+  const [periodArr, setPeriodArr] = useState([]);
   // 이미지 url이 포함된 새로운attractions state(redux)
   const attractionsWithImg = useSelector((state) => {
     return state.attractionsWithImg;
@@ -65,46 +65,56 @@ const PlanBottom = ({ isScrolled, gptAnswerSaved, userChoiceSaved }) => {
     })
   );
   // 여기까지 이미지를 api로 받아오는 로직, attractionsWithImg에 기존 attraction값에 img가 추가로 들어감.
-  let sd = new Date(startDate);
-  let ed = new Date(endDate);
 
-    let periodArr = [];
+  useEffect(() => {
+    // 기간인 period를 저장하는 로직
+    let temp = [];
+    let sd = new Date(startDate);
+    let ed = new Date(endDate);
+
     while (sd <= ed) {
-        periodArr.push((sd.getMonth() + 1) + '.' + sd.getDate());
-        sd.setDate(sd.getDate() + 1);
+      temp.push(sd.getMonth() + 1 + "." + sd.getDate());
+      sd.setDate(sd.getDate() + 1);
     }
+    setPeriodArr(temp);
+  }, [attractions]);
 
-    const { planPerDay } = userChoiceSaved;
-    useEffect(() => {
-      console.log(planPerDay)
-    }, [planPerDay])
+  const { planPerDay } = userChoiceSaved;
+  useEffect(() => {
+    console.log(planPerDay);
+  }, [planPerDay]);
 
+  // 스크롤 일정 이상 넘어가면
+  useEffect(() => {
+    const bottomBox = document.getElementById("bottom-box");
 
-    // 스크롤 일정 이상 넘어가면
-    useEffect(() => {
-        const bottomBox = document.getElementById("bottom-box");
-    
-        if(isScrolled) {
-            bottomBox.style.padding = '210px 10px 70px 10px'
-        }else {
-            bottomBox.style.padding = '10px 10px 70px 10px'
-        }
-    }, [isScrolled])
-      
+    if (isScrolled) {
+      bottomBox.style.padding = "210px 10px 70px 10px";
+    } else {
+      bottomBox.style.padding = "10px 10px 70px 10px";
+    }
+  }, [isScrolled]);
 
-    return (
-        <>
-        <PlanBottomBox id='bottom-box'>
-            {periodArr.map((value, index) => {
-                return <PerDay key={index} period={value} index={index+1} place={planPerDay[index+1].plan} />
-            })}
-            <BtnBox>
-                <SavePlanBtn>저장</SavePlanBtn>
-            </BtnBox>
-        </PlanBottomBox>
-        </>
-    )
-}
+  return (
+    <>
+      <PlanBottomBox id="bottom-box">
+        {periodArr.map((value, index) => {
+          return (
+            <PerDay
+              key={index}
+              period={value}
+              index={index + 1}
+              place={planPerDay[index + 1].plan}
+            />
+          );
+        })}
+        <BtnBox>
+          <SavePlanBtn>저장</SavePlanBtn>
+        </BtnBox>
+      </PlanBottomBox>
+    </>
+  );
+};
 
 // 1일마다 관광지 보여주는 부분
 const PerDay = ({ period, index, place, imgSrc }) => {
@@ -138,7 +148,7 @@ const PerDay = ({ period, index, place, imgSrc }) => {
                 </RouteNumber>
                 <RoutePlace>
                   <div>
-                    <p>{value.name}</p>
+                    <p>{value}</p>
                     <img src={city}></img>
                   </div>
                 </RoutePlace>

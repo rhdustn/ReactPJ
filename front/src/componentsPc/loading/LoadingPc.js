@@ -1,8 +1,8 @@
-import React from 'react'
-import { LoadingBox, LoadingCircle } from './LoadingPc.styled'
+import React from "react";
+import { LoadingBox, LoadingCircle } from "./LoadingPc.styled";
 
-import loading1 from '../../img/icons/loading1.gif'
-import loading2 from '../../img/icons/loading2.gif'
+import loading1 from "../../img/icons/loading1.gif";
+import loading2 from "../../img/icons/loading2.gif";
 
 // 2줄 버전
 const Loading1 = () => {
@@ -10,24 +10,24 @@ const Loading1 = () => {
     <>
       <LoadingBox>
         <LoadingCircle>
-            <img src={loading1}></img>
+          <img src={loading1}></img>
         </LoadingCircle>
       </LoadingBox>
     </>
-  )
-}
+  );
+};
 
 // 1줄 버전
 const Loading2 = () => {
-    return (
-      <>
-        <LoadingBox>
-            <LoadingCircle>
-                <img src={loading2}></img>
-            </LoadingCircle>
-        </LoadingBox>
-      </>
-    )
-  }
+  return (
+    <>
+      <LoadingBox>
+        <LoadingCircle>
+          <img src={loading2}></img>
+        </LoadingCircle>
+      </LoadingBox>
+    </>
+  );
+};
 
-export {Loading1, Loading2}
+export { Loading1, Loading2 };

@@ -20,13 +20,12 @@ const Plan = () => {
     console.log(gptAnswerSaved);
   }, [gptAnswerSaved]);
 
-  const userChoiceSaved = useSelector((state) => {return state.userChoiceSave})
+  const userChoiceSaved = useSelector((state) => {
+    return state.userChoiceSave;
+  });
   useEffect(() => {
-      console.log(userChoiceSaved)
-
-      
-
-  }, [userChoiceSaved])
+    console.log(userChoiceSaved);
+  }, [userChoiceSaved]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,8 +45,6 @@ const Plan = () => {
     };
   }, []);
 
-
-
   if (gptAnswerSaved.location == "") {
     return (
       <>
@@ -63,7 +60,11 @@ const Plan = () => {
 
         <PlanTop gptAnswerSaved={gptAnswerSaved} />
         <PlanMid isScrolled={isScrolled} />
-        <PlanBottom isScrolled={isScrolled} gptAnswerSaved={gptAnswerSaved} userChoiceSaved={userChoiceSaved} />
+        <PlanBottom
+          isScrolled={isScrolled}
+          gptAnswerSaved={gptAnswerSaved}
+          userChoiceSaved={userChoiceSaved}
+        />
 
         <BottomNav page={"plan"} />
       </>
