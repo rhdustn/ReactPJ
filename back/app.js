@@ -16,17 +16,17 @@ const userRouter = require("./routers/user");
 const postRouter = require("./routers/postRouter")
 
 
-// Multer 설정
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, path.join(".", "imgs"));
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + "-" + file.originalname);
-  },
-});
+// // Multer 설정
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, path.join(".", "imgs"));
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, Date.now() + "-" + file.originalname);
+//   },
+// });
 
-const upload = multer({ storage: storage });
+// const upload = multer({ storage: storage });
 
 // 아마 form 데이터
 app.use(express.urlencoded({ extended: false }));
@@ -61,7 +61,7 @@ sequelize
 app.use("/", mainRouter);
 app.use("/post",postRouter)
 
-app.use("/user", upload.single("image"), userRouter);
+app.use("/user", userRouter);
 
 // gptAPI 테스트 -----20230807 zerohoney
 app.use("/openAI", testGPT);

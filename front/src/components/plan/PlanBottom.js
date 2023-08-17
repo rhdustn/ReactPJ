@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useQueries } from 'react-query'
-import axios from 'axios'
 
 import {
   PlanBottomBox,

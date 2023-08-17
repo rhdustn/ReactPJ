@@ -24,8 +24,7 @@ const PostContent = styled.textarea`
   width: 350px;
   height: 150px; 
   color: rgba(58, 58, 58, 0.8);
-  font-weight: 500;
-  font-size: 18px;
+  font-size: 15px;
   background-color: #f0f0f0; 
   border: 1px solid #ccc; 
   border-radius: 8px; 
@@ -55,7 +54,7 @@ const UploadImgContain = styled.div`
 position: relative;
 width: 400px;
 height: 300px;
-background: #E2E2E2;
+border: 1px solid #E2E2E2;
 display: flex;
 overflow-x: scroll;
 `

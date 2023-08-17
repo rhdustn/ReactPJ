@@ -14,11 +14,22 @@ exports.allBoard = async (req, res) => {
 // 글 작성 컨트롤러
 exports.createBoard = async (req, res) => {
     const { title, detail } = req.body
-    const { images } = req.file
+    console.log(req.files)
+    const tempImgArr=req.files.map((img)=>{
+return img.filename
+    })
+
+    const imgFiles=JSON.stringify(tempImgArr)
+
+    console.log(title)
+    // const { filename } = req.file
     await Board.create({
         title: title,
         detail: detail,
-        images: images
+        images: imgFiles,
+        likes:0,
+        views:0,
+        nickname:"user1"
     })
     res.send("create success")
 }

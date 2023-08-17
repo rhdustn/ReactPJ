@@ -166,7 +166,7 @@ function App() {
             )
           }
         />
-        <Route path="/post" element={isMobile ? <Post /> : "pc 버전 post"} />
+        <Route path="/boardCreate" element={isMobile ? <Post /> : "pc 버전 post"} />
       </Routes>
     </div>
   );
