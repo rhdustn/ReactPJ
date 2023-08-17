@@ -11,7 +11,7 @@ import {
   EditProflie,
   Board,
   BoardDetail,
-  Post
+  Post,
 } from "./pages";
 import {
   EditProfliePc,
@@ -27,6 +27,9 @@ import {
 import { useMediaQuery } from "react-responsive";
 import { styled } from "styled-components";
 import travel from "./img/places/travel.gif";
+import { useEffect, useState } from "react";
+import { LoadingContainer } from "./componentsPc/main/MainPc.styled";
+import loading from "./img/icons/loading2.gif";
 function App() {
   const isMobile = useMediaQuery({
     query: "(max-width:768px)",
@@ -86,11 +89,13 @@ function App() {
             isMobile ? (
               <Main />
             ) : (
-              <MainPcBody>
-                <PcBody>
-                  <MainPc />
-                </PcBody>
-              </MainPcBody>
+              <>
+                <MainPcBody>
+                  <PcBody>
+                    <MainPc />
+                  </PcBody>
+                </MainPcBody>
+              </>
             )
           }
         />
@@ -161,16 +166,7 @@ function App() {
             )
           }
         />
-        <Route
-          path="/post"
-          element={
-            isMobile ? (
-              <Post />
-            ) : (
-              "pc 버전 post"
-            )
-          }
-        />
+        <Route path="/post" element={isMobile ? <Post /> : "pc 버전 post"} />
       </Routes>
     </div>
   );

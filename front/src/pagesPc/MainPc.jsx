@@ -5,7 +5,6 @@ import "animate.css";
 
 import BottomNavPc from "../componentsPc/nav/BottomNavPc";
 import { insert, reset } from "../redux/features/dataForGpt";
-
 import MainTopPc from "../componentsPc/main/MainTopPc";
 import MainMidPc from "../componentsPc/main/MainMidPc";
 import MainBottomPc from "../componentsPc/main/MainBottomPc";
@@ -43,6 +42,7 @@ const Main = () => {
   const [isDated, setDate] = useState(false);
   // 옵션 선택
   const [isChoiced, setChoice] = useState(false);
+  const [gptAnswer, setGptAnswer] = useState("");
 
   // 지역 검색
   const locationSearched = (lo) => {
@@ -96,6 +96,8 @@ const Main = () => {
     dispatch(reset());
   }, []);
 
+
+
   return (
     <>
       <MainTopPc locationSearched={locationSearched} />
@@ -103,11 +105,19 @@ const Main = () => {
         <MainMidPc dateSelected={dateSelected} isSearched={isSearched} />
       )}
 
-      {isDated && (
+      <MainBottomPc
+        page={"main"}
+        isDated={isDated}
+        choiceSelected={choiceSelected}
+        startDate={content.startDate}
+        endDate={content.endDate}
+        gptAnswer={gptAnswer}
+        setGptAnswer={setGptAnswer}
+      />
+      {/* {isDated && (
         // <QueryClientProvider client={queryClient}  contextSharing={true}>
-        <MainBottomPc page={"main"} isDated={isDated} choiceSelected={choiceSelected} startDate={content.startDate} endDate={content.endDate}  />
         // </QueryClientProvider>
-      )}
+      )} */}
 
       <BottomNavPc />
     </>

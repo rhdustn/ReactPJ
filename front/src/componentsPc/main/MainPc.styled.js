@@ -96,7 +96,6 @@ export const DateBoxWrap = styled.div`
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  
 `;
 
 export const DateBox = styled.div`
@@ -192,3 +191,16 @@ export const MakePlanBtn = styled.div`
   font-weight: bold;
   cursor: pointer;
 `;
+
+// 로딩 창
+export const LoadingContainer = styled.div`
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: 2;
+`;
+
+export const LoadingImg=styled.div`
+
+
+`

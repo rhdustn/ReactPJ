@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { BigLabel } from "./MainPc.styled";
+import { BigLabel, LoadingContainer } from "./MainPc.styled";
 import {
   MainBottomBox,
   SmallLabel,
@@ -14,9 +14,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { insert, save } from "../../redux/features/dataForGpt";
 import { useMutation, useQuery } from "react-query";
 import axios from "axios";
+import loading from "../../img/icons/loading2.gif";
 import { store } from "../../redux/store/store";
 import { useNavigate } from "react-router-dom";
-const MainBottomPc = ({ isDated, choiceSelected, startDate, endDate }) => {
+const MainBottomPc = ({
+  isDated,
+  choiceSelected,
+  startDate,
+  endDate,
+  gptAnswer,
+  setGptAnswer,
+}) => {
   const nav = useNavigate();
 
   let withArr = [
@@ -45,9 +53,11 @@ const MainBottomPc = ({ isDated, choiceSelected, startDate, endDate }) => {
 
   const [choiceIndex1, setChoice1] = useState("");
   const [choiceIndex2, setChoice2] = useState("");
+  // 로딩
+  const [isLoading, setIsloading] = useState(false);
+
   // gpt의 응답
-  const [gptAnswer, setGptAnswer] = useState("");
-  const [isLoading, setLoading] = useState(false);
+
   // 키값으로 가져온 gpt의 대답중 key에 값이 불규칙적이므로 index로 불러오기 위헤 Object.keys(obj); 를 사용하여 key의 인덱스를 저장할거임
   // const [ansKey, setAnsKey] = useState("");
   //   gpt에게 보낼 일련의 데이터
@@ -63,10 +73,11 @@ const MainBottomPc = ({ isDated, choiceSelected, startDate, endDate }) => {
       .then((res) => {
         // gpt응답 여기서 state에 저장
         const data = JSON.parse(res.data.content);
+        console.log(data);
         setGptAnswer(data);
+        console.log(gptAnswer);
         // const keys = Object.keys(data);
         // setAnsKey(keys);
-        setLoading(false);
         console.log(JSON.parse(res.data.content));
       })
       .catch((err) => {
@@ -77,10 +88,25 @@ const MainBottomPc = ({ isDated, choiceSelected, startDate, endDate }) => {
   // useMutation으로 비동기적 처리
   const gptQuery = useMutation(sendDataToGpt);
 
+  // mutation handle 함수
+  const handleMuatation = async () => {
+    try {
+      await gptQuery.mutateAsync(gptData);
+    } catch (error) {}
+  };
+
   const [choiceAll, setAll] = useState(false);
   // 스크롤 내려오는 함수
   const goToTagScroll = () => {
     const ele = document.querySelector("#mainBottomBoxPc");
+    if (ele) {
+      ele.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  // 로딩 스크롤 내려오는 함수
+  const goToLoadingScroll = () => {
+    const ele = document.querySelector("#loadingContainer");
     if (ele) {
       ele.scrollIntoView({ behavior: "smooth" });
     }
@@ -150,7 +176,7 @@ const MainBottomPc = ({ isDated, choiceSelected, startDate, endDate }) => {
   }, [choiceIndex1, choiceIndex2]);
 
   useEffect(() => {
-    console.log(gptAnswer);
+    console.log(gptAnswer, "들어옴");
     if (gptAnswer) {
       gptDispatch(
         save({
@@ -170,94 +196,116 @@ const MainBottomPc = ({ isDated, choiceSelected, startDate, endDate }) => {
     if (isDated) {
       goToTagScroll();
     }
-  }, [isDated]);
+    if (isLoading) {
+      goToLoadingScroll();
+    }
+  }, [isDated, isLoading]);
   const gptAnswerSaved = useSelector((state) => {
     return state.gptAnswerSave;
   });
   useEffect(() => {
     if (gptAnswerSaved.attractions.length > 0) {
       console.log(gptAnswerSaved);
+      setIsloading(false);
+
       nav("/plan");
     }
   }, [gptAnswerSaved]);
   return (
     <>
-      <MainBottomBox id="mainBottomBoxPc">
-        <BigLabel>어떤 스타일의 여행을 할 계획인가요?</BigLabel>
-        <SmallLabel>누구와</SmallLabel>
-        <SelectBox>
-          {withArr.map((value, index) => {
-            if (choiceIndex1.indexOf(index) == -1) {
-              return (
-                <Select
-                  onClick={() => isChoice1(index)}
-                  key={index}
-                  back={backColor}
-                  font={fontColor}
-                >
-                  {value}
-                </Select>
-              );
-            } else {
-              return (
-                <Select
-                  onClick={() => isChoice1(index)}
-                  key={index}
-                  back={"#277bc0"}
-                  font={"white"}
-                >
-                  {value}
-                </Select>
-              );
-            }
-          })}
-        </SelectBox>
-        <SmallLabel>여행 스타일</SmallLabel>
-        <SelectBox>
-          {whichArr.map((value, index) => {
-            if (choiceIndex2.indexOf(index) == -1) {
-              return (
-                <Select
-                  onClick={() => {
-                    isChoice2(index);
-                  }}
-                  key={index}
-                  back={backColor}
-                  font={fontColor}
-                >
-                  {value}
-                </Select>
-              );
-            } else {
-              return (
-                <Select
-                  onClick={() => {
-                    isChoice2(index);
-                  }}
-                  key={index}
-                  back={"#277bc0"}
-                  font={"white"}
-                >
-                  {value}
-                </Select>
-              );
-            }
-          })}
-        </SelectBox>
+      {isDated && (
+        <MainBottomBox id="mainBottomBoxPc">
+          <BigLabel>어떤 스타일의 여행을 할 계획인가요?</BigLabel>
+          <SmallLabel>누구와</SmallLabel>
+          <SelectBox>
+            {withArr.map((value, index) => {
+              if (choiceIndex1.indexOf(index) == -1) {
+                return (
+                  <Select
+                    onClick={() => isChoice1(index)}
+                    key={index}
+                    back={backColor}
+                    font={fontColor}
+                  >
+                    {value}
+                  </Select>
+                );
+              } else {
+                return (
+                  <Select
+                    onClick={() => isChoice1(index)}
+                    key={index}
+                    back={"#277bc0"}
+                    font={"white"}
+                  >
+                    {value}
+                  </Select>
+                );
+              }
+            })}
+          </SelectBox>
+          <SmallLabel>여행 스타일</SmallLabel>
+          <SelectBox>
+            {whichArr.map((value, index) => {
+              if (choiceIndex2.indexOf(index) == -1) {
+                return (
+                  <Select
+                    onClick={() => {
+                      isChoice2(index);
+                    }}
+                    key={index}
+                    back={backColor}
+                    font={fontColor}
+                  >
+                    {value}
+                  </Select>
+                );
+              } else {
+                return (
+                  <Select
+                    onClick={() => {
+                      isChoice2(index);
+                    }}
+                    key={index}
+                    back={"#277bc0"}
+                    font={"white"}
+                  >
+                    {value}
+                  </Select>
+                );
+              }
+            })}
+          </SelectBox>
 
-        {choiceAll && (
-          <BtnBox>
-            <MakePlanBtn
-              onClick={() => {
-                // 마지막 날짜 변경후 버튼 클릭시 실행
-                gptQuery.mutate(gptData);
-              }}
-            >
-              완료
-            </MakePlanBtn>
-          </BtnBox>
-        )}
-      </MainBottomBox>
+          {choiceAll && (
+            <BtnBox>
+              <MakePlanBtn
+                onClick={() => {
+                  setIsloading(true);
+
+                  // 마지막 날짜 변경후 버튼 클릭시 실행
+                  handleMuatation();
+                }}
+              >
+                완료
+              </MakePlanBtn>
+            </BtnBox>
+          )}
+          {isLoading && (
+            <LoadingContainer id="loadingContainer">
+              <img
+                src={loading}
+                style={{
+                  width: "100vw",
+                  height: "100vh",
+                  opacity: "0.8",
+                }}
+                alt="로딩 이미지"
+              ></img>
+            </LoadingContainer>
+          )}
+        </MainBottomBox>
+      )}
     </>
   );
 };
