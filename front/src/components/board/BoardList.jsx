@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useDispatch, useSelector } from 'react-redux';
 import { Main, ImgBox, ShowImg, ProflieImg, TextBox, SmallText, SubTitle } from './board.styled';
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 
 const BoardList = ({ id }) => {
   const navigate = useNavigate()
-  const dispatch = useDispatch()
   // const [title,setTitle]=useState([])
   // const [nickname,setNickname]=useState("")
   // const [images,setImages]=useState([])
@@ -42,22 +40,16 @@ const BoardList = ({ id }) => {
     console.log(data)
   }, [])
 
-  const handleReviewClick = () => {
-    navigate('/boarddetail')
-  }
-
-  // const {data, isLoading} = useQuery(['testdata'], list);
-
-  // if (isLoading) {
-  //   return <>로딩중</>
-  // }
-
-  // data 배열(요소 : 객체) 반복문 돌려서 반환
+// 이 글을 누룬 순간 redux로 저장
   return (
     <div>
       {data ? data.map((value, index) => {
         const thumbNail = JSON.parse(value.images)[0]
         console.log(imgPath + "/" + thumbNail)
+
+        const handleReviewClick = () => {
+          navigate(`/boarddetail/${value.id}`);
+        }
         return (<>
           <Main onClick={handleReviewClick}>
             <ImgBox>
