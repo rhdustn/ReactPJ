@@ -6,7 +6,7 @@ const BoardTitle = () => {
   const navigate = useNavigate()
 
     const movePostClick = () => {
-        navigate('/post'); 
+        navigate('/boardCreate'); 
       };
 
   return (

@@ -2,12 +2,13 @@ import React, { useState } from 'react'
 
 import { MainTopBox, LogoBox, TextBox, InputBox } from './Main.styled'
 
-import logo2 from '../../img/icons/logo2.png'
-import mainText from '../../img/icons/mainText.png'
-import search from '../../img/icons/search.png'
-
 // 로고 & 여행지 검색
 const MainTop = ({locationSearched}) => {
+  
+const logo2 = '/imgs/icons/logo2.png'
+const mainText = '/imgs/icons/mainText.png'
+const search = '/imgs/icons/search.png'
+
   const [location, setLocation] = useState();
 
   return (

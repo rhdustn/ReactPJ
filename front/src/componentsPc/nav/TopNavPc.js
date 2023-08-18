@@ -7,12 +7,12 @@ import {
   PlantInfoDate,
 } from "./NavPc.styled";
 
-import back from "../../img/icons/back.png";
 import { useNavigate } from "react-router-dom";
 
 const TopNavPc = ({ isScrolled, gptAnswerSaved }) => {
+const back = "/imgs/icons/back.png";
   const nav = useNavigate();
-  return (
+return (
     <>
       <TopNavBox>
         <TopNavBtn>

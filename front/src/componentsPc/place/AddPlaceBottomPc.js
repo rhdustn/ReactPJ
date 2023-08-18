@@ -2,10 +2,10 @@ import React, { useEffect } from 'react'
 
 import { AddBtn, Selected, ShowSelectedBox } from './PlacePc.styled'
 
-import city from '../../img/places/city.jpeg'
 
 const AddPlaceBottom = ({choiceIndex}) => {
-    useEffect(() => {
+const city = '/imgs/places/city.jpeg'
+useEffect(() => {
         console.log(choiceIndex)
     }, [])
 

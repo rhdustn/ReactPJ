@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import { PlanInfoBox, TopNavBox, TopNavBtn, PlanInfoTitle, PlantInfoDate } from './Nav.styled'
 
-import back from '../../img/icons/back.png'
 import { useNavigate } from 'react-router-dom'
 
 const TopNav = ({isScrolled, gptAnswerSaved}) => {
   const nav = useNavigate();
+  const back = '/imgs/icons/back.png'
 
   const moveToBack = () => {
     console.log('moveToBack 실행')
