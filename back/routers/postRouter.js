@@ -16,7 +16,7 @@ const storage = multer.diskStorage({
   });
   
   const upload = multer({ storage: storage });
-router.post('board',allBoard);
+router.get('/allboard',allBoard);
 router.post("/write",upload.array("uploadedFiles",5),createBoard);
 router.post('detail/:id',detailBoard);
 router.post("edit/:id",editBoard)

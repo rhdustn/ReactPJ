@@ -4,9 +4,10 @@ const { User, Board } = require("../models")
 exports.allBoard = async (req, res) => {
     try {
         const data = await Board.findAll()
-        res.send(data)
+        console.log("확인", data)
+        res.json(data)
     } catch (error) {
-        console.log("allpost에서 오류터짐")
+        console.log("allboard 오류터짐")
         console.log(error)
     }
 }
@@ -14,14 +15,12 @@ exports.allBoard = async (req, res) => {
 // 글 작성 컨트롤러
 exports.createBoard = async (req, res) => {
     const { title, detail } = req.body
-    console.log(req.files)
     const tempImgArr=req.files.map((img)=>{
 return img.filename
     })
 
     const imgFiles=JSON.stringify(tempImgArr)
 
-    console.log(title)
     // const { filename } = req.file
     await Board.create({
         title: title,

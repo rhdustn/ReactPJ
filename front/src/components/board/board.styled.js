@@ -19,7 +19,7 @@ height: 150px;
 border-top-left-radius:10px;
 border-top-right-radius:10px;
  /* 나중에 background에 리뷰 사진 올리기 */
-background: url('https://news.airbnb.com/wp-content/uploads/sites/4/2022/04/VILLA-SANGLUNG.jpeg?fit=1024%2C678') center center / cover;
+/* background: url('https://news.airbnb.com/wp-content/uploads/sites/4/2022/04/VILLA-SANGLUNG.jpeg?fit=1024%2C678') center center / cover; */
 `
 const Container = styled.div`
 display: flex;

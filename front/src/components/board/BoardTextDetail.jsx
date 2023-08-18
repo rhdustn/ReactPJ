@@ -6,7 +6,8 @@ const BoardTextDetail = () => {
     <>
     <div>
       <SmallText>
-        유저님의 일정●3박4일
+        유저님의 일정
+        ●3박4일
       </SmallText>
     </div>
     <div>

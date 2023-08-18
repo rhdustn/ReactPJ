@@ -7,10 +7,10 @@ import {
   PlantInfoDate,
 } from "./NavPc.styled";
 
-import back from "../../img/icons/back.png";
 
 const TopNavPc = ({ isScrolled, gptAnswerSaved }) => {
-  return (
+const back = "/imgs/icons/back.png";
+return (
     <>
       <TopNavBox>
         <TopNavBtn>

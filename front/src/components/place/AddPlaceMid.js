@@ -12,7 +12,6 @@ import {
   Line,
 } from "./Place.styled";
 
-import city from "../../img/places/city.jpeg";
 
 const AddPlaceMid = ({
   page,
@@ -22,6 +21,7 @@ const AddPlaceMid = ({
   setChoice,
   midHeight,
 }) => {
+  const city = "/imgs/places/city.jpeg";
 
   const isChoice = (value) => {
     let temp=[];

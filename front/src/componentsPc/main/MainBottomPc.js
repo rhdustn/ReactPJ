@@ -14,7 +14,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { insert, save } from "../../redux/features/dataForGpt";
 import { useMutation, useQuery } from "react-query";
 import axios from "axios";
-import loading from "../../img/icons/loading2.gif";
 import { store } from "../../redux/store/store";
 import { useNavigate } from "react-router-dom";
 const MainBottomPc = ({
@@ -26,6 +25,7 @@ const MainBottomPc = ({
   setGptAnswer,
 }) => {
   const nav = useNavigate();
+  const loading = "/imgs/icons/loading2.gif";
 
   let withArr = [
     "혼자",

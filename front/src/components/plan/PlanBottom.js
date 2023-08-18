@@ -13,7 +13,7 @@ import {
   EditPlanBtn,
 } from "./Plan.styled";
 
-import city from "../../img/places/city.jpeg";
+
 import { useNavigate } from "react-router-dom";
 import { useQueries } from "react-query";
 import axios from "axios";
@@ -107,6 +107,7 @@ const PlanBottom = ({ isScrolled, gptAnswerSaved, userChoiceSaved }) => {
 // 1일마다 관광지 보여주는 부분
 const PerDay = ({ period, index, place, imgSrc }) => {
   const nav = useNavigate();
+  const city= '/imgs/places/city.jpeg'
 
   // 관광지 검색 & 추가 페이지로 이동
   const moveToAdd = (id) => {
