@@ -1,8 +1,11 @@
 import React, {useEffect, useState, useRef} from 'react'
 import { PlanMidBox } from './Plan.styled'
+import { useSelector } from 'react-redux';
+
+// import { saveAttractionsWithImg } from '../../redux/features/dataForGpt';
 
 const PlanMid = (props) => {
-// const PlanMid = (props, {isScrolled} ) => {
+  // const PlanMid = (props, {isScrolled} ) => {
 
   // const choiceIndex = props.choiceIndex;
   const {choiceIndex, isScrolled, gptAnswerSaved, nearPlace, setnearPlace} = props;
@@ -26,28 +29,19 @@ const PlanMid = (props) => {
       };
 
       const map = new window.google.maps.Map(document.getElementById("gmp-map"), {
-      zoom: 12,
-      center: myLatLng,
-      fullscreenControl: false,
-      zoomControl: true,
-      streetViewControl: false,
-    });
-    new window.google.maps.Marker({
-      position: myLatLng,
-      map,
-      title: "My location",
-    });
-
-    new window.google.maps.Marker({
-      position: myLatLng,
-      map,
-      title: "My location",
-    });
+        zoom: 12,
+        center: myLatLng,
+        fullscreenControl: false,
+        zoomControl: true,
+        streetViewControl: false,
+      });
+      new window.google.maps.Marker({
+        position: myLatLng,
+        map,
+        title: "My location",
+      });
 
     }
-    // else if(){
-
-    // }
     else{
       myLatLng = {
         lat: Number(lat),
@@ -103,14 +97,16 @@ const PlanMid = (props) => {
 
 
   useEffect(() => {
-    const googleMapScript = document.createElement('script');
-    googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLEMAP_API_KEY}&libraries=places`;
-    googleMapScript.async = true;
-    googleMapScript.onload = () => {
-      initMap(props);
-    };
-    document.head.appendChild(googleMapScript);
-  }, [props.choiceIndex]);
+    if(choiceIndex){
+      const googleMapScript = document.createElement('script');
+      googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLEMAP_API_KEY}&libraries=places`;
+      googleMapScript.async = true;
+      googleMapScript.onload = () => {
+        initMap(props);
+      };
+      document.head.appendChild(googleMapScript);
+    }
+  }, [choiceIndex]);
 
 
   useEffect(() => {
