@@ -4,7 +4,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { BottomNavBox, BottomNavBtn } from "./NavPc.styled";
 
 
-
 const BottomNavPc = () => {
   const nav = useNavigate();
   const home1 = "/imgs/icons/home1.png";

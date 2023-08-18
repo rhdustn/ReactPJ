@@ -137,7 +137,7 @@ const PerDayPc = ({ period, index, place, imgSrc }) => {
                 <RoutePlace>
                   <div>
                     <p>{value}</p>
-                    <img src={city}></img>
+                    {/* <img src={''}></img> */}
                   </div>
                 </RoutePlace>
               </RouteBox>
