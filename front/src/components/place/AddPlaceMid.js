@@ -21,9 +21,14 @@ const AddPlaceMid = ({
   choiceIndex,
   setChoice,
   midHeight,
+  nearPlace
 }) => {
+const [nearAttractions, setnearAttractions] = useState([]);
+  
 
   const isChoice = (value) => {
+    // console.log("태초의 위도경도",value.attractionLocation);
+    
     let temp=[];
     // console.log(choiceIndex,'dd')
     if (choiceIndex) {
@@ -45,28 +50,58 @@ const AddPlaceMid = ({
     }
   };
 
-  let nearAttractions = [
-    {
-      name: "111",
-      detail: "111",
-      attractionLocation: {
-        latitude: "35.6329",
-        longitude: "139.8804",
-      },
-    },
-    { name: "222" },
-    { name: "333" },
-  ];
+
+
+  useEffect(() => {
+    if (nearPlace !== undefined && nearPlace !== "") {
+      console.log("d", nearPlace);
+        setnearAttractions (
+          nearPlace.map(place => {
+            console.log("place", place);
+            console.log("place", place.name);
+            console.log("위도:", place.geometry.location.lat());
+            console.log("경도:", place.geometry.location.lng());
+
+            return {
+                name: place.name,
+                detail: "디테일",
+                attractionLocation: {
+                    latitude: place.geometry.location.lat(),
+                    longitude: place.geometry.location.lng(),
+                }
+            };
+          })
+        );
+        console.log("WHA", nearAttractions);
+    }
+
+  }, [nearPlace]);
+
+  // let nearAttractions = [
+  //   {
+  //     name: "111",
+  //     detail: "111",
+  //     attractionLocation: {
+  //       latitude: "35.6329",
+  //       longitude: "139.8804",
+  //     },
+  //   },
+  //   { name: "222" },
+  //   { name: "333" },
+  // ];
 
   return (
     <>
       <AddPlaceMidBox midHeight={midHeight}>
         {suggested.map((value, index) => {
-          if (choiceIndex.indexOf(value) == -1) {
+          // 선택이 되지 않았을때
+          if (choiceIndex.indexOf(value) == -1) { 
             return (
               <>
                 <Title color={"#277bc0"}>AI 추천 관광지</Title>
-                <PlaceBox key={index}>
+                <PlaceBox key={index} onClick={()=>{
+                  isChoice(value);
+                }}>
                   <ImgBox>
                     <img src={city}></img>
                   </ImgBox>
@@ -85,7 +120,8 @@ const AddPlaceMid = ({
                   </SelectBtnBox>
                 </PlaceBox>
 
-                <Title size={"12px"}>주변 관광지</Title>
+                {/* ------------------------------------------------------------- */}
+                {/* <Title size={"12px"}>주변 관광지</Title>
                 {nearAttractions.map((value2, index2) => {
                         let temp=[];
                         // console.log(choiceIndex,'dd')
@@ -104,9 +140,9 @@ const AddPlaceMid = ({
                           <PlaceName>{value2.name}</PlaceName>
                           <SelectBtnBox>
                             <SelectBtn
-                              onClick={() => {
-                                isChoice(value2);
-                              }}
+                              // onClick={() => {
+                              //   isChoice2(value);
+                              // }}
                               back={"#edebeb"}
                               font={"#9b9a9a"}
                             >
@@ -137,12 +173,15 @@ const AddPlaceMid = ({
                       </NearPlaceBox>
                     );
                   }
-                })}
+                })} */}
+                {/* ------------------------------------------------------------- */}
 
                 <Line />
               </>
             );
-          } else {
+          } 
+          // 선택이 되었을때
+          else {
             return (
               <>
                 <Title color={"#277bc0"}>AI 추천 관광지</Title>
@@ -166,7 +205,7 @@ const AddPlaceMid = ({
                 </PlaceBox>
 
                 <Title size={"12px"}>주변 관광지</Title>
-                {nearAttractions.map((value2, index2) => {
+                {nearAttractions?.map((value2, index2) => {
                         let temp=[];
                         // console.log(choiceIndex,'dd')
                         if (choiceIndex) {

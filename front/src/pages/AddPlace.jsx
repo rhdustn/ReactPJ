@@ -21,8 +21,12 @@ const AddPlace = () => {
 
     const [choiceIndex, setChoice] = useState('');
     const [show, setShow] = useState(false);
-    const [midHeight, setMidHeight] = useState('calc(100vh - 250px)')
 
+    // nearPlace
+    const [nearPlace, setnearPlace] = useState('');
+
+    const [midHeight, setMidHeight] = useState('calc(100vh - 250px)')
+    const [nearAttractopnLocation,setNearAttractopnLocation]=useState([])
     // gpt 추천 관광지
     const gptAnswerSaved = useSelector((state) => {return state.gptAnswerSave})
     // let suggested = gptAnswerSaved.attractions
@@ -33,7 +37,7 @@ const AddPlace = () => {
     }, [])
 
     useEffect(() => {
-        console.log(choiceIndex)
+        console.log("choiceIndex[0]", choiceIndex[0])
         if(choiceIndex.length > 0) {
             setShow(true)
         }else {
@@ -77,9 +81,12 @@ const AddPlace = () => {
         
         {/* 지도 */}
         <Padding />
-        <PlanMid />
+        <PlanMid nearAttractopnLocation={nearAttractopnLocation} choiceIndex = {choiceIndex} nearPlace = {nearPlace} setnearPlace = {setnearPlace} />
 
-        <AddPlaceMid page={'add'} day={day} suggested={gptAnswerSaved.attractions} choiceIndex={choiceIndex} setChoice={setChoice} midHeight={midHeight} />
+        <AddPlaceMid page={'add'} day={day} suggested={gptAnswerSaved.attractions} choiceIndex={choiceIndex} setChoice={setChoice} midHeight={midHeight}  setNearAttractopnLocation={setNearAttractopnLocation} nearPlace = {nearPlace} />
+        
+        {/* place={place} */}
+
         {show && <AddPlaceBottom choiceIndex={choiceIndex} tryComplete={tryComplete} />}
         </>
     )

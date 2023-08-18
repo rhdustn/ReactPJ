@@ -18,6 +18,8 @@ import { useNavigate } from "react-router-dom";
 import { saveAttractionsWithImg } from "../../redux/features/dataForGpt";
 import { useDispatch, useSelector } from "react-redux";
 import { Loading2 } from "../../componentsPc/loading/LoadingPc";
+import axios from "axios";
+import { useQueries } from "react-query";
 // 지도 아래 일정 부분
 const PlanBottom = ({ isScrolled, gptAnswerSaved, userChoiceSaved }) => {
   const { location, attractions, startDate, endDate, option1, option2 } =
