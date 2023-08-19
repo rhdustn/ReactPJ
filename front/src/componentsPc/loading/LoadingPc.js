@@ -1,12 +1,10 @@
 import React from "react";
 import { LoadingBox, LoadingCircle } from "./LoadingPc.styled";
 
-import loading1 from "../../img/icons/loading1.gif";
-import loading2 from "../../img/icons/loading2.gif";
-
 // 2줄 버전
 const Loading1 = () => {
-  return (
+const loading1 = "/imgs/icons/loading1.gif";
+return (
     <>
       <LoadingBox>
         <LoadingCircle>
@@ -19,7 +17,8 @@ const Loading1 = () => {
 
 // 1줄 버전
 const Loading2 = () => {
-  return (
+const loading2 = "/imgs/icons/loading2.gif";
+return (
     <>
       <LoadingBox>
         <LoadingCircle>

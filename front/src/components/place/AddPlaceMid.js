@@ -12,7 +12,6 @@ import {
   Line,
 } from "./Place.styled";
 
-import city from "../../img/places/city.jpeg";
 
 const AddPlaceMid = ({
   page,
@@ -25,6 +24,7 @@ const AddPlaceMid = ({
 }) => {
 const [nearAttractions, setnearAttractions] = useState([]);
   
+  const city = "/imgs/places/city.jpeg";
 
   const isChoice = (value) => {
     // console.log("태초의 위도경도",value.attractionLocation);

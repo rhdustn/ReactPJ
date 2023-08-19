@@ -2,10 +2,10 @@ import React, {useState} from 'react'
 
 import { AddPlaceTopBox, InputBox } from './PlacePc.styled'
 
-import search from '../../img/icons/search.png'
 
 const AddPlaceTop = () => {
     const [place, setPlace] = useState([]);
+    const search = '/imgs/icons/search.png'
 
   return (
     <>

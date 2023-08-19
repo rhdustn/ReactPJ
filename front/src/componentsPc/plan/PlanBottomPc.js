@@ -12,7 +12,7 @@ import {
   EditPlanBtn,
 } from "./PlanPc.styled";
 
-import city from "../../img/places/city.jpeg";
+
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useQueries, useQuery } from "react-query";
@@ -81,9 +81,9 @@ const PlanBottomPc = ({ isScrolled, gptAnswerSaved, userChoiceSaved }) => {
     }
     setPeriodArr(temp);
   }, [attractions]);
-  // useEffect(()=>{
-  //   console.log(attractionsWithImg,'리덕스')
-  // },[attractionsWithImg])
+  useEffect(()=>{
+    console.log(attractionsWithImg,'리덕스')
+  },[attractionsWithImg])
 
   return (
     <>
@@ -137,7 +137,7 @@ const PerDayPc = ({ period, index, place, imgSrc }) => {
                 <RoutePlace>
                   <div>
                     <p>{value}</p>
-                    <img src={city}></img>
+                    {/* <img src={''}></img> */}
                   </div>
                 </RoutePlace>
               </RouteBox>

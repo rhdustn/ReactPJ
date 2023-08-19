@@ -2,8 +2,8 @@ let postinfo={
     id:"",
     images:"",
     title:"",
-    content:"",
-    writer:"",
+    detail:"",
+    nickname:"",
     all:""
 }
 

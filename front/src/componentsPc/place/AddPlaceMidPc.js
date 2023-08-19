@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { AddPlaceMidBox, Title, PlaceBox, ImgBox, PlaceName, SelectBtnBox, SelectBtn } from './PlacePc.styled'
 
-import city from '../../img/places/city.jpeg'
 
 const AddPlaceMid = ({page, day, suggested, choiceIndex, setChoice}) => {
+    const city = '/imgs/places/city.jpeg'
 
     const isChoice = (value) => {
         if(choiceIndex.indexOf(value) !== -1) {

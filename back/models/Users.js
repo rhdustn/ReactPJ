@@ -24,6 +24,10 @@ class User extends Sequelize.Model {
           type: Sequelize.STRING(155),
           allowNull: true,
         },
+        is_accept: {
+          type: Sequelize.BOOLEAN,
+          allowNull: false,
+        },
       },
       {
         sequelize: seq,

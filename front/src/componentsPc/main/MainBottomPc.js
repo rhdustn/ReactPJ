@@ -14,7 +14,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { insert, save, save2 } from "../../redux/features/dataForGpt";
 import { useMutation, useQuery } from "react-query";
 import axios from "axios";
-import loading from "../../img/icons/loading2.gif";
 import { store } from "../../redux/store/store";
 import { useNavigate } from "react-router-dom";
 import { Loading2 } from "../loading/LoadingPc";
@@ -27,6 +26,7 @@ const MainBottomPc = ({
   setGptAnswer,
 }) => {
   const nav = useNavigate();
+  const loading = "/imgs/icons/loading2.gif";
 
   let withArr = [
     "혼자",
@@ -70,7 +70,7 @@ const MainBottomPc = ({
   // post로 gptData를 서버로 보내는 함수
   const sendDataToGpt = async () => {
     axios
-      .post("http://localhost:8080/openAI", { gptData })
+      .post("/openAI", { gptData })
       .then((res) => {
         // gpt응답 여기서 state에 저장
         const data = JSON.parse(res.data.content);

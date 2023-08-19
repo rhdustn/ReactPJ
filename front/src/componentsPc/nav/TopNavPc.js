@@ -7,14 +7,22 @@ import {
   PlantInfoDate,
 } from "./NavPc.styled";
 
-import back from "../../img/icons/back.png";
+import { useNavigate } from "react-router-dom";
 
 const TopNavPc = ({ isScrolled, gptAnswerSaved }) => {
-  return (
+const back = "/imgs/icons/back.png";
+  const nav = useNavigate();
+return (
     <>
       <TopNavBox>
         <TopNavBtn>
-          <img src={back}></img>
+          <img
+            src={back}
+            alt="뒤로가기"
+            onClick={() => {
+              nav("/");
+            }}
+          ></img>
         </TopNavBtn>
         {/* 스크롤 내려가면 뜰 부분 */}
         {isScrolled && (

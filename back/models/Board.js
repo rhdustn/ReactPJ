@@ -28,6 +28,10 @@ class Board extends Sequelize.Model {
           type: Sequelize.INTEGER,
           allowNull: true,
         },
+        nickname :{
+          type: Sequelize.STRING(20),
+          allowNull: false,
+        },
         plan_id: {
           type: Sequelize.INTEGER,
           allowNull: true,

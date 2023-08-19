@@ -2,9 +2,9 @@ import React, { useEffect } from 'react'
 
 import { AddBtn, Selected, ShowSelectedBox } from './Place.styled'
 
-import city from '../../img/places/city.jpeg'
 
 const AddPlaceBottom = ({choiceIndex, tryComplete}) => {
+const city = '/imgs/places/city.jpeg'
   
   return (
     <>
