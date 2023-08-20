@@ -37,7 +37,7 @@ const AddPlace = () => {
   }, []);
 
     useEffect(() => {
-        console.log("choiceIndex[0]", choiceIndex[0])
+        // console.log("choiceIndex[0]", choiceIndex[0])
         if(choiceIndex.length > 0) {
             setShow(true)
         }else {
@@ -81,9 +81,9 @@ const AddPlace = () => {
         <>
         <TopNav isScrolled={true} gptAnswerSaved={gptAnswerSaved} />
         
-        {/* 지도 */}
         <Padding />
-        <PlanMid nearAttractopnLocation={nearAttractopnLocation} choiceIndex = {choiceIndex} nearPlace = {nearPlace} setnearPlace = {setnearPlace} />
+        {/* 지도 */}
+        <PlanMid gptAnswerSaved={gptAnswerSaved} nearAttractopnLocation={nearAttractopnLocation} choiceIndex = {choiceIndex} setnearPlace = {setnearPlace} />
 
         <AddPlaceMid page={'add'} day={day} suggested={gptAnswerSaved.attractions} choiceIndex={choiceIndex} setChoice={setChoice} midHeight={midHeight}  setNearAttractopnLocation={setNearAttractopnLocation} nearPlace = {nearPlace} />
         

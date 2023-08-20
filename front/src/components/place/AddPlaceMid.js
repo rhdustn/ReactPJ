@@ -27,6 +27,7 @@ const [nearAttractions, setnearAttractions] = useState([]);
   const city = "/imgs/places/city.jpeg";
 
   const isChoice = (value) => {
+    console.log("버튼 누를때마다 실행?", value);
     // console.log("태초의 위도경도",value.attractionLocation);
     
     let temp=[];
@@ -54,13 +55,14 @@ const [nearAttractions, setnearAttractions] = useState([]);
 
   useEffect(() => {
     if (nearPlace !== undefined && nearPlace !== "") {
-      console.log("d", nearPlace);
+      // 현재 선택한것
+      console.log("nearPlace : ", nearPlace);
         setnearAttractions (
           nearPlace.map(place => {
-            console.log("place", place);
-            console.log("place", place.name);
-            console.log("위도:", place.geometry.location.lat());
-            console.log("경도:", place.geometry.location.lng());
+            // console.log("place", place);
+            // console.log("place", place.name);
+            // console.log("위도:", place.geometry.location.lat());
+            // console.log("경도:", place.geometry.location.lng());
 
             return {
                 name: place.name,
@@ -72,10 +74,15 @@ const [nearAttractions, setnearAttractions] = useState([]);
             };
           })
         );
-        console.log("WHA", nearAttractions);
-    }
-
-  }, [nearPlace]);
+        // 전에 선택한것
+        console.log("블로그", nearAttractions);
+      }
+      
+    }, [nearPlace]);
+    
+    useEffect(()=>{
+      console.log("WHA", nearAttractions);
+  }, [nearAttractions]);
 
   // let nearAttractions = [
   //   {
@@ -94,6 +101,7 @@ const [nearAttractions, setnearAttractions] = useState([]);
     <>
       <AddPlaceMidBox midHeight={midHeight}>
         {suggested.map((value, index) => {
+          
           // 선택이 되지 않았을때
           if (choiceIndex.indexOf(value) == -1) { 
             return (
@@ -180,7 +188,7 @@ const [nearAttractions, setnearAttractions] = useState([]);
               </>
             );
           } 
-          // 선택이 되었을때
+          // 선택 눌렸을때
           else {
             return (
               <>
