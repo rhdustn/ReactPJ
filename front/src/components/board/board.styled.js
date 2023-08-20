@@ -78,6 +78,10 @@ font-size: 19px;
 font-weight: 600;
 
 `
+const BottomBox = styled.div`
+height: 100px;
+width: 400px;
+`
 
-export {Main,ImgBox,Container,TextBox,ProflieImg,SmallText,SubTitle,MovePost,ShowImg}
+export {Main,ImgBox,Container,TextBox,ProflieImg,SmallText,SubTitle,MovePost,ShowImg,BottomBox}
 

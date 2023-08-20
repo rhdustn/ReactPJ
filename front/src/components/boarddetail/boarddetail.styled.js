@@ -212,23 +212,28 @@ border-radius: 50%;
 `
 
 const CommentContain = styled.div`
-  width: 400px;
-  border-top: 2px solid lightgray;
-  position: relative;
- padding: 5px;
-
+width: 400px;
+border-top: 3px solid lightgray;
+position: relative;
+margin: 10px;
+height: 50px;
+align-items: center;
+display: flex;
  
 ` 
 const CommentContain2 = styled.div`
-  /* position: absolute; */
-  position: relative;
-  width: 300px;
-  top: 50%;
-  left: 40%;
-  transform: translate(-40%,-50%);
-  display: flex;
-  flex-direction: column;
+    display: flex;
     align-items: flex-start;
+    width: 250px;
+    flex-direction: column;
+    margin-left: 15px;
+    
+`
+const CommentContain3 = styled.div`
+display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 10px;
 `
 const Recommentdiv = styled.div`
     position: absolute;
@@ -240,11 +245,45 @@ position: absolute;
 left: 16%;
 bottom: 0%;
 transform: translate(-16%);
-
   border: none;
-
+`
+const Repliesdiv = styled.div`
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+    align-items: flex-start;
+    margin-left: 50px;
+    border-bottom: 1px solid lightgray;
+    width: 270px;
+    padding: 3px;
+  
+`
+const RelpyInput = styled.input`
+width: 250px;
+  height: 32px;
+  font-size: 15px;
+  border: 0;
+  border-radius: 15px;
+  outline: none;
+  padding-left: 10px;
+  background-color: rgb(233, 233, 233);
+`
+const RelpyBtn = styled.button`
+background: lightblue;
+border: none;
+height: 32px;
+border-radius: 15px;
 
 `
+const RelpyBtn2 = styled.button`
+background: lightcoral;
+border: none;
+height: 32px;
+border-radius: 15px;
+margin-left: 5px;
+
+`
+
 
 
 
@@ -253,5 +292,5 @@ export {
     Popup, PopupContent, DayList, DayListli,BtnStyle,ImageBtnPre,ImageBtnNext,
     BoardLine,BoardPlanContainer,AddStyle,imgStyle,CommentContainer,CommentMain,CommentFormdiv,
     CommentInput,CommentBtn,CommentProflieImg,CommentContain,CommentContain2,Recommentdiv,
-    Recommentbox
+    Recommentbox,CommentContain3,Repliesdiv,RelpyInput,RelpyBtn,RelpyBtn2
 }
