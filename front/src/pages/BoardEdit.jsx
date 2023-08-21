@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate,useParams } from 'react-router-dom';
-import { Main,MoveBoardBtn } from '../components/boarddetail/boarddetail.styled';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Main, MoveBoardBtn } from '../components/boarddetail/boarddetail.styled';
 import { PostContent, PostTitle, PostBtn } from '../components/post/post.style';
 import { PostPlan, ImgUpload } from '../components/post';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
+
 
 const BoardEdit = () => {
   const { id } = useParams();
@@ -11,24 +13,25 @@ const BoardEdit = () => {
   const [detail, setDetail] = useState('');
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const navigate = useNavigate();
+  const boardDetail = useSelector((state) => { return state.BoardDetailSlice })
+
 
 
   // 게시글 정보를 가져와서 화면에 표시
-  useEffect(() => {
-    const fetchPostData = async () => {
-      try {
-        // 게시판 정보 가져오기
-        const response = await axios.get(`/post/${id}`); 
-        const postData = response.data; 
-        setTitle(postData.title);
-        setDetail(postData.detail);
-      } catch (error) {
-        console.error('게시글 데이터 가져오기 에러:', error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchPostData = async () => {
+  //     try {
+  //       // 게시판 정보 가져오기
+  //       const response = await axios.get(`/detail/${id}`); 
+  //       const postData = response.data; 
+  //       console.log(postData)
+  //     } catch (error) {
+  //       console.error('게시글 데이터 가져오기 에러:', error);
+  //     }
+  //   };
 
-    fetchPostData();
-  }, [id]);
+  //   fetchPostData();
+  // }, [id]);
 
   const handlePostSubmit = async (e) => {
     e.preventDefault();
@@ -43,7 +46,8 @@ const BoardEdit = () => {
     }
     formData.append('title', title);
     formData.append('detail', detail);
-
+console.log(title)
+console.log(detail)
     try {
       const response = await axios.post(
         `/post/edit/${id}`,
@@ -56,12 +60,14 @@ const BoardEdit = () => {
         }
       );
       const data = response.data;
+      console.log(data)
       if (data === 'success') {
-        navigate(`/board/${id}`);
+        navigate(`/boarddetail/${id}`);
       }
     } catch (error) {
       console.log('수정하기 에러:', error);
     }
+  
   };
 
   const handleTitleChange = (e) => {
@@ -76,27 +82,34 @@ const BoardEdit = () => {
     setUploadedFiles(files);
   };
 
-  const MoveBoardClick =()=>{
+  const MoveBoardClick = () => {
     navigate("/board")
   }
   useEffect(() => {
     console.log(uploadedFiles)
   }, [uploadedFiles])
+
+  useEffect(()=>{
+    console.log(boardDetail)
+  },[boardDetail])
   return (
     <div>
       <MoveBoardBtn onClick={MoveBoardClick}>게시판으로 이동</MoveBoardBtn>
       <Main>
-        <ImgUpload name="images" onUpload={handleFileUpload} files={uploadedFiles} />
+        <ImgUpload name="images"
+         onUpload={handleFileUpload} 
+         files={uploadedFiles} />
         <PostTitle
           type="text"
           name="title"
-          placeholder="제목을 입력하세요"
+          placeholder={boardDetail.title}
           onChange={handleTitleChange}
+         
         />
         <PostContent
           type="text"
           name="detail"
-          placeholder="내용을 입력하세요"
+          placeholder={boardDetail.detail}
           onChange={handleDetailChange}
         />
         <PostPlan />

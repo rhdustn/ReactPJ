@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { Main, BoardLine, TitleStyle, SubContentStyle } from '../components/boarddetail/boarddetail.styled';
 import { ImgSlice, DayBtn, PlanBtn, DayPopup, BoardPlan, Comment } from '../components/boarddetail';
 import BottomNav from '../components/nav/BottomNav';
 import axios from 'axios';
+import { create } from '../redux/features/post';
 
   const BoardDetail = () => {
   const [popup, setPopup] = useState(false);
   const { id } = useParams();
  const navigate = useNavigate()
+ const dispatch = useDispatch();
 
  const boardEditClick =()=>{
-  navigate('/boardedit/:id')
+  navigate(`/boardedit/${id}`)
  }
 
   const BoardDetailView = async ({queryKey}) => {
@@ -26,11 +28,16 @@ import axios from 'axios';
       console.log(error);
     }
   };
-  useEffect(()=>{
-    console.log('안녕')
-  })
-
   const { data, isLoading } = useQuery(['boardDetail', id], BoardDetailView);
+  useEffect(()=>{
+    if (data) {
+    dispatch(create(data))
+      
+    }
+    console.log(data)
+  },[data])
+
+  
 
   const DayBtnClick = () => {
     console.log("팝업창 클릭 됨?");

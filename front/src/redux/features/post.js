@@ -10,6 +10,7 @@ export const BoardDetailSlice = createSlice({
     },
     reducers:{
         create:(state,action)=>{
+           
             state.title = action.payload.title;
             state.detail = action.payload.detail;
             state.nickname = action.payload.nickname;

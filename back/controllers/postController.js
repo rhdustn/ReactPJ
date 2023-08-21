@@ -44,10 +44,15 @@ exports.detailBoard = async (req, res) => {
 // 게시글 수정
 exports.editBoard = async (req, res) => {
     const { id } = req.params;
+    console.log(id)
     const { title, detail } = req.body
-    const { images } = req.file
+    const tempImgArr=req.files.map((img)=>{
+        return img.filename
+            })
+        
+            const imgFiles=JSON.stringify(tempImgArr)
     try {
-        await Board.update({ title, detail, images }, { where: { id } })
+        await Board.update({ title, detail, images:imgFiles }, { where: { id } })
         res.send("success")
     } catch (error) {
         console.log("글 수정 컨트롤러 에러")
