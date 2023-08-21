@@ -29,6 +29,7 @@ import { useMediaQuery } from "react-responsive";
 import { styled } from "styled-components";
 import { useEffect, useState } from "react";
 import { LoadingContainer } from "./componentsPc/main/MainPc.styled";
+import AdminPc from "./pagesPc/AdminPc";
 function App() {
 const travel = "/imgs/places/travel.gif";
 const isMobile = useMediaQuery({
@@ -168,7 +169,7 @@ const isMobile = useMediaQuery({
         />
         <Route path="/boardCreate" element={isMobile ? <Post /> : "pc 버전 post"} />
 
-        <Route path="/admin" element={<Admin />} />
+        <Route path="/admin" element={isMobile ? (<Admin />) : (<AdminPc />)} />
       </Routes>
     </div>
   );

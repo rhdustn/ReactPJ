@@ -41,12 +41,27 @@ const AdminMid = () => {
         }
     }
 
+    // 거절 & 삭제
+    const tryDeleteUser = async (user_id) => {
+        console.log(user_id)
+        try {
+            await axios.post(`http://localhost:8080/admin/del/${user_id}`)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     const authUser = useMutation(tryAuthUser, {
         onSuccess: () => {
             queryClient.invalidateQueries('users')
         }
     })
     const unAuthUser = useMutation(tryUnauthUser, {
+        onSuccess: () => {
+            queryClient.invalidateQueries('users')
+        }
+    })
+    const delUser = useMutation(tryDeleteUser, {
         onSuccess: () => {
             queryClient.invalidateQueries('users')
         }
@@ -69,7 +84,9 @@ const AdminMid = () => {
                                 <Btn onClick={() => {
                                     authUser.mutate(value.user_id)
                                 }} back={'#277bc0'}>승인</Btn>
-                                <Btn back={'#ff3131'}>거절</Btn>
+                                <Btn onClick={() => {
+                                    delUser.mutate(value.user_id)
+                                }} back={'#ff3131'}>거절</Btn>
                             </BtnBox>
                         </User>
                     )
@@ -91,7 +108,9 @@ const AdminMid = () => {
                                 <Btn onClick={() => {
                                     unAuthUser.mutate(value.user_id)
                                 }} back={'#737373'}>강등</Btn>
-                                <Btn back={'#737373'}>삭제</Btn>
+                                <Btn onClick={() => {
+                                    delUser.mutate(value.user_id)
+                                }} back={'#737373'}>삭제</Btn>
                             </BtnBox>
                         </User>
                     )

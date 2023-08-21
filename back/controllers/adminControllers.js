@@ -4,7 +4,6 @@ const {User} = require("../models")
 exports.getUsers = async (req, res) => {
     try {
         const data = await User.findAll();
-        console.log(data);
         res.json(data);
     } catch (error) {
         console.log(error)
@@ -15,7 +14,6 @@ exports.getUsers = async (req, res) => {
 exports.authUser = async (req, res) => {
     const user_id = req.params.id;
     try {
-        const user = await User.findAll({where : {user_id}})
         await User.update({is_accept : true}, {where : {user_id}})
         res.json("success")
     } catch (error) {
@@ -27,7 +25,6 @@ exports.authUser = async (req, res) => {
 exports.unauthUser = async (req, res) => {
     const user_id = req.params.id;
     try {
-        const user = await User.findAll({where : {user_id}})
         await User.update({is_accept : false}, {where : {user_id}})
         res.json("success")
     } catch (error) {
@@ -37,8 +34,11 @@ exports.unauthUser = async (req, res) => {
 
 // 거절 & 삭제
 exports.deleteUser = async (req, res) => {
+    const user_id = req.params.id;
+    console.log(user_id)
     try {
-        
+        await User.destroy({where : {user_id}})
+        res.json("success")
     } catch (error) {
         console.log(error);
     }
