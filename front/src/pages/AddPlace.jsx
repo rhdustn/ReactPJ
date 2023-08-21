@@ -19,31 +19,33 @@ const AddPlace = () => {
   const queryParams = new URLSearchParams(location.search);
   const day = queryParams.get("day");
 
-    const [choiceIndex, setChoice] = useState('');
-    const [show, setShow] = useState(false);
+  const [choiceIndex, setChoice] = useState("");
+  const [show, setShow] = useState(false);
 
-    // nearPlace
-    const [nearPlace, setnearPlace] = useState('');
+  // nearPlace
+  const [nearPlace, setnearPlace] = useState("");
 
-    const [midHeight, setMidHeight] = useState('calc(100vh - 250px)')
-    const [nearAttractopnLocation,setNearAttractopnLocation]=useState([])
-    // gpt 추천 관광지
-    const gptAnswerSaved = useSelector((state) => {return state.gptAnswerSave})
-    // let suggested = gptAnswerSaved.attractions
-    // let suggested = ['나카스', '오호리 공원', '덴진 지하상가', '하카타 역', '유후인', '어쩌고', '저쩌고', '1', '2', '3', '4', '5', '6', '7']
+  const [midHeight, setMidHeight] = useState("calc(100vh - 250px)");
+  const [nearAttractopnLocation, setNearAttractopnLocation] = useState([]);
+  // gpt 추천 관광지
+  const gptAnswerSaved = useSelector((state) => {
+    return state.gptAnswerSave;
+  });
+  // let suggested = gptAnswerSaved.attractions
+  // let suggested = ['나카스', '오호리 공원', '덴진 지하상가', '하카타 역', '유후인', '어쩌고', '저쩌고', '1', '2', '3', '4', '5', '6', '7']
 
   useEffect(() => {
     console.log(gptAnswerSaved.attractions);
   }, []);
 
-    useEffect(() => {
-        console.log("choiceIndex[0]", choiceIndex[0])
-        if(choiceIndex.length > 0) {
-            setShow(true)
-        }else {
-            setShow(false);
-        }
-    }, [choiceIndex])
+  useEffect(() => {
+    console.log("choiceIndex[0]", choiceIndex[0]);
+    if (choiceIndex.length > 0) {
+      setShow(true);
+    } else {
+      setShow(false);
+    }
+  }, [choiceIndex]);
 
   useEffect(() => {
     if (show) {
@@ -77,21 +79,37 @@ const AddPlace = () => {
     setChoice(arr);
   }, []);
 
-    return (
-        <>
-        <TopNav isScrolled={true} gptAnswerSaved={gptAnswerSaved} />
-        
-        {/* 지도 */}
-        <Padding />
-        <PlanMid nearAttractopnLocation={nearAttractopnLocation} choiceIndex = {choiceIndex} nearPlace = {nearPlace} setnearPlace = {setnearPlace} />
+  return (
+    <>
+      <TopNav isScrolled={true} gptAnswerSaved={gptAnswerSaved} />
 
-        <AddPlaceMid page={'add'} day={day} suggested={gptAnswerSaved.attractions} choiceIndex={choiceIndex} setChoice={setChoice} midHeight={midHeight}  setNearAttractopnLocation={setNearAttractopnLocation} nearPlace = {nearPlace} />
-        
-        {/* place={place} */}
+      {/* 지도 */}
+      <Padding />
+      <PlanMid
+        nearAttractopnLocation={nearAttractopnLocation}
+        choiceIndex={choiceIndex}
+        nearPlace={nearPlace}
+        setnearPlace={setnearPlace}
+      />
 
-        {show && <AddPlaceBottom choiceIndex={choiceIndex} tryComplete={tryComplete} />}
-        </>
-    )
-}
+      <AddPlaceMid
+        page={"add"}
+        day={day}
+        suggested={gptAnswerSaved.attractions}
+        choiceIndex={choiceIndex}
+        setChoice={setChoice}
+        midHeight={midHeight}
+        setNearAttractopnLocation={setNearAttractopnLocation}
+        nearPlace={nearPlace}
+      />
+
+      {/* place={place} */}
+
+      {show && (
+        <AddPlaceBottom choiceIndex={choiceIndex} tryComplete={tryComplete} />
+      )}
+    </>
+  );
+};
 
 export default AddPlace;

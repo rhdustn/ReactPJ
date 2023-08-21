@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { PlanMidBox } from "./Plan.styled";
 
 const PlanMid = (props) => {
+  
   // const PlanMid = (props, {isScrolled} ) => {
 
   // const choiceIndex = props.choiceIndex;
@@ -115,7 +116,7 @@ const PlanMid = (props) => {
         initMap(props);
       };
       document.head.appendChild(googleMapScript);
-      console.log(choiceIndex,'인덱스');
+      console.log(choiceIndex, "인덱스");
     }
   }, [choiceIndex]);
 
@@ -131,7 +132,6 @@ const PlanMid = (props) => {
     }
   }, [isScrolled]);
 
- 
   return (
     <>
       <PlanMidBox id="gmp-map-box">
