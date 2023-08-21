@@ -4,7 +4,6 @@ const { User, Board } = require("../models")
 exports.allBoard = async (req, res) => {
     try {
         const data = await Board.findAll()
-        console.log("확인", data)
         res.json(data)
     } catch (error) {
         console.log("allboard 오류터짐")
@@ -35,6 +34,7 @@ return img.filename
 
 // 상세페이지
 exports.detailBoard = async (req, res) => {
+    console.log('data')
     const { id } = req.params
     const data = await Board.findOne({ where: { id: id } });
     console.log(data)

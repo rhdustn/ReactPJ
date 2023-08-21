@@ -154,7 +154,7 @@ const isMobile = useMediaQuery({
           }
         />
         <Route
-          path="/boarddetail"
+          path="/boarddetail/:id"
           element={
             isMobile ? (
               <BoardDetail />

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
@@ -7,20 +7,24 @@ import { ImgSlice, DayBtn, PlanBtn, DayPopup, BoardPlan, Comment } from '../comp
 import BottomNav from '../components/nav/BottomNav';
 import axios from 'axios';
 
-const BoardDetail = () => {
+  const BoardDetail = () => {
   const [popup, setPopup] = useState(false);
   const { id } = useParams();
-  const boardData = useSelector(state => state.BoardDetailSlice);
 
-  const BoardDetailView = async () => {
+
+  const BoardDetailView = async ({queryKey}) => {
     try {
-      const response = await axios.get(`/post/allboard/${id}`);
-      console.log(response.data)
+      console.log("==================")
+      console.log(queryKey)
+      const response = await axios.get(`/post/detail/${queryKey[1]}`);
       return response.data;
     } catch (error) {
       console.log(error);
     }
   };
+  useEffect(()=>{
+    console.log('안녕')
+  })
 
   const { data, isLoading } = useQuery(['boardDetail', id], BoardDetailView);
 
@@ -31,21 +35,23 @@ const BoardDetail = () => {
 
   return (
     <div>
-      <Main>
-        <ImgSlice />
-        <TitleStyle>{boardData.title}</TitleStyle>
-        <SubContentStyle>{boardData.detail}</SubContentStyle>
-        <div>
-          <DayBtn DayBtnClick={DayBtnClick} />
-          <PlanBtn />
-        </div>
-        {popup && <DayPopup onClose={() => setPopup(false)} />}
-        <BoardPlan />
-        <Comment />
-        <BoardLine />
-        <BottomNav />
-      </Main>
+      {data&& <Main>
+              <ImgSlice />
+              <TitleStyle>{data.title}</TitleStyle>
+              <SubContentStyle>{data.detail}</SubContentStyle>
+              <div>
+                <DayBtn DayBtnClick={DayBtnClick} />
+                <PlanBtn />
+              </div>
+              {popup && <DayPopup onClose={() => setPopup(false)} />}
+              <BoardPlan />
+              <Comment />
+              <BoardLine />
+              <BottomNav />
+            </Main>}
+     
     </div>
+
   );
 };
 

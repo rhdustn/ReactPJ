@@ -256,6 +256,7 @@ const Repliesdiv = styled.div`
     border-bottom: 1px solid lightgray;
     width: 270px;
     padding: 3px;
+    position: relative;
   
 `
 const RelpyInput = styled.input`
@@ -283,6 +284,10 @@ border-radius: 15px;
 margin-left: 5px;
 
 `
+const Replyspan = styled.span`
+position: absolute;
+right: 0%;
+`
 
 
 
@@ -292,5 +297,5 @@ export {
     Popup, PopupContent, DayList, DayListli,BtnStyle,ImageBtnPre,ImageBtnNext,
     BoardLine,BoardPlanContainer,AddStyle,imgStyle,CommentContainer,CommentMain,CommentFormdiv,
     CommentInput,CommentBtn,CommentProflieImg,CommentContain,CommentContain2,Recommentdiv,
-    Recommentbox,CommentContain3,Repliesdiv,RelpyInput,RelpyBtn,RelpyBtn2
+    Recommentbox,CommentContain3,Repliesdiv,RelpyInput,RelpyBtn,RelpyBtn2,Replyspan
 }
