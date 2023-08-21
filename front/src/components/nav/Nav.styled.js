@@ -30,13 +30,12 @@ export const BottomNavBtn = styled.div`
     }
     & .profile_img {
         border-radius: 100%;
-        border: 1px solid silver;
     }
-    & p {
-        margin: 0;
-        font-size: 13px;
-        color: #737373; // #a6a6a6
-    }
+`
+export const BottomNavText = styled.p`
+    margin: 0;
+    font-size: 13px;
+    color: ${(props) => props.textCol || '#737373'}; // #a6a6a6
 `
 
 

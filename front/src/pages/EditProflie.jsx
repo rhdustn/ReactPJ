@@ -1,6 +1,7 @@
 import React,{ useState } from 'react'
 import { EditBtn,EditImg,EditName,ArrowBtn,EditText } from '../components/mypage'
 import styled from 'styled-components';
+import TopNav from '../components/nav/TopNav';
 
 const EditProflie = () => {
 const Main = styled.div`
@@ -15,8 +16,9 @@ transform: translate(-50%);
   const [profileName, setProfileName] = useState("");
   return (
     <div>
+      <TopNav />
+
        <Main>
-        <ArrowBtn/>
         <EditImg/>
         <EditName setProfileBtnChange={setProfileBtnChange}/>
         <EditBtn change={profileBtnChange}/>

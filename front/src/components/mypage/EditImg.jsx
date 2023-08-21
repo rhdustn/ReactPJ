@@ -1,11 +1,15 @@
 import React, { useState, useRef } from 'react';
+import axios from 'axios'
+import { useMutation, useQuery } from 'react-query';
 
 import { StyledProfileImg,InputBtn } from './mypage.styled';
 
 
 const EditImg = () => {
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [imagePreview, setImagePreview] = useState(null);
+  const default_profile = '/imgs/profiles/default_profile.jpeg'
+
+  const [selectedFile, setSelectedFile] = useState(default_profile);
+  const [imagePreview, setImagePreview] = useState(default_profile);
   const fileInputRef = useRef(null); 
 
   const handleFileChange = (event) => {
@@ -31,10 +35,26 @@ const EditImg = () => {
     fileInputRef.current.click();
   };
 
+
+  // 로그인 유저 정보 가져오기
+  const tryGetUserInfo = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/mypage/getInfo`)
+      const data = response.data;
+      console.log(data);
+      return data;
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const {data, isLoading} = useQuery(['getUser'], tryGetUserInfo)
+
+
   return (
     <>
       <StyledProfileImg onClick={handleImageClick} preview={imagePreview}>
-        {selectedFile ? selectedFile.name : 'imgs'}
+        {selectedFile ? '' : 'imgs'}
       </StyledProfileImg>
       <InputBtn>
         <input

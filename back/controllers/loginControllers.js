@@ -30,7 +30,7 @@ exports.loginClick = async (req, res)=>{
                 },process.env.ACCESSTOKENKEY,{
                     expiresIn : "30m",
                 });
-                // req.session.access_token = token;
+                req.session.access_token = token;
                 res.json("login_success");
                 // 프론트쪽에서 받아서 화면 전환시킬것.
             }else{

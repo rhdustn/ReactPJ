@@ -16,8 +16,9 @@ const Board = () => {
             <BoardTitle />
             <BoardSubTitle />
             <BoardList/>
-            <BottomNav/>
             </BoardMain>
+            
+            <BottomNav/>
         </div>
     )
 }

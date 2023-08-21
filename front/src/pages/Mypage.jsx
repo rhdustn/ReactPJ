@@ -16,12 +16,13 @@ const Mypage = () => {
   return (
     <div>
       <Main>
-      <MoveEdit />
-      <MypageImg />
-      <MypageName />
-      <TapMenu />
-      <BottomNav/>
+        <MoveEdit />
+        <MypageImg />
+        <MypageName />
+        <TapMenu />
       </Main>
+
+      <BottomNav/>
 
 
     </div>
