@@ -14,9 +14,12 @@ exports.loginClick = async (req, res)=>{
         // console.log(front_pw);
         
         const useridExist = await User.findOne({where:{user_id : front_id}});
+        console.log(useridExist.is_accept)
         if(useridExist == null){
             res.json("id_non-existent");
             // 프론트쪽에서 받아서 alert 를 띄우거나 경고창을 따로 띄워주기
+        }else if(useridExist.is_accept == false) {
+            res.json("is_accept_false")
         }
         else{
             const same = bcrypt.compareSync(front_pw, useridExist.user_pw);

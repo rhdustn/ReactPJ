@@ -13,7 +13,6 @@ import {
   EditPlanBtn,
 } from "./Plan.styled";
 
-import noImage from "../../img/icons/no-image.png";
 import { useNavigate } from "react-router-dom";
 import { saveAttractionsWithImg } from "../../redux/features/dataForGpt";
 import { useDispatch, useSelector } from "react-redux";
@@ -125,6 +124,8 @@ const PlanBottom = ({ isScrolled, gptAnswerSaved, userChoiceSaved }) => {
 const PerDay = ({ period, index, place, attractionsWithImg }) => {
   const nav = useNavigate();
   const city= '/imgs/places/city.jpeg'
+  const noImage = '/imgs/icons/no-image.png'
+
 
   // 관광지 검색 & 추가 페이지로 이동
   const moveToAdd = (id) => {

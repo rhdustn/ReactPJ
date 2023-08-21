@@ -14,7 +14,7 @@ const multer = require("multer");
 // 회원가입,로그인 기능이 있는 라우터
 const userRouter = require("./routers/user");
 const postRouter = require("./routers/postRouter")
-
+const adminRouter = require("./routers/adminRouter")
 
 // // Multer 설정
 // const storage = multer.diskStorage({
@@ -62,6 +62,7 @@ app.use("/", mainRouter);
 app.use("/post",postRouter)
 
 app.use("/user", userRouter);
+app.use("/admin", adminRouter);
 
 // gptAPI 테스트 -----20230807 zerohoney
 app.use("/openAI", testGPT);

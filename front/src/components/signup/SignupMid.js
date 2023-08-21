@@ -133,6 +133,10 @@ const SignupMid = ({page}) => {
 
     // 로그인 체크
     const tryLogin = async () => {
+      console.log('tryLogin')
+      document.querySelector("input[name='user_id']").style.border = "1px solid silver";
+      document.querySelector("input[name='user_pw']").style.border = "1px solid silver";
+
         if (!user_pw) {
           const userPwInput = document.querySelector("input[name='user_pw']");
           userPwInput.style.border = "1px solid red";
@@ -158,10 +162,16 @@ const SignupMid = ({page}) => {
     
         if(loginClick.data == "id_non-existent"){
           document.querySelector("input[name='user_id']").focus();
-          setTextId("존재하지 않는 아이디입니다. 다시 입력 부탁드립니다.^^");
+          setTextId("존재하지 않는 아이디입니다. 다시 입력 부탁드립니다.");
           setTextColor({...textColor, idColor: "red"});
           document.querySelector("input[name='user_id']").style.border = "1px solid red";
-        }else{
+        }else if(loginClick.data == "is_accept_false") {
+          // 존재하는 아이디지만 아직 승인되지 않았을 때
+          setTextId("승인 대기 중인 아이디입니다. 잠시만 기다려주세요.")
+          setTextColor({...textColor, idColor: "red"})
+          document.querySelector("input[name='user_id']").style.border = "1px solid red";
+        }
+        else{
           // 존재하는 아이디를 입력했을때
           setTextId("");
           document.querySelector("input[name='user_id']").style.border = "1px solid blue";
@@ -171,7 +181,7 @@ const SignupMid = ({page}) => {
             navigate("/");
           }else if(loginClick.data == "id_exist_but_pw_wrong"){
             // 비밀번호 틀렸을때
-            setTextPw("비밀번호 확인하세요!!");
+            setTextPw("틀린 비밀번호입니다. 다시 입력 부탁드립니다.");
             document.querySelector("input[name='user_pw']").focus();
             document.querySelector("input[name='user_pw']").style.border = "1px solid red";
           }
