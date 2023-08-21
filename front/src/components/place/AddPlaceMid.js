@@ -75,7 +75,7 @@ const [nearAttractions, setnearAttractions] = useState([]);
           })
         );
         // 전에 선택한것
-        console.log("블로그", nearAttractions);
+        console.log("전", nearAttractions);
       }
       
     }, [nearPlace]);
@@ -103,7 +103,7 @@ const [nearAttractions, setnearAttractions] = useState([]);
         {suggested.map((value, index) => {
           
           // 선택이 되지 않았을때
-          if (choiceIndex.indexOf(value) == -1) { 
+          if (choiceIndex.indexOf(value) == -1) {
             return (
               <>
                 <Title color={"#277bc0"}>AI 추천 관광지</Title>
@@ -213,7 +213,21 @@ const [nearAttractions, setnearAttractions] = useState([]);
                 </PlaceBox>
 
                 <Title size={"12px"}>주변 관광지</Title>
+                {/* {nearAttractions} */}
+                {/* 인덱스 렝스 : {suggested.length} */}
+                {/* 인덱스 {index} */}
+                
+
+                {index === 0 ? <div>0이얌</div> : null}
+                {index === 1 ? <div>1이얌</div> : null}
+                {index === 2 ? <div>2이얌</div> : null}
+
+
+                
+                
                 {nearAttractions?.map((value2, index2) => {
+                  console.log("value2 : ", value2);
+                  console.log("index2 : ", index2);
                         let temp=[];
                         // console.log(choiceIndex,'dd')
                         if (choiceIndex) {
@@ -228,7 +242,7 @@ const [nearAttractions, setnearAttractions] = useState([]);
                           <ImgBox>
                             <img src={city} />
                           </ImgBox>
-                          <PlaceName>{value2.name}</PlaceName>
+                          <PlaceName>{index}고정{value2.name}</PlaceName>
                           <SelectBtnBox>
                             <SelectBtn
                               onClick={() => {
@@ -249,7 +263,7 @@ const [nearAttractions, setnearAttractions] = useState([]);
                         <ImgBox>
                           <img src={city} />
                         </ImgBox>
-                        <PlaceName>{value2.name}</PlaceName>
+                        <PlaceName>{index}고정{value2.name}</PlaceName>
                         <SelectBtnBox>
                           <SelectBtn
                             onClick={() => {
@@ -264,6 +278,8 @@ const [nearAttractions, setnearAttractions] = useState([]);
                       </NearPlaceBox>
                     );
                   }
+
+
                 })}
 
                 <Line />

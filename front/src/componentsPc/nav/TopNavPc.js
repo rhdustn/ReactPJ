@@ -20,7 +20,8 @@ return (
             src={back}
             alt="뒤로가기"
             onClick={() => {
-              nav("/");
+              // nav("/");
+              window.history.back();
             }}
           ></img>
         </TopNavBtn>

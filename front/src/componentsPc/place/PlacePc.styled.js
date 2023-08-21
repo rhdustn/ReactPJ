@@ -9,6 +9,12 @@ const fadeInAni = keyframes`
 `
 
 // AddPlaceTop
+export const AddPlaceMid2 = styled.div`
+    width: 100%;
+    height: 50vh;
+    /* background-color: skyblue; */
+    overflow: scroll;
+`
 export const AddPlaceTopBox = styled.div`
     width: 100%; height: auto;
     padding: 60px 0 0 0;
@@ -43,6 +49,7 @@ export const InputBox = styled.div`
 // AddPlaceMid
 export const AddPlaceMidBox = styled.div`
     width: 100%; height: auto;
+    /* background-color: yellow; */
     box-sizing: border-box;
     display: flex; flex-direction: column;
     align-items: center;
@@ -96,15 +103,35 @@ export const SelectBtn = styled.div`
     box-sizing: border-box;
     cursor: pointer;
 `
+export const PlanMidPcLeft = styled.div`
+position: relative;
+width: 50%;
+height: 90vh;
+/* background-color: beige; */
+/* overflow: hidden; */
+`
+
+export const Wrap1 = styled.div`
+position: absolute;
+width: 100%;
+height: 150px;
+bottom: 0;
+/* background-color: yellow; */
+`
+
 
 // AddPlaceBottom
 export const ShowSelectedBox = styled.div`
-    width: 100%; height: 100px;
-    position: fixed; bottom: 40px;
+    width: 98%; height: 100px;
+    /* position: fixed; bottom: 400px; */
     background-color: #edebeb;
+
+    border-radius: 10px;
     display: flex; align-items: center;
     overflow-x: scroll;
     animation: ${fadeInAni} 0.5s ease-in-out;
+    /* position: relative; */
+    /* margin-bottom: 20%; */
 `
 export const Selected = styled.div`
     width: 70px; height: 80px;
@@ -129,11 +156,12 @@ export const Selected = styled.div`
     }
 `
 export const AddBtn = styled.div`
-    width: 100%; height: 40px;
+    width: 39%; height: 40px;
     background-color: #277bc0;
+    border-radius: 10px;
     color: white;
     font-weight: bold;
-    position: fixed; bottom: 0;
+    position: fixed;
     display: flex; justify-content: center; align-items: center;
     animation: ${fadeInAni} 0.5s ease-in-out;
 `

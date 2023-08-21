@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 import { BottomNavBox, BottomNavBtn } from "./NavPc.styled";
 
 
 const BottomNavPc = () => {
+  const num = useParams();
+
   const nav = useNavigate();
   const home1 = "/imgs/icons/home1.png";
   const home2 = "/imgs/icons/home2.png";
@@ -21,8 +23,9 @@ const BottomNavPc = () => {
     star: star2,
   });
 
+  
   useEffect(() => {
-    if (page == "/plan") {
+    if (page == "/plan" || page == `/addPlace/${num.id}`) {
       setIcon({
         home: home2,
         plan: plan1,
