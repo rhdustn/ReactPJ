@@ -95,7 +95,6 @@ const AddPlace = () => {
       <AddPlaceMid
         page={"add"}
         day={day}
-        suggested={gptAnswerSaved.attractions}
         choiceIndex={choiceIndex}
         setChoice={setChoice}
         midHeight={midHeight}

@@ -11,7 +11,6 @@ import NoPlan from "../components/plan/NoPlan";
 
 const Plan = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-
   const gptAnswerSaved = useSelector((state) => {
     return state.gptAnswerSave;
   });

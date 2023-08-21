@@ -13,6 +13,7 @@ import {
 } from "./Place.styled";
 import { useDispatch, useSelector } from "react-redux";
 import { saveNearAttraction } from "../../redux/features/dataForGpt";
+
 const AddPlaceMid = ({
   page,
   day,
@@ -33,12 +34,12 @@ const AddPlaceMid = ({
   // 눌러진 관광지, 이 관광지는 gpt가 뽑아온 메인 관광지 이며 ** 주변관광지가 어느 메인 관광지에 속하는 지 알기 위해 만듦**
   const [parentAttraction, setParentAttraction] = useState("");
 
-  const city = "/imgs/places/city.jpeg";
+  const noImg = "/imgs/icons/no-image.png";
   useEffect(() => {
     console.log(attractionsWithImg, "유즈 이펙트");
   }, [attractionsWithImg]);
 
-
+ 
   const isChoice = (value) => {
     // console.log("태초의 위도경도",value.attractionLocation);
 
@@ -101,43 +102,152 @@ const AddPlaceMid = ({
   //   { name: "222" },
   //   { name: "333" },
   // ];
-
   return (
     <>
       <AddPlaceMidBox midHeight={midHeight}>
-        {suggested.map((value, index) => {
-          // 선택이 되지 않았을때
-          if (choiceIndex.indexOf(value) == -1) {
-            return (
-              <>
-                <Title color={"#277bc0"}>AI 추천 관광지</Title>
-                <PlaceBox
-                  key={index}
-                  onClick={() => {
-                    isChoice(value);
-                  }}
-                >
-                  <ImgBox>
-                    <img src={city}></img>
-                  </ImgBox>
-                  <PlaceName>{value.name}</PlaceName>
-                  <PlaceDetail>{value.detail}</PlaceDetail>
-                  <SelectBtnBox>
-                    <SelectBtn
-                      onClick={() => {
-                        isChoice(value);
-                        setParentAttraction(value.name);
-                      }}
-                      back={"#edebeb"}
-                      font={"#9b9a9a"}
-                    >
-                      선택
-                    </SelectBtn>
-                  </SelectBtnBox>
-                </PlaceBox>
+        {choiceIndex !== "" &&
+          attractionsWithImg.map((value, index) => {
+            console.log();
+            // 선택이 되지 않았을때
+            if (
+              choiceIndex.some((ele) => {
+                return ele.name === value.name;
+              })
+            ) {
+              return (
+                <>
+                  <Title color={"#277bc0"}>AI 추천 관광지</Title>
+                  <PlaceBox key={index}>
+                    <ImgBox>
+                      <img
+                        src={
+                          attractionsWithImg[index].img.hits.length !== 0
+                            ? attractionsWithImg[index].img.hits?.[0]
+                                .largeImageURL
+                            : noImg
+                        }
+                        alt="관광지"
+                      ></img>
+                    </ImgBox>
+                    <PlaceName>{value.name}</PlaceName>
+                    <PlaceDetail>{value.detail}</PlaceDetail>
+                    <SelectBtnBox>
+                      <SelectBtn
+                        onClick={() => {
+                          isChoice(value);
+                        }}
+                        back={"#277bc0"}
+                        font={"white"}
+                      >
+                        선택
+                      </SelectBtn>
+                    </SelectBtnBox>
+                  </PlaceBox>
 
-                {/* ------------------------------------------------------------- */}
-                {/* <Title size={"12px"}>주변 관광지</Title>
+                  <Title size={"12px"}>주변 관광지</Title>
+                  {attractionsWithImg[index]?.nearAttraction?.map(
+                    (value2, index2) => {
+                      console.log(value2, "주변관");
+                      let temp = [];
+                      // console.log(choiceIndex,'dd')
+                      if (choiceIndex) {
+                        temp = choiceIndex.map((a) => {
+                          return a.name;
+                        });
+                      }
+                      if (temp.indexOf(value2.name) == -1) {
+                        return (
+                          <>
+                            <NearPlaceBox key={index2}>
+                              <ImgBox>
+                                <img src={noImg} alt="주변관광지" />
+                              </ImgBox>
+                              <PlaceName>{value2.name}</PlaceName>
+                              <SelectBtnBox>
+                                <SelectBtn
+                                  onClick={() => {
+                                    isChoice(value2);
+                                  }}
+                                  back={"#edebeb"}
+                                  font={"#9b9a9a"}
+                                >
+                                  선택
+                                </SelectBtn>
+                              </SelectBtnBox>
+                            </NearPlaceBox>
+                          </>
+                        );
+                      } else {
+                        return (
+                          <NearPlaceBox key={index2}>
+                            <ImgBox>
+                              <img src={noImg} alt="주변관광지" />
+                            </ImgBox>
+                            <PlaceName>{value2.name}</PlaceName>
+                            <SelectBtnBox>
+                              <SelectBtn
+                                onClick={() => {
+                                  isChoice(value2);
+                                }}
+                                back={"#277bc0"}
+                                font={"white"}
+                              >
+                                선택
+                              </SelectBtn>
+                            </SelectBtnBox>
+                          </NearPlaceBox>
+                        );
+                      }
+                    }
+                  )}
+
+                  <Line />
+                </>
+              );
+            }
+            // 선택이 되었을때
+            else {
+              console.log("여기로 들어3", choiceIndex);
+              console.log("여기로 들어옴4", value);
+              console.log(choiceIndex.some((ele) => ele.name !== value.name));
+              return (
+                <>
+                  <Title color={"#277bc0"}>AI 추천 관광지</Title>
+                  <PlaceBox
+                    key={index}
+                    onClick={() => {
+                      isChoice(value);
+                    }}
+                  >
+                    <ImgBox>
+                      <img
+                        src={
+                          attractionsWithImg[index].img.hits.length !== 0
+                            ? attractionsWithImg[index].img.hits?.[0]
+                                .largeImageURL
+                            : noImg
+                        }
+                        alt="관광지"
+                      ></img>
+                    </ImgBox>
+                    <PlaceName>{value.name}</PlaceName>
+                    <PlaceDetail>{value.detail}</PlaceDetail>
+                    <SelectBtnBox>
+                      <SelectBtn
+                        onClick={() => {
+                          isChoice(value);
+                          setParentAttraction(value.name);
+                        }}
+                        back={"#edebeb"}
+                        font={"#9b9a9a"}
+                      >
+                        선택
+                      </SelectBtn>
+                    </SelectBtnBox>
+                  </PlaceBox>
+
+                  {/* ------------------------------------------------------------- */}
+                  {/* <Title size={"12px"}>주변 관광지</Title>
                 {nearAttractions.map((value2, index2) => {
                         let temp=[];
                         // console.log(choiceIndex,'dd')
@@ -190,98 +300,13 @@ const AddPlaceMid = ({
                     );
                   }
                 })} */}
-                {/* ------------------------------------------------------------- */}
+                  {/* ------------------------------------------------------------- */}
 
-                <Line />
-              </>
-            );
-          }
-          // 선택이 되었을때
-          else {
-            return (
-              <>
-                <Title color={"#277bc0"}>AI 추천 관광지</Title>
-                <PlaceBox key={index}>
-                  <ImgBox>
-                    <img src={city}></img>
-                  </ImgBox>
-                  <PlaceName>{value.name}</PlaceName>
-                  <PlaceDetail>{value.detail}</PlaceDetail>
-                  <SelectBtnBox>
-                    <SelectBtn
-                      onClick={() => {
-                        isChoice(value);
-                      }}
-                      back={"#277bc0"}
-                      font={"white"}
-                    >
-                      선택
-                    </SelectBtn>
-                  </SelectBtnBox>
-                </PlaceBox>
-
-                <Title size={"12px"}>주변 관광지</Title>
-                {attractionsWithImg[index]?.nearAttraction?.map(
-                  (value2, index2) => {
-                    console.log(value2,'주변관')
-                    let temp = [];
-                    // console.log(choiceIndex,'dd')
-                    if (choiceIndex) {
-                      temp = choiceIndex.map((a) => {
-                        return a.name;
-                      });
-                    }
-                    if (temp.indexOf(value2.name) == -1) {
-                      return (
-                        <>
-                          <NearPlaceBox key={index2}>
-                            <ImgBox>
-                              <img src={city} />
-                            </ImgBox>
-                            <PlaceName>{value2.name}</PlaceName>
-                            <SelectBtnBox>
-                              <SelectBtn
-                                onClick={() => {
-                                  isChoice(value2);
-                                }}
-                                back={"#edebeb"}
-                                font={"#9b9a9a"}
-                              >
-                                선택
-                              </SelectBtn>
-                            </SelectBtnBox>
-                          </NearPlaceBox>
-                        </>
-                      );
-                    } else {
-                      return (
-                        <NearPlaceBox key={index2}>
-                          <ImgBox>
-                            <img src={city} />
-                          </ImgBox>
-                          <PlaceName>{value2.name}</PlaceName>
-                          <SelectBtnBox>
-                            <SelectBtn
-                              onClick={() => {
-                                isChoice(value2);
-                              }}
-                              back={"#277bc0"}
-                              font={"white"}
-                            >
-                              선택
-                            </SelectBtn>
-                          </SelectBtnBox>
-                        </NearPlaceBox>
-                      );
-                    }
-                  }
-                )}
-
-                <Line />
-              </>
-            );
-          }
-        })}
+                  <Line />
+                </>
+              );
+            }
+          })}
       </AddPlaceMidBox>
     </>
   );
