@@ -13,7 +13,7 @@ import {
   EditPlanBtn,
 } from "./Plan.styled";
 
-
+import noImage from "../../img/icons/no-image.png";
 import { useNavigate } from "react-router-dom";
 import { saveAttractionsWithImg } from "../../redux/features/dataForGpt";
 import { useDispatch, useSelector } from "react-redux";
@@ -64,13 +64,23 @@ const PlanBottom = ({ isScrolled, gptAnswerSaved, userChoiceSaved }) => {
       };
     })
   );
+  
+  useEffect(() => {
+    //  attractions state를 jsx에 쓰기 위하여 만든 임시 배열AttArrForMap에 0을 저장하는 로직
+    // 이미지를 저장하는 로직
+    let temp = [];
+    attractions.forEach((value, index) => {
+      temp.push(0);
+    });
+    setAttArrForMap(temp);
+  }, [attractions]);
+  
   // 여기까지 이미지를 api로 받아오는 로직, attractionsWithImg에 기존 attraction값에 img가 추가로 들어감.
 
   useEffect(() => {
-    // 기간인 period를 저장하는 로직
     let temp = [];
-    let sd = new Date(startDate);
-    let ed = new Date(endDate);
+  let sd = new Date(startDate);
+  let ed = new Date(endDate);
 
     while (sd <= ed) {
       temp.push(sd.getMonth() + 1 + "." + sd.getDate());
@@ -84,40 +94,35 @@ const PlanBottom = ({ isScrolled, gptAnswerSaved, userChoiceSaved }) => {
     console.log(planPerDay);
   }, [planPerDay]);
 
-  // 스크롤 일정 이상 넘어가면
-  useEffect(() => {
-    const bottomBox = document.getElementById("bottom-box");
+    // 스크롤 일정 이상 넘어가면
+    useEffect(() => {
+        const bottomBox = document.getElementById("bottom-box");
+    
+        if(isScrolled) {
+            bottomBox.style.padding = '210px 10px 70px 10px'
+        }else {
+            bottomBox.style.padding = '10px 10px 70px 10px'
+        }
+    }, [isScrolled])
+      
 
-    if (isScrolled) {
-      bottomBox.style.padding = "210px 10px 70px 10px";
-    } else {
-      bottomBox.style.padding = "10px 10px 70px 10px";
-    }
-  }, [isScrolled]);
+    return (
+        <>
+        <PlanBottomBox id='bottom-box'>
+          {periodArr.map((value, index) => {
+            return <PerDay key={index} period={periodArr[index]} index={index+1} place={planPerDay[index+1].plan} attractionsWithImg={attractionsWithImg} />
+          })}
 
-  return (
-    <>
-      <PlanBottomBox id="bottom-box">
-        {periodArr.map((value, index) => {
-          return (
-            <PerDay
-              key={index}
-              period={value}
-              index={index + 1}
-              place={planPerDay[index + 1].plan}
-            />
-          );
-        })}
-        <BtnBox>
-          <SavePlanBtn>저장</SavePlanBtn>
-        </BtnBox>
-      </PlanBottomBox>
-    </>
-  );
-};
+            <BtnBox>
+                <SavePlanBtn>저장</SavePlanBtn>
+            </BtnBox>
+        </PlanBottomBox>
+        </>
+    )
+}
 
 // 1일마다 관광지 보여주는 부분
-const PerDay = ({ period, index, place, imgSrc }) => {
+const PerDay = ({ period, index, place, attractionsWithImg }) => {
   const nav = useNavigate();
   const city= '/imgs/places/city.jpeg'
 
@@ -126,6 +131,7 @@ const PerDay = ({ period, index, place, imgSrc }) => {
     // 해당 plan의 해당 날짜에 대한 id
     nav(`/addPlace/${id}?day=${id}`);
   };
+
 
   return (
     <>
@@ -141,6 +147,12 @@ const PerDay = ({ period, index, place, imgSrc }) => {
         {/* 관광지 하나 */}
         <PerDayAttraction>
           {place.map((value, index) => {
+            let imgSrc;
+            const foundAttraction = attractionsWithImg.find(value2 => value2.name === value.name);
+            if (foundAttraction) {
+              imgSrc = foundAttraction?.img?.hits?.[0]?.largeImageURL;
+            }
+
             return (
               <RouteBox>
                 <RouteNumber>
@@ -148,9 +160,15 @@ const PerDay = ({ period, index, place, imgSrc }) => {
                   <div>{index + 1}</div>
                 </RouteNumber>
                 <RoutePlace>
-                  <div>
-                    <p>{value}</p>
-                    <img src={city}></img>
+                  <div className="place-box">
+                    <p>{value.name}</p>
+                    <div className="img-box">
+                      {imgSrc !== undefined ? (
+                        <img src={imgSrc}></img>
+                      ) : (
+                        <img src={noImage}></img>
+                      )}
+                    </div>
                   </div>
                 </RoutePlace>
               </RouteBox>

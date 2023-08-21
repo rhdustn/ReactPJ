@@ -12,6 +12,7 @@ import {
   Board,
   BoardDetail,
   Post,
+  Admin
 } from "./pages";
 import {
   EditProfliePc,
@@ -166,6 +167,8 @@ const isMobile = useMediaQuery({
           }
         />
         <Route path="/boardCreate" element={isMobile ? <Post /> : "pc 버전 post"} />
+
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </div>
   );
