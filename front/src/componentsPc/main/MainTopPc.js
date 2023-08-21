@@ -9,12 +9,13 @@ import {
   DateBox,
 } from "./MainPc.styled";
 
-import logo2 from "../../img/icons/logo2.png";
-import mainText from "../../img/icons/mainText.png";
-import search from "../../img/icons/search.png";
+
 
 // 로고 & 여행지 검색
 const MainTopPc = ({ locationSearched }) => {
+const logo2 = "/imgs/icons/logo2.png";
+const mainText = "/imgs/icons/mainText.png";
+const search = "/imgs/icons/search.png";
   const [location, setLocation] = useState();
 
   // 엔터를 입력시 감지하도록 함 zerohoney추가

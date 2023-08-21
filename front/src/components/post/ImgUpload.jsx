@@ -1,12 +1,13 @@
 import React, { useRef, useState } from 'react';
 import { UploadImgContain,UploadBtn,DeleteBtn,ShowImg,ImgContain,ImgStyle } from './post.style';
 
-const ImgUpload = () => {
+const ImgUpload = ({ onUpload, files }) => {
   const [imageFiles, setImageFiles] = useState([]);
 
   const handleFileChange = (e) => {
     const selectedFiles = Array.from(e.target.files);
     setImageFiles([...imageFiles, ...selectedFiles]);
+    onUpload([...files, ...selectedFiles])
   };
   const handleImageDelete = (index) => {
     const updatedFiles = imageFiles.filter((_, i) => i !== index);

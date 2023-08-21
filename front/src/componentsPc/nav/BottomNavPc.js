@@ -3,16 +3,15 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { BottomNavBox, BottomNavBtn } from "./NavPc.styled";
 
-import home1 from "../../img/icons/home1.png";
-import home2 from "../../img/icons/home2.png";
-import plan1 from "../../img/icons/plan1.png";
-import plan2 from "../../img/icons/plan2.png";
-import star1 from "../../img/icons/star1.png";
-import star2 from "../../img/icons/star2.png";
 
 const BottomNavPc = () => {
   const nav = useNavigate();
-
+  const home1 = "/imgs/icons/home1.png";
+  const home2 = "/imgs/icons/home2.png";
+  const plan1 = "/imgs/icons/plan1.png";
+  const plan2 = "/imgs/icons/plan2.png";
+  const star1 = "/imgs/icons/star1.png";
+  const star2 = "/imgs/icons/star2.png";
   const page = useLocation().pathname;
   const [selected, setSelect] = useState(2);
 

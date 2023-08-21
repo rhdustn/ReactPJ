@@ -27,12 +27,11 @@ import {
 } from "./pagesPc";
 import { useMediaQuery } from "react-responsive";
 import { styled } from "styled-components";
-import travel from "./img/places/travel.gif";
 import { useEffect, useState } from "react";
 import { LoadingContainer } from "./componentsPc/main/MainPc.styled";
-import loading from "./img/icons/loading2.gif";
 function App() {
-  const isMobile = useMediaQuery({
+const travel = "/imgs/places/travel.gif";
+const isMobile = useMediaQuery({
     query: "(max-width:768px)",
   });
 
@@ -167,7 +166,7 @@ function App() {
             )
           }
         />
-        <Route path="/post" element={isMobile ? <Post /> : "pc 버전 post"} />
+        <Route path="/boardCreate" element={isMobile ? <Post /> : "pc 버전 post"} />
 
         <Route path="/admin" element={<Admin />} />
       </Routes>

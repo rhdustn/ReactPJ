@@ -15,11 +15,11 @@ import {
 
 import noImage from "../../img/icons/no-image.png";
 import { useNavigate } from "react-router-dom";
-import { useQueries } from "react-query";
-import axios from "axios";
 import { saveAttractionsWithImg } from "../../redux/features/dataForGpt";
 import { useDispatch, useSelector } from "react-redux";
 import { Loading2 } from "../../componentsPc/loading/LoadingPc";
+import axios from "axios";
+import { useQueries } from "react-query";
 // 지도 아래 일정 부분
 const PlanBottom = ({ isScrolled, gptAnswerSaved, userChoiceSaved }) => {
   const { location, attractions, startDate, endDate, option1, option2 } =
@@ -124,6 +124,7 @@ const PlanBottom = ({ isScrolled, gptAnswerSaved, userChoiceSaved }) => {
 // 1일마다 관광지 보여주는 부분
 const PerDay = ({ period, index, place, attractionsWithImg }) => {
   const nav = useNavigate();
+  const city= '/imgs/places/city.jpeg'
 
   // 관광지 검색 & 추가 페이지로 이동
   const moveToAdd = (id) => {

@@ -20,9 +20,10 @@ exports.SaveUserInfo = async (req, res) => {
         } else {
           const result = await User.create({
             user_id,
-            user_pw:hash,
+            user_pw: hash,
             nickname,
             email,
+            is_accept: false,
           });
           res.send("user signUp success");
         }

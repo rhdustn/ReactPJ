@@ -59,7 +59,7 @@ const Plan = () => {
         <TopNav isScrolled={isScrolled} gptAnswerSaved={gptAnswerSaved} />
 
         <PlanTop gptAnswerSaved={gptAnswerSaved} />
-        <PlanMid isScrolled={isScrolled} />
+        <PlanMid isScrolled={isScrolled} gptAnswerSaved={gptAnswerSaved} />
         <PlanBottom
           isScrolled={isScrolled}
           gptAnswerSaved={gptAnswerSaved}
