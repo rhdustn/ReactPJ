@@ -10,6 +10,5 @@ import Comment from "./Comment";
 import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
 
-
 export {ImgSlice,Title,SubContent,DayBtn,PlanBtn,DayPopup,BoardPlan,AddPlanBtn,
     Comment,CommentForm,CommentList}

@@ -12,6 +12,8 @@ import {
   Board,
   BoardDetail,
   Post,
+  BoardEdit
+
 } from "./pages";
 import {
   EditProfliePc,
@@ -161,6 +163,18 @@ const isMobile = useMediaQuery({
             ) : (
               <PcBody>
                 <BoardDetailPc />
+              </PcBody>
+            )
+          }
+        />
+        <Route
+          path="/boardedit/:id"
+          element={
+            isMobile ? (
+              <BoardEdit />
+            ) : (
+              <PcBody>
+               BoardEdit pc 버전
               </PcBody>
             )
           }

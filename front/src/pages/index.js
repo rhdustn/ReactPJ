@@ -10,6 +10,8 @@ import EditProflie from "./EditProflie";
 import Board from "./Board";
 import BoardDetail from "./BoardDetail";
 import Post from "./Post";
+import BoardEdit from "./BoardEdit";
+
 
 export {
   Signup,
@@ -21,5 +23,6 @@ export {
   Board,
   BoardDetail,
   AddPlace,
-  Post
+  Post,
+  BoardEdit
 };

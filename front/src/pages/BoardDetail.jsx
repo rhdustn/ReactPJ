@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { Main, BoardLine, TitleStyle, SubContentStyle } from '../components/boarddetail/boarddetail.styled';
 import { ImgSlice, DayBtn, PlanBtn, DayPopup, BoardPlan, Comment } from '../components/boarddetail';
@@ -10,7 +10,11 @@ import axios from 'axios';
   const BoardDetail = () => {
   const [popup, setPopup] = useState(false);
   const { id } = useParams();
+ const navigate = useNavigate()
 
+ const boardEditClick =()=>{
+  navigate('/boardedit/:id')
+ }
 
   const BoardDetailView = async ({queryKey}) => {
     try {
@@ -36,6 +40,8 @@ import axios from 'axios';
   return (
     <div>
       {data&& <Main>
+              travel-opener
+             <button onClick={boardEditClick}>수정하기</button>
               <ImgSlice />
               <TitleStyle>{data.title}</TitleStyle>
               <SubContentStyle>{data.detail}</SubContentStyle>
@@ -48,6 +54,7 @@ import axios from 'axios';
               <Comment />
               <BoardLine />
               <BottomNav />
+              
             </Main>}
      
     </div>

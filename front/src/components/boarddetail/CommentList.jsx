@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { CommentProflieImg, CommentContain, CommentContain2,
-   Repliesdiv, RelpyInput, RelpyBtn,RelpyBtn2,Replyspan } from './boarddetail.styled';
+   Repliesdiv, RelpyInput, RelpyBtn,RelpyBtn2,CommentProflieImg2 } from './boarddetail.styled';
 
 const CommentList = ({ comments }) => {
   const [replies, setReplies] = useState([]);
@@ -64,10 +64,11 @@ const CommentList = ({ comments }) => {
           )}
 
           {replies[commentIndex]?.map((reply, replyIndex) => (
-            <Repliesdiv key={replyIndex}>
-              <div>➥{reply} 
+            <Repliesdiv key={replyIndex}>➥
+              <CommentProflieImg2 />
+                {reply} 
               {/* <Replyspan>❌</Replyspan> */}
-              </div>
+          
               
             </Repliesdiv>
           ))}

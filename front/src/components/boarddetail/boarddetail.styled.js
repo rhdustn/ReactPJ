@@ -205,10 +205,17 @@ transform: translate(-1%,-50%);
 
 `
 const CommentProflieImg = styled.div`
+width: 45px;
+height: 45px;
+border: 1px solid;
+border-radius: 50%;
+`
+const CommentProflieImg2 = styled.div`
 width: 30px;
 height: 30px;
 border: 1px solid;
 border-radius: 50%;
+margin-right: 5px;
 `
 
 const CommentContain = styled.div`
@@ -248,10 +255,10 @@ transform: translate(-16%);
   border: none;
 `
 const Repliesdiv = styled.div`
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-    align-items: flex-start;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     margin-left: 50px;
     border-bottom: 1px solid lightgray;
     width: 270px;
@@ -288,6 +295,10 @@ const Replyspan = styled.span`
 position: absolute;
 right: 0%;
 `
+const MoveBoardBtn = styled.div`
+display: flex;
+font-size: 20px;
+`
 
 
 
@@ -297,5 +308,6 @@ export {
     Popup, PopupContent, DayList, DayListli,BtnStyle,ImageBtnPre,ImageBtnNext,
     BoardLine,BoardPlanContainer,AddStyle,imgStyle,CommentContainer,CommentMain,CommentFormdiv,
     CommentInput,CommentBtn,CommentProflieImg,CommentContain,CommentContain2,Recommentdiv,
-    Recommentbox,CommentContain3,Repliesdiv,RelpyInput,RelpyBtn,RelpyBtn2,Replyspan
+    Recommentbox,CommentContain3,Repliesdiv,RelpyInput,RelpyBtn,RelpyBtn2,Replyspan,
+    CommentProflieImg2,MoveBoardBtn
 }
