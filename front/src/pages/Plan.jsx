@@ -11,21 +11,15 @@ import NoPlan from "../components/plan/NoPlan";
 
 const Plan = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-
   const gptAnswerSaved = useSelector((state) => {
     return state.gptAnswerSave;
   });
 
-  useEffect(() => {
-    console.log(gptAnswerSaved);
-  }, [gptAnswerSaved]);
 
   const userChoiceSaved = useSelector((state) => {
     return state.userChoiceSave;
   });
-  useEffect(() => {
-    console.log(userChoiceSaved);
-  }, [userChoiceSaved]);
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,6 +38,7 @@ const Plan = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
 
   if (gptAnswerSaved.location == "") {
     return (
