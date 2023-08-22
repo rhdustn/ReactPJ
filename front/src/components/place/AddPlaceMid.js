@@ -78,6 +78,9 @@ const AddPlaceMid = ({
 
     }
   }, [nearPlace]);
+  useEffect(()=>{
+    console.log(choiceIndex)
+  },[choiceIndex])
 
   // let nearAttractions = [
   //   {

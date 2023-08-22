@@ -72,6 +72,18 @@ export const PlaceBox = styled.div`
         background-color: #edebeb;
     }
 `
+export const NearPlaceBox = styled.div`
+    width: 100%; min-height: 70px;
+    max-height: 90px;
+    display: flex; flex-direction: column;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+    padding: 10px 0 10px 0;
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+`
 export const ImgBox = styled.div`
     width: 40px; height: 40px;
     position: absolute; left: 5px;

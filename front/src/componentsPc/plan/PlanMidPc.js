@@ -1,62 +1,131 @@
-import React, {useEffect, useRef, useState} from 'react'
-import { PlanMidBox } from './PlanPc.styled'
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useEffect, useRef, useState } from "react";
+import { PlanMidBox } from "./PlanPc.styled";
+import { useSelector, useDispatch } from "react-redux";
 
-const PlanMidPc = ({gptAnswerSaved}) => {
+const PlanMidPc = (props) => {
   // console.log("들어옴", gptAnswerSaved.location);
+  const { choiceIndex, isScrolled, gptAnswerSaved, nearPlace, setnearPlace } =
+    props;
+  let lat, lng;
+  if (choiceIndex) {
+    lat = choiceIndex.at(-1)?.attractionLocation.latitude;
+    lng = choiceIndex.at(-1)?.attractionLocation.longitude;
+  }
   let myLatLng;
+  useEffect(() => {
+    console.log(choiceIndex,'ㅁㄴㅇㅁㅇ');
+  }, [choiceIndex]);
+  const initMap = (props) => {
+    let myLatLng;
+    // 선택이 되지 않았을때 실행
+    if (props?.choiceIndex?.length == 0) {
+      async function geocode1() {
+        return new Promise((resolve, reject) => {
+          let geocoder = new window.google.maps.Geocoder();
+          geocoder.geocode(
+            { address: gptAnswerSaved.location },
+            function (results, status) {
+              if (status === "OK") {
+                let location = results[0].geometry.location;
+                let geocode_latitude = location.lat();
+                let geocode_longitude = location.lng();
+                resolve({ lat: geocode_latitude, lng: geocode_longitude });
+                // console.log('위1도:', geocode_latitude);
+                // console.log('경1도:', geocode_longitude);
+              } else {
+                console.error("지오코딩에 실패했습니다. 상태:", status);
+              }
+            }
+          );
+        });
+      }
+      async function geocode2() {
+        try {
+          let { lat, lng } = await geocode1();
+          myLatLng = {
+            lat: lat,
+            lng: lng,
+          };
+          const map = new window.google.maps.Map(
+            document.getElementById("gmp-map"),
+            {
+              zoom: 6,
+              center: myLatLng,
+              fullscreenControl: false,
+              zoomControl: true,
+              streetViewControl: false,
+            }
+          );
+          // new window.google.maps.Marker({
+          //   position: myLatLng,
+          //   map,
+          //   title: "My location",
+          // });
+        } catch (error) {
+          console.error(error);
+        }
+      }
+      geocode2();
+    } else {
+      myLatLng = {
+        lat: Number(lat),
+        lng: Number(lng),
+      };
 
-  async function geocode1() {
-    return new Promise((resolve, reject) => {
-      let geocoder = new window.google.maps.Geocoder();
-      geocoder.geocode({ 'address': gptAnswerSaved.location }, function (results, status) {
-        if (status === 'OK') {
-          let location = results[0].geometry.location;
-          let geocode_latitude = location.lat();
-          let geocode_longitude = location.lng();
-          resolve({ lat: geocode_latitude, lng: geocode_longitude });
-        } else {
-          console.error('지오코딩에 실패했습니다. 상태:', status);
-          reject(status);
+      const map = new window.google.maps.Map(
+        document.getElementById("gmp-map"),
+        {
+          zoom: 13,
+          center: myLatLng,
+          fullscreenControl: false,
+          zoomControl: true,
+          streetViewControl: false,
+        }
+      );
+
+      const request = {
+        location: myLatLng,
+        radius: "500",
+        types: ["tourist_attraction"],
+      };
+
+      const service = new window.google.maps.places.PlacesService(map);
+
+      service.nearbySearch(request, (results, status) => {
+        if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+          // 평점 이상
+          const filterResults = results.filter((place) => place.rating >= 4.0);
+          let send_latlng = [];
+          let send_lat, send_lng;
+          for (const place of filterResults.slice(0, 3)) {
+            // send_lat = place.geometry.location.lat();
+            // send_lng = place.geometry.location.lng();
+            send_latlng.push(place);
+            const marker = new window.google.maps.Marker({
+              position: place.geometry.location,
+              map: map,
+              title: place.name,
+            });
+          }
+          setnearPlace(send_latlng);
         }
       });
-    });
-  }
-
-  async function Geocode2() {
-    try {
-      let { lat, lng } = await geocode1();
-      myLatLng = {
-        lat: lat,
-        lng: lng,
-      };
-      console.log(lat);
-      console.log(lng);
-
-      const map = new window.google.maps.Map(document.getElementById("gmp-map"), {
-        zoom: 7,
-        center: myLatLng,
-        fullscreenControl: false,
-        zoomControl: true,
-        streetViewControl: false,
-      });
-    } catch (error) {
-      console.error(error);
     }
-  }
+  };
 
-  // useEffect(() => {
-  //   const googleMapScript = document.createElement('script');
-  //   googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLEMAP_API_KEY}&libraries=places`;
-  //   googleMapScript.async = true;
-  //   googleMapScript.onload = Geocode2;
-  //   document.head.appendChild(googleMapScript);
-  // }, [gptAnswerSaved.location]);
-
+  useEffect(() => {
+    const googleMapScript = document.createElement("script");
+    // googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_GOOGLEMAP_API_KEY}&libraries=places`;
+    googleMapScript.async = true;
+    googleMapScript.onload = () => {
+      console.log("** 구글 맵 실행됨! **");
+      // initMap(props);
+    };
+    document.head.appendChild(googleMapScript);
+  }, [gptAnswerSaved.location, choiceIndex]);
 
   // const attraction = useSelector(state => state.attractionsWithImg);
   // const [finalAttraction, setFinalAttraction] = useState(null);
-
 
   // useEffect(() => {
   //   // console.log("1 :", attraction);
@@ -68,7 +137,6 @@ const PlanMidPc = ({gptAnswerSaved}) => {
   //   // 최종 변경된 attraction 값을 사용하여 원하는 작업 수행
   // }, [finalAttraction]);
 
-
   // useEffect(()=>{
   //   const locations = [];
   //   console.log("3 : ", finalAttraction);
@@ -76,7 +144,7 @@ const PlanMidPc = ({gptAnswerSaved}) => {
   //     for(let i=0; i<finalAttraction.length; i++){
   //       // console.log("위도: ", finalAttraction[i].attractionLocation.latitude);
   //       // console.log("경도: ", finalAttraction[i].attractionLocation.longitude);
-  //       locations.push({ lat: finalAttraction[i].attractionLocation.latitude, lng: finalAttraction[i].attractionLocation.longitude, title: "Location 2" });        
+  //       locations.push({ lat: finalAttraction[i].attractionLocation.latitude, lng: finalAttraction[i].attractionLocation.longitude, title: "Location 2" });
   //     }
   //     function initMap2(locations) {
   //       const map = new window.google.maps.Map(document.getElementById("gmp-map"), {
@@ -86,7 +154,7 @@ const PlanMidPc = ({gptAnswerSaved}) => {
   //         zoomControl: true,
   //         streetViewControl: false,
   //       });
-      
+
   //       locations.forEach((location,index) => {
   //         new window.google.maps.Marker({
   //           position: { lat: Number(locations[index].lat), lng: Number(locations[index].lng) },
@@ -95,16 +163,12 @@ const PlanMidPc = ({gptAnswerSaved}) => {
   //         });
   //       });
   //     }
-      
+
   //     initMap2(locations);
   //     // -------------------------------
 
   //   }
   // }, [finalAttraction]);
-
-
-
-
 
   // useEffect(()=>{
   //   const locations = [
@@ -121,7 +185,7 @@ const PlanMidPc = ({gptAnswerSaved}) => {
   //       zoomControl: true,
   //       streetViewControl: false,
   //     });
-    
+
   //     locations.forEach((location) => {
   //       new window.google.maps.Marker({
   //         position: { lat: location.lat, lng: location.lng },
@@ -130,14 +194,10 @@ const PlanMidPc = ({gptAnswerSaved}) => {
   //       });
   //     });
   //   }
-    
+
   //   initMap2(locations);
 
   // });
-
-
-
-
 
   // 위도, 경도에 따른 위치 마커 찍어주기
   // useEffect(()=>{
@@ -164,11 +224,6 @@ const PlanMidPc = ({gptAnswerSaved}) => {
 
   // }, []);
 
-
-
-
-
-  
   // 위도, 경도 주변 관광지 마커 찍어주기
   // const mapRef = useRef(null);
 
@@ -231,10 +286,6 @@ const PlanMidPc = ({gptAnswerSaved}) => {
   //   googleMapScript.onload = initMap;
   //   document.head.appendChild(googleMapScript);
   // }, []);
-
-
-
-
 
   // 위도, 경도에 따른 시작지와 도착지 사이의 경로 및 시간 설정
   // useEffect(()=>{
@@ -329,14 +380,11 @@ const PlanMidPc = ({gptAnswerSaved}) => {
   //   initMap();
   // }, []);
 
-
-
-
   return (
     <>
       <PlanMidBox>
         {/* 1번째 */}
-        <div id='gmp-map'></div>
+        <div id="gmp-map"></div>
 
         {/* 2번째 */}
         {/* <div id='test1' ref={mapRef}></div> */}
@@ -349,10 +397,8 @@ const PlanMidPc = ({gptAnswerSaved}) => {
             <div id="panel"></div>
           </div>
         </div> */}
-
       </PlanMidBox>
-      <br/>
-
+      <br />
     </>
   );
 };

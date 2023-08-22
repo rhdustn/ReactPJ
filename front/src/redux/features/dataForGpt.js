@@ -65,6 +65,9 @@ export const attractionsWithImg = createSlice({
     // 관광지 주위에있는 관광지 저장
     saveNearAttraction: (state, action) => {
       state.forEach((value, index) => {
+        if (!action.payload[0].parentName) {
+          alert('로드중 오류가 발생하였습니다. 새로고침후 다시 이용해 주세요.')
+        }
         if (value.name === action.payload[0].parentName) {
           state[index].nearAttraction = action.payload;
         }
