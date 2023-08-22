@@ -1,4 +1,4 @@
-const { User, Board } = require("../models")
+const { User, Board,Comment, Recomment } = require("../models")
 
 // 글 리스트를 보여줄 수 있는 컨트롤러
 exports.allBoard = async (req, res) => {
@@ -37,8 +37,13 @@ exports.detailBoard = async (req, res) => {
     console.log('data')
     const { id } = req.params
     const data = await Board.findOne({ where: { id: id } });
-    console.log(data)
-    res.send(data);
+    const commentdata = await Comment.findAll({ where: { board_id: id } })
+   const recommentArr= commentdata.map( async(value, index)=>{
+        const recommentdata = await Recomment.findAll({ where: { comment_id:value.id } })
+        return recommentdata
+    })
+    res.json({data,commentdata,recommentArr});
+   
 
 }
 // 게시글 수정
@@ -49,7 +54,6 @@ exports.editBoard = async (req, res) => {
     const tempImgArr=req.files.map((img)=>{
         return img.filename
             })
-        
             const imgFiles=JSON.stringify(tempImgArr)
     try {
         await Board.update({ title, detail, images:imgFiles }, { where: { id } })

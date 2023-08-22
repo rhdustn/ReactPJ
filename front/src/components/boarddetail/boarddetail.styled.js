@@ -299,9 +299,62 @@ const MoveBoardBtn = styled.div`
 display: flex;
 font-size: 20px;
 `
+const ButtonBox = styled.div`
+width: 50px;
+height: 50px;
 
-
-
+`
+const ShowButtonBox = styled.div`
+width: 100px;
+height: 100px;
+background-color:rgba(0, 0, 0, 0.5);
+z-index: 5;
+display: flex;
+position: relative;
+border-radius: 10px;
+position: absolute;
+    top: 5%;
+    right: 8%;
+`
+const EditImg = styled.img`
+width: 30px;
+height: 30px;
+position: absolute;
+right: 2%;
+top: 1%;
+`
+const HeaderDiv = styled.div`
+width: 400px;
+height: 50px;
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+`
+const EditBtnStyle = styled.button`
+ width: 50px;
+ height: 30px;
+ background-color: white;
+ position: absolute;
+ top: 20%;
+ left: 50%;
+ transform: translate(-50%,-20%);
+ border-radius: 5px;
+ border: none;
+ padding:5px;
+`
+const DelBtnStyle = styled.button`
+ width: 50px;
+ height: 30px;
+ background-color: white;
+ position: absolute;
+ top: 80%;
+ left: 50%;
+ transform: translate(-50%,-80%);
+ border-radius: 5px;
+ border: none;
+ padding:5px;
+`
 
 export {
     Main, ImgBoxContainer, ImgBox,Image, TitleStyle, SubContentStyle,
@@ -309,5 +362,5 @@ export {
     BoardLine,BoardPlanContainer,AddStyle,imgStyle,CommentContainer,CommentMain,CommentFormdiv,
     CommentInput,CommentBtn,CommentProflieImg,CommentContain,CommentContain2,Recommentdiv,
     Recommentbox,CommentContain3,Repliesdiv,RelpyInput,RelpyBtn,RelpyBtn2,Replyspan,
-    CommentProflieImg2,MoveBoardBtn
+    CommentProflieImg2,MoveBoardBtn,ButtonBox,ShowButtonBox,EditImg,HeaderDiv,EditBtnStyle,DelBtnStyle
 }

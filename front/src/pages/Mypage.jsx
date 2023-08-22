@@ -20,8 +20,8 @@ const Mypage = () => {
       <MypageImg />
       <MypageName />
       <TapMenu />
-      <BottomNav/>
       </Main>
+      <BottomNav/>
 
 
     </div>
