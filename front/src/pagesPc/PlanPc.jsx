@@ -57,12 +57,16 @@ const PlanPc = () => {
     <>
       <TopNavPc gptAnswerSaved={gptAnswerSaved} />
 
+      {/* LA 여행 날짜 */}
       <PlanTopPc gptAnswerSaved={gptAnswerSaved} />
-      <PlanMidPc />
+      
+      {/* 지도 */}
+      <PlanMidPc gptAnswerSaved={gptAnswerSaved} />
 
+      {/* day 1 ~ 저장 */}
       <PlanBottomPc gptAnswerSaved={gptAnswerSaved} userChoiceSaved={userChoiceSaved}/>
 
-      <BottomNavPc page={"plan"} />
+      <BottomNavPc />
     </>
   );
 };

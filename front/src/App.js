@@ -115,7 +115,7 @@ const isMobile = useMediaQuery({
         />
         <Route
           path="/addPlace/:id"
-          element={isMobile ? <AddPlace /> : <>모바일이다!</>}
+          element={isMobile ? <AddPlace /> : <PcBody><AddPlacePc /></PcBody>}
         />
 
         <Route

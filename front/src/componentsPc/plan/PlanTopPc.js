@@ -16,7 +16,7 @@ const PlanTopPc = ({ gptAnswerSaved }) => {
         <Date>
           {startDate} ~ {endDate}
         </Date>
-        <Selected>
+        {/* <Selected>
           {option1.map((value, index) => {
             return `${value} `;
           })}
@@ -25,7 +25,7 @@ const PlanTopPc = ({ gptAnswerSaved }) => {
           {option2.map((value, index) => {
             return `${value} `;
           })}
-        </Selected>
+        </Selected> */}
       </PlanTopBox>
     </>
   );
