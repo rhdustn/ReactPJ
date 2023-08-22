@@ -47,6 +47,13 @@ app.use(
   })
 );
 
+app.get('/static/js/main.5518ef4c.js', (req, res) => {
+  res.type('application/javascript');
+  // 나머지 응답 처리 로직
+});
+
+
+
 console.log("123123");
 
 sequelize
