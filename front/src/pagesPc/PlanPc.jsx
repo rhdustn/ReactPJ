@@ -32,9 +32,7 @@ const PlanPc = () => {
     };
   }, []);
 
-  useEffect(() => {
-    console.log(gptAnswerSaved);
-  }, [gptAnswerSaved]);
+
 
   // 유저의 선택된 여행정보 가져오기
   const userChoiceSaved = useSelector((state) => {

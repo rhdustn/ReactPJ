@@ -13,7 +13,6 @@ const AddPlaceBottom = ({ choiceIndex, tryComplete }) => {
   const nav = useNavigate();
   // 최종적으로 선택된 유저의 플랜을 리덕스에 저장하는 함수
   const saveUserPlanToRedux = () => {
-    console.log(choiceIndex);
     const temp = choiceIndex.map((value) => {
       let img;
       if (value.img) {
@@ -32,10 +31,7 @@ const AddPlaceBottom = ({ choiceIndex, tryComplete }) => {
         img,
       };
     });
-    console.log({
-      day: searchParams.get("day"),
-      plan: temp,
-    });
+ 
     selectedUserPlanDispatch(
       pushPlan({
         day: searchParams.get("day"),

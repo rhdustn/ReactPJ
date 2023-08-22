@@ -34,7 +34,6 @@ const SignupMid = ({page}) => {
 
     // 아이디 중복 체크
     const dupChk1 = async () => {
-        console.log("아이디 중복 체크", user_id)
         
         if(user_id == undefined) {
             return;
@@ -71,7 +70,6 @@ const SignupMid = ({page}) => {
 
     // 닉네임 중복 체크
     const dupChk2 = async () => {
-        console.log("닉네임 중복 체크", nickname)
 
         if(nickname == undefined) {
             return;
@@ -115,7 +113,6 @@ const SignupMid = ({page}) => {
 
     // 최종 회원가입
     const trySignup = async () => {
-        console.log("trySignup")
         // 중복 체크 완료, 이메일 형식 체크 된 후 post 날리기
         const signUpResult = await axios.post("/user/signUp", {
             user_id,

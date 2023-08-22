@@ -34,12 +34,8 @@ const AddPlace = () => {
   // let suggested = gptAnswerSaved.attractions
   // let suggested = ['나카스', '오호리 공원', '덴진 지하상가', '하카타 역', '유후인', '어쩌고', '저쩌고', '1', '2', '3', '4', '5', '6', '7']
 
-  useEffect(() => {
-    console.log(gptAnswerSaved.attractions);
-  }, []);
 
   useEffect(() => {
-    console.log("choiceIndex[0]", choiceIndex[0]);
     if (choiceIndex.length > 0) {
       setShow(true);
     } else {
@@ -55,8 +51,6 @@ const AddPlace = () => {
 
   // 선택 완료
   const tryComplete = () => {
-    console.log(day);
-    console.log(choiceIndex);
     dispatch(
       save2({
         day: day,
@@ -69,9 +63,7 @@ const AddPlace = () => {
   const userChoiceSaved = useSelector((state) => {
     return state.userChoiceSave;
   });
-  useEffect(() => {
-    console.log(userChoiceSaved);
-  }, [userChoiceSaved]);
+
 
   useEffect(() => {
     let index = Number(day);

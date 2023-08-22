@@ -36,22 +36,18 @@ const AddPlaceMid = ({
 
   const noImg = "/imgs/icons/no-image.png";
   useEffect(() => {
-    console.log(attractionsWithImg, "유즈 이펙트");
   }, [attractionsWithImg]);
 
  
   const isChoice = (value) => {
-    // console.log("태초의 위도경도",value.attractionLocation);
 
     let temp = [];
-    // console.log(choiceIndex,'dd')
     if (choiceIndex) {
       temp = choiceIndex.map((a) => {
         return a.name;
       });
     }
 
-    // console.log(temp);
     if (temp.indexOf(value.name) !== -1) {
       let arr = choiceIndex.filter((va) => va.name !== value.name);
       setChoice(arr);
@@ -66,12 +62,7 @@ const AddPlaceMid = ({
 
   useEffect(() => {
     if (nearPlace !== undefined && nearPlace !== "") {
-      console.log("d", nearPlace);
       const tempNear = nearPlace.map((place) => {
-        console.log("place", place);
-        console.log("place", place.name);
-        console.log("위도:", place.geometry.location.lat());
-        console.log("경도:", place.geometry.location.lng());
 
         return {
           parentName: parentAttraction,
@@ -83,10 +74,8 @@ const AddPlaceMid = ({
           },
         };
       });
-      console.log(tempNear, "변변");
       attractionsWithImgDispatch(saveNearAttraction(tempNear));
 
-      console.log("WHA", nearAttractions);
     }
   }, [nearPlace]);
 
@@ -107,7 +96,6 @@ const AddPlaceMid = ({
       <AddPlaceMidBox midHeight={midHeight}>
         {choiceIndex !== "" &&
           attractionsWithImg.map((value, index) => {
-            console.log();
             // 선택이 되지 않았을때
             if (
               choiceIndex.some((ele) => {
@@ -147,9 +135,7 @@ const AddPlaceMid = ({
                   <Title size={"12px"}>주변 관광지</Title>
                   {attractionsWithImg[index]?.nearAttraction?.map(
                     (value2, index2) => {
-                      console.log(value2, "주변관");
                       let temp = [];
-                      // console.log(choiceIndex,'dd')
                       if (choiceIndex) {
                         temp = choiceIndex.map((a) => {
                           return a.name;
@@ -207,9 +193,6 @@ const AddPlaceMid = ({
             }
             // 선택이 되었을때
             else {
-              console.log("여기로 들어3", choiceIndex);
-              console.log("여기로 들어옴4", value);
-              console.log(choiceIndex.some((ele) => ele.name !== value.name));
               return (
                 <>
                   <Title color={"#277bc0"}>AI 추천 관광지</Title>
@@ -250,7 +233,6 @@ const AddPlaceMid = ({
                   {/* <Title size={"12px"}>주변 관광지</Title>
                 {nearAttractions.map((value2, index2) => {
                         let temp=[];
-                        // console.log(choiceIndex,'dd')
                         if (choiceIndex) {
                           temp = choiceIndex.map((a) => {
                             return a.name;

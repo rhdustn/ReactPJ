@@ -18,7 +18,6 @@ const AddPlacePc = () => {
     let suggested = ['나카스', '오호리 공원', '덴진 지하상가', '하카타 역']
 
     useEffect(() => {
-        console.log(choiceIndex)
         if(choiceIndex.length > 0) {
             setShow(true)
         }else {

@@ -82,8 +82,6 @@ const MainBottom = ({ choiceSelected, startDate, endDate }) => {
   };
 
   useEffect(() => {
-    console.log(choiceIndex1)
-    console.log(choiceIndex2)
     choiceSelected(choiceIndex1, choiceIndex2);
 
     if (choiceIndex1.length > 0 && choiceIndex2.length > 0) {
@@ -113,7 +111,6 @@ const MainBottom = ({ choiceSelected, startDate, endDate }) => {
   const gptQuery = useMutation(sendDataToGpt);
 
   useEffect(() => {
-    console.log(gptAnswer);
     if (gptAnswer) {
       dispatch(
         save({
@@ -151,7 +148,6 @@ const MainBottom = ({ choiceSelected, startDate, endDate }) => {
   });
   useEffect(() => {
     if (gptAnswerSaved.attractions.length > 0) {
-      console.log("넘어가기?");
       nav("/plan");
     }
   }, [gptAnswerSaved]);

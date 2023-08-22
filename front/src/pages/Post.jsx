@@ -58,9 +58,7 @@ const Post = () => {
   const handleFileUpload = (files) => {
     setUploadedFiles(files);
   };
-  useEffect(() => {
-    console.log(uploadedFiles)
-  }, [uploadedFiles])
+
   return (
     <div>
       postpage

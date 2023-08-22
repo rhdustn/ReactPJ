@@ -89,9 +89,6 @@ const PlanBottom = ({ isScrolled, gptAnswerSaved, userChoiceSaved }) => {
   }, [attractions]);
 
   const { planPerDay } = userChoiceSaved;
-  useEffect(() => {
-    console.log(planPerDay);
-  }, [planPerDay]);
 
   // 스크롤 일정 이상 넘어가면
   useEffect(() => {
@@ -146,12 +143,10 @@ const PerDay = ({ period, index, place, attractionsWithImg }) => {
   // 해당하는 날짜를 찾고  그 plan을dayPlanArr에 저장하는 함수
   useEffect(() => {
     const temp = selectedUserPlan.filter((el) => {
-      console.log(el.day);
-      console.log(index);
       return parseInt(el.day) === parseInt(index);
     });
-    console.log(temp);
     setDayPlanArr(temp);
+    console.log(selectedUserPlan)
   }, [selectedUserPlan]);
 
   return (

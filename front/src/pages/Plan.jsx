@@ -15,16 +15,11 @@ const Plan = () => {
     return state.gptAnswerSave;
   });
 
-  useEffect(() => {
-    console.log(gptAnswerSaved);
-  }, [gptAnswerSaved]);
 
   const userChoiceSaved = useSelector((state) => {
     return state.userChoiceSave;
   });
-  useEffect(() => {
-    console.log(userChoiceSaved);
-  }, [userChoiceSaved]);
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,6 +38,7 @@ const Plan = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
 
   if (gptAnswerSaved.location == "") {
     return (
