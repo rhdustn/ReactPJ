@@ -6,7 +6,7 @@ const {allBoard, createBoard, detailBoard,editBoard, deleteBoard} = require("../
 // Multer 설정
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, path.join("..",'back', "imgs"));
+      cb(null, path.join("..",'front', "public","imgs","userplanimg"));
     },
     filename: function (req, file, cb) {
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
@@ -18,8 +18,8 @@ const storage = multer.diskStorage({
   const upload = multer({ storage: storage });
 router.get('/allboard',allBoard);
 router.post("/write",upload.array("uploadedFiles",5),createBoard);
-router.post('detail/:id',detailBoard);
-router.post("edit/:id",editBoard)
-router.post("delete/:id",deleteBoard)
+router.get('/detail/:id',detailBoard);
+router.post("/edit/:id",upload.array("uploadedFiles",5),editBoard)
+router.get("/delete/:id",deleteBoard)
 
 module.exports = router

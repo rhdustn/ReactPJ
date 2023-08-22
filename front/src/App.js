@@ -12,6 +12,8 @@ import {
   Board,
   BoardDetail,
   Post,
+  BoardEdit,
+
   Admin
 } from "./pages";
 import {
@@ -155,13 +157,25 @@ const isMobile = useMediaQuery({
           }
         />
         <Route
-          path="/boarddetail"
+          path="/boarddetail/:id"
           element={
             isMobile ? (
               <BoardDetail />
             ) : (
               <PcBody>
                 <BoardDetailPc />
+              </PcBody>
+            )
+          }
+        />
+        <Route
+          path="/boardedit/:id"
+          element={
+            isMobile ? (
+              <BoardEdit />
+            ) : (
+              <PcBody>
+               BoardEdit pc 버전
               </PcBody>
             )
           }

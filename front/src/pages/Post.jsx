@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Main } from '../components/boarddetail/boarddetail.styled';
+import { Main,MoveBoardBtn } from '../components/boarddetail/boarddetail.styled';
 import { PostContent, PostTitle, PostBtn } from '../components/post/post.style';
 import { PostPlan, ImgUpload } from '../components/post';
 import axios from 'axios';
@@ -58,10 +58,15 @@ const Post = () => {
   const handleFileUpload = (files) => {
     setUploadedFiles(files);
   };
-
+  const MoveBoardClick =()=>{
+    navigate("/board")
+  }
+  useEffect(() => {
+    console.log(uploadedFiles)
+  }, [uploadedFiles])
   return (
     <div>
-      postpage
+        <MoveBoardBtn onClick={MoveBoardClick}>게시판으로 이동</MoveBoardBtn>
       <Main>
         <ImgUpload name="images" onUpload={handleFileUpload} files={uploadedFiles} />
         <PostTitle

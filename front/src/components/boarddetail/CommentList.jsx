@@ -1,49 +1,78 @@
 import React, { useState } from 'react';
-import { CommentProflieImg, CommentContain, CommentContain2 } from './boarddetail.styled';
-import ReComment from './ReComment';
+import { CommentProflieImg, CommentContain, CommentContain2,
+   Repliesdiv, RelpyInput, RelpyBtn,RelpyBtn2,CommentProflieImg2 } from './boarddetail.styled';
 
 const CommentList = ({ comments }) => {
-  const [replyComments, setReplyComments] = useState(Array(comments.length).fill([]));
+  const [replies, setReplies] = useState([]);
+  const [replyText, setReplyText] = useState('');
+  const [activeCommentIndex, setActiveCommentIndex] = useState(null);
+  const [isReplyVisible, setIsReplyVisible] = useState(false); 
 
-  const handleReCommentSave = (commentIndex, replyIndex, newComment) => {
-    const newReplyComments = [...replyComments];
-    newReplyComments[commentIndex] = [
-      ...(newReplyComments[commentIndex] || []),
-      newComment
-    ];
-    setReplyComments(newReplyComments);
+  const handleReplySubmit = (commentIndex) => {
+    if (replyText.trim() !== '') {
+      const updatedReplies = [...replies];
+      updatedReplies[commentIndex] = (updatedReplies[commentIndex] || []).concat(replyText);
+      setReplies(updatedReplies);
+      setReplyText('');
+      setActiveCommentIndex(null);
+      setIsReplyVisible(false); 
+    }
+  };
+
+  const handleCancelReply = () => {
+    setReplyText(''); 
+    setIsReplyVisible(false); 
   };
 
   return (
     <div>
       {comments.map((comment, commentIndex) => (
-        <CommentContain key={commentIndex}>
-          <CommentProflieImg>
-            Img
-          </CommentProflieImg>
-          <CommentContain2>
+        <div key={commentIndex}>
+          <CommentContain>
+            <CommentProflieImg>
+              Img
+            </CommentProflieImg>
+            <CommentContain2>
+              <div>
+                nickname
+              </div>
+              <div>
+                {comment}
+              </div>
+              <div>
+                <div onClick={() => {
+                  setActiveCommentIndex(commentIndex);
+                  setIsReplyVisible(true); 
+                }}>답글 달기</div>
+              </div>
+            </CommentContain2>
+            <div>삭제</div>
+            <div>수정</div>
+            <div>DATE</div>
+          </CommentContain>
+          {activeCommentIndex === commentIndex && isReplyVisible && (
             <div>
-              nickname
+              <RelpyInput
+                type="text"
+                placeholder="대댓글 작성하기"
+                value={replyText}
+                onChange={(e) => setReplyText(e.target.value)}
+              />
+              <RelpyBtn onClick={() => handleReplySubmit(commentIndex)}>등록</RelpyBtn>
+              <RelpyBtn2 onClick={handleCancelReply}>취소</RelpyBtn2>
             </div>
-            <div>
-              {comment}
-            </div>
-            <ReComment
-              initComment=""
-              onSave={(newComment) => handleReCommentSave(commentIndex, 0, newComment)}
-            />
-            {replyComments[commentIndex] &&
-              replyComments[commentIndex].map((reply, replyIndex) => (
-                <ReComment
-                  key={replyIndex}
-                  initComment={reply}
-                  onSave={(newReply) =>
-                    handleReCommentSave(commentIndex, replyIndex + 1, newReply)
-                  }
-                />
-              ))}
-          </CommentContain2>
-        </CommentContain>
+          )}
+
+          {replies[commentIndex]?.map((reply, replyIndex) => (
+            <Repliesdiv key={replyIndex}>➥
+              <CommentProflieImg2 />
+                {reply} 
+              {/* <Replyspan>❌</Replyspan> */}
+          
+              
+            </Repliesdiv>
+          ))}
+        </div>
       ))}
     </div>
   );
