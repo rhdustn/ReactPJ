@@ -20,6 +20,6 @@ router.get('/allboard',allBoard);
 router.post("/write",upload.array("uploadedFiles",5),createBoard);
 router.get('/detail/:id',detailBoard);
 router.post("/edit/:id",upload.array("uploadedFiles",5),editBoard)
-router.post("/delete/:id",deleteBoard)
+router.get("/delete/:id",deleteBoard)
 
 module.exports = router
