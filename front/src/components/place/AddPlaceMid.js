@@ -36,7 +36,8 @@ const AddPlaceMid = ({
 
   const noImg = "/imgs/icons/no-image.png";
   useEffect(() => {
-  }, [attractionsWithImg]);
+    console.log(choiceIndex)
+  }, [choiceIndex]);
 
  
   const isChoice = (value) => {

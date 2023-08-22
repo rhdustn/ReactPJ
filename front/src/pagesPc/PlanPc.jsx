@@ -9,7 +9,8 @@ import { useSelector } from "react-redux";
 const PlanPc = () => {
   const [dayNum, setDayNum] = useState();
   const [isScrolled, setIsScrolled] = useState(false);
-
+  // 유저가 클릭한 데이의 인덱스, 즉 해당 플랜을 클릭시 그 플랜안에 있는 장소의 위치를 찍어주기 위해 만든 state 이 값은 plabMidPc에서 쓰며, set함수는 PlanBottomPc에서 사용한다.
+  const [selectedPlanIndex, setSelectedPlanIndex] = useState(0);
   const gptAnswerSaved = useSelector((state) => {
     return state.gptAnswerSave;
   });
@@ -59,12 +60,13 @@ const PlanPc = () => {
       <PlanTopPc gptAnswerSaved={gptAnswerSaved} />
 
       {/* 지도 */}
-      <PlanMidPc gptAnswerSaved={gptAnswerSaved} />
+      <PlanMidPc gptAnswerSaved={gptAnswerSaved} page={"plan"} selectedPlanIndex={selectedPlanIndex} />
 
       {/* day 1 ~ 저장 */}
       <PlanBottomPc
         gptAnswerSaved={gptAnswerSaved}
         userChoiceSaved={userChoiceSaved}
+        setSelectedPlanIndex={setSelectedPlanIndex}
       />
 
       <BottomNavPc />

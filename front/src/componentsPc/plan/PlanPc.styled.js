@@ -33,6 +33,8 @@ export const RouteBox = styled.div`
   width: 100%;
   height: 100px;
   display: flex;
+  cursor: pointer;
+
 `;
 export const RouteNumber = styled.div`
   width: 10%;

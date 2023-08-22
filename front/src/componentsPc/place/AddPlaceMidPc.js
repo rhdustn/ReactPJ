@@ -9,17 +9,12 @@ import {
   SelectBtn,
   nearPlace,
   NearPlaceBox,
+  NearAttractionConatiner,
 } from "./PlacePc.styled";
 import { saveNearAttraction } from "../../redux/features/dataForGpt";
 import { useDispatch, useSelector } from "react-redux";
 
-const AddPlaceMid = ({
-  page,
-  day,
-  choiceIndex,
-  setChoice,
-  nearPlace,
-}) => {
+const AddPlaceMid = ({ page, day, choiceIndex, setChoice, nearPlace }) => {
   const attractionsWithImg = useSelector((state) => {
     return state.attractionsWithImg;
   });
@@ -68,10 +63,10 @@ const AddPlaceMid = ({
       attractionsWithImgDispatch(saveNearAttraction(tempNear));
     }
   }, [nearPlace]);
-  
+
   useEffect(() => {
-    console.log(choiceIndex);
-  }, [choiceIndex]);
+    console.log(attractionsWithImg);
+  }, [attractionsWithImg]);
   // let nearAttractions = [
   //   {
   //     name: "111",
@@ -91,15 +86,14 @@ const AddPlaceMid = ({
         <Title>day{day} 추천 장소</Title>
         {choiceIndex !== "" &&
           attractionsWithImg.map((value, index) => {
-            console.log(value)
             if (
               choiceIndex.some((ele) => {
                 return ele.name === value.name;
               })
             ) {
-                console.log('1')
               return (
                 <>
+                <h3>AI추천장소</h3>
                   <PlaceBox key={index}>
                     <ImgBox>
                       <img
@@ -112,7 +106,7 @@ const AddPlaceMid = ({
                         alt="관광지"
                       ></img>
                     </ImgBox>
-                    <PlaceName>{value}</PlaceName>
+                    <PlaceName>{value.name}</PlaceName>
                     <SelectBtnBox>
                       <SelectBtn
                         onClick={() => {
@@ -126,17 +120,40 @@ const AddPlaceMid = ({
                     </SelectBtnBox>
                   </PlaceBox>
                   <Title size={"12px"}>주변 관광지</Title>
-                  {attractionsWithImg[index]?.nearAttraction?.map(
-                    (value2, index2) => {
-                      let temp = [];
-                      if (choiceIndex) {
-                        temp = choiceIndex.map((a) => {
-                          return a.name;
-                        });
-                      }
-                      if (temp.indexOf(value2.name) == -1) {
-                        return (
-                          <>
+                  <NearAttractionConatiner>
+                    {attractionsWithImg[index]?.nearAttraction?.map(
+                      (value2, index2) => {
+                        console.log(value2);
+                        let temp = [];
+                        if (choiceIndex) {
+                          temp = choiceIndex.map((a) => {
+                            return a.name;
+                          });
+                        }
+                        if (temp.indexOf(value2.name) == -1) {
+                          return (
+                            <>
+                              <NearPlaceBox key={index2}>
+                                <ImgBox>
+                                  <img src={noImg} alt="주변관광지" />
+                                </ImgBox>
+                                <PlaceName>{value2.name}</PlaceName>
+                                <SelectBtnBox>
+                                  <SelectBtn
+                                    onClick={() => {
+                                      isChoice(value2);
+                                    }}
+                                    back={"#edebeb"}
+                                    font={"#9b9a9a"}
+                                  >
+                                    선택
+                                  </SelectBtn>
+                                </SelectBtnBox>
+                              </NearPlaceBox>
+                            </>
+                          );
+                        } else {
+                          return (
                             <NearPlaceBox key={index2}>
                               <ImgBox>
                                 <img src={noImg} alt="주변관광지" />
@@ -147,69 +164,51 @@ const AddPlaceMid = ({
                                   onClick={() => {
                                     isChoice(value2);
                                   }}
-                                  back={"#edebeb"}
-                                  font={"#9b9a9a"}
+                                  back={"#277bc0"}
+                                  font={"white"}
                                 >
                                   선택
                                 </SelectBtn>
                               </SelectBtnBox>
                             </NearPlaceBox>
-                          </>
-                        );
-                      } else {
-                        return (
-                          <NearPlaceBox key={index2}>
-                            <ImgBox>
-                              <img src={noImg} alt="주변관광지" />
-                            </ImgBox>
-                            <PlaceName>{value2.name}</PlaceName>
-                            <SelectBtnBox>
-                              <SelectBtn
-                                onClick={() => {
-                                  isChoice(value2);
-                                }}
-                                back={"#277bc0"}
-                                font={"white"}
-                              >
-                                선택
-                              </SelectBtn>
-                            </SelectBtnBox>
-                          </NearPlaceBox>
-                        );
+                          );
+                        }
                       }
-                    }
-                  )}
+                    )}
+                  </NearAttractionConatiner>
                 </>
               );
             } else {
-                console.log('2')
               return (
-                <PlaceBox key={index}>
-                  <ImgBox>
-                    <img
-                      src={
-                        attractionsWithImg[index].img.hits.length !== 0
-                          ? attractionsWithImg[index].img.hits?.[0]
-                              .largeImageURL
-                          : noImg
-                      }
-                      alt="관광지"
-                    ></img>
-                  </ImgBox>
-                  <PlaceName>{value}</PlaceName>
-                  <SelectBtnBox>
-                    <SelectBtn
-                      onClick={() => {
-                        isChoice(value);
-                        setParentAttraction(value.name);
-                      }}
-                      back={"#277bc0"}
-                      font={"white"}
-                    >
-                      선택
-                    </SelectBtn>
-                  </SelectBtnBox>
-                </PlaceBox>
+                <>
+                <h3 style={{marginTop:'20px',fontWeight:'bold'}}>AI추천장소</h3>
+                  <PlaceBox key={index}>
+                    <ImgBox>
+                      <img
+                        src={
+                          attractionsWithImg[index].img.hits.length !== 0
+                            ? attractionsWithImg[index].img.hits?.[0]
+                                .largeImageURL
+                            : noImg
+                        }
+                        alt="관광지"
+                      ></img>
+                    </ImgBox>
+                    <PlaceName>{value.name}</PlaceName>
+                    <SelectBtnBox>
+                      <SelectBtn
+                        onClick={() => {
+                          isChoice(value);
+                          setParentAttraction(value.name);
+                        }}
+                        back={"#277bc0"}
+                        font={"white"}
+                      >
+                        선택
+                      </SelectBtn>
+                    </SelectBtnBox>
+                  </PlaceBox>
+                </>
               );
             }
           })}

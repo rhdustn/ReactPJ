@@ -20,8 +20,7 @@ const AddPlacePc = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const day = queryParams.get("day");
-
-  const [choiceIndex, setChoice] = useState('');
+  const [choiceIndex, setChoice] = useState([]);
   const [show, setShow] = useState(false);
   const [nearAttractopnLocation, setNearAttractopnLocation] = useState([]);
   const [nearPlace, setnearPlace] = useState("");
@@ -43,13 +42,13 @@ const AddPlacePc = () => {
   // gpt 추천 관광지
   // let suggested = ['나카스', '오호리 공원', '덴진 지하상가', '하카타 역']
 
-//   useEffect(() => {
-//     if (choiceIndex.length > 0) {
-//       setShow(true);
-//     } else {
-//       setShow(false);
-//     }
-//   }, [choiceIndex]);
+  useEffect(() => {
+    if (choiceIndex.length > 0) {
+      setShow(true);
+    } else {
+      setShow(false);
+    }
+  }, [choiceIndex]);
 
 //   useEffect(() => {
 //     let index = Number(day);
@@ -88,6 +87,7 @@ const AddPlacePc = () => {
         choiceIndex={choiceIndex}
         nearPlace={nearPlace}
         setnearPlace={setnearPlace}
+        page={'add'}
       />
 
       <BottomNavPc />

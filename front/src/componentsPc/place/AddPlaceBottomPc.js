@@ -61,7 +61,7 @@ const AddPlaceBottom = ({ choiceIndex }) => {
               <Selected key={index}>
                 <img src={img} alt="선택된 이미지"></img>
 
-                <div>{value}</div>
+                <div>{value.name}</div>
               </Selected>
             );
           })}
