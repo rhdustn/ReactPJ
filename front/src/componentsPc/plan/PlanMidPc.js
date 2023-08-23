@@ -24,6 +24,7 @@ const PlanMidPc = (props) => {
   let map;
   const initMap = useCallback(
     (props) => {
+      console.log(page);
       // 플랜 페이지, 일정편집 페이지 두 곳에서 구글맵을 보여줘야 하므로 나누었다. add는 일정편집, plan은 플랜 페이지이며 그곳에서 실행될 init함수를 정의
       if (page === "add") {
         let myLatLng;
@@ -81,7 +82,8 @@ const PlanMidPc = (props) => {
             lat: Number(lat),
             lng: Number(lng),
           };
-
+          console.log(lat, lng);
+          console.log(myLatLng);
           map = new window.google.maps.Map(document.getElementById("gmp-map"), {
             zoom: 13,
             center: myLatLng,
@@ -177,7 +179,7 @@ const PlanMidPc = (props) => {
                 return [];
               } else {
                 temp.shift();
-                temp.pop()
+                temp.pop();
                 console.log(temp, "2");
                 return temp;
               }

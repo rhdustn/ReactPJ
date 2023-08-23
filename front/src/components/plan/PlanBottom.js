@@ -20,7 +20,12 @@ import axios from "axios";
 import { useQueries } from "react-query";
 import { pushPlan } from "../../redux/features/selectedUserPlan";
 // 지도 아래 일정 부분
-const PlanBottom = ({ isScrolled, gptAnswerSaved, userChoiceSaved }) => {
+const PlanBottom = ({
+  isScrolled,
+  gptAnswerSaved,
+  userChoiceSaved,
+  setSelectedPlanIndex,
+}) => {
   const { location, attractions, startDate, endDate, option1, option2 } =
     gptAnswerSaved;
 
@@ -112,6 +117,7 @@ const PlanBottom = ({ isScrolled, gptAnswerSaved, userChoiceSaved }) => {
               index={index + 1}
               place={planPerDay[index + 1].plan}
               attractionsWithImg={attractionsWithImg}
+              setSelectedPlanIndex={setSelectedPlanIndex}
             />
           );
         })}
@@ -125,7 +131,7 @@ const PlanBottom = ({ isScrolled, gptAnswerSaved, userChoiceSaved }) => {
 };
 
 // 1일마다 관광지 보여주는 부분
-const PerDay = ({ period, index, place, attractionsWithImg }) => {
+const PerDay = ({ period, index, place, attractionsWithImg,setSelectedPlanIndex }) => {
   const [dayPlanArr, setDayPlanArr] = useState([]);
   const noImage = "/img/icons/no-image.png";
   const nav = useNavigate();
@@ -146,12 +152,16 @@ const PerDay = ({ period, index, place, attractionsWithImg }) => {
       return parseInt(el.day) === parseInt(index);
     });
     setDayPlanArr(temp);
-    console.log(selectedUserPlan)
+    console.log(selectedUserPlan);
   }, [selectedUserPlan]);
 
   return (
     <>
-      <PerDayBox>
+      <PerDayBox
+        onClick={() => {
+          setSelectedPlanIndex(index - 1);
+        }}
+      >
         {/* 날짜 */}
         <PerDayDate>
           <p>

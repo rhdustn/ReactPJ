@@ -95,7 +95,7 @@ const MainBottom = ({ choiceSelected, startDate, endDate }) => {
   const sendDataToGpt = async () => {
     setLoading(true);
     axios
-      .post("http://localhost:8080/openAI", { gptData })
+      .post("/openAI", { gptData })
       .then((res) => {
         // gpt응답 여기서 state에 저장
         const data = JSON.parse(res.data.content);
@@ -128,18 +128,17 @@ const MainBottom = ({ choiceSelected, startDate, endDate }) => {
       let ed = new Date(endDate);
       let periodArr = [];
       while (sd <= ed) {
-          periodArr.push((sd.getMonth() + 1) + '.' + sd.getDate());
-          sd.setDate(sd.getDate() + 1);
+        periodArr.push(sd.getMonth() + 1 + "." + sd.getDate());
+        sd.setDate(sd.getDate() + 1);
       }
       periodArr.map((value, index) => {
         dispatch(
           save2({
-              day: (index+1).toString(),
-              plan: []
+            day: (index + 1).toString(),
+            plan: [],
           })
-        )
-      })
-
+        );
+      });
     }
   }, [gptAnswer]);
 

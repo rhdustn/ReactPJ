@@ -19,7 +19,7 @@ const AddPlace = () => {
   const queryParams = new URLSearchParams(location.search);
   const day = queryParams.get("day");
 
-  const [choiceIndex, setChoice] = useState("");
+  const [choiceIndex, setChoice] = useState([]);
   const [show, setShow] = useState(false);
 
   // nearPlace
@@ -65,11 +65,11 @@ const AddPlace = () => {
   });
 
 
-  useEffect(() => {
-    let index = Number(day);
-    let arr = userChoiceSaved.planPerDay[index].plan;
-    setChoice(arr);
-  }, []);
+  // useEffect(() => {
+  //   let index = Number(day);
+  //   let arr = userChoiceSaved.planPerDay[index].plan;
+  //   setChoice(arr);
+  // }, []);
 
   return (
     <>
@@ -83,6 +83,7 @@ const AddPlace = () => {
         nearPlace={nearPlace}
         setnearPlace={setnearPlace}
         gptAnswerSaved={gptAnswerSaved}
+        page={"add"}
       />
 
       <AddPlaceMid

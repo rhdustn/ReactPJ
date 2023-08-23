@@ -60,7 +60,11 @@ const PlanPc = () => {
       <PlanTopPc gptAnswerSaved={gptAnswerSaved} />
 
       {/* 지도 */}
-      <PlanMidPc gptAnswerSaved={gptAnswerSaved} page={"plan"} selectedPlanIndex={selectedPlanIndex} />
+      <PlanMidPc
+        gptAnswerSaved={gptAnswerSaved}
+        page={"plan"}
+        selectedPlanIndex={selectedPlanIndex}
+      />
 
       {/* day 1 ~ 저장 */}
       <PlanBottomPc

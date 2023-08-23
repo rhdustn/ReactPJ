@@ -23,8 +23,6 @@ const AddPlaceMid = ({
   midHeight,
   nearPlace,
 }) => {
-  const [nearAttractions, setnearAttractions] = useState([]);
-  // attraction에 관련된 모든 정보가 있는 attractionsWithImg 가져오기
   const attractionsWithImg = useSelector((state) => {
     return state.attractionsWithImg;
   });
@@ -35,13 +33,9 @@ const AddPlaceMid = ({
   const [parentAttraction, setParentAttraction] = useState("");
 
   const noImg = "/imgs/icons/no-image.png";
-  useEffect(() => {
-    console.log(choiceIndex)
-  }, [choiceIndex]);
+  useEffect(() => {}, [attractionsWithImg]);
 
- 
   const isChoice = (value) => {
-
     let temp = [];
     if (choiceIndex) {
       temp = choiceIndex.map((a) => {
@@ -62,9 +56,9 @@ const AddPlaceMid = ({
   };
 
   useEffect(() => {
+    console.log('니어 바뀜')
     if (nearPlace !== undefined && nearPlace !== "") {
       const tempNear = nearPlace.map((place) => {
-
         return {
           parentName: parentAttraction,
           name: place.name,
@@ -76,13 +70,12 @@ const AddPlaceMid = ({
         };
       });
       attractionsWithImgDispatch(saveNearAttraction(tempNear));
-
     }
   }, [nearPlace]);
-  useEffect(()=>{
-    console.log(choiceIndex)
-  },[choiceIndex])
 
+  useEffect(() => {
+    console.log(attractionsWithImg,'asd');
+  }, [attractionsWithImg]);
   // let nearAttractions = [
   //   {
   //     name: "111",
@@ -127,6 +120,7 @@ const AddPlaceMid = ({
                       <SelectBtn
                         onClick={() => {
                           isChoice(value);
+                          console.log('눌림')
                         }}
                         back={"#277bc0"}
                         font={"white"}
@@ -204,6 +198,7 @@ const AddPlaceMid = ({
                     key={index}
                     onClick={() => {
                       isChoice(value);
+                      console.log('눌림')
                     }}
                   >
                     <ImgBox>
