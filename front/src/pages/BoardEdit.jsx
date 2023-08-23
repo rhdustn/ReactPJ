@@ -46,8 +46,8 @@ const BoardEdit = () => {
     }
     formData.append('title', title);
     formData.append('detail', detail);
-    console.log(title)
-    console.log(detail)
+console.log(title)
+console.log(detail)
     try {
       const response = await axios.post(
         `/post/edit/${id}`,
@@ -67,7 +67,7 @@ const BoardEdit = () => {
     } catch (error) {
       console.log('수정하기 에러:', error);
     }
-
+  
   };
 
   const handleTitleChange = (e) => {
@@ -89,22 +89,22 @@ const BoardEdit = () => {
     console.log(uploadedFiles)
   }, [uploadedFiles])
 
-  useEffect(() => {
+  useEffect(()=>{
     console.log(boardDetail)
-  }, [boardDetail])
+  },[boardDetail])
   return (
     <div>
       <MoveBoardBtn onClick={MoveBoardClick}>게시판으로 이동</MoveBoardBtn>
       <Main>
         <ImgUpload name="images"
-          onUpload={handleFileUpload}
-          files={uploadedFiles} />
+         onUpload={handleFileUpload} 
+         files={uploadedFiles} />
         <PostTitle
           type="text"
           name="title"
           placeholder={boardDetail.title}
           onChange={handleTitleChange}
-
+         
         />
         <PostContent
           type="text"
