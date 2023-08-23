@@ -34,7 +34,8 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    // origin: ["http://13.209.73.40"],
+    origin: ["*"],
     credentials: true,
   })
 );
@@ -47,10 +48,10 @@ app.use(
   })
 );
 
-app.get('/static/js/main.5518ef4c.js', (req, res) => {
-  res.type('application/javascript');
-  // 나머지 응답 처리 로직
-});
+// app.get('/static/js/main.5518ef4c.js', (req, res) => {
+//   res.type('application/javascript');
+//   // 나머지 응답 처리 로직
+// });
 
 
 

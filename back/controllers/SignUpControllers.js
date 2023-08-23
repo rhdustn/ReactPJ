@@ -36,6 +36,7 @@ exports.SaveUserInfo = async (req, res) => {
 };
 
 exports.ValidateDuplicateUserId = async (req, res) => {
+  console.log("들어오니????????????????/");
   const { user_id } = req.body;
 
   try {

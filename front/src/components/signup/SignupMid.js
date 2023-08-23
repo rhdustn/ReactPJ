@@ -40,7 +40,7 @@ const SignupMid = ({page}) => {
         }else {
             // useMutation 사용해서 axios post 보내기
             // const data = useMutation();
-            const duplicateIdResult = await axios.post("/user/duplicateId", {
+            const duplicateIdResult = await axios.post("http://localhost:8080/user/duplicateId", {
                 user_id,
             });
 
@@ -77,7 +77,7 @@ const SignupMid = ({page}) => {
             // useMutation 사용해서 axios post 보내기
             // const data = useMutation();
             const duplicateNickNameResult = await axios.post(
-                "/user/duplicateNickName",
+                "http://localhost:8080/user/duplicateNickName",
                 {
                   nickname,
                 }
@@ -114,7 +114,7 @@ const SignupMid = ({page}) => {
     // 최종 회원가입
     const trySignup = async () => {
         // 중복 체크 완료, 이메일 형식 체크 된 후 post 날리기
-        const signUpResult = await axios.post("/user/signUp", {
+        const signUpResult = await axios.post("http://localhost:8080/user/signUp", {
             user_id,
             user_pw,
             nickname,
@@ -144,7 +144,7 @@ const SignupMid = ({page}) => {
           return;
         }
         
-        const loginClick = await axios.post("/user/login", {
+        const loginClick = await axios.post("http://localhost:8080/user/login", {
           user_id,
           user_pw
         },{
