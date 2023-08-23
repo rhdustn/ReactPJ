@@ -82,7 +82,7 @@ const SignupMid = ({page}) => {
             // useMutation 사용해서 axios post 보내기
             // const data = useMutation();
             const duplicateNickNameResult = await axios.post(
-                "http://localhost:8080/user/duplicateNickName",
+                "/user/duplicateNickName",
                 {
                   nickname,
                 }
