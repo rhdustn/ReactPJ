@@ -1,5 +1,6 @@
 const Sequelize = require("sequelize");
 const config = require("./config");
+const bcrypt = require("bcrypt");
 
 const { User } = require("./Users");
 const { Board } = require("./Board");
@@ -51,5 +52,29 @@ LikeComment.associate(db);
 LikeRecomment.associate(db);
 Recomment.associate(db);
 Plan.associate(db);
+
+const createAdminUser = async () => {
+  const user = await User.findOne({ where: { user_id: "admin1234" } });
+  if (user) {
+    
+  } else {
+    bcrypt.hash("aaaa1111!", 10, async (err, hash) => {
+      console.log(hash);
+      if (err) {
+        console.log(err);
+        res.send("Error hashing password in SaveUserInfo");
+      } else {
+        const result = await User.create({
+          user_id: "admin1234",
+          user_pw: hash,
+          nickname: "admin",
+          email: "admin",
+          is_accept: true,
+        });
+      }
+    });
+  }
+};
+createAdminUser();
 
 module.exports = db;
