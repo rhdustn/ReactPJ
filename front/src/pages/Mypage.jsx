@@ -2,6 +2,8 @@ import React from 'react'
 import { MypageImg, TapMenu, MypageName, MoveEdit } from '../components/mypage'
 import styled from 'styled-components';
 import BottomNav from '../components/nav/BottomNav';
+import { useQuery } from 'react-query';
+import axios from 'axios';
 
 const Main = styled.div`
   width: 400px;
