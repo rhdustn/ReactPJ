@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-import { AddBtn, Selected, ShowSelectedBox } from './PlacePc.styled'
+import { AddBtn, Selected, ShowSelectedBox, Wrap1 } from './PlacePc.styled'
 
 
 const AddPlaceBottom = ({choiceIndex}) => {
@@ -11,17 +11,19 @@ useEffect(() => {
 
   return (
     <>
-      <ShowSelectedBox>
-        {choiceIndex.map((value, index) => {
-            return (
-                <Selected key={index}>
-                    <img src={city}></img>
-                    <div>{value}</div>
-                </Selected>
-            )
-        })}
-      </ShowSelectedBox>
-      <AddBtn>선택완료</AddBtn>
+      <Wrap1>
+        <ShowSelectedBox>
+          {choiceIndex.map((value, index) => {
+              return (
+                  <Selected key={index}>
+                      <img src={city}></img>
+                      <div>{value}</div>
+                  </Selected>
+              )
+          })}
+        </ShowSelectedBox>
+        <AddBtn>선택완료</AddBtn>
+      </Wrap1>
     </>
   )
 }

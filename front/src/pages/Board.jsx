@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import { BoardTitle, BoardSubTitle,BoardList } from '../components/board'
+import { BottomBox } from '../components/board/board.styled';
 import BottomNav from '../components/nav/BottomNav';
 const BoardMain =styled.div`
 width: 400px;
@@ -16,8 +17,8 @@ const Board = () => {
             <BoardTitle />
             <BoardSubTitle />
             <BoardList/>
+            <BottomBox/>
             </BoardMain>
-            
             <BottomNav/>
         </div>
     )

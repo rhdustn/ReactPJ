@@ -16,9 +16,9 @@ import {
 import { useNavigate } from "react-router-dom";
 import { saveAttractionsWithImg } from "../../redux/features/dataForGpt";
 import { useDispatch, useSelector } from "react-redux";
-import { Loading2 } from "../../componentsPc/loading/LoadingPc";
 import axios from "axios";
 import { useQueries } from "react-query";
+import { pushPlan } from "../../redux/features/selectedUserPlan";
 // 지도 아래 일정 부분
 const PlanBottom = ({ isScrolled, gptAnswerSaved, userChoiceSaved }) => {
   const { location, attractions, startDate, endDate, option1, option2 } =
@@ -63,7 +63,7 @@ const PlanBottom = ({ isScrolled, gptAnswerSaved, userChoiceSaved }) => {
       };
     })
   );
-  
+
   useEffect(() => {
     //  attractions state를 jsx에 쓰기 위하여 만든 임시 배열AttArrForMap에 0을 저장하는 로직
     // 이미지를 저장하는 로직
@@ -73,13 +73,13 @@ const PlanBottom = ({ isScrolled, gptAnswerSaved, userChoiceSaved }) => {
     });
     setAttArrForMap(temp);
   }, [attractions]);
-  
+
   // 여기까지 이미지를 api로 받아오는 로직, attractionsWithImg에 기존 attraction값에 img가 추가로 들어감.
 
   useEffect(() => {
     let temp = [];
-  let sd = new Date(startDate);
-  let ed = new Date(endDate);
+    let sd = new Date(startDate);
+    let ed = new Date(endDate);
 
     while (sd <= ed) {
       temp.push(sd.getMonth() + 1 + "." + sd.getDate());
@@ -89,50 +89,65 @@ const PlanBottom = ({ isScrolled, gptAnswerSaved, userChoiceSaved }) => {
   }, [attractions]);
 
   const { planPerDay } = userChoiceSaved;
+
+  // 스크롤 일정 이상 넘어가면
   useEffect(() => {
-    console.log(planPerDay);
-  }, [planPerDay]);
+    const bottomBox = document.getElementById("bottom-box");
 
-    // 스크롤 일정 이상 넘어가면
-    useEffect(() => {
-        const bottomBox = document.getElementById("bottom-box");
-    
-        if(isScrolled) {
-            bottomBox.style.padding = '210px 10px 70px 10px'
-        }else {
-            bottomBox.style.padding = '10px 10px 70px 10px'
-        }
-    }, [isScrolled])
-      
+    if (isScrolled) {
+      bottomBox.style.padding = "210px 10px 70px 10px";
+    } else {
+      bottomBox.style.padding = "10px 10px 70px 10px";
+    }
+  }, [isScrolled]);
 
-    return (
-        <>
-        <PlanBottomBox id='bottom-box'>
-          {periodArr.map((value, index) => {
-            return <PerDay key={index} period={periodArr[index]} index={index+1} place={planPerDay[index+1].plan} attractionsWithImg={attractionsWithImg} />
-          })}
+  return (
+    <>
+      <PlanBottomBox id="bottom-box">
+        {periodArr.map((value, index) => {
+          return (
+            <PerDay
+              key={index}
+              period={periodArr[index]}
+              index={index + 1}
+              place={planPerDay[index + 1].plan}
+              attractionsWithImg={attractionsWithImg}
+            />
+          );
+        })}
 
-            <BtnBox>
-                <SavePlanBtn>저장</SavePlanBtn>
-            </BtnBox>
-        </PlanBottomBox>
-        </>
-    )
-}
+        <BtnBox>
+          <SavePlanBtn>저장</SavePlanBtn>
+        </BtnBox>
+      </PlanBottomBox>
+    </>
+  );
+};
 
 // 1일마다 관광지 보여주는 부분
 const PerDay = ({ period, index, place, attractionsWithImg }) => {
+  const [dayPlanArr, setDayPlanArr] = useState([]);
+  const noImage = "../../img/icons/no-image.png";
   const nav = useNavigate();
-  const city= '/imgs/places/city.jpeg'
-  const noImage = '/imgs/icons/no-image.png'
-
-
+  const city = "/imgs/places/city.jpeg";
   // 관광지 검색 & 추가 페이지로 이동
   const moveToAdd = (id) => {
     // 해당 plan의 해당 날짜에 대한 id
     nav(`/addPlace/${id}?day=${id}`);
   };
+  // 유저가 선택한 plan을 가져오는 selector
+  const selectedUserPlan = useSelector((state) => {
+    return state.selectedUserPlan;
+  });
 
+  // 해당하는 날짜를 찾고  그 plan을dayPlanArr에 저장하는 함수
+  useEffect(() => {
+    const temp = selectedUserPlan.filter((el) => {
+      return parseInt(el.day) === parseInt(index);
+    });
+    setDayPlanArr(temp);
+    console.log(selectedUserPlan)
+  }, [selectedUserPlan]);
 
   return (
     <>
@@ -146,36 +161,27 @@ const PerDay = ({ period, index, place, attractionsWithImg }) => {
         </PerDayDate>
 
         {/* 관광지 하나 */}
-        <PerDayAttraction>
-          {place.map((value, index) => {
-            let imgSrc;
-            const foundAttraction = attractionsWithImg.find(value2 => value2.name === value.name);
-            if (foundAttraction) {
-              imgSrc = foundAttraction?.img?.hits?.[0]?.largeImageURL;
-            }
-
+        {dayPlanArr.length !== 0 &&
+          dayPlanArr[0].plan.map((value, index) => {
             return (
-              <RouteBox>
-                <RouteNumber>
-                  <span></span>
-                  <div>{index + 1}</div>
-                </RouteNumber>
-                <RoutePlace>
-                  <div className="place-box">
-                    <p>{value.name}</p>
-                    <div className="img-box">
-                      {imgSrc !== undefined ? (
-                        <img src={imgSrc}></img>
-                      ) : (
-                        <img src={noImage}></img>
-                      )}
+              <PerDayAttraction>
+                <RouteBox>
+                  <RouteNumber>
+                    <span></span>
+                    <div>{index + 1}</div>
+                  </RouteNumber>
+                  <RoutePlace>
+                    <div className="place-box">
+                      <p>{value.name}</p>
+                      <div className="img-box">
+                        <img src={value.img} alt="관광이미지" />
+                      </div>
                     </div>
-                  </div>
-                </RoutePlace>
-              </RouteBox>
+                  </RoutePlace>
+                </RouteBox>
+              </PerDayAttraction>
             );
           })}
-        </PerDayAttraction>
 
         {/* 장소 편집 버튼 */}
         <BtnBox>

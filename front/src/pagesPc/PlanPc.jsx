@@ -32,9 +32,7 @@ const PlanPc = () => {
     };
   }, []);
 
-  useEffect(() => {
-    console.log(gptAnswerSaved);
-  }, [gptAnswerSaved]);
+
 
   // 유저의 선택된 여행정보 가져오기
   const userChoiceSaved = useSelector((state) => {
@@ -59,12 +57,16 @@ const PlanPc = () => {
     <>
       <TopNavPc gptAnswerSaved={gptAnswerSaved} />
 
+      {/* LA 여행 날짜 */}
       <PlanTopPc gptAnswerSaved={gptAnswerSaved} />
-      <PlanMidPc />
+      
+      {/* 지도 */}
+      <PlanMidPc gptAnswerSaved={gptAnswerSaved} />
 
+      {/* day 1 ~ 저장 */}
       <PlanBottomPc gptAnswerSaved={gptAnswerSaved} userChoiceSaved={userChoiceSaved}/>
 
-      <BottomNavPc page={"plan"} />
+      <BottomNavPc />
     </>
   );
 };

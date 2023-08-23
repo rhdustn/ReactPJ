@@ -10,6 +10,8 @@ import EditProflie from "./EditProflie";
 import Board from "./Board";
 import BoardDetail from "./BoardDetail";
 import Post from "./Post";
+import BoardEdit from "./BoardEdit";
+
 
 import Admin from "./Admin";
 
@@ -24,5 +26,6 @@ export {
   BoardDetail,
   AddPlace,
   Post,
+  BoardEdit,
   Admin
 };

@@ -51,9 +51,7 @@ export const gptAnswerSave = createSlice({
 // 이미지 url이 포함된 gpt답변이다. 관광지의 이름과 위도경도,이미지,디테일이 들어간다.
 export const attractionsWithImg = createSlice({
   name: "attractionsWithImg",
-  initialState: [
-    // nearAttraction:['name']
-  ],
+  initialState: [],
   reducers: {
     saveAttractionsWithImg: (state, action) => {
       state.push({
@@ -64,14 +62,14 @@ export const attractionsWithImg = createSlice({
         nearAttraction: [],
       });
     },
-  },
-  // 관광지 주위에있는 관광지 저장
-  saveNearAttraction: (state, action) => {
-    state.forEach((value, index) => {
-      if (value.attractionLocation === action.payload.attractionLocation) {
-        state[index].nearAttraction = action.payload.nearAttraction;
-      }
-    });
+    // 관광지 주위에있는 관광지 저장
+    saveNearAttraction: (state, action) => {
+      state.forEach((value, index) => {
+        if (value.name === action.payload[0].parentName) {
+          state[index].nearAttraction = action.payload;
+        }
+      });
+    },
   },
 });
 
@@ -113,6 +111,7 @@ export const userChoiceSave = createSlice({
 
 export const { insert } = gptSlice.actions;
 export const { save, reset } = gptAnswerSave.actions;
-export const { saveAttractionsWithImg } = attractionsWithImg.actions;
+export const { saveAttractionsWithImg, saveNearAttraction } =
+  attractionsWithImg.actions;
 
 export const { save2 } = userChoiceSave.actions;
