@@ -1,4 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useQueries } from "react-query";
+import axios from "axios";
 
 import {
   PlanBottomBox,
@@ -13,16 +17,18 @@ import {
   EditPlanBtn,
 } from "./Plan.styled";
 
-import { useNavigate } from "react-router-dom";
 import { saveAttractionsWithImg } from "../../redux/features/dataForGpt";
-import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
-import { useQueries } from "react-query";
 import { pushPlan } from "../../redux/features/selectedUserPlan";
+
 // 지도 아래 일정 부분
 const PlanBottom = ({ isScrolled, gptAnswerSaved, userChoiceSaved }) => {
+
   const { location, attractions, startDate, endDate, option1, option2 } =
     gptAnswerSaved;
+
+  const userOrGuest = useSelector((state) => {
+    return state.userOrGuest
+  })
 
   // attractions을 반복시키기위해 만든 임시 state
   const [attArrForMap, setAttArrForMap] = useState("");
@@ -117,7 +123,14 @@ const PlanBottom = ({ isScrolled, gptAnswerSaved, userChoiceSaved }) => {
         })}
 
         <BtnBox>
-          <SavePlanBtn>저장</SavePlanBtn>
+          {userOrGuest.isLogin &&
+            <SavePlanBtn>저장</SavePlanBtn>
+          }
+          {!userOrGuest.isLogin &&
+            <SavePlanBtn onClick={() => {
+              alert('로그인 후 이용 가능')
+            }} col={'silver'}>저장</SavePlanBtn>
+          }
         </BtnBox>
       </PlanBottomBox>
     </>
