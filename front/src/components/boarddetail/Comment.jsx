@@ -2,17 +2,18 @@ import React, { useState } from 'react'
 import { CommentContainer,CommentMain } from './boarddetail.styled'
 import {CommentList,CommentForm} from './index'
 
-const Comment = () => {
-  const [comment,setComment]=useState([])
+const Comment = ({comments}) => {
 
-  const CommentSubmit = (newComment) => {
-    setComment([...comment, newComment]);
+  console.log(comments)
+
+  const CommentSubmit = () => {
+
   };
   return (
     <div>
       <CommentContainer>
       <CommentMain>
-      <CommentList comments={comment}/>
+      <CommentList comments={comments}/>
       </CommentMain>
       <CommentForm onCommentSubmit={CommentSubmit}/>
       </CommentContainer>

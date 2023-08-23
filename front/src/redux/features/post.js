@@ -6,6 +6,7 @@ export const BoardDetailSlice = createSlice({
         title: "",
         detail:"",
         nickname: "",
+        user_id:"",
         images:[],
     },
     reducers:{
@@ -15,6 +16,7 @@ export const BoardDetailSlice = createSlice({
             state.detail = action.payload.detail;
             state.nickname = action.payload.nickname;
             state.images = action.payload.images
+            state.user_id = action.payload.user_id
         }
     }
 })
