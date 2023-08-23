@@ -82,6 +82,7 @@ const AddPlace = () => {
         choiceIndex={choiceIndex}
         nearPlace={nearPlace}
         setnearPlace={setnearPlace}
+        gptAnswerSaved={gptAnswerSaved}
       />
 
       <AddPlaceMid

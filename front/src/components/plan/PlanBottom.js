@@ -127,7 +127,7 @@ const PlanBottom = ({ isScrolled, gptAnswerSaved, userChoiceSaved }) => {
 // 1일마다 관광지 보여주는 부분
 const PerDay = ({ period, index, place, attractionsWithImg }) => {
   const [dayPlanArr, setDayPlanArr] = useState([]);
-  const noImage = "../../img/icons/no-image.png";
+  const noImage = "/img/icons/no-image.png";
   const nav = useNavigate();
   const city = "/imgs/places/city.jpeg";
   // 관광지 검색 & 추가 페이지로 이동

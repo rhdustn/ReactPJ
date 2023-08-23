@@ -21,7 +21,7 @@ class Recomment extends Sequelize.Model {
   static associate(db) {
     db.Recomment.belongsTo(db.User, { foreignKey: "user_id", targetKey: "id" });
     db.Recomment.belongsTo(db.Comment, {
-      foreignKey: "recomment_id",
+      foreignKey: "comment_id",
       targetKey: "id",
     });
     db.Recomment.hasMany(db.LikeRecomment, {
