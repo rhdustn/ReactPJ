@@ -37,4 +37,11 @@ module.exports = (app) => {
       changeOrigin: true,
     })
   );
+  app.use(
+    "/admin",
+    createProxyMiddleware({
+      target: "http://localhost:8080", // 프록시 대상 서버 주소
+      changeOrigin: true,
+    })
+  );
 };

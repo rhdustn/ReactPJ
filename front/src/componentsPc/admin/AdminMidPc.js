@@ -9,7 +9,7 @@ const AdminMidPc = () => {
 
     const getUsers = async () => {
         try {
-            const users = await axios.get("http://localhost:8080/admin/users")
+            const users = await axios.get("/admin/users")
             const data = users.data;
             return data;
         } catch (error) {
@@ -27,7 +27,7 @@ const AdminMidPc = () => {
     // 승인
     const tryAuthUser = async (user_id) => {
         try {
-            await axios.post(`http://localhost:8080/admin/auth/${user_id}`)
+            await axios.post(`/admin/auth/${user_id}`)
         } catch (error) {
             console.log(error);
         }
@@ -35,7 +35,7 @@ const AdminMidPc = () => {
     // 강등
     const tryUnauthUser = async (user_id) => {
         try {
-            await axios.post(`http://localhost:8080/admin/unauth/${user_id}`)
+            await axios.post(`/admin/unauth/${user_id}`)
         } catch (error) {
             console.log(error);
         }
@@ -45,7 +45,7 @@ const AdminMidPc = () => {
     const tryDeleteUser = async (user_id) => {
         console.log(user_id)
         try {
-            await axios.post(`http://localhost:8080/admin/del/${user_id}`)
+            await axios.post(`/admin/del/${user_id}`)
         } catch (error) {
             console.log(error);
         }

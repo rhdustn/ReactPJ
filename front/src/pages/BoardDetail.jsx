@@ -28,7 +28,7 @@ const BoardDetail = () => {
   const BoardDetailView = async ({ queryKey }) => {
     try {
       console.log(queryKey)
-      const response = await axios.get(`http://localhost:8080/post/detail/${queryKey[1]}`);
+      const response = await axios.get(`/post/detail/${queryKey[1]}`);
       return response.data;
     } catch (error) {
       console.log(error);
