@@ -2,10 +2,10 @@ import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import AdminTop from '../components/admin/AdminTop'
-import AdminMid from '../components/admin/AdminMid'
+import AdminTopPc from '../componentsPc/admin/AdminTopPc'
+import AdminMidPc from '../componentsPc/admin/AdminMidPc'
 
-const Admin = () => {
+const AdminPc = () => {
   const nav = useNavigate();
 
   const userOrGuest = useSelector((state => {
@@ -22,10 +22,10 @@ const Admin = () => {
 
   return (
     <>
-      <AdminTop />
-      <AdminMid />
+      <AdminTopPc />
+      <AdminMidPc />
     </>
   )
 }
 
-export default Admin
+export default AdminPc

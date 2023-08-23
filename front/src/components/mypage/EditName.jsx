@@ -36,7 +36,7 @@ const EditName = ({ setProfileBtnChange }) => {
           autoFocus
         />
       ) : (
-        name || 'Profile Edit Name'
+        name || '닉네임 설정'
       )}
     </StyledProfileName>
   );
