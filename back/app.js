@@ -75,7 +75,7 @@ app.use("/user", userRouter);
 app.use("/openAI", testGPT);
 // 플랜을 저장하고 관리하는 라우터
 app.use("/plan", planRouter);
-const server = app.listen(8080, () => {
+const server = app.listen(8000, () => {
   console.log("server on");
 });
 
