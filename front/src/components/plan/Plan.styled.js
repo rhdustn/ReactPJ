@@ -116,7 +116,7 @@ export const RoutePlace = styled.div`
     display: flex; justify-content: center; align-items: center;
     position: relative;
 
-    & div {
+    & .place-box {
         width: 100%; height: 90%;
         background-color: white;
         border-radius: 10px;
@@ -125,13 +125,19 @@ export const RoutePlace = styled.div`
         box-sizing: border-box;
         box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.35);
     }
-    & div p {
+    & .place-box p {
         width: 70%; text-align: start;
     }
-    & div img {
-        height: 80%;
+    & .place-box .img-box {
+        width: 60px;
+        height: 70%;
         position: absolute; right: 10px;
         border-radius: 10px;
+        overflow: hidden;
+        display: flex; justify-content: center;
+    }
+    & .place-box .img-box img {
+        height: 100%;
     }
 `
 export const EditPlanBtn = styled.div`
@@ -161,7 +167,7 @@ export const SavePlanBtn = styled.div`
     width: 100%; height: 20px;
     display: flex; justify-content: center; align-items: center;
     border-radius: 15px;
-    background-color: #277bc0;
+    background-color: ${(props) => props.col || '#277bc0'};
     color: white;
     font-size: 16px; font-weight: bold;
     cursor: pointer;

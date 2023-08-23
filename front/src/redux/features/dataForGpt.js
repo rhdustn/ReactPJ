@@ -51,11 +51,10 @@ export const gptAnswerSave = createSlice({
 // 이미지 url이 포함된 gpt답변이다. 관광지의 이름과 위도경도,이미지,디테일이 들어간다.
 export const attractionsWithImg = createSlice({
   name: "attractionsWithImg",
-  initialState: [
-    // nearAttraction:['name']
-  ],
+  initialState: [],
   reducers: {
     saveAttractionsWithImg: (state, action) => {
+      console.log("리덕스, 지피티 데이터 push 됨");
       state.push({
         attractionLocation: action.payload.attractionLocation,
         detail: action.payload.detail,
@@ -64,37 +63,46 @@ export const attractionsWithImg = createSlice({
         nearAttraction: [],
       });
     },
-  },
-  // 관광지 주위에있는 관광지 저장
-  saveNearAttraction: (state, action) => {
-    state.forEach((value, index) => {
-      if (value.attractionLocation === action.payload.attractionLocation) {
-        state[index].nearAttraction = action.payload.nearAttraction;
-      }
-    });
+    // 관광지 주위에있는 관광지 저장
+    saveNearAttraction: (state, action) => {
+      state.forEach((value, index) => {
+        console.log(action.payload);
+        if (!action.payload[0].parentName) {
+          alert("로드중 오류가 발생하였습니다. 새로고침후 다시 이용해 주세요.");
+        }
+        console.log(action.payload[0].parentName);
+        if (value.name === action.payload[0].parentName) {
+          state[index].nearAttraction = action.payload;
+        }
+      });
+    },
   },
 });
 
 export const userChoiceSave = createSlice({
   name: "userChoiceSave",
   initialState: {
-    planPerDay : [{
-      day : '',
-      plan : []
-    }]
+    planPerDay: [
+      {
+        day: "",
+        plan: [],
+      },
+    ],
   },
-  reducers : {
+  reducers: {
     save2: (state, action) => {
       const { day, plan } = action.payload;
-      
-      if(state.planPerDay.day == '') {
-        console.log('여기')
-        state.planPerDay.day = day
-        state.planPerDay.plan = plan
-      }else {
+
+      if (state.planPerDay.day == "") {
+        console.log("여기");
+        state.planPerDay.day = day;
+        state.planPerDay.plan = plan;
+      } else {
         // 이미 해당 day에 값이 있는지 확인
-        const existingDayIndex = state.planPerDay.findIndex(item => item.day === day);
-        
+        const existingDayIndex = state.planPerDay.findIndex(
+          (item) => item.day === day
+        );
+
         if (existingDayIndex !== -1) {
           // 이미 해당 day에 값이 있는 경우, 해당 day의 plan을 변경
           state.planPerDay[existingDayIndex].plan = plan;
@@ -103,12 +111,13 @@ export const userChoiceSave = createSlice({
           state.planPerDay.push({ day, plan });
         }
       }
-    }
-  }
-})
+    },
+  },
+});
 
 export const { insert } = gptSlice.actions;
 export const { save, reset } = gptAnswerSave.actions;
-export const { saveAttractionsWithImg } = attractionsWithImg.actions;
+export const { saveAttractionsWithImg, saveNearAttraction } =
+  attractionsWithImg.actions;
 
 export const { save2 } = userChoiceSave.actions;

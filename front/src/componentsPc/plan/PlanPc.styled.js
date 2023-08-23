@@ -33,6 +33,8 @@ export const RouteBox = styled.div`
   width: 100%;
   height: 100px;
   display: flex;
+  cursor: pointer;
+
 `;
 export const RouteNumber = styled.div`
   width: 10%;
@@ -119,7 +121,7 @@ export const SavePlanBtn = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 15px;
-  background-color: #277bc0;
+  background-color: ${(props) => props.col || '#277bc0'};
   color: white;
   font-size: 16px;
   font-weight: bold;
@@ -164,7 +166,7 @@ export const PlanMidBox = styled.div`
   & #test1 {
     width: 100%;
     height: 100%;
-    background-color: yellow;
+    /* background-color: yellow; */
   }
   /* 3번째 테스트 */
   & #container {

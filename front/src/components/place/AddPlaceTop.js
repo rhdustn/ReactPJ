@@ -1,22 +1,27 @@
-import React, {useState} from 'react'
+import React, { useState } from "react";
 
-import { AddPlaceTopBox, InputBox } from './Place.styled'
-
+import { AddPlaceTopBox, InputBox } from "./Place.styled";
 
 const AddPlaceTop = () => {
-    const [place, setPlace] = useState([]);
-    const search = '/imgs/icons/search.png'
+  const [place, setPlace] = useState([]);
+  const search = "/imgs/icons/search.png";
 
   return (
     <>
-    <AddPlaceTopBox>
+      <AddPlaceTopBox>
         <InputBox>
-          <input onChange={(e) => {setPlace(e.target.value)}} type='text' placeholder='관광지 검색'></input>
+          <input
+            onChange={(e) => {
+              setPlace(e.target.value);
+            }}
+            type="text"
+            placeholder="관광지 검색"
+          ></input>
           <img src={search}></img>
         </InputBox>
-    </AddPlaceTopBox>
+      </AddPlaceTopBox>
     </>
-  )
-}
+  );
+};
 
-export default AddPlaceTop
+export default AddPlaceTop;

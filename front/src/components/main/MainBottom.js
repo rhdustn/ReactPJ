@@ -82,8 +82,6 @@ const MainBottom = ({ choiceSelected, startDate, endDate }) => {
   };
 
   useEffect(() => {
-    console.log(choiceIndex1)
-    console.log(choiceIndex2)
     choiceSelected(choiceIndex1, choiceIndex2);
 
     if (choiceIndex1.length > 0 && choiceIndex2.length > 0) {
@@ -97,7 +95,7 @@ const MainBottom = ({ choiceSelected, startDate, endDate }) => {
   const sendDataToGpt = async () => {
     setLoading(true);
     axios
-      .post("http://localhost:8080/openAI", { gptData })
+      .post("/openAI", { gptData })
       .then((res) => {
         // gpt응답 여기서 state에 저장
         const data = JSON.parse(res.data.content);
@@ -113,7 +111,6 @@ const MainBottom = ({ choiceSelected, startDate, endDate }) => {
   const gptQuery = useMutation(sendDataToGpt);
 
   useEffect(() => {
-    console.log(gptAnswer);
     if (gptAnswer) {
       dispatch(
         save({
@@ -131,18 +128,17 @@ const MainBottom = ({ choiceSelected, startDate, endDate }) => {
       let ed = new Date(endDate);
       let periodArr = [];
       while (sd <= ed) {
-          periodArr.push((sd.getMonth() + 1) + '.' + sd.getDate());
-          sd.setDate(sd.getDate() + 1);
+        periodArr.push(sd.getMonth() + 1 + "." + sd.getDate());
+        sd.setDate(sd.getDate() + 1);
       }
       periodArr.map((value, index) => {
         dispatch(
           save2({
-              day: (index+1).toString(),
-              plan: []
+            day: (index + 1).toString(),
+            plan: [],
           })
-        )
-      })
-
+        );
+      });
     }
   }, [gptAnswer]);
 
@@ -151,7 +147,6 @@ const MainBottom = ({ choiceSelected, startDate, endDate }) => {
   });
   useEffect(() => {
     if (gptAnswerSaved.attractions.length > 0) {
-      console.log("넘어가기?");
       nav("/plan");
     }
   }, [gptAnswerSaved]);

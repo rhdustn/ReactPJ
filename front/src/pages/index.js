@@ -13,6 +13,8 @@ import Post from "./Post";
 import BoardEdit from "./BoardEdit";
 
 
+import Admin from "./Admin";
+
 export {
   Signup,
   Login,
@@ -24,5 +26,6 @@ export {
   BoardDetail,
   AddPlace,
   Post,
-  BoardEdit
+  BoardEdit,
+  Admin
 };

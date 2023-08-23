@@ -13,8 +13,9 @@ const testGPT = require("./routers/testGPT");
 const multer = require("multer");
 // 회원가입,로그인 기능이 있는 라우터
 const userRouter = require("./routers/user");
-const postRouter = require("./routers/postRouter")
-
+const postRouter = require("./routers/postRouter");
+const planRouter = require("./routers/planRouter");const mypageRouter = require("./routers/mypageRouter")
+const adminRouter = require("./routers/adminRouter")
 
 
 // // Multer 설정
@@ -35,7 +36,8 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    origin: ["http://13.125.126.65"],
+    // origin: ["*"],
     credentials: true,
   })
 );
@@ -47,6 +49,13 @@ app.use(
     saveUninitialized: false,
   })
 );
+
+// app.get('/static/js/main.5518ef4c.js', (req, res) => {
+//   res.type('application/javascript');
+//   // 나머지 응답 처리 로직
+// });
+
+
 
 console.log("123123");
 
@@ -62,11 +71,14 @@ sequelize
 app.use("/", mainRouter);
 app.use("/post",postRouter)
 app.use("/user", userRouter);
+app.use("/mypage", mypageRouter);
+app.use("/admin", adminRouter);
 
 // gptAPI 테스트 -----20230807 zerohoney
 app.use("/openAI", testGPT);
-
-const server = app.listen(8080, () => {
+// 플랜을 저장하고 관리하는 라우터
+app.use("/plan", planRouter);
+const server = app.listen(8000, () => {
   console.log("server on");
 });
 

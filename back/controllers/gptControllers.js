@@ -34,7 +34,7 @@ console.log(gptData)
           {"name":'',detail:'',attractionLocation:{"latitude": '', "longitude": ''}},
           ...
         ]} 
-        설명: location은 입력한 장소의 값이고, attractions는 너가 추천해줄 장소의 배열이야. 그 안의 name은 장소의 이름이고 이것만 꼭 영어로 출력해줘!, detail은 장소에 대한 자세한 설명,attractionLocation은 그 장소의 위도와 경도야.
+        설명: location은 입력한 장소의 값이고, attractions는 너가 추천해줄 장소의 배열이야. 그 안의 name은 8로 출력해줘!, detail은 장소에 대한 자세한 설명,attractionLocation은 그 장소의 위도와 경도야.
         형식은 json이야
         `,
       },

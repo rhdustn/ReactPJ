@@ -1,17 +1,23 @@
 import { configureStore } from "@reduxjs/toolkit";
 import {
   gptAnswerSave,
-  gptSlice, userChoiceSave,
+  gptSlice,
+  userChoiceSave,
   attractionsWithImg,
 } from "../features/dataForGpt";
+import { selectedUserPlan } from "../features/selectedUserPlan";
 import { BoardDetailSlice } from "../features/post";
+import { userOrGuest } from "../features/login";
+
 const store = configureStore({
   reducer: {
     gptSlice: gptSlice.reducer,
     gptAnswerSave: gptAnswerSave.reducer,
     attractionsWithImg: attractionsWithImg.reducer,
     userChoiceSave: userChoiceSave.reducer,
-    BoardDetailSlice:BoardDetailSlice.reducer
+    BoardDetailSlice: BoardDetailSlice.reducer,
+    selectedUserPlan: selectedUserPlan.reducer,
+    userOrGuest: userOrGuest.reducer
   },
 });
 
