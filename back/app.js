@@ -34,7 +34,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: ["http://13.125.126.65"],
+    origin: ["http://hyunss.com"],
     // origin: ["*"],
     credentials: true,
   })
