@@ -86,7 +86,7 @@ const PlanBottomPc = ({
     setPeriodArr(temp);
   }, [attractions]);
   useEffect(() => {
-    console.log(attractionsWithImg, "리덕스");
+    console.log("this guy", attractionsWithImg, "리덕스");
   }, [attractionsWithImg]);
 
   return (

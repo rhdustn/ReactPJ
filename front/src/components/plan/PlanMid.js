@@ -18,6 +18,7 @@ const PlanMid = (props) => {
     let myLatLng;
     // 선택이 되지 않았을때 실행
     if (props?.choiceIndex?.length == 0) {
+      console.log("들어오니?");
       async function geocode1() {
         return new Promise((resolve, reject) => {
           let geocoder = new window.google.maps.Geocoder();
