@@ -3,12 +3,14 @@ import axios from 'axios';
 import { useQuery,useMutation } from 'react-query';
 import { useParams } from 'react-router-dom';
 import { CommentProflieImg, CommentContain, CommentContain2,
-   Repliesdiv, RelpyInput, RelpyBtn,RelpyBtn2,CommentProflieImg2,Reasd } from './boarddetail.styled';
+   Repliesdiv, RelpyInput, RelpyBtn,RelpyBtn2,CommentProflieImg2,Reasd,CommentEditInput,
+   CommentEditButton,} from './boarddetail.styled';
 
 const CommentList = ({ comments }) => {
   const [replies, setReplies] = useState([]);
   const [replyText, setReplyText] = useState('');
-  const [editCommentIndex, setEditCommentIndex] = useState("");
+  const [editedComment, setEditedComment] = useState('');
+  const [isEditing, setIsEditing] = useState(false);
   const [activeCommentIndex, setActiveCommentIndex] = useState(null);
   const [isReplyVisible, setIsReplyVisible] = useState(false); 
   const { id } = useParams();
@@ -43,8 +45,12 @@ const CommentList = ({ comments }) => {
 
   // 댓글수정
   const CommentEdit = async()=>{
-    const response = await axios.post(`post/commentEdit/${id}`);
-    console.log(response)
+    try {
+      const response = await axios.post(`post/commentEdit/${id}`);
+      console.log(response)
+    } catch (error) {
+      
+    }
   }
 
   const handleEditCheck = (commentIndex) => {
@@ -52,7 +58,7 @@ const CommentList = ({ comments }) => {
     console.log(commentIndex)
 
   };
-  
+
 
   // 댓글삭제
     const CommentDelet = async(commentIndex)=>{
