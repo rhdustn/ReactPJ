@@ -3,24 +3,24 @@ const { createSlice } = require("@reduxjs/toolkit");
 export const userOrGuest = createSlice({
   name: "userOrGuest",
   initialState: {
-    isLogin : false,
-    isAdmin : false
+    isLogin: false,
+    isAdmin: false,
   },
   reducers: {
     check: (state, action) => {
-        const user_id = action.payload;
+      const user_id = action.payload;
+      console.log("로그인 리덕스");
+      state.isLogin = true;
+      state.isAdmin = false;
 
-        state.isLogin = true;
-        state.isAdmin = false;
-
-        if(user_id == 'admin1234') {
-            state.isAdmin = true;
-        }
+      if (user_id == "admin1234") {
+        state.isAdmin = true;
+      }
     },
     reset: (state, action) => {
-        state.isLogin = false;
-        state.isAdmin = false;
-    }
+      state.isLogin = false;
+      state.isAdmin = false;
+    },
   },
 });
 

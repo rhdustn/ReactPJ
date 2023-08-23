@@ -31,8 +31,8 @@ const PlanBottom = ({
     gptAnswerSaved;
 
   const userOrGuest = useSelector((state) => {
-    return state.userOrGuest
-  })
+    return state.userOrGuest;
+  });
 
   // attractions을 반복시키기위해 만든 임시 state
   const [attArrForMap, setAttArrForMap] = useState("");
@@ -45,6 +45,30 @@ const PlanBottom = ({
   });
   // attractionsWithImg를 저장하는 dispatch
   const attractionsWithImgDispatch = useDispatch();
+  // 유저가 선택한 plan을 가져오는 selector
+  const selectedUserPlan = useSelector((state) => {
+    return state.selectedUserPlan;
+  });
+
+  const nav = useNavigate();
+
+  // 유저가 세운 계획을 저장하는 로직
+  const saveUserPlan = async () => {
+    console.log("눌림 asdasasd");
+    const savePlan = await axios.post("/plan/save", {
+      selectedUserPlan,
+      duration: `${gptAnswerSaved.startDate}~${gptAnswerSaved.endDate}`,
+      name: gptAnswerSaved.location,
+      who: gptAnswerSaved.option1,
+      how: gptAnswerSaved.option2,
+    });
+    if (savePlan.data === "success") {
+      nav("/");
+    } else {
+      alert("오류가 발생하였습니다. 다시 시도해 주시기 바랍니다");
+      nav("/");
+    }
+  };
 
   // 여기서 부터
   const getAttPic = async (queryKey) => {
@@ -128,14 +152,19 @@ const PlanBottom = ({
         })}
 
         <BtnBox>
-          {userOrGuest.isLogin &&
-            <SavePlanBtn>저장</SavePlanBtn>
-          }
-          {!userOrGuest.isLogin &&
-            <SavePlanBtn onClick={() => {
-              alert('로그인 후 이용 가능')
-            }} col={'silver'}>저장</SavePlanBtn>
-          }
+          {userOrGuest.isLogin && (
+            <SavePlanBtn onClick={saveUserPlan}>저장</SavePlanBtn>
+          )}
+          {!userOrGuest.isLogin && (
+            <SavePlanBtn
+              onClick={() => {
+                alert("로그인 후 이용 가능");
+              }}
+              col={"silver"}
+            >
+              저장
+            </SavePlanBtn>
+          )}
         </BtnBox>
       </PlanBottomBox>
     </>
@@ -143,7 +172,13 @@ const PlanBottom = ({
 };
 
 // 1일마다 관광지 보여주는 부분
-const PerDay = ({ period, index, place, attractionsWithImg,setSelectedPlanIndex }) => {
+const PerDay = ({
+  period,
+  index,
+  place,
+  attractionsWithImg,
+  setSelectedPlanIndex,
+}) => {
   const [dayPlanArr, setDayPlanArr] = useState([]);
   const noImage = "/img/icons/no-image.png";
   const nav = useNavigate();
@@ -171,7 +206,13 @@ const PerDay = ({ period, index, place, attractionsWithImg,setSelectedPlanIndex 
     <>
       <PerDayBox
         onClick={() => {
-          setSelectedPlanIndex(index - 1);
+          // SelectedPlanIndex는 누른 index를 따라간다. 하지만 plan은 유저가 저장을 한 날만 채워진다. 예를들어
+          // 1,3,5일을 유저가 계획을 세웠다면 plan의 array는 length가 3이고, index(1)은 두번째 날이다.
+          // 하지만 아래 코드에서 두번째 계획을 누르면 index가 1이 되고 plan의 인덱스 1을 찾는다. 즉, 두번째 날을 클릭하면
+          // 세번째날이 출력되는 버그 발생. 이를 방지하기위해 index가 아니라 day를 넘겨줘 PlanMid에서 findIndex로 해당하는 day의 index를 찾는다.
+          if (dayPlanArr.length !== 0) {
+            setSelectedPlanIndex(dayPlanArr[0].day);
+          }
         }}
       >
         {/* 날짜 */}

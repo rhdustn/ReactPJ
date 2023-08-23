@@ -13,8 +13,10 @@ import {
 } from "./PlacePc.styled";
 import { saveNearAttraction } from "../../redux/features/dataForGpt";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const AddPlaceMid = ({ page, day, choiceIndex, setChoice, nearPlace }) => {
+  const nav = useNavigate();
   const attractionsWithImg = useSelector((state) => {
     return state.attractionsWithImg;
   });
@@ -49,18 +51,24 @@ const AddPlaceMid = ({ page, day, choiceIndex, setChoice, nearPlace }) => {
 
   useEffect(() => {
     if (nearPlace !== undefined && nearPlace !== "") {
-      const tempNear = nearPlace.map((place) => {
-        return {
-          parentName: parentAttraction,
-          name: place.name,
-          detail: "디테일",
-          attractionLocation: {
-            latitude: place.geometry.location.lat(),
-            longitude: place.geometry.location.lng(),
-          },
-        };
-      });
-      attractionsWithImgDispatch(saveNearAttraction(tempNear));
+      console.log(nearPlace, "최종 유저의 플랜 ");
+      if (nearPlace.length !== 0) {
+        const tempNear = nearPlace.map((place) => {
+          return {
+            parentName: parentAttraction,
+            name: place.name,
+            detail: "디테일",
+            attractionLocation: {
+              latitude: place.geometry.location.lat(),
+              longitude: place.geometry.location.lng(),
+            },
+          };
+        });
+        attractionsWithImgDispatch(saveNearAttraction(tempNear));
+      } else {
+        alert("로드 중 오류가 발생하였습니다.");
+        nav("/");
+      }
     }
   }, [nearPlace]);
 
@@ -143,7 +151,6 @@ const AddPlaceMid = ({ page, day, choiceIndex, setChoice, nearPlace }) => {
                                     onClick={() => {
                                       isChoice(value2);
                                     }}
-                                    
                                     back={"#277bc0"}
                                     font={"white"}
                                   >
