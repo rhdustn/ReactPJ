@@ -1,9 +1,8 @@
-import React, {useEffect, useState} from 'react'
-import {useNavigate, useLocation} from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 import { BottomNavBox, BottomNavBtn, BottomNavText } from './Nav.styled'
-
-
 
 const BottomNav = () => {
     const home1 = '/imgs/icons/home1.png'
@@ -14,10 +13,13 @@ const BottomNav = () => {
     const star2 = '/imgs/icons/star2.png'
     const default_profile = '/imgs/profiles/default_profile.jpeg'
 
-
     const nav = useNavigate();
 
     const page = useLocation().pathname;
+
+    const userOrGuest = useSelector((state => {
+        return state.userOrGuest;
+    }))
 
     const [icons, setIcon] = useState({
         home : home1,
@@ -87,10 +89,21 @@ const BottomNav = () => {
                 <img src={icons.star}></img>
                 <BottomNavText textCol={textCol.star}>리뷰</BottomNavText>
             </BottomNavBtn>
-            <BottomNavBtn onClick={() => nav('/mypage')}>
-                <img src={default_profile} className='profile_img'></img>
-                <BottomNavText textCol={textCol.my}>마이페이지</BottomNavText>
-            </BottomNavBtn>
+
+            {/* 로그인 된 유저 -> 마이페이지 */}
+            {userOrGuest.isLogin &&            
+                <BottomNavBtn onClick={() => nav('/mypage')}>
+                    <img src={default_profile} className='profile_img'></img>
+                    <BottomNavText textCol={textCol.my}>마이페이지</BottomNavText>
+                </BottomNavBtn>
+            }
+            {/* 게스트 -> 로그인 페이지 */}
+            {!userOrGuest.isLogin &&
+                <BottomNavBtn onClick={() => {nav('/login')}}>
+                    <img src={default_profile} className='profile_img'></img>
+                    <BottomNavText>로그인</BottomNavText>
+                </BottomNavBtn>
+            }
         </BottomNavBox>
         </>
     )

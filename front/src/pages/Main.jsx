@@ -7,11 +7,16 @@ import BottomNav from "../components/nav/BottomNav";
 import MainTop from "../components/main/MainTop";
 import MainMid from "../components/main/MainMid";
 import MainBottom from "../components/main/MainBottom";
-import { Loading1, Loading2 } from "../components/loading/Loading";
-import { PopupBox, PopupBtn } from "../components/main/Main.styled";
+import { useNavigate } from "react-router-dom";
 
 const Main = () => {
   const dispatch = useDispatch();
+  const nav = useNavigate();
+
+  const userOrGuest = useSelector((state => {
+    return state.userOrGuest;
+  }))
+
   const gptData = useSelector((state) => {
     return state.gptSlice;
   });
@@ -82,6 +87,12 @@ const Main = () => {
 
   useEffect(() => {
     dispatch(reset());
+
+    console.log(userOrGuest)
+    // 어드민 로그인이면 어드민 페이지로 이동
+    if(userOrGuest.isAdmin == true) {
+      nav('/admin')
+    }
   }, []);
 
   return (

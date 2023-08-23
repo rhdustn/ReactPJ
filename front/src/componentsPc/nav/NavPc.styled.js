@@ -16,28 +16,24 @@ export const BottomNavBox = styled.div`
 `;
 
 export const BottomNavBtn = styled.div`
-  width: 100px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-  cursor: pointer;
+    width: 100px; height: 100%;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    box-sizing: border-box;
+    cursor: pointer;
 
-  & img {
-    height: 60%;
-  }
-  & .profile_img {
-    border-radius: 100%;
-    border: 1px solid silver;
-  }
-  & p {
+    & img {
+        height: 50%;
+    }
+    & .profile_img {
+        border-radius: 100%;
+    }
+`
+export const BottomNavText = styled.p`
     margin: 0;
     font-size: 13px;
-    color: #737373; // #a6a6a6
-  }
-`;
+    color: ${(props) => props.textCol || '#737373'}; // #a6a6a6
+`
 
 export const TopNavBox = styled.div`
   width: 100%;

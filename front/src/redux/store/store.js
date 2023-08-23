@@ -7,6 +7,8 @@ import {
 } from "../features/dataForGpt";
 import { selectedUserPlan } from "../features/selectedUserPlan";
 import { BoardDetailSlice } from "../features/post";
+import { userOrGuest } from "../features/login";
+
 const store = configureStore({
   reducer: {
     gptSlice: gptSlice.reducer,
@@ -15,6 +17,7 @@ const store = configureStore({
     userChoiceSave: userChoiceSave.reducer,
     BoardDetailSlice: BoardDetailSlice.reducer,
     selectedUserPlan: selectedUserPlan.reducer,
+    userOrGuest: userOrGuest.reducer
   },
 });
 

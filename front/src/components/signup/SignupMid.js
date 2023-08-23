@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { useQuery, useMutation } from 'react-query'
-import axios from 'axios'
-import { Input, InputBox, Label, SignupMidBox, Text, ChkBtn, Title, TryBtn } from './Signup.styled'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import axios from 'axios'
+
+import { check } from '../../redux/features/login'
+
+import { Input, InputBox, Label, SignupMidBox, Text, ChkBtn, Title, TryBtn } from './Signup.styled'
 
 const SignupMid = ({page}) => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [user_id, setId] = useState();
     const [user_pw, setPw] = useState();
@@ -175,6 +180,7 @@ const SignupMid = ({page}) => {
           
           if(loginClick.data == "login_success"){
             // 로그인 성공
+            dispatch(check(user_id));
             navigate("/");
           }else if(loginClick.data == "id_exist_but_pw_wrong"){
             // 비밀번호 틀렸을때
