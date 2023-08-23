@@ -54,7 +54,7 @@ export const attractionsWithImg = createSlice({
   initialState: [],
   reducers: {
     saveAttractionsWithImg: (state, action) => {
-      console.log('리덕스, 지피티 데이터 push 됨')
+      console.log("리덕스, 지피티 데이터 push 됨");
       state.push({
         attractionLocation: action.payload.attractionLocation,
         detail: action.payload.detail,
@@ -66,10 +66,11 @@ export const attractionsWithImg = createSlice({
     // 관광지 주위에있는 관광지 저장
     saveNearAttraction: (state, action) => {
       state.forEach((value, index) => {
+        console.log(action.payload);
         if (!action.payload[0].parentName) {
-          alert('로드중 오류가 발생하였습니다. 새로고침후 다시 이용해 주세요.')
+          alert("로드중 오류가 발생하였습니다. 새로고침후 다시 이용해 주세요.");
         }
-        console.log(action.payload[0].parentName)
+        console.log(action.payload[0].parentName);
         if (value.name === action.payload[0].parentName) {
           state[index].nearAttraction = action.payload;
         }

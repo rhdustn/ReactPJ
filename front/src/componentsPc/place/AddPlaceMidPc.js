@@ -93,7 +93,7 @@ const AddPlaceMid = ({ page, day, choiceIndex, setChoice, nearPlace }) => {
             ) {
               return (
                 <>
-                <h3>AI추천장소</h3>
+                  <h3>AI추천장소</h3>
                   <PlaceBox key={index}>
                     <ImgBox>
                       <img
@@ -143,8 +143,8 @@ const AddPlaceMid = ({ page, day, choiceIndex, setChoice, nearPlace }) => {
                                     onClick={() => {
                                       isChoice(value2);
                                     }}
-                                    back={"#edebeb"}
-                                    font={"#9b9a9a"}
+                                    back={"#277bc0"}
+                                    font={"white"}
                                   >
                                     선택
                                   </SelectBtn>
@@ -164,8 +164,8 @@ const AddPlaceMid = ({ page, day, choiceIndex, setChoice, nearPlace }) => {
                                   onClick={() => {
                                     isChoice(value2);
                                   }}
-                                  back={"#277bc0"}
-                                  font={"white"}
+                                  back={"#edebeb"}
+                                  font={"#9b9a9a"}
                                 >
                                   선택
                                 </SelectBtn>
@@ -181,7 +181,9 @@ const AddPlaceMid = ({ page, day, choiceIndex, setChoice, nearPlace }) => {
             } else {
               return (
                 <>
-                <h3 style={{marginTop:'20px',fontWeight:'bold'}}>AI추천장소</h3>
+                  <h3 style={{ marginTop: "20px", fontWeight: "bold" }}>
+                    AI추천장소
+                  </h3>
                   <PlaceBox key={index}>
                     <ImgBox>
                       <img

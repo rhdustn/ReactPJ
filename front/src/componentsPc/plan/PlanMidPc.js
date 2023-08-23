@@ -124,60 +124,69 @@ const PlanMidPc = (props) => {
         console.log("???", selectedUserPlan);
         if (selectedUserPlan.length !== 0) {
           const { plan } = selectedUserPlan[selectedPlanIndex];
-          let lat_lng = [];
-          console.log("this guy",plan);
-          for(let i=0; i<plan.length; i++){
-            lat_lng[i] = [];
-            lat_lng[i].push( Number(plan[i].attractionLocation.latitude) );
-            lat_lng[i].push( Number(plan[i].attractionLocation.longitude) );
+          let lat = [];
+          let lng = [];
+          console.log("this guy", plan);
+          for (let i = 0; i < plan.length; i++) {
+            lat.push(Number(plan[i].attractionLocation.latitude));
+            lng.push(Number(plan[i].attractionLocation.longitude));
             // console.log("위도: ",plan[i].attractionLocation.latitude);
             // console.log("경도: ",plan[i].attractionLocation.longitude);
           }
-          console.log("arr", lat_lng);
 
           // --------------------------------------------------------------
           // let lat_lng = [[40.7614, -73.9776], [40.7851, -73.9683]];
-          function initMap() {
-            const map = new window.google.maps.Map(document.getElementById("map"), {
-              zoom: 4,
-              // center 안에 있는 위도와 경도는 지도가 초기화될 때 보여지는 초기 중앙 위치를 설정
-              // center: { lat: 36.5, lng: 127.75 }, 한국
-              // center: { lat: 37.0902, lng: -95.7129 }, //미국
-            });
-            const directionsService = new window.google.maps.DirectionsService();
-            const directionsRenderer = new window.google.maps.DirectionsRenderer({
-              draggable: true,
-              map,
-              panel: document.getElementById("panel"),
-            });
+          map = new window.google.maps.Map(document.getElementById("gmp-map"), {
+            zoom: 4,
+            // center 안에 있는 위도와 경도는 지도가 초기화될 때 보여지는 초기 중앙 위치를 설정
+            // center: { lat: 36.5, lng: 127.75 }, 한국
+            // center: { lat: 37.0902, lng: -95.7129 }, //미국
+          });
+          const directionsService = new window.google.maps.DirectionsService();
+          const directionsRenderer = new window.google.maps.DirectionsRenderer({
+            draggable: true,
+            map,
+            panel: document.getElementById("panel"),
+          });
 
-            directionsRenderer.addListener("directions_changed", () => {
-              const directions = directionsRenderer.getDirections();
+          directionsRenderer.addListener("directions_changed", () => {
+            const directions = directionsRenderer.getDirections();
 
-              if (directions) {
-                computeTotalDistance(directions);
-              }
-            });
+            if (directions) {
+              computeTotalDistance(directions);
+            }
+          });
 
-            displayRoute(
-              { lat: lat_lng[0][0], lng: lat_lng[0][1] }, // 시작
-              { lat: lat_lng[2][0], lng: lat_lng[2][1] }, // 종료
-              directionsService,
-              directionsRenderer,
-            );
-          }
+          displayRoute(
+            { lat: lat[0], lng: lng[0] }, // 시작
+            { lat: lat.at(-1), lng: lng.at(-1) }, // 종료
+            directionsService,
+            directionsRenderer
+          );
 
           function displayRoute(origin, destination, service, display) {
+            const getWayPoints = () => {
+              const temp = lat.map((value, index) => {
+                if (index !== 0 && index !== lat.length - 1) {
+                  return { location: { lat: lat[index], lng: lng[index] } };
+                }
+              });
+
+              if (temp.length === 1 || temp.length === 2) {
+                console.log(temp, "1");
+                return [];
+              } else {
+                temp.shift();
+                temp.pop()
+                console.log(temp, "2");
+                return temp;
+              }
+            };
             service
               .route({
                 origin: origin,
                 destination: destination,
-                waypoints: [
-                  { location: { lat: lat_lng[1][0], lng: lat_lng[1][1] } },
-
-                  // { location: "Adelaide, SA" },
-                  // { location: "Broken Hill, NSW" },
-                ],
+                waypoints: getWayPoints(),
                 travelMode: window.google.maps.TravelMode.WALKING,
                 /*
                 DRIVING: 자동차로 이동.
@@ -223,11 +232,7 @@ const PlanMidPc = (props) => {
           //   }
           // });
 
-          window.initMap = initMap;
-          initMap();
           // --------------------------------------------------------------
-          
-
 
           // map = new window.google.maps.Map(document.getElementById("gmp-map"), {
           //   center: {
@@ -278,9 +283,11 @@ const PlanMidPc = (props) => {
 
         {/* 3번째 */}
         <div id="container">
-          <div id="map"></div>
+          <div id="gmp-map"></div>
           <div id="sidebar">
-            <p>Total Distance: <span id="total"></span></p>
+            <p>
+              Total Distance: <span id="total"></span>
+            </p>
             <div id="panel"></div>
           </div>
         </div>
