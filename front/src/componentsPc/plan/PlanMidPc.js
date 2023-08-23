@@ -121,7 +121,7 @@ const PlanMidPc = (props) => {
           });
         }
       } else {
-        console.log(selectedPlanIndex)
+        console.log(selectedUserPlan);
         if (selectedUserPlan.length !== 0) {
           const { plan } = selectedUserPlan[selectedPlanIndex];
           console.log(plan);
@@ -138,8 +138,8 @@ const PlanMidPc = (props) => {
             console.log(value);
             new window.google.maps.Marker({
               position: {
-                lat: value.attractionLocation.latitude,
-                lng: value.attractionLocation.longitude,
+                lat: Number(value.attractionLocation.latitude),
+                lng: Number(value.attractionLocation.longitude),
               },
               map: map,
               title: "Marker",
