@@ -5,17 +5,15 @@ export const selectedUserPlan = createSlice({
   initialState: [],
   reducers: {
     pushPlan: (state, action) => {
-      const temp = state.some((value) => {
-        return Number(value.day) === Number(action.payload.day);
-      });
-      if (temp) {
-        const newTemp = state.map((value) => {
-          if (Number(value.day) === Number(action.payload.day)) {
-            return { ...value, plan: action.payload.plan };
-          }
-        });
+      const dayToUpdateIndex = state.findIndex(
+        (value) => Number(value.day) === Number(action.payload.day)
+      );
 
-        state = [...newTemp];
+      if (dayToUpdateIndex !== -1) {
+        state[dayToUpdateIndex] = {
+          ...state[dayToUpdateIndex],
+          plan: action.payload.plan,
+        };
       } else {
         state.push({ day: action.payload.day, plan: action.payload.plan });
       }

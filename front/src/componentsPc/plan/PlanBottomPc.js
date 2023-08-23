@@ -28,7 +28,9 @@ const PlanBottomPc = ({
   // 일정 며칠인지
   const { location, attractions, startDate, endDate, option1, option2 } =
     gptAnswerSaved;
-
+  const selectedUserPlan = useSelector((state) => {
+    return state.selectedUserPlan;
+  });
   // period
   const [periodArr, setPeriodArr] = useState([]);
   // 유저가 선택한 지역중 일별 일정만
@@ -43,6 +45,16 @@ const PlanBottomPc = ({
   });
   // attractionsWithImg를 저장하는 dispatch
   const attractionsWithImgDispatch = useDispatch();
+
+
+  // 저장된 selectedUserPlan 을 서버로 보내는 로직
+  const sendPlanToServer=async ()=>{
+
+    const sendPaln=await axios.post('/plan/save',{
+      
+    })
+
+  }
 
   // 여기서 부터
   const getAttPic = async (queryKey) => {
@@ -86,8 +98,8 @@ const PlanBottomPc = ({
     setPeriodArr(temp);
   }, [attractions]);
   useEffect(() => {
-    console.log(attractionsWithImg, "리덕스");
-  }, [attractionsWithImg]);
+    console.log(selectedUserPlan, "리덕스");
+  }, [selectedUserPlan]);
 
   return (
     <>
@@ -139,7 +151,7 @@ const PerDayPc = ({ period, index, place, imgSrc, setSelectedPlanIndex }) => {
     <>
       <PerDayBox
         onClick={() => {
-          setSelectedPlanIndex(index-1);
+          setSelectedPlanIndex(index - 1);
         }}
       >
         {/* 날짜 */}
