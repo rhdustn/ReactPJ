@@ -6,29 +6,31 @@ const StyleArrow = styled.div`
   top: 3%;
   cursor: pointer;
 `;
-
 const StyledImage = styled.img`
   width: 30px;
 `;
+
 const Button = styled.div`
-position: absolute;
-left: 50%;
-top: 40%;
-transform: translate(-50%, -40%);
-width: 250px;
-border-radius:  5px;
-height: 50px;
-background-color: ${props => props.change ? '#3e7bff' : '#d6d6d6'};
-color: ${props =>props.change ? 'white' :'#989898'};
-display: flex;
-justify-content: center;
-align-items: center;
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -40%);
+  width: 250px;
+  border-radius:  5px;
+  height: 50px;
+  background-color: ${props => props.change ? '#277bc0' : '#d6d6d6'};
+  color: ${props =>props.change ? 'white' :'#989898'};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
 `;
+
 const StyledProfileImg = styled.div`
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  background-color: #ffd8de;
+  background-color: #277bc0;
   position: absolute;  
   left: 50%;
   top: 15%;
@@ -65,21 +67,21 @@ const StyledProfileName = styled.div`
 `;
 
 const Text = styled.div`
-position: absolute;  
+  position: absolute;  
   left: 50%;
   top: 45%;
   transform: translate(-50%, -45%);
-width: 250px;
-font-size: 12px;
+  width: 250px;
+  font-size: 12px;
 `
 
 const EditNavigate = styled.div`
-position: absolute;
-right: 10%;
-top: 5%;
+  position: absolute;
+  right: 10%;
+  top: 5%;
 `
 const ProflieImg = styled.div`
-width: 100px;
+  width: 100px;
   height: 100px;
   border-radius: 50%;
   background-color: #ffd8de;
@@ -87,9 +89,13 @@ width: 100px;
   left: 50%;
   top: 15%;
   transform: translate(-50%, -15%);
-  
-  `
-  const ProfileName = styled.div`
+  overflow: hidden;
+
+  & img {
+    width: 100%;
+  }
+`
+const ProfileName = styled.div`
   position: absolute;
 
   font-weight: 600;
@@ -98,10 +104,10 @@ width: 100px;
   top: 30%;
   left: 50%;
   transform: translate(-50%, -30%);
-
 `;
 const TabMain = styled.div`
   position: absolute;
+  height: calc(100vh - 40% - 60px);
   top: 40%;
 `;
 
@@ -121,8 +127,9 @@ const TabButton = styled.button`
 
 const Content = styled.div`
   background-color: #f5f5f5;
-  height: 400px;
+  height: calc(100% - 40px);
   border-radius: 0 0 5px 5px;
+  overflow: scroll;
 `;
 
 export {StyleArrow,StyledImage,Button,StyledProfileImg,InputBtn,StyledProfileName,

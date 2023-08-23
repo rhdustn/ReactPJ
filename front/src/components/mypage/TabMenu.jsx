@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TabMain,TabButton,TabsContainer,Content } from './mypage.styled';
 
-const TapMenu = () => {
+const TapMenu = ({user}) => {
   const [tab, setTab] = useState(0);
   const tabArr = [
     { name: "My Trip", content: "My Trip" },

@@ -1,10 +1,10 @@
 import React from 'react'
 import { ProfileName } from './mypage.styled';
 
-const MypageName = () => {
+const MypageName = ({nickname}) => {
   return (
     <div>
-      <ProfileName>MypageName</ProfileName>
+      <ProfileName>{nickname}</ProfileName>
       </div>
   )
 }
