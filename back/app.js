@@ -13,8 +13,8 @@ const testGPT = require("./routers/testGPT");
 const multer = require("multer");
 // 회원가입,로그인 기능이 있는 라우터
 const userRouter = require("./routers/user");
-const postRouter = require("./routers/postRouter")
-
+const postRouter = require("./routers/postRouter");
+const planRouter = require("./routers/planRouter");
 
 // // Multer 설정
 // const storage = multer.diskStorage({
@@ -67,13 +67,14 @@ sequelize
   });
 
 app.use("/", mainRouter);
-app.use("/post",postRouter)
+app.use("/post", postRouter);
 
 app.use("/user", userRouter);
 
 // gptAPI 테스트 -----20230807 zerohoney
 app.use("/openAI", testGPT);
-
+// 플랜을 저장하고 관리하는 라우터
+app.use("/plan", planRouter);
 const server = app.listen(8080, () => {
   console.log("server on");
 });
