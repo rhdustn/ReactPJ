@@ -5,7 +5,7 @@ exports.getUserInfo = async (req, res) => {
     console.log(front_id)
 
     try {
-        
+        res.json(front_id)
     } catch (error) {
         console.log(error);
     }

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import axios from 'axios'
 
-import { check } from '../../redux/features/login'
+import { check, reset } from '../../redux/features/login'
 
 import { Input, InputBox, Label, SignupMidBox, Text, ChkBtn, Title, TryBtn } from './Signup.styled'
 
@@ -132,7 +132,6 @@ const SignupMid = ({page}) => {
           }
     }
 
-
     // 로그인 체크
     const tryLogin = async () => {
       console.log('tryLogin')
@@ -192,9 +191,13 @@ const SignupMid = ({page}) => {
     
       }
 
-      const loginMutation = useMutation(tryLogin);
-      const signUpMutation = useMutation(trySignup);
+    const loginMutation = useMutation(tryLogin);
+    const signUpMutation = useMutation(trySignup);
 
+
+    useEffect(() => {
+      dispatch(reset())
+    }, [])
 
     if(page == '회원가입') {
         return (

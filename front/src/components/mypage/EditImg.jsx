@@ -35,22 +35,6 @@ const EditImg = () => {
     fileInputRef.current.click();
   };
 
-
-  // 로그인 유저 정보 가져오기
-  const tryGetUserInfo = async () => {
-    try {
-      const response = await axios.get(`http://localhost:8080/mypage/getInfo`)
-      const data = response.data;
-      console.log(data);
-      return data;
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  const {data, isLoading} = useQuery(['getUser'], tryGetUserInfo)
-
-
   return (
     <>
       <StyledProfileImg onClick={handleImageClick} preview={imagePreview}>

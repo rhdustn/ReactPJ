@@ -17,7 +17,11 @@ export const userOrGuest = createSlice({
             state.isAdmin = true;
         }
     },
+    reset: (state, action) => {
+        state.isLogin = false;
+        state.isAdmin = false;
+    }
   },
 });
 
-export const { check } = userOrGuest.actions;
+export const { check, reset } = userOrGuest.actions;
