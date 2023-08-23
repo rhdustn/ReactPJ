@@ -34,8 +34,8 @@ app.use(express.json());
 
 app.use(
   cors({
-    // origin: ["http://13.209.73.40"],
-    origin: ["*"],
+    origin: ["http://13.209.73.40"],
+    // origin: ["*"],
     credentials: true,
   })
 );
