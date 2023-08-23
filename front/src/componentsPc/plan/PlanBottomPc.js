@@ -31,6 +31,10 @@ const PlanBottomPc = ({
   const selectedUserPlan = useSelector((state) => {
     return state.selectedUserPlan;
   });
+  const userOrGuest = useSelector((state) => {
+    return state.userOrGuest
+  })
+
   // period
   const [periodArr, setPeriodArr] = useState([]);
   // 유저가 선택한 지역중 일별 일정만
@@ -115,8 +119,16 @@ const PlanBottomPc = ({
             />
           );
         })}
+
         <BtnBox>
-          <SavePlanBtn>저장</SavePlanBtn>
+          {userOrGuest.isLogin &&
+            <SavePlanBtn>저장</SavePlanBtn>
+          }
+          {!userOrGuest.isLogin &&
+            <SavePlanBtn onClick={() => {
+              alert('로그인 후 이용 가능')
+            }} col={'silver'}>저장</SavePlanBtn>
+          }
         </BtnBox>
       </PlanBottomBox>
     </>

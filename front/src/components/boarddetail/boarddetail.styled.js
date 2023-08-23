@@ -299,9 +299,88 @@ const MoveBoardBtn = styled.div`
 display: flex;
 font-size: 20px;
 `
+const ButtonBox = styled.div`
+width: 50px;
+height: 50px;
 
-
-
+`
+const ShowButtonBox = styled.div`
+width: 100px;
+height: 100px;
+background-color:rgba(255, 255, 255, 0.7);
+z-index: 5;
+display: flex;
+position: relative;
+border-radius: 10px;
+position: absolute;
+    top: 5%;
+    right: 8%;
+`
+const EditImg = styled.img`
+width: 30px;
+height: 30px;
+position: absolute;
+right: 2%;
+top: 1%;
+`
+const HeaderDiv = styled.div`
+width: 400px;
+height: 50px;
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+align-items: center;
+`
+const EditBtnStyle = styled.button`
+ width: 50px;
+ height: 30px;
+ background-color: white;
+ position: absolute;
+ top: 20%;
+ left: 50%;
+ transform: translate(-50%,-20%);
+ border-radius: 5px;
+ border: none;
+ padding:5px;
+`
+const DelBtnStyle = styled.button`
+ width: 50px;
+ height: 30px;
+ background-color:lightcoral;
+ position: absolute;
+ top: 80%;
+ left: 50%;
+ transform: translate(-50%,-80%);
+ border-radius: 5px;
+ border: none;
+ padding:5px;
+`
+const Reasd = styled.div`
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+`
+const CommentEditInput = styled.input`
+position: absolute;
+left: 15%;
+border: 2px solid lightblue;
+`
+const CommentEditButton = styled.button`
+position: absolute;
+left: 60%;
+width: 50px;
+height: 20px;
+border: 2px solid lightblue;
+background-color: transparent;
+` 
+const CommentDelButton = styled.button`
+position: absolute;
+left: 73%;
+width: 50px;
+height: 20px;
+border: 2px solid lightcoral;
+background-color: white;
+` 
 
 export {
     Main, ImgBoxContainer, ImgBox,Image, TitleStyle, SubContentStyle,
@@ -309,5 +388,6 @@ export {
     BoardLine,BoardPlanContainer,AddStyle,imgStyle,CommentContainer,CommentMain,CommentFormdiv,
     CommentInput,CommentBtn,CommentProflieImg,CommentContain,CommentContain2,Recommentdiv,
     Recommentbox,CommentContain3,Repliesdiv,RelpyInput,RelpyBtn,RelpyBtn2,Replyspan,
-    CommentProflieImg2,MoveBoardBtn
+    CommentProflieImg2,MoveBoardBtn,ButtonBox,ShowButtonBox,EditImg,HeaderDiv,EditBtnStyle,DelBtnStyle,
+    Reasd,CommentEditInput,CommentEditButton,CommentDelButton
 }

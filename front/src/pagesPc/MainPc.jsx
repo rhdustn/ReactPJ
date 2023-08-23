@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 import styled, { keyframes } from "styled-components";
 import "animate.css";
 // import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -8,7 +11,7 @@ import { insert, reset } from "../redux/features/dataForGpt";
 import MainTopPc from "../componentsPc/main/MainTopPc";
 import MainMidPc from "../componentsPc/main/MainMidPc";
 import MainBottomPc from "../componentsPc/main/MainBottomPc";
-import { useDispatch, useSelector } from "react-redux";
+
 // fadeIn
 const FadeInAni = keyframes`
     from {
@@ -23,6 +26,12 @@ const FadeInMainMid = styled(MainMidPc)`
 
 const Main = () => {
   const dispatch = useDispatch();
+  const nav = useNavigate();
+
+  const userOrGuest = useSelector((state => {
+    return state.userOrGuest;
+  }))
+
   const gptData = useSelector((state) => {
     return state.gptSlice;
   });
@@ -94,6 +103,12 @@ const Main = () => {
 
   useEffect(() => {
     dispatch(reset());
+
+    console.log(userOrGuest)
+    // 어드민 로그인이면 어드민 페이지로 이동
+    if(userOrGuest.isAdmin == true) {
+      nav('/admin')
+    }
   }, []);
 
 

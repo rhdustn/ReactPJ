@@ -121,7 +121,7 @@ export const SavePlanBtn = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 15px;
-  background-color: #277bc0;
+  background-color: ${(props) => props.col || '#277bc0'};
   color: white;
   font-size: 16px;
   font-weight: bold;

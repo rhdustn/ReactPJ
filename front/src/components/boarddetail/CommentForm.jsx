@@ -1,18 +1,36 @@
 import React, { useState } from 'react'
+import axios from 'axios';
 import { CommentFormdiv,CommentInput,CommentBtn } from './boarddetail.styled'
+import { useParams } from 'react-router-dom';
 
 
 const CommentForm = ({onCommentSubmit}) => {
     const [inputComment, setInputComment] = useState('');
+    const {id} = useParams()
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
       e.preventDefault();
       if (inputComment === '') {
         return;
       }
+      
       onCommentSubmit(inputComment);
       setInputComment('');
       console.log(inputComment)
+
+      try {
+        const response = 
+        await axios.post(
+            `/post/createComment`,{detail :inputComment,board_id:id},{withCredentials:true}
+        )
+        const data = response.data;
+        console.log(data)
+        if (data === "create success") {
+          window.location.reload();
+        }
+      } catch (error) {
+        console.log(error)
+      }
     };
   return (
     <>

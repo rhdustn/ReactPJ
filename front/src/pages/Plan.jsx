@@ -14,12 +14,11 @@ const Plan = () => {
   const gptAnswerSaved = useSelector((state) => {
     return state.gptAnswerSave;
   });
-
-
+  // 유저가 클릭한 데이의 인덱스, 즉 해당 플랜을 클릭시 그 플랜안에 있는 장소의 위치를 찍어주기 위해 만든 state 이 값은 plabMidPc에서 쓰며, set함수는 PlanBottomPc에서 사용한다.
+  const [selectedPlanIndex, setSelectedPlanIndex] = useState(0);
   const userChoiceSaved = useSelector((state) => {
     return state.userChoiceSave;
   });
-
 
   useEffect(() => {
     const handleScroll = () => {
@@ -39,7 +38,6 @@ const Plan = () => {
     };
   }, []);
 
-
   if (gptAnswerSaved.location == "") {
     return (
       <>
@@ -54,11 +52,17 @@ const Plan = () => {
         <TopNav isScrolled={isScrolled} gptAnswerSaved={gptAnswerSaved} />
 
         <PlanTop gptAnswerSaved={gptAnswerSaved} />
-        <PlanMid isScrolled={isScrolled} gptAnswerSaved={gptAnswerSaved} />
+        <PlanMid
+          isScrolled={isScrolled}
+          gptAnswerSaved={gptAnswerSaved}
+          page={"plan"}
+          selectedPlanIndex={selectedPlanIndex}
+        />
         <PlanBottom
           isScrolled={isScrolled}
           gptAnswerSaved={gptAnswerSaved}
           userChoiceSaved={userChoiceSaved}
+          setSelectedPlanIndex={setSelectedPlanIndex}
         />
 
         <BottomNav page={"plan"} />

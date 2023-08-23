@@ -1,65 +1,123 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+import { QueryCache, QueryClient, useMutation, useQuery, useQueryClient } from 'react-query'
+
 import { AdminMidBox, Btn, BtnBox, Title, User, UserBox } from './Admin.styled'
 
 const AdminMid = () => {
-    
-    let users = [
-        {
-            id : 1,
-            user_id : 'aaa',
-            user_pw : 'aaa',
-            nickname : 'aaa',
-            level : 0
-        },
-        {
-            id : 2,
-            user_id : 'bbb',
-            user_pw : 'bbb',
-            nickname : 'bbb',
-            level : 1
+    const queryClient = useQueryClient();
+
+    const getUsers = async () => {
+        try {
+            const users = await axios.get("http://localhost:8080/admin/users")
+            const data = users.data;
+            return data;
+        } catch (error) {
+            console.log(error);
         }
-    ]
+    }
+
+    const {data, isLoading} = useQuery(['users'], getUsers)
+
+    useEffect(() => {
+        console.log(data)
+    }, [data])
+
+
+    // 승인
+    const tryAuthUser = async (user_id) => {
+        try {
+            await axios.post(`http://localhost:8080/admin/auth/${user_id}`)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    // 강등
+    const tryUnauthUser = async (user_id) => {
+        try {
+            await axios.post(`http://localhost:8080/admin/unauth/${user_id}`)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    // 거절 & 삭제
+    const tryDeleteUser = async (user_id) => {
+        console.log(user_id)
+        try {
+            await axios.post(`http://localhost:8080/admin/del/${user_id}`)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    const authUser = useMutation(tryAuthUser, {
+        onSuccess: () => {
+            queryClient.invalidateQueries('users')
+        }
+    })
+    const unAuthUser = useMutation(tryUnauthUser, {
+        onSuccess: () => {
+            queryClient.invalidateQueries('users')
+        }
+    })
+    const delUser = useMutation(tryDeleteUser, {
+        onSuccess: () => {
+            queryClient.invalidateQueries('users')
+        }
+    })
 
   return (
     <>
       <AdminMidBox>
 
-
         <Title>대기 중인 유저</Title>
+        {!isLoading && 
         <UserBox>
-            {users.map((value, index) => {
-                if(value.level == 0) {
+            {data.map((value, index) => {
+                if(value.is_accept == false) {
                     return (
                         <User key={index}>
                             <div className='user-index'>{index + 1}</div>
                             <div className='user-id'>{value.user_id} ({value.nickname})</div>
                             <BtnBox>
-                                <Btn back={'#277bc0'}>승인</Btn>
-                                <Btn back={'#ff3131'}>거절</Btn>
+                                <Btn onClick={() => {
+                                    authUser.mutate(value.user_id)
+                                }} back={'#277bc0'}>승인</Btn>
+                                <Btn onClick={() => {
+                                    delUser.mutate(value.user_id)
+                                }} back={'#ff3131'}>거절</Btn>
                             </BtnBox>
                         </User>
                     )
                 }
             })}
         </UserBox>
+        }
 
         <Title>승인 완료된 유저</Title>
+        {!isLoading && 
         <UserBox>
-            {users.map((value, index) => {
-                if(value.level == 1) {
+            {data.map((value, index) => {
+                if(value.is_accept == true) {
                     return (
                         <User key={index}>
                             <div className='user-index'>{index + 1}</div>
                             <div className='user-id'>{value.user_id} ({value.nickname})</div>
                             <BtnBox>
-                                <Btn back={'#737373'}>강등</Btn>
-                                <Btn back={'#737373'}>삭제</Btn>
+                                <Btn onClick={() => {
+                                    unAuthUser.mutate(value.user_id)
+                                }} back={'#737373'}>강등</Btn>
+                                <Btn onClick={() => {
+                                    delUser.mutate(value.user_id)
+                                }} back={'#737373'}>삭제</Btn>
                             </BtnBox>
                         </User>
                     )
                 }
             })}
         </UserBox>
+        }
 
       </AdminMidBox>
     </>

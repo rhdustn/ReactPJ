@@ -57,6 +57,11 @@ const StyledProfileName = styled.div`
   font-weight: 600;
   cursor: pointer;
   border-bottom: 2px solid #64a7fe;
+
+  & input {
+    outline: none;
+    border: none;
+  }
 `;
 
 const Text = styled.div`

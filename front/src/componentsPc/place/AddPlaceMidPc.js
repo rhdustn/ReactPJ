@@ -143,6 +143,7 @@ const AddPlaceMid = ({ page, day, choiceIndex, setChoice, nearPlace }) => {
                                     onClick={() => {
                                       isChoice(value2);
                                     }}
+                                    
                                     back={"#277bc0"}
                                     font={"white"}
                                   >
