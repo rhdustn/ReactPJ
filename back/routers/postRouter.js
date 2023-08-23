@@ -4,7 +4,7 @@ const path = require("path");
 
 const {allBoard, createBoard, detailBoard,editBoard, deleteBoard} = require("../controllers/postController")
 const {commentlist,createComment,editComment,deleteComment} =require("../controllers/CommentControllers")
-const {recommentlist, createRecomment, editRecomment,deleteRecomment} = require("../controllers/ReCommentControllers")
+const {recommentlist,createRecomment, editRecomment,deleteRecomment} = require("../controllers/ReCommentControllers")
 
 // Multer 설정
 const storage = multer.diskStorage({
@@ -25,12 +25,12 @@ router.get('/detail/:id',detailBoard);
 router.post("/edit/:id",upload.array("uploadedFiles",5),editBoard)
 router.get("/delete/:id",deleteBoard)
 
-router.get("/commentlis",commentlist)
+router.get('/commentlist',commentlist)
 router.post('/createComment',createComment)
 router.post('/commentEdit/:id',editComment)
 router.get('/commentDelet/:id',deleteComment)
 
-router.get("/recommentlist",recommentlist)
+router.get('/recommentlist',recommentlist)
 router.post('/createRecomment',createRecomment)
 router.post('/editRecomment/:id',editRecomment)
 router.get('/deleteRecomment/:id',deleteRecomment)

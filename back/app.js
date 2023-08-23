@@ -14,8 +14,7 @@ const multer = require("multer");
 // 회원가입,로그인 기능이 있는 라우터
 const userRouter = require("./routers/user");
 const postRouter = require("./routers/postRouter")
-const commentRouter = require("./routers/commentRouter")
-const recommentRouter = require("./routers/recommentRouter")
+
 
 
 // // Multer 설정
@@ -62,8 +61,6 @@ sequelize
 
 app.use("/", mainRouter);
 app.use("/post",postRouter)
-app.use('/comment',commentRouter)
-app.use('/recomment',recommentRouter)
 app.use("/user", userRouter);
 
 // gptAPI 테스트 -----20230807 zerohoney

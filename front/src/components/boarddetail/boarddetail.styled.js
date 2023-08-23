@@ -307,7 +307,7 @@ height: 50px;
 const ShowButtonBox = styled.div`
 width: 100px;
 height: 100px;
-background-color:rgba(0, 0, 0, 0.5);
+background-color:rgba(255, 255, 255, 0.7);
 z-index: 5;
 display: flex;
 position: relative;
@@ -346,7 +346,7 @@ const EditBtnStyle = styled.button`
 const DelBtnStyle = styled.button`
  width: 50px;
  height: 30px;
- background-color: white;
+ background-color:lightcoral;
  position: absolute;
  top: 80%;
  left: 50%;
@@ -355,6 +355,11 @@ const DelBtnStyle = styled.button`
  border: none;
  padding:5px;
 `
+const Reasd = styled.div`
+display: flex;
+flex-direction: column;
+align-items: flex-start
+`
 
 export {
     Main, ImgBoxContainer, ImgBox,Image, TitleStyle, SubContentStyle,
@@ -362,5 +367,6 @@ export {
     BoardLine,BoardPlanContainer,AddStyle,imgStyle,CommentContainer,CommentMain,CommentFormdiv,
     CommentInput,CommentBtn,CommentProflieImg,CommentContain,CommentContain2,Recommentdiv,
     Recommentbox,CommentContain3,Repliesdiv,RelpyInput,RelpyBtn,RelpyBtn2,Replyspan,
-    CommentProflieImg2,MoveBoardBtn,ButtonBox,ShowButtonBox,EditImg,HeaderDiv,EditBtnStyle,DelBtnStyle
+    CommentProflieImg2,MoveBoardBtn,ButtonBox,ShowButtonBox,EditImg,HeaderDiv,EditBtnStyle,DelBtnStyle,
+    Reasd
 }

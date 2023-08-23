@@ -34,22 +34,31 @@ return img.filename
 
 // 상세페이지
 exports.detailBoard = async (req, res) => {
-    console.log('data')
     const { id } = req.params
     const data = await Board.findOne({ where: { id: id } });
-    const commentdata = await Comment.findAll({ where: { board_id: id } })
+    console.log("상세페이지asdasd"+data)
+    const commentdata = await Comment.findAll({ where: { board_id: id }, include : [{model:Recomment}] })
    const recommentArr= commentdata.map( async(value, index)=>{
-        const recommentdata = await Recomment.findAll({ where: { comment_id:value.id } })
+        const recommentdata = await Recomment.findAll({ where: { comment_id:value.dataValues.id } })
         return recommentdata
     })
-    res.json({data,commentdata,recommentArr});
+    console.log(data)
+    res.json({data,commentdata,recommentArr})
+    // res.json({data,commentdata,recommentArr});
    
 
 }
+// exports.detailBoard = async (req, res) => {
+//     console.log('data')
+//     const { id } = req.params
+//     const data = await Board.findOne({ where: { id: id } });
+//     console.log(data)
+//     res.send(data);
+
+// }
 // 게시글 수정
 exports.editBoard = async (req, res) => {
     const { id } = req.params;
-    console.log(id)
     const { title, detail } = req.body
     const tempImgArr=req.files.map((img)=>{
         return img.filename

@@ -22,7 +22,7 @@ const ImgSlice = () => {
   const BoardDetailImg = async ({ queryKey }) => {
     try {
       const response = await axios.get(`/post/detail/${queryKey[1]}`);
-      return response.data;
+      return response.data
     } catch (error) {
       console.log(error);
     }
@@ -31,8 +31,8 @@ const ImgSlice = () => {
     console.log('hi')
   })
   const { data, isLoading } = useQuery(['boardDetail', id], BoardDetailImg);
-console.log(data.images)
-const imgArr = JSON.parse(data.images)
+console.log(data.data.images)
+const imgArr = JSON.parse(data.data.images)
 
 
 
