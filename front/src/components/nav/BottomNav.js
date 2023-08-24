@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
+import { useQuery } from 'react-query'
+import axios from 'axios'
 
 import { BottomNavBox, BottomNavBtn, BottomNavText } from './Nav.styled'
 
@@ -74,27 +76,41 @@ const BottomNav = () => {
     }, [])   
 
 
+    // 로그인 유저 정보 가져오기 (profile_img 넣을 예정)
+    const tryGetUserInfo = async () => {
+        try {
+            const response = await axios.get(`/mypage/getInfo`)
+            const data = response.data;
+            return data;
+        }catch (error) {
+            console.log(error)
+        }
+    }
+
+    const {data, isLoading} = useQuery(['getUserNav'], tryGetUserInfo)
+
+
     return (
         <>
         <BottomNavBox>
             <BottomNavBtn onClick={() => nav('/')}>
                 <img src={icons.home}></img>
-                <BottomNavText textCol={textCol.home}>홈</BottomNavText>    
+                <BottomNavText textcol={textCol.home}>홈</BottomNavText>    
             </BottomNavBtn>
             <BottomNavBtn onClick={() => nav('/plan')}>
                 <img src={icons.plan}></img>
-                <BottomNavText textCol={textCol.plan}>일정</BottomNavText>
+                <BottomNavText textcol={textCol.plan}>일정</BottomNavText>
             </BottomNavBtn>
             <BottomNavBtn onClick={() => nav('/board')}>
                 <img src={icons.star}></img>
-                <BottomNavText textCol={textCol.star}>리뷰</BottomNavText>
+                <BottomNavText textcol={textCol.star}>리뷰</BottomNavText>
             </BottomNavBtn>
 
             {/* 로그인 된 유저 -> 마이페이지 */}
             {userOrGuest.isLogin &&            
                 <BottomNavBtn onClick={() => nav('/mypage')}>
                     <img src={default_profile} className='profile_img'></img>
-                    <BottomNavText textCol={textCol.my}>마이페이지</BottomNavText>
+                    <BottomNavText textcol={textCol.my}>마이페이지</BottomNavText>
                 </BottomNavBtn>
             }
             {/* 게스트 -> 로그인 페이지 */}

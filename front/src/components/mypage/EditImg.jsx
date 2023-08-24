@@ -1,15 +1,15 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios'
 import { useMutation, useQuery } from 'react-query';
 
 import { StyledProfileImg,InputBtn } from './mypage.styled';
 
 
-const EditImg = () => {
+const EditImg = ({profileImg, setProfileImg}) => {
   const default_profile = '/imgs/profiles/default_profile.jpeg'
 
-  const [selectedFile, setSelectedFile] = useState(default_profile);
-  const [imagePreview, setImagePreview] = useState(default_profile);
+  const [selectedFile, setSelectedFile] = useState(profileImg);
+  const [imagePreview, setImagePreview] = useState(profileImg);
   const fileInputRef = useRef(null); 
 
   const handleFileChange = (event) => {
@@ -34,6 +34,17 @@ const EditImg = () => {
   const handleImageClick = () => {
     fileInputRef.current.click();
   };
+
+  useEffect(() => {
+    console.log(selectedFile)
+  }, [selectedFile])
+
+  useEffect(() => {
+    if(profileImg == null) {
+      setSelectedFile(default_profile)
+      setImagePreview(default_profile)
+    }
+  }, [])
 
   return (
     <>

@@ -136,9 +136,12 @@ const PlanMid = (props) => {
           });
         }
       } else {
-        console.log("???", selectedUserPlan);
         if (selectedUserPlan.length !== 0) {
-          const { plan } = selectedUserPlan[selectedPlanIndex];
+          // 해당 날짜에 해당하는 인덱스
+          const index = selectedUserPlan.findIndex(
+            (ele) => Number(ele.day) === Number(selectedPlanIndex)
+          );
+          const { plan } = selectedUserPlan[index];
           let lat = [];
           let lng = [];
           console.log("this guy", plan);

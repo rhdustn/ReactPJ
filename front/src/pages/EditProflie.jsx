@@ -6,6 +6,7 @@ import { EditBtn,EditImg,EditName,ArrowBtn,EditText } from '../components/mypage
 import styled from 'styled-components';
 import TopNav from '../components/nav/TopNav';
 import { useSelector } from 'react-redux';
+import { ProfileName } from '../components/mypage/mypage.styled';
 
 const EditProflie = () => {
   const Main = styled.div`
@@ -15,9 +16,10 @@ const EditProflie = () => {
     left: 50%;
     transform: translate(-50%);
   `
-
+  const [load, setLoad] = useState(false)
   const [profileBtnChange, setProfileBtnChange] = useState(false);
   const [profileName, setProfileName] = useState("");
+  const [profileImg, setProfileImg] = useState();
 
   // 로그인 유저 정보 가져오기
   const tryGetUserInfo = async () => {
@@ -30,28 +32,40 @@ const EditProflie = () => {
       console.log(error)
     }
   }
-
-  const {data, isLoading} = useQuery(['getUser'], tryGetUserInfo)
-
-  const userOrGuest = useSelector((state) => {
-    return state.userOrGuest
+  const {data, isLoading} = useQuery(['getUser'], tryGetUserInfo, {
+    enabled : load
   })
 
   useEffect(() => {
-    console.log(data)
-    console.log(userOrGuest)
-  }, [])
+    if(!isLoading) {
+      setProfileName(data.nickname)
+      setProfileImg(data.profile_img)
+    }
+  }, [isLoading])
+
+  const trySaveUserInfo = () => {
+    try {
+      console.log('수정 저장')
+      console.log(profileName)
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div>
       <TopNav />
 
        <Main>
-        <EditImg/>
-        <EditName setProfileBtnChange={setProfileBtnChange}/>
-        <EditBtn change={profileBtnChange}/>
-        <EditText/>
-        </Main>
+        {!isLoading &&
+          <>
+          <EditImg profileImg={profileImg} setProfileImg={setProfileImg} />
+          <EditName profileName={profileName} setProfileName={setProfileName} setProfileBtnChange={setProfileBtnChange}/>
+          <EditBtn change={profileBtnChange} trySaveUserInfo={trySaveUserInfo} />
+          <EditText/>
+          </>        
+        }
+      </Main>
         
     </div>
   )

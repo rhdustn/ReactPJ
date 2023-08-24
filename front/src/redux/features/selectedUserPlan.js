@@ -18,7 +18,10 @@ export const selectedUserPlan = createSlice({
         state.push({ day: action.payload.day, plan: action.payload.plan });
       }
     },
+    resetSelectedUserPlan: (state, action) => {
+      return [];
+    },
   },
 });
 
-export const { pushPlan } = selectedUserPlan.actions;
+export const { pushPlan, resetSelectedUserPlan } = selectedUserPlan.actions;
