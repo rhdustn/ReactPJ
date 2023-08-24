@@ -53,7 +53,7 @@ const TapMenu = ({user}) => {
   useEffect(() => {
     if(isLoading == false) {
       console.log(isLoading)
-      // console.log(data)
+      console.log(data)
       // setLoad(false)
       setTabArr((tabArr => tabArr.map((tab, index) => {
         if(index == 0){
@@ -77,7 +77,7 @@ const TapMenu = ({user}) => {
   // plan 페이지로 이동
   const moveToPlan = async (id) => {
     try {
-      axios.post('/plan/getPlan', {id})
+      ipUrl.post('/plan/getPlan', {id})
       .then((res) => {
         const response = res.data;
         console.log(response);

@@ -44,7 +44,9 @@ const imgArr = JSON.parse(data.data.images)
         <ImageBtnPre onClick={prevImage}>◀️</ImageBtnPre>
         <ImgBox style={{ transform: `translateX(-${currentImageIndex * (100 / imgArr.length)}%)` }}>
           {imgArr.map((image, index) => (
-            <Image key={index} src={imgPath+"/"+image} style={{ width: '400px' }} alt={`Image ${index + 1}`} />
+            <div>
+              <Image key={index} src={imgPath+"/"+image} alt={`Image ${index + 1}`} />
+            </div>
           ))}
         </ImgBox>
         <ImageBtnNext onClick={nextImage}>▶️</ImageBtnNext>

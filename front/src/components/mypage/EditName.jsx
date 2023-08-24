@@ -44,4 +44,4 @@ const EditName = ({ profileName, setProfileName, setProfileBtnChange }) => {
   );
 };
 
-export default EditName;
+export default React.memo(EditName);

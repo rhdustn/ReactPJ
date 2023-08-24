@@ -8,7 +8,7 @@ import { StyledProfileImg,InputBtn } from './mypage.styled';
 const EditImg = ({profileImg, setProfileImg}) => {
 
   const [selectedFile, setSelectedFile] = useState('');
-  const [imagePreview, setImagePreview] = useState('');
+  const [imagePreview, setImagePreview] = useState(selectedFile);
   const fileInputRef = useRef(null); 
 
   const handleFileChange = (event) => {
@@ -37,6 +37,10 @@ const EditImg = ({profileImg, setProfileImg}) => {
 
   useEffect(() => {
     console.log(selectedFile)
+    if(selectedFile != '') {
+      console.log('dd')
+      setProfileImg(selectedFile)
+    }
   }, [selectedFile])
 
   return (
@@ -62,4 +66,4 @@ const EditImg = ({profileImg, setProfileImg}) => {
   );
 };
 
-export default EditImg;
+export default React.memo(EditImg);

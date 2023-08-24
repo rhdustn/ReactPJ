@@ -6,7 +6,7 @@ import TopNav from "../components/nav/TopNav";
 
 import PlanTop from "../components/plan/PlanTop";
 import PlanMid from "../components/plan/PlanMid";
-import PlanBottom from "../components/plan/PlanBottom";
+import PlanBottomShow from "../components/plan/PlanBottom";
 
 const EditPlan = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -24,28 +24,40 @@ const EditPlan = () => {
 //   });
 
   useEffect(() => {
-    console.log(getSavedPlan)
-    if(getSavedPlan.length > 0) {
-        const {plan, attraction} = getSavedPlan;
-        const dateString = plan.duration;
-        const [startDate, endDate] = dateString.split("~").map(date => new Date(date));
-        setGptAnswerSaved({
-            location : plan.plan,
-            attraction : attraction,
-            startDate : startDate,
-            endDate : endDate,
-            option1 : plan.who,
-            option2 : plan.how
-        })
-        // setUserChoiceSaved({
-        //     planPerDay: [
-        //         {
-        //             day:
-        //         }
-        //     ]
-        // })
-    }
-  }, [getSavedPlan])
+    const {plan, attraction} = getSavedPlan.savedPlan;
+    console.log(plan)
+    console.log(attraction)
+
+    const dateString = plan.duration;
+    const [startDate, endDate] = dateString.split("~").map(date => date);
+    
+    setGptAnswerSaved({
+        location : plan.plan,
+        attractions : attraction,
+        startDate : startDate,
+        endDate : endDate,
+        option1 : [attraction[0].who],
+        option2 : [attraction[0].how]
+    })
+    
+
+    let finalArr = [];
+
+    attraction.map((value, index) => {
+      let arr = attraction.filter(item => item.day == index+1)
+      console.log(arr);
+      finalArr.push(arr)
+    })
+    console.log(finalArr)
+
+
+    setUserChoiceSaved(finalArr)
+
+  }, [])
+
+  useEffect(() => {
+    console.log(gptAnswerSaved)
+  }, [gptAnswerSaved])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -65,27 +77,31 @@ const EditPlan = () => {
     };
   }, []);
 
-    // return (
-    //     <>
-    //     <TopNav isScrolled={isScrolled} gptAnswerSaved={gptAnswerSaved} />
+    return (
+        <>
+        {gptAnswerSaved &&
+        <>
+        <TopNav isScrolled={isScrolled} gptAnswerSaved={gptAnswerSaved} />
 
-    //     <PlanTop gptAnswerSaved={gptAnswerSaved} />
-    //     <PlanMid
-    //         isScrolled={isScrolled}
-    //         gptAnswerSaved={gptAnswerSaved}
-    //         page={"plan"}
-    //         selectedPlanIndex={selectedPlanIndex}
-    //     />
-    //     <PlanBottom
-    //         isScrolled={isScrolled}
-    //         gptAnswe rSaved={gptAnswerSaved}
-    //         userChoiceSaved={userChoiceSaved}
-    //         setSelectedPlanIndex={setSelectedPlanIndex}
-    //     />
+        <PlanTop gptAnswerSaved={gptAnswerSaved} />
+        <PlanMid
+            isScrolled={isScrolled}
+            gptAnswerSaved={gptAnswerSaved}
+            page={"plan"}
+            selectedPlanIndex={selectedPlanIndex}
+        />
+        <PlanBottomShow
+            isScrolled={isScrolled}
+            gptAnswerSaved={gptAnswerSaved}
+            userChoiceSaved={userChoiceSaved}
+            setSelectedPlanIndex={setSelectedPlanIndex}
+        />
 
-    //     <BottomNav page={"plan"} />
-    //     </>
-    // );
+        <BottomNav page={"plan"} />
+        </>
+        }
+        </>
+    );
 }
 
 export default EditPlan;

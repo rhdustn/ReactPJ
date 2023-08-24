@@ -50,6 +50,7 @@ const EditProflie = () => {
     try {
       console.log('수정 저장')
       console.log(profileName)
+      console.log(profileImg)
     } catch (error) {
       console.log(error);
     }
