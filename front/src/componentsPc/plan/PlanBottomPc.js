@@ -12,11 +12,13 @@ import {
   EditPlanBtn,
 } from "./PlanPc.styled";
 
+
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useQueries, useQuery } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { saveAttractionsWithImg } from "../../redux/features/dataForGpt";
+import { ipUrl } from '../../util/util';
 
 // 지도 아래 일정 부분
 const PlanBottomPc = ({
@@ -54,7 +56,7 @@ const PlanBottomPc = ({
 
   // 유저가 세운 계획을 저장하는 로직
   const saveUserPlan = async () => {
-    const savePlan = await axios.post("/plan/save", {
+    const savePlan = await ipUrl.post("/plan/save", {
       selectedUserPlan,
       duration: `${gptAnswerSaved.startDate}~${gptAnswerSaved.endDate}`,
       name: gptAnswerSaved.location,
@@ -77,7 +79,7 @@ const PlanBottomPc = ({
       "&q=" +
       encodeURIComponent(queryKey);
 
-    const getAttPicRes = await axios.get(URL);
+    const getAttPicRes = await ipUrl.get(URL);
     return getAttPicRes.data;
   };
 

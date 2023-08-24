@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios';
 import { CommentFormdiv,CommentInput,CommentBtn } from './boarddetail.styled'
 import { useParams } from 'react-router-dom';
+import { ipUrl } from '../../util/util';
 
 
 const CommentForm = ({onCommentSubmit}) => {
@@ -20,7 +21,7 @@ const CommentForm = ({onCommentSubmit}) => {
 
       try {
         const response = 
-        await axios.post(
+        await ipUrl.post(
             `/post/createComment`,{detail :inputComment,board_id:id},{withCredentials:true}
         )
         const data = response.data;

@@ -3,6 +3,8 @@ import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { ImgBox, ImgBoxContainer, Image, ImageBtnPre, ImageBtnNext } from './boarddetail.styled'
+import { ipUrl } from '../../util/util';
+
 
 const imgPath = '/imgs/userplanimg'
 
@@ -21,7 +23,7 @@ const ImgSlice = () => {
 
   const BoardDetailImg = async ({ queryKey }) => {
     try {
-      const response = await axios.get(`/post/detail/${queryKey[1]}`);
+      const response = await ipUrl.get(`/post/detail/${queryKey[1]}`);
       return response.data
     } catch (error) {
       console.log(error);

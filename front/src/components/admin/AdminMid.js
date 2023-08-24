@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { QueryCache, QueryClient, useMutation, useQuery, useQueryClient } from 'react-query'
-
 import { AdminMidBox, Btn, BtnBox, Title, User, UserBox } from './Admin.styled'
+import { ipUrl } from '../../util/util';
 
 const AdminMid = () => {
     const queryClient = useQueryClient();
@@ -10,7 +10,7 @@ const AdminMid = () => {
     const getUsers = async () => {
         try {
             console.log('어드민')
-            const users = await axios.get("/admin/users")
+            const users = await ipUrl.get("/admin/users")
             const data = users.data;
             return data;
         } catch (error) {
@@ -31,7 +31,7 @@ const AdminMid = () => {
     // 승인
     const tryAuthUser = async (user_id) => {
         try {
-            await axios.post(`/admin/auth/${user_id}`)
+            await ipUrl.post(`/admin/auth/${user_id}`)
         } catch (error) {
             console.log(error);
         }
@@ -39,7 +39,7 @@ const AdminMid = () => {
     // 강등
     const tryUnauthUser = async (user_id) => {
         try {
-            await axios.post(`/admin/unauth/${user_id}`)
+            await ipUrl.post(`/admin/unauth/${user_id}`)
         } catch (error) {
             console.log(error);
         }
@@ -49,7 +49,7 @@ const AdminMid = () => {
     const tryDeleteUser = async (user_id) => {
         console.log(user_id)
         try {
-            await axios.post(`/admin/del/${user_id}`)
+            await ipUrl.post(`/admin/del/${user_id}`)
         } catch (error) {
             console.log(error);
         }

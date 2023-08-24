@@ -3,6 +3,8 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useQuery } from 'react-query'
 import axios from 'axios'
+import { ipUrl } from '../../util/util';
+
 
 import { BottomNavBox, BottomNavBtn, BottomNavText } from './Nav.styled'
 
@@ -79,7 +81,7 @@ const BottomNav = () => {
     // 로그인 유저 정보 가져오기 (profile_img 넣을 예정)
     const tryGetUserInfo = async () => {
         try {
-            const response = await axios.get(`/mypage/getInfo`)
+            const response = await ipUrl.get(`/mypage/getInfo`)
             const data = response.data;
             return data;
         }catch (error) {

@@ -14,6 +14,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { check, reset } from "../../redux/features/login";
+import { ipUrl } from '../../util/util';
+
 const SignupMid = ({ page }) => {
   const [user_id, setId] = useState();
   const [user_pw, setPw] = useState();
@@ -51,7 +53,7 @@ const SignupMid = ({ page }) => {
     } else {
       // useMutation 사용해서 axios post 보내기
       // const data = useMutation();
-      const duplicateIdResult = await axios.post("/user/duplicateId", {
+      const duplicateIdResult = await ipUrl.post("/user/duplicateId", {
         user_id,
       });
 
@@ -87,7 +89,7 @@ const SignupMid = ({ page }) => {
     } else {
       // useMutation 사용해서 axios post 보내기
 
-      const duplicateNickNameResult = await axios.post(
+      const duplicateNickNameResult = await ipUrl.post(
         "/user/duplicateNickName",
         {
           nickname,
@@ -117,7 +119,7 @@ const SignupMid = ({ page }) => {
   const dupChk2Mutation = useMutation(dupChk2);
   // 회원가입 axios zerohoney
   const signUp = async () => {
-    const signUpResult = await axios.post("/user/signUp", {
+    const signUpResult = await ipUrl.post("/user/signUp", {
       user_id,
       user_pw,
       nickname,
@@ -145,7 +147,7 @@ const SignupMid = ({ page }) => {
       return;
     }
 
-    const loginClick = await axios.post(
+    const loginClick = await ipUrl.post(
       "/user/login",
       {
         user_id,

@@ -16,7 +16,7 @@ import {
   MakePlanBtn,
 } from "./Main.styled";
 import { Loading2 } from "../loading/Loading";
-
+import {ipUrl} from '../../util/util'
 const MainBottom = ({ choiceSelected, startDate, endDate }) => {
   const nav = useNavigate();
 
@@ -94,7 +94,7 @@ const MainBottom = ({ choiceSelected, startDate, endDate }) => {
   // post로 gptData를 서버로 보내는 함수
   const sendDataToGpt = async () => {
     setLoading(true);
-    axios
+    ipUrl
       .post("/openAI", { gptData })
       .then((res) => {
         // gpt응답 여기서 state에 저장

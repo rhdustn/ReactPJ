@@ -17,6 +17,7 @@ import axios from "axios";
 import { store } from "../../redux/store/store";
 import { useNavigate } from "react-router-dom";
 import { Loading2 } from "../loading/LoadingPc";
+import { ipUrl } from "../../util/util";
 const MainBottomPc = ({
   isDated,
   choiceSelected,
@@ -69,7 +70,7 @@ const MainBottomPc = ({
   const dispatch = useDispatch();
   // post로 gptData를 서버로 보내는 함수
   const sendDataToGpt = async () => {
-    axios
+    ipUrl
       .post("/openAI", { gptData })
       .then((res) => {
         // gpt응답 여기서 state에 저장

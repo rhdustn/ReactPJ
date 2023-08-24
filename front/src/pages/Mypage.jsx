@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import BottomNav from '../components/nav/BottomNav';
 import { useQuery } from 'react-query';
 import axios from 'axios';
+import { ipUrl } from '../util/util';
+
 
 const Main = styled.div`
   width: 400px;
@@ -22,7 +24,7 @@ const Mypage = () => {
   // 로그인 유저 정보 가져오기
   const tryGetUserInfo = async () => {
     try {
-      const response = await axios.get(`/mypage/getInfo`)
+      const response = await ipUrl.get(`/mypage/getInfo`)
       const data = response.data;
       console.log(data);
       return data;

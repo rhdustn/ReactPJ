@@ -10,6 +10,8 @@ import { ImgSlice, DayBtn, PlanBtn, DayPopup, BoardPlan, Comment } from '../comp
 import BottomNav from '../components/nav/BottomNav';
 import axios from 'axios';
 import { create } from '../redux/features/post';
+import { ipUrl } from '../util/util';
+
 
 const BoardDetail = () => {
   const [popup, setPopup] = useState(false);
@@ -28,7 +30,7 @@ const BoardDetail = () => {
   const BoardDetailView = async ({ queryKey }) => {
     try {
       console.log(queryKey)
-      const response = await axios.get(`/post/detail/${queryKey[1]}`);
+      const response = await ipUrl.get(`/post/detail/${queryKey[1]}`);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -40,7 +42,7 @@ const BoardDetail = () => {
   
   const boardDelet = async () => {
     try {
-      const response = await axios.get(`/post/delete/${id}`);
+      const response = await ipUrl.get(`/post/delete/${id}`);
       const data = response.data;
       if (data === "delete success") {
         navigate("/board");

@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Main, ImgBox, ShowImg, ProflieImg, TextBox, SmallText, SubTitle } from './board.styled';
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
+import { ipUrl } from '../../util/util';
+
 
 const BoardList = ({ id }) => {
   const navigate = useNavigate()
@@ -12,7 +14,7 @@ const BoardList = ({ id }) => {
   const imgPath = '/imgs/userplanimg'
   const list = async () => {
     try {
-      const response = await axios.get(
+      const response = await ipUrl.get(
         "/post/allboard"
       )
       const data = response.data

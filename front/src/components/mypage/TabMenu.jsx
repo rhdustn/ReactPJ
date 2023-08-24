@@ -8,6 +8,8 @@ import { useDispatch } from 'react-redux';
 
 import { getSaved } from '../../redux/features/getSavedPlan';
 
+import { ipUrl } from '../../util/util';
+
 
 const TapMenu = ({user}) => {
   const nav = useNavigate();
@@ -31,10 +33,10 @@ const TapMenu = ({user}) => {
   const tryGetAll = async () => {
     console.log('머지')
     try {
-      const response1 = await axios.get(`/mypage/getPlan`)
-      const response2 = await axios.get(`/mypage/getReview`)
-      // const response3 = await axios.get(`/mypage/getComment`)
-      // const response4 = await axios.get(`/mypage/getNotice`)
+      const response1 = await ipUrl.get(`/mypage/getPlan`)
+      const response2 = await ipUrl.get(`/mypage/getReview`)
+      const response3 = await ipUrl.get(`/mypage/getComment`)
+      const response4 = await ipUrl.get(`/mypage/getNotice`)
       const data1 = response1.data;
       const data2 = response2.data;
       // const data3 = response3.data;
