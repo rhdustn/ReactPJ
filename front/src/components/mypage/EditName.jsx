@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyledProfileName } from './mypage.styled';
 
 
-const EditName = ({ setProfileBtnChange }) => {
+const EditName = ({ profileName, setProfileName, setProfileBtnChange }) => {
   const [editing, setEditing] = useState(false);
   const [name, setName] = useState("");
 
@@ -10,20 +10,21 @@ const EditName = ({ setProfileBtnChange }) => {
     setEditing(true);
   };
 
-  const NameChange = (e) => {
-    const newName = e.target.value;
-    setName(newName);
-
-    if (newName === name) {
-      setProfileBtnChange(false);
-    } else {
+  const NameBlur = () => {
+    setEditing(false);
+    if(name == '') {
+      setProfileName(profileName)
+      setProfileBtnChange(false)
+    }else {
+      setProfileName(name)
       setProfileBtnChange(true);
     }
   };
 
-  const NameBlur = () => {
-    setEditing(false);
-  };
+  useEffect(() => {
+    console.log(profileName)
+  }, [])
+
 
   return (
     <StyledProfileName onClick={NameClick}>
@@ -31,12 +32,12 @@ const EditName = ({ setProfileBtnChange }) => {
         <input
           type="text"
           value={name}
-          onChange={NameChange}
+          onChange={(e) => {setName(e.target.value)}}
           onBlur={NameBlur}
           autoFocus
         />
       ) : (
-        name || '닉네임 설정'
+        name || profileName
       )}
     </StyledProfileName>
   );

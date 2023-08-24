@@ -9,6 +9,7 @@ const AdminMid = () => {
 
     const getUsers = async () => {
         try {
+            console.log('어드민')
             const users = await axios.get("/admin/users")
             const data = users.data;
             return data;
@@ -22,6 +23,9 @@ const AdminMid = () => {
     useEffect(() => {
         console.log(data)
     }, [data])
+    useEffect(() => {
+        console.log(isLoading)
+    }, [isLoading])
 
 
     // 승인

@@ -3,9 +3,9 @@ import { Button } from './mypage.styled';
 
 
 
-const EditBtn = ({ change }) => {
+const EditBtn = ({ change, trySaveUserInfo }) => {
 return (
-  <Button change={change}>
+  <Button change={change} onClick={trySaveUserInfo}>
     수정 완료
   </Button>
 );

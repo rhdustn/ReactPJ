@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { MypageImg, TapMenu, MypageName, MoveEdit } from '../components/mypage'
 import styled from 'styled-components';
 import BottomNav from '../components/nav/BottomNav';
@@ -7,7 +7,7 @@ import axios from 'axios';
 
 const Main = styled.div`
   width: 400px;
-  height: 800px;
+  height: 100vh;
   position: relative;
   left: 50%;
   transform: translate(-50%);
@@ -15,6 +15,9 @@ const Main = styled.div`
 
 
 const Mypage = () => {
+
+  const [load, setLoad] = useState(false)
+
   // 로그인 유저 정보 가져오기
   const tryGetUserInfo = async () => {
     try {
@@ -27,20 +30,24 @@ const Mypage = () => {
     }
   }
 
-  const {data, isLoading} = useQuery(['getUser'], tryGetUserInfo)
+  const {data, isLoading} = useQuery(['getUserMypage'], tryGetUserInfo, {
+    enabled : load
+  })
 
   return (
     <div>
-      <Main>
-        <MoveEdit />
-        <MypageImg />
-        <MypageName />
-        <TapMenu />
-      </Main>
+      {!isLoading &&
+      <>
+        <Main>
+          <MoveEdit />
+          <MypageImg profile_img={data.profile_img} />
+          <MypageName nickname={data.nickname} />
+          <TapMenu user={data} />
+        </Main>
 
-      <BottomNav/>
-
-
+        <BottomNav/>
+      </>      
+      }
     </div>
   )
 }
