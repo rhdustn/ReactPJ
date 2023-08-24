@@ -3,14 +3,15 @@ import axios from 'axios'
 import { QueryCache, QueryClient, useMutation, useQuery, useQueryClient } from 'react-query'
 
 import { AdminMidBox, Btn, BtnBox, Title, User, UserBox } from './AdminPc.styled'
-import { ipUrl } from '../../util/util';
+
+import { ipUrl } from '../../utl/util';
 
 const AdminMidPc = () => {
     const queryClient = useQueryClient();
 
     const getUsers = async () => {
         try {
-            const users = await axios.get("/admin/users")
+            const users = await ipUrl.get("/admin/users")
             const data = users.data;
             return data;
         } catch (error) {
@@ -28,7 +29,7 @@ const AdminMidPc = () => {
     // 승인
     const tryAuthUser = async (user_id) => {
         try {
-            await axios.post(`/admin/auth/${user_id}`)
+            await ipUrl.post(`/admin/auth/${user_id}`)
         } catch (error) {
             console.log(error);
         }
@@ -36,7 +37,7 @@ const AdminMidPc = () => {
     // 강등
     const tryUnauthUser = async (user_id) => {
         try {
-            await axios.post(`/admin/unauth/${user_id}`)
+            await ipUrl.post(`/admin/unauth/${user_id}`)
         } catch (error) {
             console.log(error);
         }
@@ -46,7 +47,7 @@ const AdminMidPc = () => {
     const tryDeleteUser = async (user_id) => {
         console.log(user_id)
         try {
-            await axios.post(`/admin/del/${user_id}`)
+            await ipUrl.post(`/admin/del/${user_id}`)
         } catch (error) {
             console.log(error);
         }

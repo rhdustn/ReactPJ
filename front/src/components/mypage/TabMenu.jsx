@@ -4,7 +4,8 @@ import axios from 'axios'
 import { TabMain,TabButton,TabsContainer,Content, ContentOne } from './mypage.styled';
 import { useQuery } from 'react-query';
 
-import { ipUrl } from '../../util/util';
+import { ipUrl } from '../../utl/util';
+
 
 const TapMenu = ({user}) => {
   const [tab, setTab] = useState(0);
@@ -45,10 +46,10 @@ const TapMenu = ({user}) => {
   // 유저가 만든 일정 가져오기
   const tryGetAll = async () => {
     try {
-      const response1 = await axios.get(`/mypage/getPlan`)
-      const response2 = await axios.get(`/mypage/getReview`)
-      const response3 = await axios.get(`/mypage/getComment`)
-      const response4 = await axios.get(`/mypage/getNotice`)
+      const response1 = await ipUrl.get(`/mypage/getPlan`)
+      const response2 = await ipUrl.get(`/mypage/getReview`)
+      const response3 = await ipUrl.get(`/mypage/getComment`)
+      const response4 = await ipUrl.get(`/mypage/getNotice`)
       const data1 = response1.data;
       const data2 = response2.data;
       const data3 = response3.data;

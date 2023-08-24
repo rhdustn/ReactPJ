@@ -6,7 +6,8 @@ import { PostPlan, ImgUpload } from '../components/post';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 
-import { ipUrl } from '../util/util';
+import { ipUrl } from '../utl/util';
+
 
 const BoardEdit = () => {
   const { id } = useParams();
@@ -23,7 +24,7 @@ const BoardEdit = () => {
   //   const fetchPostData = async () => {
   //     try {
   //       // 게시판 정보 가져오기
-  //       const response = await axios.get(`/detail/${id}`); 
+  //       const response = await ipUrl.get(`/detail/${id}`); 
   //       const postData = response.data; 
   //       console.log(postData)
   //     } catch (error) {
@@ -50,7 +51,7 @@ const BoardEdit = () => {
 console.log(title)
 console.log(detail)
     try {
-      const response = await axios.post(
+      const response = await ipUrl.post(
         `/post/edit/${id}`,
         formData,
         {

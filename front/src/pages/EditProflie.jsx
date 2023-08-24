@@ -7,7 +7,8 @@ import styled from 'styled-components';
 import TopNav from '../components/nav/TopNav';
 import { useSelector } from 'react-redux';
 import { ProfileName } from '../components/mypage/mypage.styled';
-import { ipUrl } from '../util/util';
+import { ipUrl } from '../utl/util';
+
 
 const EditProflie = () => {
   const Main = styled.div`
@@ -25,7 +26,7 @@ const EditProflie = () => {
   // 로그인 유저 정보 가져오기
   const tryGetUserInfo = async () => {
     try {
-      const response = await axios.get(`/mypage/getInfo`)
+      const response = await ipUrl.get(`/mypage/getInfo`)
       const data = response.data;
       console.log(data);
       return data;
