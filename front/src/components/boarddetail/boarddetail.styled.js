@@ -363,24 +363,43 @@ align-items: flex-start;
 const CommentEditInput = styled.input`
 position: absolute;
 left: 15%;
+top: 15%;
+height: 40px;
 border: 2px solid lightblue;
 `
 const CommentEditButton = styled.button`
 position: absolute;
-left: 60%;
+left: 65%;
 width: 50px;
-height: 20px;
+top: 20%;
+height: 40px;
 border: 2px solid lightblue;
 background-color: transparent;
 ` 
 const CommentDelButton = styled.button`
 position: absolute;
-left: 73%;
+left: 80%;
+top: 20%;
 width: 50px;
-height: 20px;
+height: 40px;
 border: 2px solid lightcoral;
 background-color: white;
 ` 
+const InputContain = styled.div`
+
+`
+
+const HandleEditCheck = styled.div`
+width: 40px;
+height: 20px;
+border: 1px solid;
+`
+const HandleDeleteCheck = styled.div`
+width: 40px;
+height: 20px;
+border: 1px solid;
+`
+
 
 export {
     Main, ImgBoxContainer, ImgBox,Image, TitleStyle, SubContentStyle,
@@ -389,5 +408,6 @@ export {
     CommentInput,CommentBtn,CommentProflieImg,CommentContain,CommentContain2,Recommentdiv,
     Recommentbox,CommentContain3,Repliesdiv,RelpyInput,RelpyBtn,RelpyBtn2,Replyspan,
     CommentProflieImg2,MoveBoardBtn,ButtonBox,ShowButtonBox,EditImg,HeaderDiv,EditBtnStyle,DelBtnStyle,
-    Reasd,CommentEditInput,CommentEditButton,CommentDelButton
+    Reasd,CommentEditInput,CommentEditButton,CommentDelButton,InputContain,HandleEditCheck,
+    HandleDeleteCheck
 }
