@@ -1,4 +1,4 @@
-import styled,{keyframes} from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 const Main = styled.div`
 width: 400px;
@@ -20,7 +20,7 @@ display: flex;
 transition: transform 0.3s ease;
 
 `
- const Image = styled.img`
+const Image = styled.img`
   width: 400px;
   height: 250px;
   overflow-y: hidden;
@@ -152,7 +152,7 @@ const AddStyle = styled.button`
 `
 const imgStyle = {
   width: '18px'
-  
+
 };
 
 const CommentContainer = styled.div`
@@ -227,11 +227,11 @@ height: 50px;
 align-items: center;
 display: flex;
  
-` 
+`
 const CommentContain2 = styled.div`
     display: flex;
     align-items: flex-start;
-    width: 250px;
+    width: 240px;
     flex-direction: column;
     margin-left: 15px;
     
@@ -362,52 +362,104 @@ align-items: flex-start;
 `
 const CommentEditInput = styled.input`
 position: absolute;
-left: 15%;
-top: 15%;
-height: 40px;
-border: 2px solid lightblue;
+width: 220px;
+  height: 32px;
+  font-size: 15px;
+  border: 0;
+  border-radius: 15px;
+  outline: none;
+  padding-left: 10px;
+  background-color: rgb(233, 233, 233);
+  left: 5%;
+  top: 40%;
+
 `
 const CommentEditButton = styled.button`
 position: absolute;
 left: 65%;
 width: 50px;
-top: 20%;
-height: 40px;
-border: 2px solid lightblue;
-background-color: transparent;
-` 
+top: 50%;
+width: 50px;
+height: 20px;
+border-radius: 15px;
+background: lightblue;
+border: none;
+`
 const CommentDelButton = styled.button`
 position: absolute;
 left: 80%;
-top: 20%;
+top: 50%;
 width: 50px;
-height: 40px;
-border: 2px solid lightcoral;
-background-color: white;
-` 
+height: 20px;
+border-radius: 15px;
+background-color: lightcoral;
+border: none;
+`
 const InputContain = styled.div`
 
 `
 
 const HandleEditCheck = styled.div`
-width: 40px;
-height: 20px;
-border: 1px solid;
+background: lightblue;
+border: none;
+height: 25px;
+width: 35px;
+border-radius: 15px;
+display: flex;
+justify-content: center;
+align-items: center;
+transform: translate(0,1px);
+
 `
 const HandleDeleteCheck = styled.div`
-width: 40px;
-height: 20px;
-border: 1px solid;
+background: lightcoral;
+border: none;
+height: 25px;
+width: 35px;
+border-radius: 15px;
+display: flex;
+justify-content: center;
+align-items: center;
+transform: translate(0,2px);
 `
+
+const LikeSize = styled.img`
+width: 30px;
+height: 30px;
+`
+
+const CommentEditImg = styled.img`
+width: 20px;
+height: 20px;
+position: absolute;
+right: 5%;
+top: 25%;
+`
+const ShowButtonBox2 = styled.div`
+width: 50px;
+height: 80px;
+background-color:rgba(0, 0, 0, 0.2);
+z-index: 5;
+display: flex;
+position: relative;
+border-radius: 10px;
+z-index: 20;
+
+    top: 30%;
+    right: 10%;
+    display: flex;
+    justify-content: center;
+`
+
 
 
 export {
-    Main, ImgBoxContainer, ImgBox,Image, TitleStyle, SubContentStyle,
-    Popup, PopupContent, DayList, DayListli,BtnStyle,ImageBtnPre,ImageBtnNext,
-    BoardLine,BoardPlanContainer,AddStyle,imgStyle,CommentContainer,CommentMain,CommentFormdiv,
-    CommentInput,CommentBtn,CommentProflieImg,CommentContain,CommentContain2,Recommentdiv,
-    Recommentbox,CommentContain3,Repliesdiv,RelpyInput,RelpyBtn,RelpyBtn2,Replyspan,
-    CommentProflieImg2,MoveBoardBtn,ButtonBox,ShowButtonBox,EditImg,HeaderDiv,EditBtnStyle,DelBtnStyle,
-    Reasd,CommentEditInput,CommentEditButton,CommentDelButton,InputContain,HandleEditCheck,
-    HandleDeleteCheck
+  Main, ImgBoxContainer, ImgBox, Image, TitleStyle, SubContentStyle,
+  Popup, PopupContent, DayList, DayListli, BtnStyle, ImageBtnPre, ImageBtnNext,
+  BoardLine, BoardPlanContainer, AddStyle, imgStyle, CommentContainer, CommentMain, CommentFormdiv,
+  CommentInput, CommentBtn, CommentProflieImg, CommentContain, CommentContain2, Recommentdiv,
+  Recommentbox, CommentContain3, Repliesdiv, RelpyInput, RelpyBtn, RelpyBtn2, Replyspan,
+  CommentProflieImg2, MoveBoardBtn, ButtonBox, ShowButtonBox, EditImg, HeaderDiv, EditBtnStyle, DelBtnStyle,
+  Reasd, CommentEditInput, CommentEditButton, CommentDelButton, InputContain, HandleEditCheck,
+  HandleDeleteCheck, LikeSize, CommentEditImg, ShowButtonBox2
 }
