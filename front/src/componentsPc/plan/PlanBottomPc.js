@@ -18,7 +18,7 @@ import axios from "axios";
 import { useQueries, useQuery } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { saveAttractionsWithImg } from "../../redux/features/dataForGpt";
-import { ipUrl } from '../../utl/util';
+import { ipUrl } from '../../util/util';
 
 // 지도 아래 일정 부분
 const PlanBottomPc = ({

@@ -10,7 +10,7 @@ import { ImgSlice, DayBtn, PlanBtn, DayPopup, BoardPlan, Comment } from '../comp
 import BottomNav from '../components/nav/BottomNav';
 import axios from 'axios';
 import { create } from '../redux/features/post';
-import { ipUrl } from '../utl/util';
+import { ipUrl } from '../util/util';
 
 
 const BoardDetail = () => {

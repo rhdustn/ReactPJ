@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useQuery } from 'react-query'
 import axios from 'axios'
-import { ipUrl } from '../../utl/util';
+import { ipUrl } from '../../util/util';
 
 
 import { BottomNavBox, BottomNavBtn, BottomNavText } from './Nav.styled'

@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import TopNav from '../components/nav/TopNav';
 import { useSelector } from 'react-redux';
 import { ProfileName } from '../components/mypage/mypage.styled';
-import { ipUrl } from '../utl/util';
+import { ipUrl } from '../util/util';
 
 
 const EditProflie = () => {

@@ -16,7 +16,7 @@ import {
   MakePlanBtn,
 } from "./Main.styled";
 import { Loading2 } from "../loading/Loading";
-
+import {ipUrl} from '../../util/util'
 const MainBottom = ({ choiceSelected, startDate, endDate }) => {
   const nav = useNavigate();
 

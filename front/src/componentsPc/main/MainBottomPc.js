@@ -17,6 +17,7 @@ import axios from "axios";
 import { store } from "../../redux/store/store";
 import { useNavigate } from "react-router-dom";
 import { Loading2 } from "../loading/LoadingPc";
+import { ipUrl } from "../../util/util";
 const MainBottomPc = ({
   isDated,
   choiceSelected,

@@ -4,7 +4,7 @@ import { QueryCache, QueryClient, useMutation, useQuery, useQueryClient } from '
 
 import { AdminMidBox, Btn, BtnBox, Title, User, UserBox } from './AdminPc.styled'
 
-import { ipUrl } from '../../utl/util';
+import { ipUrl } from '../../util/util';
 
 const AdminMidPc = () => {
     const queryClient = useQueryClient();

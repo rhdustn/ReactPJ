@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Main, ImgBox, ShowImg, ProflieImg, TextBox, SmallText, SubTitle } from './board.styled';
 import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
-import { ipUrl } from '../../utl/util';
+import { ipUrl } from '../../util/util';
 
 
 const BoardList = ({ id }) => {
