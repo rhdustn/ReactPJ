@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const multer = require("multer")
 const {isLogin} = require("../controllers/isLogin")
 const {getUserInfo, updateUserInfo, getUserPlan, getUserReview, getUserComment, getUserNotice} = require("../controllers/mypageControllers")
 

@@ -35,6 +35,7 @@ const EditName = ({ profileName, setProfileName, setProfileBtnChange }) => {
           onChange={(e) => {setName(e.target.value)}}
           onBlur={NameBlur}
           autoFocus
+          maxLength={10}
         />
       ) : (
         name || profileName

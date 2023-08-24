@@ -13,7 +13,7 @@ const StyledImage = styled.img`
 const Button = styled.div`
   position: absolute;
   left: 50%;
-  top: 40%;
+  top: 45%;
   transform: translate(-50%, -40%);
   width: 250px;
   border-radius:  5px;
@@ -30,7 +30,8 @@ const StyledProfileImg = styled.div`
   width: 100px;
   height: 100px;
   border-radius: 50%;
-  background-color: #277bc0;
+  background-color: white;
+  border: 2px solid #277bc0;
   position: absolute;  
   left: 50%;
   top: 15%;
@@ -63,16 +64,17 @@ const StyledProfileName = styled.div`
   & input {
     outline: none;
     border: none;
+    text-align: center;
   }
 `;
 
 const Text = styled.div`
   position: absolute;  
   left: 50%;
-  top: 45%;
+  top: 33%;
   transform: translate(-50%, -45%);
   width: 250px;
-  font-size: 12px;
+  font-size: 10px;
 `
 
 const EditNavigate = styled.div`
@@ -160,21 +162,39 @@ const ContentOne = styled.div`
     display: flex; justify-content: start; align-items: end;
     position: absolute;
     top: 0; left: 10%;
+    font-weight: bold;
   }
   & .duration {
-    width: 40%; height: 40%;
+    width: 70%; height: 40%;
     display: flex; justify-content: start; align-items: start;
     font-size: 12px;
     position: absolute;
     top: 60%; left: 10%;
   }
+  & .imgs {
+    width: 20%; height: 100%;
+    position: absolute; top: 0; right: 5px;
+    display: flex; justify-content: end; align-items: center;
+    padding: 5px;
+    box-sizing: border-box;
+  }
+  & .imgs img {
+    height: 90%;
+    border-radius: 10px;
+  }
+`
+const Coming = styled.div`
+  height: 15%;
+  border-bottom: ${(props) => props.line || '1px solid #277bc0ß'};
+  font-size: 10px;
+  padding: 5px;
 `
 
 
 
 export {StyleArrow,StyledImage,Button,StyledProfileImg,InputBtn,StyledProfileName,
     Text, EditNavigate, ProflieImg, ProfileName, TabMain, TabsContainer, TabButton, 
-    Content, ContentOne
+    Content, ContentOne, Coming
 }
 
 

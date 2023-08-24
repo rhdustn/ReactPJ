@@ -1,40 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 
-import { TabMain,TabButton,TabsContainer,Content, ContentOne } from './mypage.styled';
-import { useQuery } from 'react-query';
+import { TabMain,TabButton,TabsContainer,Content, ContentOne, Coming } from './mypage.styled';
+import { useMutation, useQuery } from 'react-query';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+
+import { getSaved } from '../../redux/features/getSavedPlan';
 
 
 const TapMenu = ({user}) => {
+  const nav = useNavigate();
+  const dispatch = useDispatch();
+
+  const [load, setLoad] = useState(true)
+
   const [tab, setTab] = useState(0);
   const [tabArr, setTabArr] = useState([
-    { name: "My Trip", content: [
-      {
-        id : 1,
-        location : '일본',
-        duration : '2023.08.02 ~ 2023.08.05',
-        option1 : ['혼자서'],
-        option2 : ['체험']
-      },
-      {
-        id : 2,
-        location : '미국',
-        duration : '2023.08.05 ~ 2023.08.19',
-        option1 : ['혼자서'],
-        option2 : ['체험']
-      },
-    ] },
-    { name: "Review", content: [
-      {
-        id : 1,
-        title : '어쩌고',
-        location : '일본',
-        duration : '2023.08.02 ~ 2023.08.05',
-        date : '작성날짜'
-      }
-    ] },
-    { name: "Comments", content: [] },
-    { name: "Alarm", content: [] }
+    { name: "내 여행", content: [] },
+    { name: "리뷰", content: [] },
+    { name: "댓글", content: [] },
+    { name: "알림", content: [] }
   ])
 
   const selectMenuHandler = (index) => {
@@ -43,33 +29,69 @@ const TapMenu = ({user}) => {
 
   // 유저가 만든 일정 가져오기
   const tryGetAll = async () => {
+    console.log('머지')
     try {
       const response1 = await axios.get(`/mypage/getPlan`)
       const response2 = await axios.get(`/mypage/getReview`)
-      const response3 = await axios.get(`/mypage/getComment`)
-      const response4 = await axios.get(`/mypage/getNotice`)
+      // const response3 = await axios.get(`/mypage/getComment`)
+      // const response4 = await axios.get(`/mypage/getNotice`)
       const data1 = response1.data;
       const data2 = response2.data;
-      const data3 = response3.data;
-      const data4 = response4.data;
-      return {data1, data2, data3, data4};
+      // const data3 = response3.data;
+      // const data4 = response4.data;
+      return {data1, data2};
 
     } catch (error) {
       console.log(error);
     }
   }
 
-  // const {data1, data2, data3, data4, isLoading} = useQuery(['getAll'], tryGetAll)
+  const {data, isLoading} = useQuery(['getAll'], tryGetAll)
 
-  // useEffect(() => {
-  //   if(!isLoading) {
-  //     setTabArr()
-  //   }
-  // }, [isLoading])
+  useEffect(() => {
+    if(isLoading == false) {
+      console.log(isLoading)
+      // console.log(data)
+      // setLoad(false)
+      setTabArr((tabArr => tabArr.map((tab, index) => {
+        if(index == 0){
+          return {...tab, content: data.data1}
+        }else if(index == 1) {
+          return {...tab, content: data.data2}
+        }else if(index == 2) {
+          return {...tab, content: []}
+        }else if(index == 3) {
+          return {...tab, content: []}
+        }
+      })))
+    }
+  }, [isLoading])
 
   useEffect(() => {
     console.log(tabArr)
   }, [tabArr])
+
+
+  // plan 페이지로 이동
+  const moveToPlan = async (id) => {
+    try {
+      axios.post('/plan/getPlan', {id})
+      .then((res) => {
+        const response = res.data;
+        console.log(response);
+        dispatch(getSaved(response))
+        nav('/editPlan')
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const getPlan = useMutation(moveToPlan);
 
   return (
     <div>
@@ -89,19 +111,42 @@ const TapMenu = ({user}) => {
         <Content>
           {tabArr[tab].content.map((value, index) => {
             if(tab == 0) {
+              let isComing;
+              let lineCol;
+              const dateString = value.duration;
+              const [startDate, endDate] = dateString.split("~").map(date => new Date(date));
+              const today = new Date();
+              if(today < startDate) {
+                isComing = '여행 시작 전'
+                lineCol = '1px solid red'
+              }else if(today >= startDate && today <= endDate) {
+                isComing = '여행 중'
+                lineCol = '1px solid #277bc0'
+              }else {
+                isComing = '여행 끝'
+                lineCol = '1px solid silver'
+              }
+
               return (
-                <ContentOne>
+                <ContentOne onClick={() => {getPlan.mutate(value.id)}}>
                   <div className='index'>{index+1}</div>
-                  <div className='location'>{value.location}</div>
+                  <div className='location'>{value.plan} 여행</div>
                   <div className='duration'>{value.duration}</div>
+                  <div className='imgs'>
+                    <Coming line={lineCol}>{isComing}</Coming>
+                  </div>
                 </ContentOne>
               )
             }else if(tab == 1) {
+              let firstImg = JSON.parse(value.images);
               return (
-                <ContentOne>
+                <ContentOne onClick={() => {nav(`/boarddetail/${value.id}`)}}>
                   <div className='index'>{index+1}</div>
-                  <div className='location'>{value.location}</div>
-                  <div className='duration'>{value.duration}</div>
+                  <div className='location'>{value.title}</div>
+                  <div className='duration'>{value.detail}</div>
+                  <div className='imgs'>
+                    <img src={`/imgs/userplanimg/${firstImg[0]}`}></img>
+                  </div>
                 </ContentOne>
               )
             }else if(tab == 2) {

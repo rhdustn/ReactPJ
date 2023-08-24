@@ -3,6 +3,7 @@ import Login from "./Login"
 
 import Main from "./Main";
 import Plan from "./Plan";
+import EditPlan from "./EditPlan"
 import AddPlace from "./AddPlace";
 
 import Mypage from "./Mypage";
@@ -20,6 +21,7 @@ export {
   Login,
   Main,
   Plan,
+  EditPlan,
   Mypage,
   EditProflie,
   Board,

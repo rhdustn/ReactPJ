@@ -50,3 +50,15 @@ exports.SavePlan = async (req, res) => {
     console.log(error);
   }
 };
+
+exports.GetPlan = async (req, res) => {
+  try {
+    const {id} = req.body;
+    console.log(id);
+    const plan = await Plan.findOne({where : {id}})
+    const attraction = await Attraction.findAll({where : {plan_id : plan.id}})
+    res.json({plan, attraction})
+  } catch (error) {
+    console.log(error);
+  }
+}

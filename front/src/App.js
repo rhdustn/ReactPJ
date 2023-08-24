@@ -6,6 +6,7 @@ import {
   Login,
   Main,
   Plan,
+  EditPlan,
   AddPlace,
   Mypage,
   EditProflie,
@@ -112,6 +113,17 @@ const isMobile = useMediaQuery({
                 <PlanBody>
                   <PlanPc />
                 </PlanBody>
+              </PcBody>
+            )
+          }
+        />
+        <Route
+          path="/editPlan"
+          element={
+            isMobile ? (
+              <EditPlan />
+            ) : (
+              <PcBody>
               </PcBody>
             )
           }

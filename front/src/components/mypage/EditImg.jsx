@@ -6,14 +6,14 @@ import { StyledProfileImg,InputBtn } from './mypage.styled';
 
 
 const EditImg = ({profileImg, setProfileImg}) => {
-  const default_profile = '/imgs/profiles/default_profile.jpeg'
 
-  const [selectedFile, setSelectedFile] = useState(profileImg);
-  const [imagePreview, setImagePreview] = useState(profileImg);
+  const [selectedFile, setSelectedFile] = useState('');
+  const [imagePreview, setImagePreview] = useState('');
   const fileInputRef = useRef(null); 
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
+    console.log(file);
     setSelectedFile(file);
 
     if (file) {
@@ -39,23 +39,18 @@ const EditImg = ({profileImg, setProfileImg}) => {
     console.log(selectedFile)
   }, [selectedFile])
 
-  useEffect(() => {
-    if(profileImg == null) {
-      setSelectedFile(default_profile)
-      setImagePreview(default_profile)
-    }
-  }, [])
-
   return (
     <>
       <StyledProfileImg onClick={handleImageClick} preview={imagePreview}>
-        {selectedFile ? '' : 'imgs'}
+        {selectedFile ? '' : '프로필 선택'}
       </StyledProfileImg>
       <InputBtn>
         <input
           type="file"
           name="file"
-          onChange={handleFileChange}
+          onChange={(e) => {
+            handleFileChange(e)
+          }}
           ref={fileInputRef} 
           style={{ display: 'none' }}
         />

@@ -16,10 +16,10 @@ const EditProflie = () => {
     left: 50%;
     transform: translate(-50%);
   `
-  const [load, setLoad] = useState(false)
+  const [load, setLoad] = useState(true)
   const [profileBtnChange, setProfileBtnChange] = useState(false);
   const [profileName, setProfileName] = useState("");
-  const [profileImg, setProfileImg] = useState();
+  const [profileImg, setProfileImg] = useState("");
 
   // 로그인 유저 정보 가져오기
   const tryGetUserInfo = async () => {
@@ -38,6 +38,7 @@ const EditProflie = () => {
 
   useEffect(() => {
     if(!isLoading) {
+      setLoad(false)
       setProfileName(data.nickname)
       setProfileImg(data.profile_img)
     }
@@ -59,7 +60,7 @@ const EditProflie = () => {
        <Main>
         {!isLoading &&
           <>
-          <EditImg profileImg={profileImg} setProfileImg={setProfileImg} />
+          <EditImg profileImg={profileImg} setProfileImg={setProfileImg} setProfileBtnChange={setProfileBtnChange} />
           <EditName profileName={profileName} setProfileName={setProfileName} setProfileBtnChange={setProfileBtnChange}/>
           <EditBtn change={profileBtnChange} trySaveUserInfo={trySaveUserInfo} />
           <EditText/>
