@@ -3,6 +3,7 @@ import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { ImgBox, ImgBoxContainer, Image, ImageBtnPre, ImageBtnNext } from './boarddetail.styled'
+import { ipUrl } from '../../util/util';
 
 const imgPath = '/imgs/userplanimg'
 

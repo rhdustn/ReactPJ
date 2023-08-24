@@ -4,6 +4,7 @@ import axios from 'axios'
 import { TabMain,TabButton,TabsContainer,Content, ContentOne } from './mypage.styled';
 import { useQuery } from 'react-query';
 
+import { ipUrl } from '../../util/util';
 
 const TapMenu = ({user}) => {
   const [tab, setTab] = useState(0);

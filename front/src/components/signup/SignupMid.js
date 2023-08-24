@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import axios from 'axios'
 
 import { check, reset } from '../../redux/features/login'
+import { ipUrl } from '../../util/util';
 
 import { Input, InputBox, Label, SignupMidBox, Text, ChkBtn, Title, TryBtn } from './Signup.styled'
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios';
 import { CommentFormdiv,CommentInput,CommentBtn } from './boarddetail.styled'
 import { useParams } from 'react-router-dom';
-
+import { ipUrl } from '../../util/util';
 
 const CommentForm = ({onCommentSubmit}) => {
     const [inputComment, setInputComment] = useState('');

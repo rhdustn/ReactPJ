@@ -6,6 +6,7 @@ import { PostPlan, ImgUpload } from '../components/post';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 
+import { ipUrl } from '../util/util';
 
 const BoardEdit = () => {
   const { id } = useParams();

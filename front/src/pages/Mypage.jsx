@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import BottomNav from '../components/nav/BottomNav';
 import { useQuery } from 'react-query';
 import axios from 'axios';
+import { ipUrl } from '../util/util';
 
 const Main = styled.div`
   width: 400px;

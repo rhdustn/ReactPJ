@@ -3,6 +3,7 @@ import axios from 'axios'
 import { QueryCache, QueryClient, useMutation, useQuery, useQueryClient } from 'react-query'
 
 import { AdminMidBox, Btn, BtnBox, Title, User, UserBox } from './AdminPc.styled'
+import { ipUrl } from '../../util/util';
 
 const AdminMidPc = () => {
     const queryClient = useQueryClient();

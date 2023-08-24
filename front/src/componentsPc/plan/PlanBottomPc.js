@@ -11,6 +11,7 @@ import {
   SavePlanBtn,
   EditPlanBtn,
 } from "./PlanPc.styled";
+import { ipUrl } from '../../util/util';
 
 import { useNavigate } from "react-router-dom";
 import axios from "axios";

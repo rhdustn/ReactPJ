@@ -7,7 +7,7 @@ import {
   RelpyBtn2, CommentProflieImg2, Reasd, CommentEditInput, CommentEditButton, CommentDelButton,
   HandleEditCheck, InputContain, HandleDeleteCheck
 } from './boarddetail.styled';
-
+import { ipUrl } from '../../util/util';
 const CommentList = ({ comments }) => {
   const [replies, setReplies] = useState([]);
   const [replyText, setReplyText] = useState('');

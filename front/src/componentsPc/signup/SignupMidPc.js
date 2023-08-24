@@ -14,6 +14,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { check, reset } from "../../redux/features/login";
+import { ipUrl } from "../../util/util";
+
 const SignupMid = ({ page }) => {
   const [user_id, setId] = useState();
   const [user_pw, setPw] = useState();

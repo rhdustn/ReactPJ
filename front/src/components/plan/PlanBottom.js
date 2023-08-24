@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useQueries } from "react-query";
 import axios from "axios";
+import { ipUrl } from '../../util/util';
 
 import {
   PlanBottomBox,
