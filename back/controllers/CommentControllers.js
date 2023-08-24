@@ -42,6 +42,7 @@ exports.createComment = async (req, res) => {
 exports.editComment = async (req, res) => {
     const { id } = req.params
     const { detail } = req.body;
+    console.log(detail)
     try {
         await Comment.update({ detail }, { where: { id } })
         res.send("comment success")

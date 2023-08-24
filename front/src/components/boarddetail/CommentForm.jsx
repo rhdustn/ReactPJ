@@ -25,9 +25,7 @@ const CommentForm = ({onCommentSubmit}) => {
         )
         const data = response.data;
         console.log(data)
-        if (data === "create success") {
-          window.location.reload();
-        }
+
       } catch (error) {
         console.log(error)
       }

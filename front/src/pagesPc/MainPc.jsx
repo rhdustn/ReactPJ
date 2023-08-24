@@ -7,11 +7,11 @@ import "animate.css";
 // import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import BottomNavPc from "../componentsPc/nav/BottomNavPc";
-import { insert, reset } from "../redux/features/dataForGpt";
+import { insert, reset ,resetAttractionsWithImg} from "../redux/features/dataForGpt";
 import MainTopPc from "../componentsPc/main/MainTopPc";
 import MainMidPc from "../componentsPc/main/MainMidPc";
 import MainBottomPc from "../componentsPc/main/MainBottomPc";
-
+import { resetSelectedUserPlan } from "../redux/features/selectedUserPlan";
 // fadeIn
 const FadeInAni = keyframes`
     from {
@@ -28,9 +28,9 @@ const Main = () => {
   const dispatch = useDispatch();
   const nav = useNavigate();
 
-  const userOrGuest = useSelector((state => {
+  const userOrGuest = useSelector((state) => {
     return state.userOrGuest;
-  }))
+  });
 
   const gptData = useSelector((state) => {
     return state.gptSlice;
@@ -104,15 +104,17 @@ const Main = () => {
   useEffect(() => {
     dispatch(reset());
 
-    console.log(userOrGuest)
+    console.log(userOrGuest);
     // 어드민 로그인이면 어드민 페이지로 이동
-    if(userOrGuest.isAdmin == true) {
-      nav('/admin')
+    if (userOrGuest.isAdmin == true) {
+      nav("/admin");
     }
   }, []);
+  useEffect(() => {
+    dispatch(resetSelectedUserPlan());
+    dispatch(resetAttractionsWithImg())
 
-
-
+  }, []);
   return (
     <>
       <MainTopPc locationSearched={locationSearched} />

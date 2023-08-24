@@ -12,6 +12,8 @@ import {
 } from "./SignupPc.styled";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { check, reset } from "../../redux/features/login";
 const SignupMid = ({ page }) => {
   const [user_id, setId] = useState();
   const [user_pw, setPw] = useState();
@@ -24,6 +26,7 @@ const SignupMid = ({ page }) => {
   const [textNick, setTextNick] = useState("");
   // 회원가입 성공시 로그인으로 이동
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [textColor, setTextColor] = useState({
     idColor: "red",
     pwColor: "red",
@@ -48,7 +51,7 @@ const SignupMid = ({ page }) => {
     } else {
       // useMutation 사용해서 axios post 보내기
       // const data = useMutation();
-      const duplicateIdResult = await axios.post("http://13.125.126.65/user/duplicateId", {
+      const duplicateIdResult = await axios.post("/user/duplicateId", {
         user_id,
       });
 
@@ -85,7 +88,7 @@ const SignupMid = ({ page }) => {
       // useMutation 사용해서 axios post 보내기
 
       const duplicateNickNameResult = await axios.post(
-        "http://13.125.126.65/user/duplicateNickName",
+        "/user/duplicateNickName",
         {
           nickname,
         }
@@ -114,7 +117,7 @@ const SignupMid = ({ page }) => {
   const dupChk2Mutation = useMutation(dupChk2);
   // 회원가입 axios zerohoney
   const signUp = async () => {
-    const signUpResult = await axios.post("http://13.125.126.65/user/signUp", {
+    const signUpResult = await axios.post("/user/signUp", {
       user_id,
       user_pw,
       nickname,
@@ -126,7 +129,6 @@ const SignupMid = ({ page }) => {
       navigate("/login");
     }
   };
-
 
   const login = async () => {
     if (!user_pw) {
@@ -142,38 +144,45 @@ const SignupMid = ({ page }) => {
     if (!user_id || !user_pw) {
       return;
     }
-    
-    const loginClick = await axios.post("http://13.125.126.65/user/login", {
-      user_id,
-      user_pw
-    },{
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
 
-    if(loginClick.data == "id_non-existent"){
+    const loginClick = await axios.post(
+      "/user/login",
+      {
+        user_id,
+        user_pw,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (loginClick.data == "id_non-existent") {
       document.querySelector("input[name='user_id']").focus();
       setTextId("존재하지 않는 아이디입니다. 다시 입력 부탁드립니다.^^");
-      setTextColor({...textColor, idColor: "red"});
-      document.querySelector("input[name='user_id']").style.border = "1px solid red";
-    }else{
+      setTextColor({ ...textColor, idColor: "red" });
+      document.querySelector("input[name='user_id']").style.border =
+        "1px solid red";
+    } else {
       // 존재하는 아이디를 입력했을때
       setTextId("");
-      document.querySelector("input[name='user_id']").style.border = "1px solid blue";
-      
-      if(loginClick.data == "login_success"){
+      document.querySelector("input[name='user_id']").style.border =
+        "1px solid blue";
+
+      if (loginClick.data == "login_success") {
         // 로그인 성공
+        dispatch(check(user_id));
         navigate("/");
-      }else if(loginClick.data == "id_exist_but_pw_wrong"){
+      } else if (loginClick.data == "id_exist_but_pw_wrong") {
         // 비밀번호 틀렸을때
         setTextPw("비밀번호 확인하세요!!");
         document.querySelector("input[name='user_pw']").focus();
-        document.querySelector("input[name='user_pw']").style.border = "1px solid red";
+        document.querySelector("input[name='user_pw']").style.border =
+          "1px solid red";
       }
     }
-
-  }
+  };
 
   const loginMutation = useMutation(login);
 
@@ -208,6 +217,10 @@ const SignupMid = ({ page }) => {
     // 아이디 없을 때
     // 비밀번호 틀렸을 때
   };
+
+  useEffect(() => {
+    dispatch(reset());
+  }, []);
 
   if (page == "회원가입") {
     return (
@@ -351,17 +364,29 @@ const SignupMid = ({ page }) => {
           <Title>{page}</Title>
           <InputBox>
             <Label>아이디</Label>
-            <Input type="text" name="user_id" onChange={(e)=>setId(e.target.value)}></Input>
+            <Input
+              type="text"
+              name="user_id"
+              onChange={(e) => setId(e.target.value)}
+            ></Input>
             <Text color={textColor.idColor}>{textId}</Text>
           </InputBox>
           <InputBox>
             <Label>비밀번호</Label>
-            <Input type="password" name="user_pw" onChange={(e)=>setPw(e.target.value)}></Input>
+            <Input
+              type="password"
+              name="user_pw"
+              onChange={(e) => setPw(e.target.value)}
+            ></Input>
             <Text color={textColor.pwColor}>{textPw}</Text>
 
-            <TryBtn onClick={()=>{
-              loginMutation.mutate();
-            }}>{page}</TryBtn>
+            <TryBtn
+              onClick={() => {
+                loginMutation.mutate();
+              }}
+            >
+              {page}
+            </TryBtn>
           </InputBox>
         </SignupMidBox>
       </>

@@ -32,8 +32,8 @@ const PlanBottomPc = ({
     return state.selectedUserPlan;
   });
   const userOrGuest = useSelector((state) => {
-    return state.userOrGuest
-  })
+    return state.userOrGuest;
+  });
 
   // period
   const [periodArr, setPeriodArr] = useState([]);
@@ -50,16 +50,24 @@ const PlanBottomPc = ({
   // attractionsWithImg를 저장하는 dispatch
   const attractionsWithImgDispatch = useDispatch();
 
+  const nav = useNavigate();
 
-  // 저장된 selectedUserPlan 을 서버로 보내는 로직
-  const sendPlanToServer=async ()=>{
-
-    const sendPaln=await axios.post('/plan/save',{
-      
-    })
-
-  }
-
+  // 유저가 세운 계획을 저장하는 로직
+  const saveUserPlan = async () => {
+    const savePlan = await axios.post("/plan/save", {
+      selectedUserPlan,
+      duration: `${gptAnswerSaved.startDate}~${gptAnswerSaved.endDate}`,
+      name: gptAnswerSaved.location,
+      who: gptAnswerSaved.option1,
+      how: gptAnswerSaved.option2,
+    });
+    if (savePlan.data === "success") {
+      nav("/");
+    } else {
+      alert("오류가 발생하였습니다. 다시 시도해 주시기 바랍니다");
+      nav("/");
+    }
+  };
   // 여기서 부터
   const getAttPic = async (queryKey) => {
     const apiKey = process.env.REACT_APP_PIXABAY_API_KEY;
@@ -102,8 +110,8 @@ const PlanBottomPc = ({
     setPeriodArr(temp);
   }, [attractions]);
   useEffect(() => {
-    console.log(selectedUserPlan, "리덕스");
-  }, [selectedUserPlan]);
+    console.log(userOrGuest, "리덕스");
+  }, [userOrGuest]);
 
   return (
     <>
@@ -121,14 +129,19 @@ const PlanBottomPc = ({
         })}
 
         <BtnBox>
-          {userOrGuest.isLogin &&
-            <SavePlanBtn>저장</SavePlanBtn>
-          }
-          {!userOrGuest.isLogin &&
-            <SavePlanBtn onClick={() => {
-              alert('로그인 후 이용 가능')
-            }} col={'silver'}>저장</SavePlanBtn>
-          }
+          {userOrGuest.isLogin && (
+            <SavePlanBtn onClick={saveUserPlan}>저장</SavePlanBtn>
+          )}
+          {!userOrGuest.isLogin && (
+            <SavePlanBtn
+              onClick={() => {
+                alert("로그인 후 이용 가능");
+              }}
+              col={"silver"}
+            >
+              저장
+            </SavePlanBtn>
+          )}
         </BtnBox>
       </PlanBottomBox>
     </>
@@ -163,7 +176,13 @@ const PerDayPc = ({ period, index, place, imgSrc, setSelectedPlanIndex }) => {
     <>
       <PerDayBox
         onClick={() => {
-          setSelectedPlanIndex(index - 1);
+          // SelectedPlanIndex는 누른 index를 따라간다. 하지만 plan은 유저가 저장을 한 날만 채워진다. 예를들어
+          // 1,3,5일을 유저가 계획을 세웠다면 plan의 array는 length가 3이고, index(1)은 두번째 날이다.
+          // 하지만 아래 코드에서 두번째 계획을 누르면 index가 1이 되고 plan의 인덱스 1을 찾는다. 즉, 두번째 날을 클릭하면
+          // 세번째날이 출력되는 버그 발생. 이를 방지하기위해 index가 아니라 day를 넘겨줘 PlanMidPc에서 findIndex로 해당하는 day의 index를 찾는다.
+          if (dayPlanArr.length !== 0) {
+            setSelectedPlanIndex(dayPlanArr[0].day);
+          }
         }}
       >
         {/* 날짜 */}

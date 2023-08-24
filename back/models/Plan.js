@@ -4,7 +4,8 @@ class Plan extends Sequelize.Model {
   static init(seq) {
     return super.init(
       {
-        plan: { type: Sequelize.TEXT, allowNull: false },
+        duration: { type: Sequelize.TEXT, allowNull: false },
+        plan: { type: Sequelize.STRING(30), allowNull: false },
       },
       {
         sequelize: seq,

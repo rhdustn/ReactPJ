@@ -66,15 +66,17 @@ export const attractionsWithImg = createSlice({
     // 관광지 주위에있는 관광지 저장
     saveNearAttraction: (state, action) => {
       state.forEach((value, index) => {
-        console.log(action.payload);
-        if (!action.payload[0].parentName) {
+        if (!action.payload.length === 0) {
           alert("로드중 오류가 발생하였습니다. 새로고침후 다시 이용해 주세요.");
-        }
-        console.log(action.payload[0].parentName);
-        if (value.name === action.payload[0].parentName) {
-          state[index].nearAttraction = action.payload;
+        } else {
+          if (value.name === action.payload[0].parentName) {
+            state[index].nearAttraction = action.payload;
+          }
         }
       });
+    },
+    resetAttractionsWithImg: (state, action) => {
+      return [];
     },
   },
 });
@@ -117,7 +119,7 @@ export const userChoiceSave = createSlice({
 
 export const { insert } = gptSlice.actions;
 export const { save, reset } = gptAnswerSave.actions;
-export const { saveAttractionsWithImg, saveNearAttraction } =
+export const { saveAttractionsWithImg, saveNearAttraction,resetAttractionsWithImg } =
   attractionsWithImg.actions;
 
 export const { save2 } = userChoiceSave.actions;
