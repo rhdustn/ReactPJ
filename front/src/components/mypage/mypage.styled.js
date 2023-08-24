@@ -129,12 +129,52 @@ const Content = styled.div`
   background-color: #f5f5f5;
   height: calc(100% - 40px);
   border-radius: 0 0 5px 5px;
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: start;
+  align-items: flex-start;
+  padding: 10px;
+  box-sizing: border-box;
+  align-content: flex-start;
 `;
+const ContentOne = styled.div`
+  width: 100%; height: 60px;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.1);
+  margin: 5px 0 5px 0;
+  display: flex;
+  position: relative;
+
+  & .index {
+    width: 10%; height: 100%;
+    display: flex; justify-content: center; align-items: center;
+    font-weight: bold;
+    position: absolute; top: 0; left: 0;
+  }
+  & .location {
+    width: 40%; height: 50%;
+    display: flex; justify-content: start; align-items: end;
+    position: absolute;
+    top: 0; left: 10%;
+  }
+  & .duration {
+    width: 40%; height: 40%;
+    display: flex; justify-content: start; align-items: start;
+    font-size: 12px;
+    position: absolute;
+    top: 60%; left: 10%;
+  }
+`
+
+
 
 export {StyleArrow,StyledImage,Button,StyledProfileImg,InputBtn,StyledProfileName,
     Text, EditNavigate, ProflieImg, ProfileName, TabMain, TabsContainer, TabButton, 
-    Content
+    Content, ContentOne
 }
 
 
