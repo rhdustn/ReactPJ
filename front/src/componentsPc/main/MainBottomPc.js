@@ -69,7 +69,7 @@ const MainBottomPc = ({
   const dispatch = useDispatch();
   // post로 gptData를 서버로 보내는 함수
   const sendDataToGpt = async () => {
-    axios
+    ipUrl
       .post("/openAI", { gptData })
       .then((res) => {
         // gpt응답 여기서 state에 저장
