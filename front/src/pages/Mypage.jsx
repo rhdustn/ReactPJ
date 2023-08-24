@@ -34,6 +34,12 @@ const Mypage = () => {
     enabled : load
   })
 
+  useEffect(() => {
+    if(!isLoading) {
+      console.log(data)
+    }
+  }, [isLoading])
+
   return (
     <div>
       {!isLoading &&
