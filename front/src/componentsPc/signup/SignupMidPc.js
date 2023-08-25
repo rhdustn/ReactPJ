@@ -48,7 +48,7 @@ const SignupMid = ({ page }) => {
     } else {
       // useMutation 사용해서 axios post 보내기
       // const data = useMutation();
-      const duplicateIdResult = await axios.post("http://3.37.10.123/user/duplicateId", {
+      const duplicateIdResult = await axios.post("http://localhost:8000/user/duplicateId", {
         user_id,
       });
 
@@ -85,7 +85,7 @@ const SignupMid = ({ page }) => {
       // useMutation 사용해서 axios post 보내기
 
       const duplicateNickNameResult = await axios.post(
-        "http://3.37.10.123/user/duplicateNickName",
+        "http://localhost:8000/user/duplicateNickName",
         {
           nickname,
         }
@@ -114,7 +114,7 @@ const SignupMid = ({ page }) => {
   const dupChk2Mutation = useMutation(dupChk2);
   // 회원가입 axios zerohoney
   const signUp = async () => {
-    const signUpResult = await axios.post("http://3.37.10.123/user/signUp", {
+    const signUpResult = await axios.post("http://localhost:8000/user/signUp", {
       user_id,
       user_pw,
       nickname,
@@ -143,7 +143,7 @@ const SignupMid = ({ page }) => {
       return;
     }
     
-    const loginClick = await axios.post("http://3.37.10.123/user/login", {
+    const loginClick = await axios.post("http://localhost:8000/user/login", {
       user_id,
       user_pw
     },{
