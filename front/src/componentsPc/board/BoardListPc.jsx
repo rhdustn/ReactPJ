@@ -23,22 +23,51 @@ const Div_two = styled.div`
 // 이미지, 프로필정보, 내용, 제목
 
 const BoardListPc = () => {
+  const data = [
+    [{
+      BoardTitle: "게시판 제목 1",
+      UploadUserNickname: "닉네임 1",
+    },
+    {
+      BoardTitle: "게시판 제목 2",
+      UploadUserNickname: "닉네임 2",
+    }],
+    [{
+      BoardTitle: "게시판 제목 3",
+      UploadUserNickname: "닉네임 3",
+    },
+    {
+      BoardTitle: "게시판 제목 4",
+      UploadUserNickname: "닉네임 4",
+    }]
+  ];
   return (
     <>
       <Div_one>
-        <Div_two>
-          <Main>
-            {/* 이미지 */}
-            <BoardPreviewImg/>
 
-            {/* 프로필이미지 */}
-            <BoardProflieImg UserProfileImg = {""}/>
+      {/* 갯수 나눠서 배열을 쪼개놓고 */}
+      {/* [1,2,3,4]  => [[1,2],[3,4]]*/}
+      {/* Div_two */}
 
-            {/* 제목+내용 */}
-            <BoardText BoardTitle={"게시판 제목"} UploadUserNickname={"닉네임"} />
-          </Main>
-          
-        </Div_two>
+      {data.map((item, index)=>{
+        return(
+          <Div_two key={index}>
+          {item.map((item2, index2)=>(
+                <Main key={index2}>
+                {/* 이미지 */}
+                <BoardPreviewImg/>
+
+                {/* 프로필이미지 */}
+                <BoardProflieImg UserProfileImg = {""}/>
+
+                {/* 제목+내용 */}
+                <BoardText BoardTitle={item2.BoardTitle} UploadUserNickname={item2.UploadUserNickname} />
+                </Main>
+          ))}
+          </Div_two>
+        )
+      })}
+
         <br /><br /><br />
         
       </Div_one>
