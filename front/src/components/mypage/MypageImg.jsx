@@ -9,7 +9,7 @@ const MypageImg = ({profile_img}) => {
 
   useEffect(() => {
     if(profile_img == null) {
-      setProfileImg(default_profile)
+      setProfileImg('default_profile.jpeg')
     }else {
       setProfileImg(profile_img)
     }

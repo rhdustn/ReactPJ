@@ -44,7 +44,7 @@ exports.getUserReview = async (req, res) => {
     try {
         const {front_id} = req.decoded;
         const user = await User.findOne({where : {user_id : front_id}})
-        const reviewAll = await Board.findAll({where : {users_id : user.id}})
+        const reviewAll = await Board.findAll({where : {user_id : user.id}})
         res.json(reviewAll);
     } catch (error) {
         console.log(error);

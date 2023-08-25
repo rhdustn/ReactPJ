@@ -26,6 +26,8 @@ const BottomNav = () => {
         return state.userOrGuest;
     }))
 
+    const [profileImg, setProfileImg] = useState('default_profile.jpeg ')
+
     const [icons, setIcon] = useState({
         home : home1,
         plan : plan2,
@@ -94,7 +96,12 @@ const BottomNav = () => {
 
     useEffect(() => {
         if(isLoading == false) {
-            console.log(data.profile_img)
+            console.log(data);
+            if(data.profile_img == null) {
+                setProfileImg('default_profile.jpeg')
+            }else {
+                setProfileImg(data.profile_img)
+            }
         }
     }, [isLoading])
 
@@ -117,9 +124,7 @@ const BottomNav = () => {
             {/* 로그인 된 유저 -> 마이페이지 */}
             {userOrGuest.isLogin &&            
                 <BottomNavBtn onClick={() => nav('/mypage')}>
-                    {!isLoading &&
-                    <img src={`${ImgPath}/${data.profile_img}`} className='profile_img'></img>
-                    }
+                    <img src={`${ImgPath}/${profileImg}`} className='profile_img'></img>
                     <BottomNavText textcol={textCol.my}>마이페이지</BottomNavText>
                 </BottomNavBtn>
             }

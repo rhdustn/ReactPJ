@@ -136,7 +136,7 @@ const TabButton = styled.button`
   color: #676767;
   padding: 10px 20px;
   border: none;
-  border-bottom: 2px solid ${(props) => (props.active ? "#5da0ff" : "white")};
+  border-bottom: 2px solid ${(props) => (props.active ? "#277bc0" : "white")};
   cursor: pointer;
 `;
 

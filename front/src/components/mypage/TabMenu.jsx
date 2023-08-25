@@ -39,6 +39,7 @@ const TapMenu = ({user}) => {
       const data2 = response2.data;
       // const data3 = response3.data;
       // const data4 = response4.data;
+      console.log(data1)
       return {data1, data2};
 
     } catch (error) {
@@ -46,11 +47,12 @@ const TapMenu = ({user}) => {
     }
   }
 
-  const {data, isLoading} = useQuery(['getAll'], tryGetAll)
+  const {data, isLoading} = useQuery(['getAllMypage'], tryGetAll)
 
   useEffect(() => {
-    if(isLoading == false) {
-      // setLoad(false)
+    console.log(isLoading)
+    console.log(load)
+    if(isLoading == false && load) {
       setTabArr((tabArr => tabArr.map((tab, index) => {
         if(index == 0){
           return {...tab, content: data.data1}
@@ -61,9 +63,10 @@ const TapMenu = ({user}) => {
         }else if(index == 3) {
           return {...tab, content: []}
         }
+        setLoad(false)
       })))
     }
-  }, [isLoading])
+  }, [isLoading, load])
 
 
   // plan 페이지로 이동
