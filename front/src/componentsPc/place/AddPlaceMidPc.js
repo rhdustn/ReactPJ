@@ -120,14 +120,14 @@ const AddPlaceMid = ({ page, day, choiceIndex, setChoice, nearPlace }) => {
                         onClick={() => {
                           isChoice(value);
                         }}
-                        back={"#edebeb"}
-                        font={"#9b9a9a"}
+                        back={"#277bc0"}
+                        font={"white"}
                       >
                         선택
                       </SelectBtn>
                     </SelectBtnBox>
                   </PlaceBox>
-                  <Title size={"12px"}>주변 관광지</Title>
+                  <Title size={"14px"}>주변 관광지</Title>
                   <NearAttractionConatiner>
                     {attractionsWithImg[index]?.nearAttraction?.map(
                       (value2, index2) => {
@@ -151,8 +151,8 @@ const AddPlaceMid = ({ page, day, choiceIndex, setChoice, nearPlace }) => {
                                     onClick={() => {
                                       isChoice(value2);
                                     }}
-                                    back={"#277bc0"}
-                                    font={"white"}
+                                    back={"#edebeb"}
+                                    font={"#9b9a9a"}
                                   >
                                     선택
                                   </SelectBtn>
@@ -172,8 +172,8 @@ const AddPlaceMid = ({ page, day, choiceIndex, setChoice, nearPlace }) => {
                                   onClick={() => {
                                     isChoice(value2);
                                   }}
-                                  back={"#edebeb"}
-                                  font={"#9b9a9a"}
+                                  back={"#277bc0"}
+                                  font={"white"}
                                 >
                                   선택
                                 </SelectBtn>
@@ -211,8 +211,8 @@ const AddPlaceMid = ({ page, day, choiceIndex, setChoice, nearPlace }) => {
                           isChoice(value);
                           setParentAttraction(value.name);
                         }}
-                        back={"#277bc0"}
-                        font={"white"}
+                        back={"#edebeb"}
+                        font={"#9b9a9a"}
                       >
                         선택
                       </SelectBtn>
