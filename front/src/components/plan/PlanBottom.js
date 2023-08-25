@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useQueries } from "react-query";
+import axios from "axios";
+
 
 import {
   PlanBottomBox,
@@ -11,9 +13,13 @@ import {
   RouteBox,
   RouteNumber,
   RoutePlace,
+  BtnBox,
+  SavePlanBtn,
+  EditPlanBtn,
 } from "./Plan.styled";
 
 import { saveAttractionsWithImg } from "../../redux/features/dataForGpt";
+import { pushPlan } from "../../redux/features/selectedUserPlan";
 import { ipUrl } from '../../util/util';
 
 // 지도 아래 일정 부분
@@ -25,6 +31,10 @@ const PlanBottom = ({
 }) => {
   const { location, attractions, startDate, endDate, option1, option2 } =
     gptAnswerSaved;
+
+  const userOrGuest = useSelector((state) => {
+    return state.userOrGuest;
+  });
 
   // attractions을 반복시키기위해 만든 임시 state
   const [attArrForMap, setAttArrForMap] = useState("");
@@ -41,6 +51,26 @@ const PlanBottom = ({
   const selectedUserPlan = useSelector((state) => {
     return state.selectedUserPlan;
   });
+
+  const nav = useNavigate();
+
+  // 유저가 세운 계획을 저장하는 로직
+  const saveUserPlan = async () => {
+    console.log("눌림 asdasasd");
+    const savePlan = await ipUrl.post("/plan/save", {
+      selectedUserPlan,
+      duration: `${gptAnswerSaved.startDate}~${gptAnswerSaved.endDate}`,
+      name: gptAnswerSaved.location,
+      who: gptAnswerSaved.option1,
+      how: gptAnswerSaved.option2,
+    });
+    if (savePlan.data === "success") {
+      nav("/");
+    } else {
+      alert("오류가 발생하였습니다. 다시 시도해 주시기 바랍니다");
+      nav("/");
+    }
+  };
 
   // 여기서 부터
   const getAttPic = async (queryKey) => {
@@ -94,11 +124,7 @@ const PlanBottom = ({
     setPeriodArr(temp);
   }, [attractions]);
 
-  useEffect(() => {
-    console.log(userChoiceSaved)
-  }, [])
-
-  const planPerDay = userChoiceSaved;
+  const { planPerDay } = userChoiceSaved;
 
   // 스크롤 일정 이상 넘어가면
   useEffect(() => {
@@ -120,12 +146,28 @@ const PlanBottom = ({
               key={index}
               period={periodArr[index]}
               index={index + 1}
-              place={planPerDay[index]}
+              place={planPerDay[index + 1].plan}
               attractionsWithImg={attractionsWithImg}
               setSelectedPlanIndex={setSelectedPlanIndex}
             />
           );
         })}
+
+        <BtnBox>
+          {userOrGuest.isLogin && (
+            <SavePlanBtn onClick={saveUserPlan}>저장</SavePlanBtn>
+          )}
+          {!userOrGuest.isLogin && (
+            <SavePlanBtn
+              onClick={() => {
+                alert("로그인 후 이용 가능");
+              }}
+              col={"silver"}
+            >
+              저장
+            </SavePlanBtn>
+          )}
+        </BtnBox>
       </PlanBottomBox>
     </>
   );
@@ -142,7 +184,12 @@ const PerDay = ({
   const [dayPlanArr, setDayPlanArr] = useState([]);
   const noImage = "/img/icons/no-image.png";
   const nav = useNavigate();
-
+  const city = "/imgs/places/city.jpeg";
+  // 관광지 검색 & 추가 페이지로 이동
+  const moveToAdd = (id) => {
+    // 해당 plan의 해당 날짜에 대한 id
+    nav(`/addPlace/${id}?day=${id}`);
+  };
   // 유저가 선택한 plan을 가져오는 selector
   const selectedUserPlan = useSelector((state) => {
     return state.selectedUserPlan;
@@ -156,10 +203,6 @@ const PerDay = ({
     setDayPlanArr(temp);
     console.log(selectedUserPlan);
   }, [selectedUserPlan]);
-
-  useEffect(() => {
-    console.log(place)
-  }, [])
 
   return (
     <>
@@ -183,8 +226,8 @@ const PerDay = ({
         </PerDayDate>
 
         {/* 관광지 하나 */}
-        {place.length !== 0 &&
-          place.map((value, index) => {
+        {dayPlanArr.length !== 0 &&
+          dayPlanArr[0].plan.map((value, index) => {
             return (
               <PerDayAttraction>
                 <RouteBox>
@@ -194,13 +237,27 @@ const PerDay = ({
                   </RouteNumber>
                   <RoutePlace>
                     <div className="place-box">
-                      <p>{value.att_name}</p>
+                      <p>{value.name}</p>
+                      <div className="img-box">
+                        <img src={value.img} alt="관광이미지" />
+                      </div>
                     </div>
                   </RoutePlace>
                 </RouteBox>
               </PerDayAttraction>
             );
           })}
+
+        {/* 장소 편집 버튼 */}
+        <BtnBox>
+          <EditPlanBtn
+            onClick={() => {
+              moveToAdd(index);
+            }}
+          >
+            일정 편집
+          </EditPlanBtn>
+        </BtnBox>
       </PerDayBox>
     </>
   );

@@ -1,19 +1,22 @@
 import React, { useState, useRef, useEffect } from 'react';
-import axios from 'axios'
 import { useMutation, useQuery } from 'react-query';
+import { useDispatch } from 'react-redux';
+import axios from 'axios'
+
+import { saveProfile } from '../../redux/features/editProfile';
 
 import { StyledProfileImg,InputBtn } from './mypage.styled';
 
 
-const EditImg = ({profileImg, setProfileImg}) => {
+const EditImg = () => {
+  const dispatch = useDispatch();
 
   const [selectedFile, setSelectedFile] = useState('');
-  const [imagePreview, setImagePreview] = useState(selectedFile);
+  const [imagePreview, setImagePreview] = useState('');
   const fileInputRef = useRef(null); 
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
-    console.log(file);
     setSelectedFile(file);
 
     if (file) {
@@ -37,10 +40,10 @@ const EditImg = ({profileImg, setProfileImg}) => {
 
   useEffect(() => {
     console.log(selectedFile)
-    if(selectedFile != '') {
-      console.log('dd')
-      setProfileImg(selectedFile)
+    if(selectedFile) {
+      dispatch(saveProfile(selectedFile))
     }
+
   }, [selectedFile])
 
   return (
@@ -52,9 +55,7 @@ const EditImg = ({profileImg, setProfileImg}) => {
         <input
           type="file"
           name="file"
-          onChange={(e) => {
-            handleFileChange(e)
-          }}
+          onChange={handleFileChange}
           ref={fileInputRef} 
           style={{ display: 'none' }}
         />
@@ -66,4 +67,4 @@ const EditImg = ({profileImg, setProfileImg}) => {
   );
 };
 
-export default React.memo(EditImg);
+export default EditImg;

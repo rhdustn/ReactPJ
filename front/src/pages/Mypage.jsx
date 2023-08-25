@@ -36,7 +36,6 @@ const Mypage = () => {
   const {data, isLoading} = useQuery(['getUserMypage'], tryGetUserInfo)
 
   return (
-    <div>
       <>
         <Main>
           <MoveEdit />
@@ -51,7 +50,6 @@ const Mypage = () => {
 
         <BottomNav/>
       </>      
-    </div>
   )
 }
 

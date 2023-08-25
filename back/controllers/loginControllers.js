@@ -30,7 +30,7 @@ exports.loginClick = async (req, res) => {
           },
           process.env.ACCESSTOKENKEY,
           {
-            expiresIn: "30m",
+            expiresIn: "1h",
           }
         );
         req.session.access_token = token;

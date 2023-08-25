@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+
 import { StyledProfileName } from './mypage.styled';
+import { saveProfile } from '../../redux/features/editProfile';
 
 
-const EditName = ({ profileName, setProfileName, setProfileBtnChange }) => {
+const EditName = ({ profileName }) => {
+  const dispatch = useDispatch();
+
   const [editing, setEditing] = useState(false);
   const [name, setName] = useState("");
 
@@ -13,17 +18,12 @@ const EditName = ({ profileName, setProfileName, setProfileBtnChange }) => {
   const NameBlur = () => {
     setEditing(false);
     if(name == '') {
-      setProfileName(profileName)
-      setProfileBtnChange(false)
+      return;
     }else {
-      setProfileName(name)
-      setProfileBtnChange(true);
+      console.log(name)
+      dispatch(saveProfile(name))
     }
   };
-
-  useEffect(() => {
-    console.log(profileName)
-  }, [])
 
 
   return (

@@ -6,7 +6,7 @@ import TopNav from "../components/nav/TopNav";
 
 import PlanTop from "../components/plan/PlanTop";
 import PlanMid from "../components/plan/PlanMid";
-import PlanBottomShow from "../components/plan/PlanBottom";
+import PlanBottomX from "../components/plan/PlanBottomX";
 
 const EditPlan = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -90,7 +90,7 @@ const EditPlan = () => {
             page={"plan"}
             selectedPlanIndex={selectedPlanIndex}
         />
-        <PlanBottomShow
+        <PlanBottomX
             isScrolled={isScrolled}
             gptAnswerSaved={gptAnswerSaved}
             userChoiceSaved={userChoiceSaved}
