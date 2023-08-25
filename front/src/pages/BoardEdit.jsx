@@ -3,7 +3,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Main, MoveBoardBtn } from '../components/boarddetail/boarddetail.styled';
 import { PostContent, PostTitle, PostBtn } from '../components/post/post.style';
 import { PostPlan, ImgUpload } from '../components/post';
-import axios from 'axios';
 import { useSelector } from 'react-redux';
 
 import { ipUrl } from '../util/util';
@@ -26,7 +25,6 @@ const BoardEdit = () => {
   //       // 게시판 정보 가져오기
   //       const response = await ipUrl.get(`/detail/${id}`); 
   //       const postData = response.data; 
-  //       console.log(postData)
   //     } catch (error) {
   //       console.error('게시글 데이터 가져오기 에러:', error);
   //     }
@@ -48,8 +46,6 @@ const BoardEdit = () => {
     }
     formData.append('title', title);
     formData.append('detail', detail);
-console.log(title)
-console.log(detail)
     try {
       const response = await ipUrl.post(
         `/post/edit/${id}`,
@@ -62,7 +58,6 @@ console.log(detail)
         }
       );
       const data = response.data;
-      console.log(data)
       if (data === 'success') {
         navigate(`/boarddetail/${id}`);
       }
@@ -87,13 +82,7 @@ console.log(detail)
   const MoveBoardClick = () => {
     navigate("/board")
   }
-  useEffect(() => {
-    console.log(uploadedFiles)
-  }, [uploadedFiles])
 
-  useEffect(()=>{
-    console.log(boardDetail)
-  },[boardDetail])
   return (
     <div>
       <MoveBoardBtn onClick={MoveBoardClick}>게시판으로 이동</MoveBoardBtn>

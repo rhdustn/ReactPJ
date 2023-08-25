@@ -10,11 +10,8 @@ exports.loginClick = async (req, res) => {
     const front_id = req.body.user_id;
     const front_pw = req.body.user_pw;
 
-    // console.log(front_id);
-    // console.log(front_pw);
 
     const useridExist = await User.findOne({ where: { user_id: front_id } });
-    console.log(useridExist.is_accept);
     if (useridExist == null) {
       res.json("id_non-existent");
       // 프론트쪽에서 받아서 alert 를 띄우거나 경고창을 따로 띄워주기
@@ -34,7 +31,6 @@ exports.loginClick = async (req, res) => {
           }
         );
         req.session.access_token = token;
-        // console.log("login session : ", req.session);
         res.json("login_success");
         // 프론트쪽에서 받아서 화면 전환시킬것.
       } else {

@@ -51,7 +51,6 @@ const AddPlaceMid = ({ page, day, choiceIndex, setChoice, nearPlace }) => {
 
   useEffect(() => {
     if (nearPlace !== undefined && nearPlace !== "") {
-      console.log(nearPlace, "최종 유저의 플랜 ");
       if (nearPlace.length !== 0) {
         const tempNear = nearPlace.map((place) => {
           return {
@@ -72,9 +71,6 @@ const AddPlaceMid = ({ page, day, choiceIndex, setChoice, nearPlace }) => {
     }
   }, [nearPlace]);
 
-  useEffect(() => {
-    console.log(attractionsWithImg);
-  }, [attractionsWithImg]);
   // let nearAttractions = [
   //   {
   //     name: "111",
@@ -131,7 +127,6 @@ const AddPlaceMid = ({ page, day, choiceIndex, setChoice, nearPlace }) => {
                   <NearAttractionConatiner>
                     {attractionsWithImg[index]?.nearAttraction?.map(
                       (value2, index2) => {
-                        console.log(value2);
                         let temp = [];
                         if (choiceIndex) {
                           temp = choiceIndex.map((a) => {

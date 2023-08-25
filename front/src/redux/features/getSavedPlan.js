@@ -7,7 +7,6 @@ export const getSavedPlan = createSlice({
   },
   reducers: {
     getSaved: (state, action) => {
-        console.log(action.payload)
         state.savedPlan = action.payload;
     },
   },

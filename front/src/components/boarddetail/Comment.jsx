@@ -1,23 +1,21 @@
-import React, { useState } from 'react'
-import { CommentContainer,CommentMain } from './boarddetail.styled'
-import {CommentList,CommentForm} from './index'
+import React, { useState } from "react";
+import { CommentContainer, CommentMain } from "./boarddetail.styled";
+import { CommentList, CommentForm } from "./index";
 
-const Comment = ({comments}) => {
-  console.log(comments)
+const Comment = ({ comments }) => {
+  console.log(comments);
 
-  const CommentSubmit = () => {
-
-  };
+  const CommentSubmit = () => {};
   return (
     <div>
       <CommentContainer>
-      <CommentMain>
-      <CommentList comments={comments}/>
-      </CommentMain>
-      <CommentForm onCommentSubmit={CommentSubmit}/>
+        <CommentMain>
+          <CommentList comments={comments} />
+        </CommentMain>
+        <CommentForm onCommentSubmit={CommentSubmit} />
       </CommentContainer>
-      </div>
-  )
-}
+    </div>
+  );
+};
 
-export default Comment
+export default Comment;

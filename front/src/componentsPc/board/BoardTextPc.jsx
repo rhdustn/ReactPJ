@@ -2,11 +2,11 @@ import React from 'react'
 import { TextBox } from './boardPc.styled';
 import BoardTextDetail from './BoardTextDetailPc';
 
-const BoardTextPc = () => {
+const BoardTextPc = (props) => {
   return (
     <div>
         <TextBox>
-          <BoardTextDetail/>
+          <BoardTextDetail BoardTitle={props.BoardTitle} UploadUserNickname = {props.UploadUserNickname} />
         </TextBox>
     </div>
   )

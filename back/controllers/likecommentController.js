@@ -19,9 +19,8 @@ exports.likeslist = async (req, res) => {
       }
 
     })
-    console.log('고연수 여신 .', temp)
     // const data = await LikeComment.findAll()
-    res.json(data)
+    res.json(temp)
   } catch (error) {
     console.log("likeslist 오류터짐")
     console.log(error)
@@ -29,19 +28,15 @@ exports.likeslist = async (req, res) => {
 }
 // 하트가 true 면likeComment에 올라가는 컨트롤러
 exports.updateLikes = async (req, res) => {
-  // 일단 임시로 정적으로 넣은 comment_id를 넣음
   const comment_id = req.body.comment_id
   const userData = req.decoded;
-  console.log("flgnfkngkfg", comment_id);
   const UserId = userData.front_id
-  console.log(UserId)
   // req.decoded에 있는 user_id을 이용해서 User.findOne으로 해당 유저의 id를 찾고 그 아이디를 user_id에 삽입
 
   try {
     const user = await User.findOne({ where: { user_id: UserId } })
     const user_id = user.id;
     const likeData = await LikeComment.create({ comment_id, user_id });
-    console.log(likeData)
     res.send(likeData)
 
   } catch (error) {

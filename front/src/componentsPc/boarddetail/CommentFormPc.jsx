@@ -9,7 +9,6 @@ const CommentFormPc = ({onCommentSubmit}) => {
       e.preventDefault();
       onCommentSubmit(inputComment);
       setInputComment('');
-      console.log(inputComment)
     };
   return (
     <>

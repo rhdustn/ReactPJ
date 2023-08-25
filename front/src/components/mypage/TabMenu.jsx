@@ -30,7 +30,6 @@ const TapMenu = ({user}) => {
 
   // 유저가 만든 일정 가져오기
   const tryGetAll = async () => {
-    console.log('머지')
     try {
       const response1 = await ipUrl.get(`/mypage/getPlan`)
       const response2 = await ipUrl.get(`/mypage/getReview`)
@@ -51,8 +50,6 @@ const TapMenu = ({user}) => {
 
   useEffect(() => {
     if(isLoading == false) {
-      console.log(isLoading)
-      console.log(data)
       // setLoad(false)
       setTabArr((tabArr => tabArr.map((tab, index) => {
         if(index == 0){
@@ -68,10 +65,6 @@ const TapMenu = ({user}) => {
     }
   }, [isLoading])
 
-  useEffect(() => {
-    console.log(tabArr)
-  }, [tabArr])
-
 
   // plan 페이지로 이동
   const moveToPlan = async (id) => {
@@ -79,7 +72,6 @@ const TapMenu = ({user}) => {
       ipUrl.post('/plan/getPlan', {id})
       .then((res) => {
         const response = res.data;
-        console.log(response);
         dispatch(getSaved(response))
         nav('/showPlan')
       })

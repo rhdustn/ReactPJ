@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useMutation, useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import {
@@ -26,7 +25,6 @@ const CommentList = ({ comments }) => {
   const CommentView = async () => {
     try {
       const response = await ipUrl.get(`/post/commentlist`);
-      console.log(response);
       return response;
     } catch (error) {
       console.log(error);
@@ -38,7 +36,6 @@ const CommentList = ({ comments }) => {
   const CommentEdit = async ({ commentIndex }) => {
     try {
       const response = await ipUrl.post(`/post/commentEdit/${commentIndex}`, { detail: document.querySelector("#commentEditInput").value }, { withCredentials: true });
-      console.log(response);
       const data = response.data
     } catch (error) {
       console.log(error)
@@ -68,7 +65,6 @@ const CommentList = ({ comments }) => {
   const CommentDelet = async (commentIndex) => {
     try {
       const response = await ipUrl.get(`/post/commentDelet/${commentIndex}`);
-      console.log(response);
     } catch (error) {
       console.log("댓글 삭제 에러");
       console.log(error);
@@ -89,7 +85,6 @@ const CommentList = ({ comments }) => {
   const ReCommentView = async () => {
     try {
       const response = await ipUrl.get(`/post/recommentlist`);
-      console.log(response);
       return response;
     } catch (error) {
       console.log(error);
@@ -99,7 +94,6 @@ const CommentList = ({ comments }) => {
 
   // 대댓글등록 Submit
   const handleReplySubmit = async (commentIndex) => {
-    console.log(commentIndex)
     if (replyText.trim() !== '') {
       try {
         const response = await ipUrl.post(
@@ -110,7 +104,6 @@ const CommentList = ({ comments }) => {
           },
           { withCredentials: true }
         );
-        console.log("ssssssssssssssssssss", response)
         const updatedReplies = [...replies];
         updatedReplies[commentIndex] = (updatedReplies[commentIndex] || []).concat(replyText);
         setReplies(updatedReplies);
@@ -145,16 +138,20 @@ const CommentList = ({ comments }) => {
     setExpandedCommentIndex(null);
   }
 
-  // 
+// 지금 img = 이미지의 뎡로 
+const ProImgPath = "/imgs/userplanimg/"
 
   return (
     <div>
       {comments.map((comment, commentIndex) => (
         <div key={commentIndex}>
           <CommentContain >
-            <CommentProflieImg>Img</CommentProflieImg>
+            <CommentProflieImg   src={ProImgPath+comment.Img}>
+              
+            </CommentProflieImg>
+            
             <CommentContain2>
-              <div>{comment.user_id}</div>
+              <div>{comment.User}</div>
               <div>{comment.detail}</div>
               <div>
                 <div

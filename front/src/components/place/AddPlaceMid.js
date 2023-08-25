@@ -58,9 +58,7 @@ const AddPlaceMid = ({
   };
 
   useEffect(() => {
-    console.log("니어 바뀜");
     if (nearPlace !== undefined && nearPlace !== "") {
-      console.log(nearPlace, "최종 유저의 플랜 ");
       if (nearPlace.length !== 0) {
         const tempNear = nearPlace.map((place) => {
           return {
@@ -128,7 +126,6 @@ const AddPlaceMid = ({
                       <SelectBtn
                         onClick={() => {
                           isChoice(value);
-                          console.log("눌림");
                         }}
                         back={"#edebeb"}
                         font={"#9b9a9a"}
@@ -206,7 +203,6 @@ const AddPlaceMid = ({
                     key={index}
                     onClick={() => {
                       isChoice(value);
-                      console.log("눌림");
                     }}
                   >
                     <ImgBox>

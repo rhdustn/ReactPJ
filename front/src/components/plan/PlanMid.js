@@ -15,7 +15,6 @@ const PlanMid = (props) => {
     setnearPlace,
     selectedPlanIndex,
   } = props;
-  // console.log("뜸?", gptAnswerSaved.location);
   let lat, lng;
   const [distance, setDistance] = useState({ total: "", isAlert: false });
   if (choiceIndex) {
@@ -28,10 +27,8 @@ const PlanMid = (props) => {
   let map;
   const initMap = useCallback(
     (props) => {
-      console.log(page);
       // 플랜 페이지, 일정편집 페이지 두 곳에서 구글맵을 보여줘야 하므로 나누었다. add는 일정편집, plan은 플랜 페이지이며 그곳에서 실행될 init함수를 정의
       if (page === "add") {
-        console.log(choiceIndex);
         let myLatLng;
         // 선택이 되지 않았을때 실행
         if (props?.choiceIndex?.length == 0) {
@@ -46,8 +43,6 @@ const PlanMid = (props) => {
                     let geocode_latitude = location.lat();
                     let geocode_longitude = location.lng();
                     resolve({ lat: geocode_latitude, lng: geocode_longitude });
-                    // console.log('위1도:', geocode_latitude);
-                    // console.log('경1도:', geocode_longitude);
                   } else {
                     console.error("지오코딩에 실패했습니다. 상태:", status);
                   }
@@ -87,8 +82,6 @@ const PlanMid = (props) => {
             lat: Number(lat),
             lng: Number(lng),
           };
-          console.log(lat, lng);
-          console.log(myLatLng);
           map = new window.google.maps.Map(document.getElementById("gmp-map"), {
             zoom: 13,
             center: myLatLng,
@@ -106,7 +99,6 @@ const PlanMid = (props) => {
           const service = new window.google.maps.places.PlacesService(map);
 
           service.nearbySearch(request, (results, status) => {
-            console.log(request);
             if (status === window.google.maps.places.PlacesServiceStatus.OK) {
               // 평점 이상
               const filterResults = results.filter(
@@ -124,13 +116,8 @@ const PlanMid = (props) => {
                   title: place.name,
                 });
               }
-              console.log("플랜미드에서 니어바뀜");
               setnearPlace(send_latlng);
             } else {
-              console.log(
-                "구글맵 nearbySearch 이상",
-                window.google.maps.places.PlacesServiceStatus.OK
-              );
               console.log("구글맵 nearbySearch 이상 status", status);
             }
           });
@@ -144,12 +131,9 @@ const PlanMid = (props) => {
           const { plan } = selectedUserPlan[index];
           let lat = [];
           let lng = [];
-          console.log("this guy", plan);
           for (let i = 0; i < plan.length; i++) {
             lat.push(Number(plan[i].attractionLocation.latitude));
             lng.push(Number(plan[i].attractionLocation.longitude));
-            // console.log("위도: ",plan[i].attractionLocation.latitude);
-            // console.log("경도: ",plan[i].attractionLocation.longitude);
           }
 
           // --------------------------------------------------------------
@@ -191,12 +175,10 @@ const PlanMid = (props) => {
               });
 
               if (temp.length === 1 || temp.length === 2) {
-                console.log(temp, "1");
                 return [];
               } else {
                 temp.shift();
                 temp.pop();
-                console.log(temp, "2");
                 return temp;
               }
             };
@@ -266,7 +248,6 @@ const PlanMid = (props) => {
 
           // // 각 마커 생성 및 지도에 추가
           // plan.forEach((value) => {
-          //   console.log(value);
           //   new window.google.maps.Marker({
           //     position: {
           //       lat: Number(value.attractionLocation.latitude),

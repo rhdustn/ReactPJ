@@ -94,9 +94,6 @@ const PlanBottomX = ({
     setPeriodArr(temp);
   }, [attractions]);
 
-  useEffect(() => {
-    console.log(userChoiceSaved)
-  }, [])
 
   const planPerDay = userChoiceSaved;
 
@@ -154,12 +151,8 @@ const PerDay = ({
       return parseInt(el.day) === parseInt(index);
     });
     setDayPlanArr(temp);
-    console.log(selectedUserPlan);
   }, [selectedUserPlan]);
 
-  useEffect(() => {
-    console.log(place)
-  }, [])
 
   return (
     <>
