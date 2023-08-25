@@ -20,10 +20,6 @@ exports.createComment = async (req, res) => {
     const UserFront_id = userId.front_id
     const userinfo = await User.findOne({where : {user_id:UserFront_id}})
     const userid = userinfo.id;
-    const usernickname = userinfo.nickname;
-    console.log("sdsdsdsdsds",userid)
-    console.log()
-    console.log("==================")
     const { board_id, detail } = req.body
 
     try {
