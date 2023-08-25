@@ -215,8 +215,9 @@ const CommentList = ({ comments }) => {
                 <Repliesdiv key={replyIndex}>
                   ➥
                   <CommentProflieImg2 />
-                  <Reasd>
-                    <div>nickname</div>
+                  <Reasd> 
+                    {/* 일단 user_id 값만 가져옴 */}
+                    <div>{reply.user_id}</div> 
                     {reply.detail}
                   </Reasd>
                 </Repliesdiv>

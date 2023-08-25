@@ -5,8 +5,9 @@ import { LikeSize } from './boarddetail.styled'
 
 const LikesBtn = ({commentIndex}) => {
     const ImgPath = "/imgs/icons"
-    const [likes, setLikes] = useState(false)
-
+    const [likes, setLikes] = useState("")
+    //params로 갖고온 param
+    const param=5
 
 
     const LikesClick =async()=>{
@@ -14,12 +15,25 @@ const LikesBtn = ({commentIndex}) => {
         const response = await axios.post(
             `/post/updateLikes`,{comment_id:commentIndex},{withCredentials:true}
             )
-            console.log(response)
+            console.log(response.data)
+            setLikes(!likes);
+            if(likes === false){
+              UnlikeComment()
+            }
       } catch (error) {
-        
+          console.log("ssssssssssssssLikesClickerr")
       }
-      setLikes(!likes);
+      const UnlikeComment = async (comment_id) => {
+        try {
+          await axios.delete(`/post/deleltlikes/${comment_id}`, { withCredentials: true });
+          console.log('Like removed from the database');
+        } catch (error) {
+          console.error('Error removing like:', error);
+        }
+      };
+   
 
+      axios.get(`/post/${5}`)
     }
     useEffect(() => {
       if(likes ==false){

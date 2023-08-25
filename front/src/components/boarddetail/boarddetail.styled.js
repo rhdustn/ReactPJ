@@ -300,7 +300,7 @@ display: flex;
 font-size: 20px;
 `
 const ButtonBox = styled.div`
-width: 50px;
+width: 10px;
 height: 50px;
 
 `
@@ -424,8 +424,13 @@ transform: translate(0,2px);
 `
 
 const LikeSize = styled.img`
+width: 22px;
+height: 22px;
+`
+const LikeSize2 = styled.img`
 width: 30px;
 height: 30px;
+transform: translate(60px);
 `
 
 const CommentEditImg = styled.img`
@@ -444,11 +449,10 @@ display: flex;
 position: relative;
 border-radius: 10px;
 z-index: 20;
-
-    top: 30%;
-    right: 10%;
-    display: flex;
-    justify-content: center;
+top: 30%;
+right: 10%;
+display: flex;
+justify-content: center;
 `
 
 
@@ -461,5 +465,5 @@ export {
   Recommentbox, CommentContain3, Repliesdiv, RelpyInput, RelpyBtn, RelpyBtn2, Replyspan,
   CommentProflieImg2, MoveBoardBtn, ButtonBox, ShowButtonBox, EditImg, HeaderDiv, EditBtnStyle, DelBtnStyle,
   Reasd, CommentEditInput, CommentEditButton, CommentDelButton, InputContain, HandleEditCheck,
-  HandleDeleteCheck, LikeSize, CommentEditImg, ShowButtonBox2
+  HandleDeleteCheck, LikeSize, CommentEditImg, ShowButtonBox2, LikeSize2
 }
