@@ -65,6 +65,7 @@ const TitleStyle = styled.div`
   display: flex; align-items: end;
 `
 const SubContentStyle = styled.div`
+width: 390px;
   height: auto;
   box-sizing: border-box;
   overflow-wrap: break-word;
@@ -218,7 +219,7 @@ height: 45px;
 border: 1px solid;
 border-radius: 50%;
 `
-const CommentProflieImg2 = styled.div`
+const CommentProflieImg2 = styled.img`
 width: 30px;
 height: 30px;
 border: 1px solid;
@@ -462,6 +463,10 @@ right: 10%;
 display: flex;
 justify-content: center;
 `
+const Xbtn = styled.div`
+position: absolute;
+right: 0;
+`
 
 
 
@@ -473,5 +478,5 @@ export {
   Recommentbox, CommentContain3, Repliesdiv, RelpyInput, RelpyBtn, RelpyBtn2, Replyspan,
   CommentProflieImg2, MoveBoardBtn, ButtonBox, ShowButtonBox, EditImg, HeaderDiv, EditBtnStyle, DelBtnStyle,
   Reasd, CommentEditInput, CommentEditButton, CommentDelButton, InputContain, HandleEditCheck,
-  HandleDeleteCheck, LikeSize, CommentEditImg, ShowButtonBox2, LikeSize2
+  HandleDeleteCheck, LikeSize, CommentEditImg, ShowButtonBox2, LikeSize2,Xbtn
 }

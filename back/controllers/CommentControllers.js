@@ -7,8 +7,6 @@ exports.commentlist = async(req,res)=>{
         const data = await Comment.findAll({
             include:[{model:Recomment}]
         })
-        console.log(data,'커멘트 리스트')
-
         res.json(data,userdata)
     } catch (error) {
         console.log("commentlist 오류터짐")
@@ -22,13 +20,7 @@ exports.createComment = async (req, res) => {
     const UserFront_id = userId.front_id
     const userinfo = await User.findOne({where : {user_id:UserFront_id}})
     const userid = userinfo.id;
-    const usernickname = userinfo.nickname;
-    console.log("sdsdsdsdsds",userid)
-    console.log()
-    console.log("==================")
     const { board_id, detail } = req.body
-    console.log(detail)
-    console.log(board_id)
 
     try {
         await Comment.create({

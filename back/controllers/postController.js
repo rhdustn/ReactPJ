@@ -5,7 +5,6 @@ exports.allBoard = async (req, res) => {
     try {
         const temp = await Board.findAll({ include: [{ model: User }] })
         const data = temp.map((value) => {
-            
             return { ...value.dataValues, User: value.dataValues.User.profile_img }
         })
         res.json(data)
@@ -63,28 +62,31 @@ exports.detailBoard = async (req, res) => {
     const { id } = req.params
     const data = await Board.findOne({ where: { id: id } });
     const commentdata = await Comment.findAll({ where: { board_id: id }, include: [{ model: Recomment }, { model: User }] })
-    const recommentArr = commentdata.map(async (value, index) => {
-        const recommentdata = await Recomment.findAll({ where: { comment_id: value.dataValues.id } })
-        return recommentdata
-    })
     const newComment = commentdata.map((value) => {
         console.log(value.User.dataValues.nickname, '뉴커멘asdawrwqrqw')
         return { ...value.dataValues, User: value.User.dataValues.nickname, Img: value.User.dataValues.profile_img }
     })
-    console.log(newComment, '뉴커멘')
-    res.json({ data, commentdata: newComment, recommentArr })
+   const realNewComment=newComment.map( async(value)=>{
+           const recommentdata = await Recomment.findAll({ where: { comment_id: value.id },include: [{ model: User }] })
+          
+          console.log(recommentdata,'리코만토오오')
+           const newReComment = recommentdata.map((revalue) => {
+            //    console.log(revalue.dataValues, 'revaluesdsdsds')
+               return { ...revalue.dataValues,User: revalue.User.dataValues.nickname, Img: revalue.User.dataValues.profile_img }
+           })
+           console.log(newReComment,'뉴리코맨트')
+           console.log(value,'뉴리코맨트ㅍㅍㅍㅍ')
+           return {...value,Recomments:newReComment}
+       
+   })
+   const realRealNewComment=await Promise.all(realNewComment)
+    console.log(realRealNewComment, '뉴커멘')
+    res.json({ data, commentdata: realRealNewComment,realNewComment })
     // res.json({data,commentdata,recommentArr});
 
 
 }
-// exports.detailBoard = async (req, res) => {
-//     console.log('data')
-//     const { id } = req.params
-//     const data = await Board.findOne({ where: { id: id } });
-//     console.log(data)
-//     res.send(data);
 
-// }
 // 게시글 수정
 exports.editBoard = async (req, res) => {
     const { id } = req.params;
