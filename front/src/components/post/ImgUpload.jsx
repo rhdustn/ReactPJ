@@ -12,6 +12,7 @@ const ImgUpload = ({ onUpload, files }) => {
   const handleImageDelete = (index) => {
     const updatedFiles = imageFiles.filter((_, i) => i !== index);
     setImageFiles(updatedFiles);
+    onUpload(updatedFiles);
   };
 
   const inputRef = useRef(null);

@@ -8,9 +8,7 @@ import { ipUrl } from '../../util/util';
 
 const BoardList = ({ id }) => {
   const navigate = useNavigate()
-  // const [title,setTitle]=useState([])
-  // const [nickname,setNickname]=useState("")
-  // const [images,setImages]=useState([])
+
   const imgPath = '/imgs/userplanimg'
   const list = async () => {
     try {
@@ -18,16 +16,8 @@ const BoardList = ({ id }) => {
         "/post/allboard"
       )
       const data = response.data
-      // if (response.data && response.data.title) {
-      //   setTitle(response.data[0].title);
-      // }
-      // if (response.data && response.data.images && response.data.images.length > 0) {
-      //   setImages(response.data[0].images);
-      // }
-      // if (response.data && response.data.nickname) {
-      //   setNickname(response.data[0].nickname);
-      // }
-
+        console.log("333333333333333",data)
+        console.log(data.nickname)
       return data;
     } catch (error) {
       console.log(error)
@@ -46,6 +36,7 @@ const BoardList = ({ id }) => {
   return (
     <div>
       {data ? data.map((value, index) => {
+        console.log("여기 보드 리스트 페이지임",value)
         const thumbNail = JSON.parse(value.images)[0]
         console.log(imgPath + "/" + thumbNail)
 

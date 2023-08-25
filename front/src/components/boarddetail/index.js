@@ -9,6 +9,8 @@ import AddPlanBtn from "./AddPlanBtn";
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
 import CommentList from "./CommentList";
+import LikesBtn from "./LikesBtn";
+import BoardLikes from "./BoardLikes";
 
 export {ImgSlice,Title,SubContent,DayBtn,PlanBtn,DayPopup,BoardPlan,AddPlanBtn,
-    Comment,CommentForm,CommentList}
+    Comment,CommentForm,CommentList,LikesBtn,BoardLikes}
