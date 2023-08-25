@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios';
 import { LikeSize2 } from './boarddetail.styled'
-
+import { ipUrl } from '../../util/util';
 const BoardLikes = ({board_id}) =>{
     const ImgPath = "/imgs/icons"
     const [boardLikes, setBoardLikes] = useState(false)
@@ -10,7 +9,7 @@ const BoardLikes = ({board_id}) =>{
 
     const LikesClick =async()=>{
       try {
-        const response = await axios.post(
+        const response = await ipUrl.post(
             // `/post/updateLikes`,{comment_id:commentIndex},{withCredentials:true}
             )
       } catch (error) {
