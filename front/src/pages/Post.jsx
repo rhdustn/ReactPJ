@@ -62,9 +62,6 @@ const Post = () => {
   const MoveBoardClick =()=>{
     navigate("/board")
   }
-  useEffect(() => {
-    console.log(uploadedFiles)
-  }, [uploadedFiles])
   return (
     <div>
         <MoveBoardBtn onClick={MoveBoardClick}>게시판으로 이동</MoveBoardBtn>

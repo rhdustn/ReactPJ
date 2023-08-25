@@ -14,7 +14,8 @@ const multer = require("multer");
 // 회원가입,로그인 기능이 있는 라우터
 const userRouter = require("./routers/user");
 const postRouter = require("./routers/postRouter");
-const planRouter = require("./routers/planRouter");const mypageRouter = require("./routers/mypageRouter")
+const planRouter = require("./routers/planRouter");
+const mypageRouter = require("./routers/mypageRouter")
 const adminRouter = require("./routers/adminRouter")
 
 
@@ -57,7 +58,6 @@ app.use(
 
 
 
-console.log("123123");
 
 sequelize
   .sync({ force: false })

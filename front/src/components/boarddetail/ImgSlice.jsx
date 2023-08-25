@@ -30,10 +30,8 @@ const ImgSlice = () => {
     }
   };
   useEffect(() => {
-    console.log('hi')
   })
   const { data, isLoading } = useQuery(['boardDetail', id], BoardDetailImg);
-console.log(data.data.images)
 const imgArr = JSON.parse(data.data.images)
 
 

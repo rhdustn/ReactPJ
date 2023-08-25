@@ -56,7 +56,6 @@ const PlanBottom = ({
 
   // 유저가 세운 계획을 저장하는 로직
   const saveUserPlan = async () => {
-    console.log("눌림 asdasasd");
     const savePlan = await ipUrl.post("/plan/save", {
       selectedUserPlan,
       duration: `${gptAnswerSaved.startDate}~${gptAnswerSaved.endDate}`,
@@ -201,7 +200,6 @@ const PerDay = ({
       return parseInt(el.day) === parseInt(index);
     });
     setDayPlanArr(temp);
-    console.log(selectedUserPlan);
   }, [selectedUserPlan]);
 
   return (

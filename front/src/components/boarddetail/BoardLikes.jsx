@@ -13,21 +13,12 @@ const BoardLikes = ({board_id}) =>{
         const response = await axios.post(
             // `/post/updateLikes`,{comment_id:commentIndex},{withCredentials:true}
             )
-            console.log(response)
       } catch (error) {
         
       }
       setBoardLikes(!boardLikes);
 
     }
-    useEffect(() => {
-      if(boardLikes ==false){
-        console.log("하트 비워짐")
-      }else{
-        console.log("하트 채움")
-
-      }
-    }, [boardLikes])
 
 
     // 해당 user_id가 좋아요한 comment_id에 대한 likes 보이기

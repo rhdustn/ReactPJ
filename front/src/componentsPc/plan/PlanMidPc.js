@@ -3,7 +3,6 @@ import { PlanMidBox } from "./PlanPc.styled";
 import { useSelector, useDispatch } from "react-redux";
 
 const PlanMidPc = (props) => {
-  // console.log("들어옴", gptAnswerSaved.location);
   const {
     choiceIndex,
     isScrolled,
@@ -24,7 +23,6 @@ const PlanMidPc = (props) => {
   let map;
   const initMap = useCallback(
     (props) => {
-      console.log(page);
       // 플랜 페이지, 일정편집 페이지 두 곳에서 구글맵을 보여줘야 하므로 나누었다. add는 일정편집, plan은 플랜 페이지이며 그곳에서 실행될 init함수를 정의
       if (page === "add") {
         let myLatLng;
@@ -41,8 +39,6 @@ const PlanMidPc = (props) => {
                     let geocode_latitude = location.lat();
                     let geocode_longitude = location.lng();
                     resolve({ lat: geocode_latitude, lng: geocode_longitude });
-                    // console.log('위1도:', geocode_latitude);
-                    // console.log('경1도:', geocode_longitude);
                   } else {
                     console.error("지오코딩에 실패했습니다. 상태:", status);
                   }
@@ -82,8 +78,6 @@ const PlanMidPc = (props) => {
             lat: Number(lat),
             lng: Number(lng),
           };
-          console.log(lat, lng);
-          console.log(myLatLng);
           map = new window.google.maps.Map(document.getElementById("gmp-map"), {
             zoom: 13,
             center: myLatLng,
@@ -123,7 +117,6 @@ const PlanMidPc = (props) => {
           });
         }
       } else {
-        console.log("???", selectedUserPlan);
         if (selectedUserPlan.length !== 0) {
           // 해당 날짜에 해당하는 인덱스
           const index = selectedUserPlan.findIndex(
@@ -132,12 +125,9 @@ const PlanMidPc = (props) => {
           const { plan } = selectedUserPlan[index];
           let lat = [];
           let lng = [];
-          console.log("this guy", plan);
           for (let i = 0; i < plan.length; i++) {
             lat.push(Number(plan[i].attractionLocation.latitude));
             lng.push(Number(plan[i].attractionLocation.longitude));
-            // console.log("위도: ",plan[i].attractionLocation.latitude);
-            // console.log("경도: ",plan[i].attractionLocation.longitude);
           }
 
           // --------------------------------------------------------------
@@ -179,12 +169,10 @@ const PlanMidPc = (props) => {
               });
 
               if (temp.length === 1 || temp.length === 2) {
-                console.log(temp, "1");
                 return [];
               } else {
                 temp.shift();
                 temp.pop();
-                console.log(temp, "2");
                 return temp;
               }
             };
@@ -250,7 +238,6 @@ const PlanMidPc = (props) => {
 
           // // 각 마커 생성 및 지도에 추가
           // plan.forEach((value) => {
-          //   console.log(value);
           //   new window.google.maps.Marker({
           //     position: {
           //       lat: Number(value.attractionLocation.latitude),

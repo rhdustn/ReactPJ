@@ -54,7 +54,6 @@ export const attractionsWithImg = createSlice({
   initialState: [],
   reducers: {
     saveAttractionsWithImg: (state, action) => {
-      console.log("리덕스, 지피티 데이터 push 됨");
       state.push({
         attractionLocation: action.payload.attractionLocation,
         detail: action.payload.detail,
@@ -96,7 +95,6 @@ export const userChoiceSave = createSlice({
       const { day, plan } = action.payload;
 
       if (state.planPerDay.day == "") {
-        console.log("여기");
         state.planPerDay.day = day;
         state.planPerDay.plan = plan;
       } else {

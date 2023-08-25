@@ -15,18 +15,16 @@ const LikesBtn = ({commentIndex}) => {
         const response = await axios.post(
             `/post/updateLikes`,{comment_id:commentIndex},{withCredentials:true}
             )
-            console.log(response.data)
             setLikes(!likes);
             if(likes === false){
               UnlikeComment()
             }
       } catch (error) {
-          console.log("ssssssssssssssLikesClickerr")
+          console.log(error)
       }
       const UnlikeComment = async (comment_id) => {
         try {
           await axios.delete(`/post/deleltlikes/${comment_id}`, { withCredentials: true });
-          console.log('Like removed from the database');
         } catch (error) {
           console.error('Error removing like:', error);
         }
@@ -35,14 +33,6 @@ const LikesBtn = ({commentIndex}) => {
 
       axios.get(`/post/${5}`)
     }
-    useEffect(() => {
-      if(likes ==false){
-        console.log("하트 비워짐")
-      }else{
-        console.log("하트 채움")
-        console.log(commentIndex)
-      }
-    }, [likes])
 
 
     // 해당 user_id가 좋아요한 comment_id에 대한 likes 보이기

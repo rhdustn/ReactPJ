@@ -75,12 +75,9 @@ const MainBottomPc = ({
       .then((res) => {
         // gpt응답 여기서 state에 저장
         const data = JSON.parse(res.data.content);
-        console.log(data);
         setGptAnswer(data);
-        console.log(gptAnswer);
         // const keys = Object.keys(data);
         // setAnsKey(keys);
-        console.log(JSON.parse(res.data.content));
       })
       .catch((err) => {
         console.log(err);
@@ -157,9 +154,6 @@ const MainBottomPc = ({
   };
 
   useEffect(() => {
-    console.log("누구와 : ", choiceIndex1);
-    console.log("여행스타일 : ", choiceIndex2);
-    console.log("gpt데이터:", gptData);
     choiceSelected(choiceIndex1, choiceIndex2);
 
     if (choiceIndex1.length > 0 && choiceIndex2.length > 0) {
@@ -212,7 +206,6 @@ const MainBottomPc = ({
   });
   useEffect(() => {
     if (gptAnswerSaved.attractions.length > 0) {
-      console.log(gptAnswerSaved);
       setIsloading(false);
 
       nav("/plan");

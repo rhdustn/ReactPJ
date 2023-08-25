@@ -13,7 +13,6 @@ exports.SaveUserInfo = async (req, res) => {
       res.send("already user exist");
     } else {
       bcrypt.hash(user_pw, 10, async (err, hash) => {
-        console.log(hash);
         if (err) {
           console.log(err);
           res.send("Error hashing password in SaveUserInfo");
@@ -36,7 +35,6 @@ exports.SaveUserInfo = async (req, res) => {
 };
 
 exports.ValidateDuplicateUserId = async (req, res) => {
-  console.log("들어오니????????????????/");
   const { user_id } = req.body;
 
   try {

@@ -39,7 +39,6 @@ const EditImg = () => {
   };
 
   useEffect(() => {
-    console.log(selectedFile)
     if(selectedFile) {
       dispatch(saveProfile(selectedFile))
     }

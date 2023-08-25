@@ -9,7 +9,6 @@ const AdminMid = () => {
 
     const getUsers = async () => {
         try {
-            console.log('어드민')
             const users = await ipUrl.get("/admin/users")
             const data = users.data;
             return data;
@@ -20,12 +19,6 @@ const AdminMid = () => {
 
     const {data, isLoading} = useQuery(['users'], getUsers)
 
-    useEffect(() => {
-        console.log(data)
-    }, [data])
-    useEffect(() => {
-        console.log(isLoading)
-    }, [isLoading])
 
 
     // 승인
@@ -47,7 +40,6 @@ const AdminMid = () => {
 
     // 거절 & 삭제
     const tryDeleteUser = async (user_id) => {
-        console.log(user_id)
         try {
             await ipUrl.post(`/admin/del/${user_id}`)
         } catch (error) {

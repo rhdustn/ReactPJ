@@ -9,7 +9,6 @@ export const userOrGuest = createSlice({
   reducers: {
     check: (state, action) => {
       const user_id = action.payload;
-      console.log("로그인 리덕스");
       state.isLogin = true;
       state.isAdmin = false;
 

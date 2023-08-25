@@ -21,9 +21,6 @@ const AdminMidPc = () => {
 
     const {data, isLoading} = useQuery(['users'], getUsers)
 
-    useEffect(() => {
-        console.log(data)
-    }, [data])
 
 
     // 승인
@@ -45,7 +42,6 @@ const AdminMidPc = () => {
 
     // 거절 & 삭제
     const tryDeleteUser = async (user_id) => {
-        console.log(user_id)
         try {
             await ipUrl.post(`/admin/del/${user_id}`)
         } catch (error) {
