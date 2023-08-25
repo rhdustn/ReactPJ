@@ -1,13 +1,10 @@
 import React from 'react'
-import styled from "styled-components"
 import { ProfileName } from "./MyPagePc.styled";
 
-
-
-const MypageNamePc = () => {
+const MypageNamePc = ({nickname}) => {
   return (
     <div>
-      <ProfileName>MypageName</ProfileName>
+      <ProfileName>{nickname}</ProfileName>
       </div>
   )
 }

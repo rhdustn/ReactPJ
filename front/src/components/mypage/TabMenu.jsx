@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios'
 
 import { TabMain,TabButton,TabsContainer,Content, ContentOne, Coming } from './mypage.styled';
 import { useMutation, useQuery } from 'react-query';

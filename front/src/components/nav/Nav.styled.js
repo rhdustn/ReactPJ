@@ -33,7 +33,7 @@ export const BottomNavBtn = styled.div`
     }
 `
 export const BottomNavText = styled.p`
-    margin: 0;
+    margin: 2px 0 0 0;
     font-size: 12px;
     color: ${(props) => props.textcol || '#737373'}; // #a6a6a6
 `

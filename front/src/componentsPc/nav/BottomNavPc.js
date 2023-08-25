@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux'
+import { useQuery } from 'react-query'
+
+import { ipUrl } from '../../util/util';
 
 import { BottomNavBox, BottomNavBtn, BottomNavText } from "./NavPc.styled";
 
@@ -12,6 +15,7 @@ const BottomNavPc = () => {
   const star1 = '/imgs/icons/star1.png'
   const star2 = '/imgs/icons/star2.png'
   const default_profile = '/imgs/profiles/default_profile.jpeg'
+  const ImgPath = '/imgs/profiles'
 
   const nav = useNavigate();
 
@@ -33,46 +37,65 @@ const BottomNavPc = () => {
       my : '#737373'
   })
 
-  useEffect(() => {
-      if(page == '/plan') {
-          setIcon({
-              home : home2,
-              plan : plan1,
-              star : star2
-          })
-          setTextCol({
-              home : '#737373',
-              plan : '#545454',
-              star : '#737373',
-              my : '#737373'
-          })
-      }else if(page == '/board') {
-          setIcon({
-              home : home2,
-              plan : plan2,
-              star : star1
-          })
-          setTextCol({
-              home : '#737373',
-              plan : '#737373',
-              star : '#545454',
-              my : '#737373'
-          })
-      }else if(page == '/mypage') {
-          setIcon({
-              home : home2,
-              plan : plan2,
-              star : star2
-          })
-          setTextCol({
-              home : '#737373',
-              plan : '#737373',
-              star : '#737373',
-              my : '#545454'
-          })
-      }
-  }, [])   
+    useEffect(() => {
+        if(page == '/plan') {
+            setIcon({
+                home : home2,
+                plan : plan1,
+                star : star2
+            })
+            setTextCol({
+                home : '#737373',
+                plan : '#545454',
+                star : '#737373',
+                my : '#737373'
+            })
+        }else if(page == '/board') {
+            setIcon({
+                home : home2,
+                plan : plan2,
+                star : star1
+            })
+            setTextCol({
+                home : '#737373',
+                plan : '#737373',
+                star : '#545454',
+                my : '#737373'
+            })
+        }else if(page == '/mypage' || page == '/showPlan') {
+            setIcon({
+                home : home2,
+                plan : plan2,
+                star : star2
+            })
+            setTextCol({
+                home : '#737373',
+                plan : '#737373',
+                star : '#737373',
+                my : '#545454'
+            })
+        }
+    }, [])  
 
+
+    // 로그인 유저 정보 가져오기 (profile_img 넣을 예정)
+    const tryGetUserInfo = async () => {
+        try {
+            const response = await ipUrl.get(`/mypage/getInfo`)
+            const data = response.data;
+            return data;
+        }catch (error) {
+            console.log(error)
+        }
+    }
+
+    const {data, isLoading} = useQuery(['getUserNav'], tryGetUserInfo)
+
+    useEffect(() => {
+        if(isLoading == false) {
+            console.log(data.profile_img)
+        }
+    }, [isLoading])
 
   return (
       <>
@@ -93,8 +116,10 @@ const BottomNavPc = () => {
           {/* 로그인 된 유저 -> 마이페이지 */}
           {userOrGuest.isLogin &&            
               <BottomNavBtn onClick={() => nav('/mypage')}>
-                  <img src={default_profile} className='profile_img'></img>
-                  <BottomNavText textCol={textCol.my}>마이페이지</BottomNavText>
+                {!isLoading &&
+                <img src={`${ImgPath}/${data.profile_img}`} className='profile_img'></img>
+                }
+                <BottomNavText textCol={textCol.my}>마이페이지</BottomNavText>
               </BottomNavBtn>
           }
           {/* 게스트 -> 로그인 페이지 */}

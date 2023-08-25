@@ -16,11 +16,11 @@ const MypageImg = ({profile_img}) => {
   }, [])
 
   return (
-    <div>
+    <>
       <ProflieImg>
         <img src={`${ImgPath}/${profileImg}`}></img>
       </ProflieImg>
-      </div>
+    </>
   )
 }
 

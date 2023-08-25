@@ -92,6 +92,11 @@ const BottomNav = () => {
 
     const {data, isLoading} = useQuery(['getUserNav'], tryGetUserInfo)
 
+    useEffect(() => {
+        if(isLoading == false) {
+            console.log(data.profile_img)
+        }
+    }, [isLoading])
 
     return (
         <>
@@ -112,7 +117,9 @@ const BottomNav = () => {
             {/* 로그인 된 유저 -> 마이페이지 */}
             {userOrGuest.isLogin &&            
                 <BottomNavBtn onClick={() => nav('/mypage')}>
+                    {!isLoading &&
                     <img src={`${ImgPath}/${data.profile_img}`} className='profile_img'></img>
+                    }
                     <BottomNavText textcol={textCol.my}>마이페이지</BottomNavText>
                 </BottomNavBtn>
             }

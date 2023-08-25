@@ -5,13 +5,15 @@ import axios from 'axios'
 import { EditBtn,EditImg,EditName,ArrowBtn,EditText } from '../components/mypage'
 import styled from 'styled-components';
 import TopNav from '../components/nav/TopNav';
-import { useDispatch, useSelector } from 'react-redux';
 import { ProfileName, StyledProfileImg, InputBtn, StyledProfileName, Button } from '../components/mypage/mypage.styled';
 
 import { ipUrl } from '../util/util';
+import { useNavigate } from 'react-router-dom';
 
 
 const EditProflie = () => {
+  const nav = useNavigate();
+
   const Main = styled.div`
     width: 400px;
     height: 800px;
@@ -19,8 +21,6 @@ const EditProflie = () => {
     left: 50%;
     transform: translate(-50%);
   `
-
-  const dispatch = useDispatch();
 
   const [load, setLoad] = useState(true) // 유저 정보 한 번 가져오고 useQuery 종료
   const [profileBtnChange, setProfileBtnChange] = useState(false);
@@ -105,7 +105,9 @@ const EditProflie = () => {
         }
       })
 
-      console.log(data);
+      if(data.data == 'success') {
+        nav('/mypage')
+      }
       
     } catch (error) {
       console.log(error);
@@ -140,7 +142,7 @@ const EditProflie = () => {
   // )
 
   return (
-    <div>
+    <>
       <TopNav />
 
        <Main>
@@ -190,7 +192,7 @@ const EditProflie = () => {
         }
       </Main>
         
-    </div>
+    </>
   )
 }
 

@@ -17,9 +17,6 @@ const Main = styled.div`
 
 
 const Mypage = () => {
-  const default_profile = '/imgs/profiles/default_profile.jpeg'
-
-  const [profileImg, setProfileImg] = useState('')
 
   // 로그인 유저 정보 가져오기
   const tryGetUserInfo = async () => {

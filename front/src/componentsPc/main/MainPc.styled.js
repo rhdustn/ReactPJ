@@ -2,7 +2,7 @@ import styled, { keyframes } from "styled-components";
 
 export const MainTopBox = styled.div`
   width: 100%;
-  height: 90vh;
+  height: 80vh;
   background-color: #277bc0;
   border-radius: 0 0 30px 30px;
   padding: 10px;
@@ -11,18 +11,19 @@ export const MainTopBox = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 0 0 20px 0;
+  border: 3px solid white;
 `;
 
 export const LogoBox = styled.div`
   width: 100%;
-  height: 50px;
+  height: 70px;
   position: relative;
   box-sizing: border-box;
 
   & img {
     height: 100%;
     position: absolute;
-    left: 10px;
+    left: 40px;
   }
 `;
 
@@ -34,13 +35,13 @@ export const TextBox = styled.div`
   height: 80vh;
 
   & img {
-    width: 100%;
+    width: 80%; height: 80%;
   }
 `;
 
 export const InputBox = styled.div`
-  width: 320px;
-  height: 40px;
+  width: 80%;
+  height: 60px;
   border-radius: 25px;
   color: white;
   background-color: white;
@@ -75,7 +76,7 @@ export const MainMidBox = styled.div`
   flex-direction: column;
   align-items: center;
   margin: 0 0 10px 0;
-  margin-top: 10%;
+  margin-top: 20%;
 `;
 
 export const BigLabel = styled.div`
@@ -93,22 +94,24 @@ export const DateBoxWrap = styled.div`
   width: 100%;
   height: auto;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   box-sizing: border-box;
+  padding: 10px 30px 10px 20px;
 `;
 
 export const DateBox = styled.div`
-  width: 170px;
-  height: 40px;
+  width: 200px;
+  height: 50px;
   background-color: white;
   display: flex;
   align-items: center;
   box-sizing: border-box;
-  margin: 0 5px 0 5px;
+  margin: 0 10px 0 10px;
   border: 1px solid silver;
   border-radius: 20px;
   padding: 0 10px 0 10px;
+  
   & input {
     width: 100%;
     border: none;

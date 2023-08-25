@@ -1,16 +1,26 @@
-import React from 'react'
-import styled from "styled-components"
+import React, { useEffect, useState } from 'react'
 import { ProflieImg } from "./MyPagePc.styled";
 
+const MypageImgPc = ({profile_img}) => {
+  const default_profile = '/imgs/profiles/default_profile.jpeg'
+  const ImgPath = "/imgs/profiles"
 
+  const [profileImg, setProfileImg] = useState('')
 
+  useEffect(() => {
+    if(profile_img == null) {
+      setProfileImg(default_profile)
+    }else {
+      setProfileImg(profile_img)
+    }
+  }, [])
 
-
-const MypageImgPc = () => {
   return (
-    <div>
-      <ProflieImg></ProflieImg>
-      </div>
+    <>
+      <ProflieImg>
+        <img src={`${ImgPath}/${profileImg}`}></img>
+      </ProflieImg>
+    </>
   )
 }
 

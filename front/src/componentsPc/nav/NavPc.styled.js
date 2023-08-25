@@ -30,8 +30,8 @@ export const BottomNavBtn = styled.div`
     }
 `
 export const BottomNavText = styled.p`
-    margin: 0;
-    font-size: 13px;
+    margin: 2px 0 0 0;
+    font-size: 12px;
     color: ${(props) => props.textCol || '#737373'}; // #a6a6a6
 `
 
