@@ -254,6 +254,7 @@ export const NoPlanBtn = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0 10px 0 10px;
 
   &:hover {
     background-color: #277bc0;

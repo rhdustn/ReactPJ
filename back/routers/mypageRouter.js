@@ -1,7 +1,7 @@
 const router = require("express").Router();
-const multer = require("multer")
+const multer = require("multer");
+const path = require("path")
 const {isLogin} = require("../controllers/isLogin")
-const multer = require("multer")
 const {getUserInfo, updateUserInfo, getUserPlan, getUserReview, getUserComment, getUserNotice} = require("../controllers/mypageControllers")
 
 // Multer 설정
@@ -22,7 +22,7 @@ router.get("/getInfo", isLogin, getUserInfo);
 router.post(
   "/updateInfo",
   isLogin,
-  upload.array("uploadedFiles", 5),
+  upload.array("profile_img", 5),
   updateUserInfo
 );
 

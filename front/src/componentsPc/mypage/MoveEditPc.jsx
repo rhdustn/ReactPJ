@@ -12,11 +12,11 @@ const MoveEditPc = () => {
       };
     
   return (
-    <div>
+    <>
         <EditNavigate onClick={moveEditClick}>
             프로필 편집
         </EditNavigate>
-    </div>
+    </>
   )
 }
 export default MoveEditPc

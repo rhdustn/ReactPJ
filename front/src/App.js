@@ -118,7 +118,7 @@ const isMobile = useMediaQuery({
           }
         />
         <Route
-          path="/editPlan"
+          path="/showPlan"
           element={
             isMobile ? (
               <EditPlan />

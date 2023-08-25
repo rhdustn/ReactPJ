@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios'
 
 import { TabMain,TabButton,TabsContainer,Content, ContentOne, Coming } from './mypage.styled';
 import { useMutation, useQuery } from 'react-query';
@@ -82,7 +81,7 @@ const TapMenu = ({user}) => {
         const response = res.data;
         console.log(response);
         dispatch(getSaved(response))
-        nav('/editPlan')
+        nav('/showPlan')
       })
       .catch((err) => {
         console.log(err)

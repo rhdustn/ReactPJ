@@ -16,6 +16,7 @@ const BottomNav = () => {
     const star1 = '/imgs/icons/star1.png'
     const star2 = '/imgs/icons/star2.png'
     const default_profile = '/imgs/profiles/default_profile.jpeg'
+    const ImgPath = '/imgs/profiles'
 
     const nav = useNavigate();
 
@@ -62,7 +63,7 @@ const BottomNav = () => {
                 star : '#545454',
                 my : '#737373'
             })
-        }else if(page == '/mypage') {
+        }else if(page == '/mypage' || page == '/showPlan') {
             setIcon({
                 home : home2,
                 plan : plan2,
@@ -91,6 +92,11 @@ const BottomNav = () => {
 
     const {data, isLoading} = useQuery(['getUserNav'], tryGetUserInfo)
 
+    useEffect(() => {
+        if(isLoading == false) {
+            console.log(data.profile_img)
+        }
+    }, [isLoading])
 
     return (
         <>
@@ -111,7 +117,9 @@ const BottomNav = () => {
             {/* 로그인 된 유저 -> 마이페이지 */}
             {userOrGuest.isLogin &&            
                 <BottomNavBtn onClick={() => nav('/mypage')}>
-                    <img src={default_profile} className='profile_img'></img>
+                    {!isLoading &&
+                    <img src={`${ImgPath}/${data.profile_img}`} className='profile_img'></img>
+                    }
                     <BottomNavText textcol={textCol.my}>마이페이지</BottomNavText>
                 </BottomNavBtn>
             }

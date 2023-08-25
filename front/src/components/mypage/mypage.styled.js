@@ -24,6 +24,7 @@ const Button = styled.div`
   justify-content: center;
   align-items: center;
   font-weight: bold;
+  cursor: ${(props) => props.change ? 'pointer' : 'default'};
 `;
 
 const StyledProfileImg = styled.div`
@@ -83,8 +84,8 @@ const EditNavigate = styled.div`
   top: 5%;
 `
 const ProflieImg = styled.div`
-  width: 100px;
-  height: 100px;
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
   background-color: #ffd8de;
   position: absolute;  
@@ -101,6 +102,7 @@ const ProfileName = styled.div`
   position: absolute;
 
   font-weight: 600;
+  font-size: 20px;
   cursor: pointer;
 
   top: 30%;
@@ -158,21 +160,21 @@ const ContentOne = styled.div`
     position: absolute; top: 0; left: 0;
   }
   & .location {
-    width: 40%; height: 50%;
+    width: 65%; height: 50%;
     display: flex; justify-content: start; align-items: end;
     position: absolute;
     top: 0; left: 10%;
     font-weight: bold;
   }
   & .duration {
-    width: 70%; height: 40%;
+    width: 65%; height: 40%;
     display: flex; justify-content: start; align-items: start;
     font-size: 12px;
     position: absolute;
     top: 60%; left: 10%;
   }
   & .imgs {
-    width: 20%; height: 100%;
+    width: 25%; height: 100%;
     position: absolute; top: 0; right: 5px;
     display: flex; justify-content: end; align-items: center;
     padding: 5px;
