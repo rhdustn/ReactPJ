@@ -38,13 +38,12 @@ const BoardList = ({ id }) => {
             <ImgBox>
               <ShowImg src={imgPath + "/" + thumbNail} alt="" />
             </ImgBox>
-            <ProflieImg />
+            <ProflieImg src={imgPath + "/" +value.User}/>
             <TextBox>
               <div>
                 <SmallText>
                   {/* <span>{nickname}</span>님의 일정 */}
                   <span>{value.nickname}</span>님의 일정
-                  ●3박4일
                 </SmallText>
 
               </div>

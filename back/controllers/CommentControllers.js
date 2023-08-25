@@ -16,16 +16,21 @@ exports.commentlist = async(req,res)=>{
 
 // 댓글 작성 컨드롤러
 exports.createComment = async (req, res) => {
-    // const { id } = req.decoded;
-    const id = 1;
-    console.log(id)
+    const userId = req.decoded
+    const UserFront_id = userId.front_id
+    const userinfo = await User.findOne({where : {user_id:UserFront_id}})
+    const userid = userinfo.id;
+    const usernickname = userinfo.nickname;
+    console.log("sdsdsdsdsds",userid)
+    console.log()
+    console.log("==================")
     const { board_id, detail } = req.body
 
     try {
         await Comment.create({
             board_id,
             detail: detail,
-            user_id:id,
+            user_id:userid,
         })
         res.send("create success")
         res.send()
