@@ -48,7 +48,7 @@ const SignupMid = ({ page }) => {
     } else {
       // useMutation 사용해서 axios post 보내기
       // const data = useMutation();
-      const duplicateIdResult = await axios.post("http://localhost:8000/user/duplicateId", {
+      const duplicateIdResult = await axios.post("http://127.0.0.1:8000/user/duplicateId", {
         user_id,
       });
 
