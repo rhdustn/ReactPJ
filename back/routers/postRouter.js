@@ -22,20 +22,20 @@ const storage = multer.diskStorage({
   
   const upload = multer({ storage: storage });
 router.get('/allboard',isLogin,allBoard);
-router.post("/write",upload.array("uploadedFiles",5),createBoard);
+router.post("/write",upload.array("uploadedFiles",5),isLogin,createBoard);
 router.get('/detail/:id',detailBoard);
 router.post("/edit/:id",upload.array("uploadedFiles",5),editBoard)
 router.get("/delete/:id",deleteBoard)
 
-router.get('/commentlist',commentlist)
-router.post('/createComment',createComment)
-router.post('/commentEdit/:id',editComment)
-router.get('/commentDelet/:id',deleteComment)
+router.get('/commentlist',isLogin,commentlist)
+router.post('/createComment',isLogin,createComment)
+router.post('/commentEdit/:id',isLogin,editComment)
+router.get('/commentDelet/:id',isLogin,deleteComment)
 
-router.get('/recommentlist',recommentlist)
-router.post('/createRecomment',createRecomment)
-router.post('/editRecomment/:id',editRecomment)
-router.get('/deleteRecomment/:id',deleteRecomment)
+router.get('/recommentlist',isLogin,recommentlist)
+router.post('/createRecomment',isLogin,createRecomment)
+router.post('/editRecomment/:id',isLogin,editRecomment)
+router.get('/deleteRecomment/:id',isLogin,deleteRecomment)
 
 router.get("/likeslist/:id",isLogin,likeslist)
 router.post("/updatelikes",isLogin,updateLikes)

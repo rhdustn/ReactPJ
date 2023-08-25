@@ -19,9 +19,8 @@ exports.likeslist = async (req, res) => {
       }
 
     })
-    console.log('고연수 여신 .', temp)
     // const data = await LikeComment.findAll()
-    res.json(data)
+    res.json(temp)
   } catch (error) {
     console.log("likeslist 오류터짐")
     console.log(error)
@@ -29,7 +28,6 @@ exports.likeslist = async (req, res) => {
 }
 // 하트가 true 면likeComment에 올라가는 컨트롤러
 exports.updateLikes = async (req, res) => {
-  // 일단 임시로 정적으로 넣은 comment_id를 넣음
   const comment_id = req.body.comment_id
   const userData = req.decoded;
   console.log("flgnfkngkfg", comment_id);

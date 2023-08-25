@@ -3,7 +3,7 @@ const {Comment, Recomment} = require("../models")
 // 대댓글을 보여줄 수 있는 컨트롤러
 exports.recommentlist =async(req,res)=>{
     try {
-        const data = await ReComment.findAll()
+        const data = await Recomment.findAll()
         res.json(data)
     } catch (error) {
         console.log("commentlist 오류터짐")

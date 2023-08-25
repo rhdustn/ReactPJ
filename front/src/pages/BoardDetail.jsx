@@ -33,7 +33,7 @@ const BoardDetail = () => {
   const BoardDetailView = async ({ queryKey }) => {
     try {
       console.log(queryKey)
-      const response = await axios.get(`/post/detail/${queryKey[1]}`);
+      const response = await ipUrl.get(`/post/detail/${queryKey[1]}`);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -42,8 +42,9 @@ const BoardDetail = () => {
     const likesView = async ({queryKey})=>{
     try {
       console.log(queryKey)
-      const response = await axios.get(`/post/likeslist/${queryKey[1]}`);
-      return response.data;
+      const response = await ipUrl.get(`/post/likeslist/${queryKey[1]}`);
+    console.log(response.data)
+    return response.data;
     } catch (error) {
       console.log(error);
     }
@@ -78,7 +79,6 @@ const BoardDetail = () => {
       dispatch(create(data))
 
     }
-    console.log(data)
   }, [data])
 
   useEffect(()=>{

@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { Main,MoveBoardBtn } from '../components/boarddetail/boarddetail.styled';
 import { PostContent, PostTitle, PostBtn } from '../components/post/post.style';
 import { PostPlan, ImgUpload } from '../components/post';
-import axios from 'axios';
 import { ipUrl } from '../util/util';
 
 const Post = () => {

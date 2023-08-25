@@ -212,7 +212,7 @@ transform: translate(-1%,-50%);
   }
 
 `
-const CommentProflieImg = styled.div`
+const CommentProflieImg = styled.img`
 width: 45px;
 height: 45px;
 border: 1px solid;

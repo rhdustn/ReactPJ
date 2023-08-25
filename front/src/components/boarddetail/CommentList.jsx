@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useMutation, useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
 import {
@@ -21,19 +20,6 @@ const CommentList = ({ comments }) => {
   const { id } = useParams();
   const ImgPath = "/imgs/icons";
 
-
-
-  const CommentView = async () => {
-    try {
-      const response = await ipUrl.get(`/post/commentlist`);
-      console.log(response);
-      return response;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const { data, isLoading } = useQuery(['boardDetail', id], CommentView);
 
   const CommentEdit = async ({ commentIndex }) => {
     try {
@@ -145,16 +131,20 @@ const CommentList = ({ comments }) => {
     setExpandedCommentIndex(null);
   }
 
-  // 
+// 지금 img = 이미지의 뎡로 
+const ProImgPath = "/imgs/userplanimg/"
 
   return (
     <div>
       {comments.map((comment, commentIndex) => (
         <div key={commentIndex}>
           <CommentContain >
-            <CommentProflieImg>Img</CommentProflieImg>
+            <CommentProflieImg   src={ProImgPath+comment.Img}>
+              
+            </CommentProflieImg>
+            
             <CommentContain2>
-              <div>{comment.user_id}</div>
+              <div>{comment.User}</div>
               <div>{comment.detail}</div>
               <div>
                 <div
