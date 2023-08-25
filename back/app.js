@@ -36,8 +36,8 @@ app.use(express.json());
 
 app.use(
   cors({
-    // origin: ["http://hyunss.com","http://localhost"],
-    origin: ["http://localhost"],
+    origin: ["http://hyunss.com"],
+    // origin: ["http://localhost"],
     // origin: ["*"],
     credentials: true,
   })
