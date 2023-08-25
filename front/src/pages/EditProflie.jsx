@@ -6,7 +6,7 @@ import { EditBtn,EditImg,EditName,ArrowBtn,EditText } from '../components/mypage
 import styled from 'styled-components';
 import TopNav from '../components/nav/TopNav';
 import { useDispatch, useSelector } from 'react-redux';
-import { ProfileName, StyledProfileImg, InputBtn, StyledProfileName } from '../components/mypage/mypage.styled';
+import { ProfileName, StyledProfileImg, InputBtn, StyledProfileName, Button } from '../components/mypage/mypage.styled';
 
 import { ipUrl } from '../util/util';
 
@@ -50,7 +50,7 @@ const EditProflie = () => {
     if(isLoading == false) {
       setLoad(false)
     }
-  }, [])
+  }, [isLoading])
 
   // 프로필 이미지 관련
   const handleFileChange = (event) => {
@@ -88,11 +88,25 @@ const EditProflie = () => {
   };
 
   // 수정 완료
-  const trySaveUserInfo = () => {
+  const trySaveUserInfo = async () => {
     try {
       console.log('수정 저장')
       console.log(selectedFile)
       console.log(name)
+
+      const form = new FormData();
+      form.append('nickname', name);
+      form.append('profile_img', selectedFile)
+
+      const data = await ipUrl.post('/mypage/updateInfo', form, {
+        withCredentials : true,
+        headers : {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+
+      console.log(data);
+      
     } catch (error) {
       console.log(error);
     }
@@ -101,6 +115,8 @@ const EditProflie = () => {
   useEffect(() => {
     if(name || selectedFile) {
       setProfileBtnChange(true)
+    }else if(!name && !selectedFile) {
+      setProfileBtnChange(false)
     }
   }, [name, selectedFile])
 
@@ -163,7 +179,12 @@ const EditProflie = () => {
               )}
             </StyledProfileName>          
           
-            <EditBtn change={profileBtnChange} trySaveUserInfo={trySaveUserInfo} />
+            <Button change={profileBtnChange} onClick={() => {
+              trySaveUserInfo()
+            }}>
+              수정 완료
+            </Button>
+            
             <EditText/>
           </>        
         }
