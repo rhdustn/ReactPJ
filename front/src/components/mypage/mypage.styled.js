@@ -83,8 +83,8 @@ const EditNavigate = styled.div`
   top: 5%;
 `
 const ProflieImg = styled.div`
-  width: 100px;
-  height: 100px;
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
   background-color: #ffd8de;
   position: absolute;  
@@ -101,6 +101,7 @@ const ProfileName = styled.div`
   position: absolute;
 
   font-weight: 600;
+  font-size: 20px;
   cursor: pointer;
 
   top: 30%;

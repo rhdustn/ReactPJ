@@ -82,7 +82,7 @@ const TapMenu = ({user}) => {
         const response = res.data;
         console.log(response);
         dispatch(getSaved(response))
-        nav('/editPlan')
+        nav('/showPlan')
       })
       .catch((err) => {
         console.log(err)
