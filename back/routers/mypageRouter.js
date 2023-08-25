@@ -1,14 +1,8 @@
 const router = require("express").Router();
-const { isLogin } = require("../controllers/isLogin");
-const {
-  getUserInfo,
-  updateUserInfo,
-  getUserPlan,
-  getUserReview,
-  getUserComment,
-  getUserNotice,
-} = require("../controllers/mypageControllers");
-const multer = require("multer");
+const multer = require("multer")
+const {isLogin} = require("../controllers/isLogin")
+const {getUserInfo, updateUserInfo, getUserPlan, getUserReview, getUserComment, getUserNotice} = require("../controllers/mypageControllers")
+
 // Multer 설정
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {

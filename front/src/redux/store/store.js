@@ -8,6 +8,8 @@ import {
 import { selectedUserPlan } from "../features/selectedUserPlan";
 import { BoardDetailSlice } from "../features/post";
 import { userOrGuest } from "../features/login";
+import { getSavedPlan } from "../features/getSavedPlan";
+import { editProfile } from "../features/editProfile";
 
 const store = configureStore({
   reducer: {
@@ -17,7 +19,9 @@ const store = configureStore({
     userChoiceSave: userChoiceSave.reducer,
     BoardDetailSlice: BoardDetailSlice.reducer,
     selectedUserPlan: selectedUserPlan.reducer,
-    userOrGuest: userOrGuest.reducer
+    userOrGuest: userOrGuest.reducer,
+    getSavedPlan: getSavedPlan.reducer,
+    editProfile: editProfile.reducer
   },
 });
 

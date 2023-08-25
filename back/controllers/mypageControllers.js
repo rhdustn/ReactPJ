@@ -5,7 +5,7 @@ exports.getUserInfo = async (req, res) => {
     try {
         const {front_id} = req.decoded;
         const user = await User.findOne({where : {user_id : front_id}})
-        console.log(user);
+        console.log('로그인 유저 : ', user);
         res.json(user)
     } catch (error) {
         console.log(error);
@@ -30,7 +30,9 @@ exports.updateUserInfo = async (req, res) => {
 exports.getUserPlan = async (req, res) => {
     try {
         const {front_id} = req.decoded;
-        const planAll = await Plan.findAll({where : {user_id : front_id}})
+        const user = await User.findOne({where : {user_id : front_id}})
+        const planAll = await Plan.findAll({where : {user_id : user.id}})
+        console.log('일정 : ', planAll)
         res.json(planAll);
     } catch (error) {
         console.log(error);
@@ -41,7 +43,9 @@ exports.getUserPlan = async (req, res) => {
 exports.getUserReview = async (req, res) => {
     try {
         const {front_id} = req.decoded;
-        const reviewAll = await Board.findAll({where : {user_id : front_id}})
+        const user = await User.findOne({where : {user_id : front_id}})
+        const reviewAll = await Board.findAll({where : {users_id : user.id}})
+        console.log('게시글 : ', reviewAll)
         res.json(reviewAll);
     } catch (error) {
         console.log(error);
@@ -52,7 +56,9 @@ exports.getUserReview = async (req, res) => {
 exports.getUserComment = async (req, res) => {
     try {
         const {front_id} = req.decoded;
-        const commentAll = await Comment.findAll({where : {user_id : front_id}})
+        const user = await User.findOne({where : {user_id : front_id}})
+
+        const commentAll = await Comment.findAll({where : {user_id : user.id}})
         res.json(commentAll);
     } catch (error) {
         console.log(error);
@@ -63,8 +69,10 @@ exports.getUserComment = async (req, res) => {
 exports.getUserNotice = async (req, res) => {
     try {
         const {front_id} = req.decoded;
+        const user = await User.findOne({where : {user_id : front_id}})
+
         const noticeAll = await Notice.findAll({where : {
-            receiver : front_id,
+            receiver : user.id,
             is_confirm : false
         }})
         res.json(noticeAll);

@@ -6,7 +6,7 @@ height: 800px;
 `
 const ImgBoxContainer = styled.div`
 width: 400px;
-height: 280px;
+height: 250px;
 display: flex;
 overflow: hidden;
 position: relative;
@@ -19,10 +19,16 @@ background-color: beige;
 display: flex;
 transition: transform 0.3s ease;
 
+& div {
+  width: 400px; height: 250px;
+  overflow: hidden;
+  display: flex; justify-content: center; align-items: center;
+}
+
 `
  const Image = styled.img`
-  width: 400px;
-  height: 250px;
+  width: 100%;
+  height: auto;
   overflow-y: hidden;
 `;
 const ImageBtnPre = styled.button`
@@ -45,30 +51,32 @@ border: none;
 transform: translate(0,-50%);
 `
 const TitleStyle = styled.div`
-    box-sizing: border-box;
-    overflow-wrap: break-word;
-    color: rgb(58, 58, 58);
-    float: none;
-    font-weight: bold;
-    white-space: pre-line;
-    padding: 0px 30px;
-    font-size: 24px;
-    line-height: 1.2;
-    letter-spacing: 0px;
-    display: flex;
+  height: 50px;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+  color: rgb(58, 58, 58);
+  float: none;
+  font-weight: bold;
+  white-space: pre-line;
+  padding: 0 30px;
+  font-size: 24px;
+  line-height: 1.2;
+  letter-spacing: 0px;
+  display: flex; align-items: end;
 `
 const SubContentStyle = styled.div`
-    box-sizing: border-box;
-    overflow-wrap: break-word;
-    color: rgba(58, 58, 58, 0.8);
-    float: none;
-    font-weight: 500;
-    white-space: pre-line;
-    padding: 20px 30px 0px;
-    font-size: 16px;
-    line-height: 1.62;
-    letter-spacing: 0px;
-    display: flex;
+  height: auto;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+  color: rgba(58, 58, 58, 0.8);
+  float: none;
+  font-weight: 500;
+  white-space: pre-line;
+  padding: 0 30px;
+  font-size: 16px;
+  line-height: 1.62;
+  letter-spacing: 0px;
+  display: flex;
 `
 const Popup = styled.div`
 position: fixed;
@@ -116,7 +124,7 @@ margin-left: 15px;
 `
 
 const BtnStyle = styled.button`
-    width: 150px;
+    width: 170px;
     height: 30px;
     border: 2px solid LightGray;
     background-color: white;
@@ -317,11 +325,11 @@ position: absolute;
     right: 8%;
 `
 const EditImg = styled.img`
-width: 30px;
-height: 30px;
+width: 20px;
+height: 20px;
 position: absolute;
-right: 2%;
-top: 1%;
+right: 15px;
+top: 15px;
 `
 const HeaderDiv = styled.div`
 width: 400px;

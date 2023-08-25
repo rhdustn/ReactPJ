@@ -1,15 +1,18 @@
 import React, { useState, useRef, useEffect } from 'react';
-import axios from 'axios'
 import { useMutation, useQuery } from 'react-query';
+import { useDispatch } from 'react-redux';
+import axios from 'axios'
+
+import { saveProfile } from '../../redux/features/editProfile';
 
 import { StyledProfileImg,InputBtn } from './mypage.styled';
 
 
-const EditImg = ({profileImg, setProfileImg}) => {
-  const default_profile = '/imgs/profiles/default_profile.jpeg'
+const EditImg = () => {
+  const dispatch = useDispatch();
 
-  const [selectedFile, setSelectedFile] = useState(profileImg);
-  const [imagePreview, setImagePreview] = useState(profileImg);
+  const [selectedFile, setSelectedFile] = useState('');
+  const [imagePreview, setImagePreview] = useState('');
   const fileInputRef = useRef(null); 
 
   const handleFileChange = (event) => {
@@ -37,19 +40,16 @@ const EditImg = ({profileImg, setProfileImg}) => {
 
   useEffect(() => {
     console.log(selectedFile)
-  }, [selectedFile])
-
-  useEffect(() => {
-    if(profileImg == null) {
-      setSelectedFile(default_profile)
-      setImagePreview(default_profile)
+    if(selectedFile) {
+      dispatch(saveProfile(selectedFile))
     }
-  }, [])
+
+  }, [selectedFile])
 
   return (
     <>
       <StyledProfileImg onClick={handleImageClick} preview={imagePreview}>
-        {selectedFile ? '' : 'imgs'}
+        {selectedFile ? '' : '프로필 선택'}
       </StyledProfileImg>
       <InputBtn>
         <input

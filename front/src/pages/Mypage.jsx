@@ -17,8 +17,9 @@ const Main = styled.div`
 
 
 const Mypage = () => {
+  const default_profile = '/imgs/profiles/default_profile.jpeg'
 
-  const [load, setLoad] = useState(false)
+  const [profileImg, setProfileImg] = useState('')
 
   // 로그인 유저 정보 가져오기
   const tryGetUserInfo = async () => {
@@ -32,25 +33,23 @@ const Mypage = () => {
     }
   }
 
-  const {data, isLoading} = useQuery(['getUserMypage'], tryGetUserInfo, {
-    enabled : load
-  })
+  const {data, isLoading} = useQuery(['getUserMypage'], tryGetUserInfo)
 
   return (
-    <div>
-      {!isLoading &&
       <>
         <Main>
           <MoveEdit />
+          {!isLoading &&
+          <>
           <MypageImg profile_img={data.profile_img} />
           <MypageName nickname={data.nickname} />
+          </>
+          }
           <TapMenu user={data} />
         </Main>
 
         <BottomNav/>
       </>      
-      }
-    </div>
   )
 }
 

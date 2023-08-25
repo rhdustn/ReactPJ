@@ -12,15 +12,16 @@ height: 800px;
 const Board = () => {
 
     return (
-        <div>
+        <>
             <BoardMain>
-            <BoardTitle />
-            <BoardSubTitle />
-            <BoardList/>
-            <BottomBox/>
+                <BoardTitle />
+                <BoardSubTitle />
+                <BoardList/>
+                <BottomBox/>
             </BoardMain>
+            
             <BottomNav/>
-        </div>
+        </>
     )
 }
 
