@@ -14,7 +14,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { check, reset } from "../../redux/features/login";
-import { ipUrl } from '../../util/util';
+import { ipUrl } from "../../util/util";
 
 const SignupMid = ({ page }) => {
   const [user_id, setId] = useState();
@@ -46,8 +46,6 @@ const SignupMid = ({ page }) => {
 
   // 아이디 중복 체크
   const dupChk1 = async () => {
-    console.log("아이디 중복 체크", user_id);
-
     if (user_id == undefined) {
       return;
     } else {
@@ -82,8 +80,6 @@ const SignupMid = ({ page }) => {
 
   // 닉네임 중복 체크
   const dupChk2 = async () => {
-    console.log("닉네임 중복 체크", nickname);
-
     if (nickname === undefined) {
       return;
     } else {
@@ -207,11 +203,7 @@ const SignupMid = ({ page }) => {
       (value) => value === true
     );
 
-    if (isEveryTrue) {
-      console.log("통과");
-    } else {
-      console.log("중복확인 및 이메일,비밀번호 형식을 확인해 주세요");
-    }
+   
   };
 
   // 로그인 체크

@@ -57,7 +57,6 @@ app.use(
 
 
 
-console.log("123123");
 
 sequelize
   .sync({ force: false })

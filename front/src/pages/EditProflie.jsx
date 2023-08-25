@@ -26,7 +26,6 @@ const EditProflie = () => {
     try {
       const response = await ipUrl.get(`/mypage/getInfo`)
       const data = response.data;
-      console.log(data);
       return data;
     }catch (error) {
       console.log(error)
@@ -38,7 +37,6 @@ const EditProflie = () => {
 
   const trySaveUserInfo = () => {
     try {
-      console.log('수정 저장')
     } catch (error) {
       console.log(error);
     }

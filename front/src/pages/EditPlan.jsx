@@ -25,8 +25,6 @@ const EditPlan = () => {
 
   useEffect(() => {
     const {plan, attraction} = getSavedPlan.savedPlan;
-    console.log(plan)
-    console.log(attraction)
 
     const dateString = plan.duration;
     const [startDate, endDate] = dateString.split("~").map(date => date);
@@ -45,19 +43,14 @@ const EditPlan = () => {
 
     attraction.map((value, index) => {
       let arr = attraction.filter(item => item.day == index+1)
-      console.log(arr);
       finalArr.push(arr)
     })
-    console.log(finalArr)
 
 
     setUserChoiceSaved(finalArr)
 
   }, [])
 
-  useEffect(() => {
-    console.log(gptAnswerSaved)
-  }, [gptAnswerSaved])
 
   useEffect(() => {
     const handleScroll = () => {

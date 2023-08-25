@@ -136,7 +136,6 @@ const SignupMid = ({page}) => {
 
     // 로그인 체크
     const tryLogin = async () => {
-      console.log('tryLogin')
       document.querySelector("input[name='user_id']").style.border = "1px solid silver";
       document.querySelector("input[name='user_pw']").style.border = "1px solid silver";
 

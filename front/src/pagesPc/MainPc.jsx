@@ -104,7 +104,6 @@ const Main = () => {
   useEffect(() => {
     dispatch(reset());
 
-    console.log(userOrGuest);
     // 어드민 로그인이면 어드민 페이지로 이동
     if (userOrGuest.isAdmin == true) {
       nav("/admin");

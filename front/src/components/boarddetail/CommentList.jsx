@@ -26,7 +26,6 @@ const CommentList = ({ comments }) => {
   const CommentView = async () => {
     try {
       const response = await ipUrl.get(`/post/commentlist`);
-      console.log(response);
       return response;
     } catch (error) {
       console.log(error);
@@ -38,7 +37,6 @@ const CommentList = ({ comments }) => {
   const CommentEdit = async ({ commentIndex }) => {
     try {
       const response = await ipUrl.post(`/post/commentEdit/${commentIndex}`, { detail: document.querySelector("#commentEditInput").value }, { withCredentials: true });
-      console.log(response);
       const data = response.data
     } catch (error) {
       console.log(error)
@@ -68,7 +66,6 @@ const CommentList = ({ comments }) => {
   const CommentDelet = async (commentIndex) => {
     try {
       const response = await ipUrl.get(`/post/commentDelet/${commentIndex}`);
-      console.log(response);
     } catch (error) {
       console.log("댓글 삭제 에러");
       console.log(error);
@@ -89,7 +86,6 @@ const CommentList = ({ comments }) => {
   const ReCommentView = async () => {
     try {
       const response = await ipUrl.get(`/post/recommentlist`);
-      console.log(response);
       return response;
     } catch (error) {
       console.log(error);
@@ -99,7 +95,6 @@ const CommentList = ({ comments }) => {
 
   // 대댓글등록 Submit
   const handleReplySubmit = async (commentIndex) => {
-    console.log(commentIndex)
     if (replyText.trim() !== '') {
       try {
         const response = await ipUrl.post(
@@ -110,7 +105,6 @@ const CommentList = ({ comments }) => {
           },
           { withCredentials: true }
         );
-        console.log("ssssssssssssssssssss", response)
         const updatedReplies = [...replies];
         updatedReplies[commentIndex] = (updatedReplies[commentIndex] || []).concat(replyText);
         setReplies(updatedReplies);

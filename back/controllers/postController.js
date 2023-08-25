@@ -42,17 +42,14 @@ exports.detailBoard = async (req, res) => {
         const recommentdata = await Recomment.findAll({ where: { comment_id:value.dataValues.id } })
         return recommentdata
     })
-    console.log(data)
     res.json({data,commentdata,recommentArr})
     // res.json({data,commentdata,recommentArr});
    
 
 }
 // exports.detailBoard = async (req, res) => {
-//     console.log('data')
 //     const { id } = req.params
 //     const data = await Board.findOne({ where: { id: id } });
-//     console.log(data)
 //     res.send(data);
 
 // }

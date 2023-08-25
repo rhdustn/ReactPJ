@@ -44,7 +44,6 @@ const BoardDetail = () => {
 
   const BoardDetailView = async ({ queryKey }) => {
     try {
-      console.log(queryKey);
       const response = await axios.get(`/post/detail/${queryKey[1]}`);
       return response.data;
     } catch (error) {
@@ -53,7 +52,6 @@ const BoardDetail = () => {
   };
   const likesView = async ({ queryKey }) => {
     try {
-      console.log(queryKey);
       const response = await axios.get(`/post/likeslist/${queryKey[1]}`);
       return response.data;
     } catch (error) {
@@ -86,7 +84,6 @@ const BoardDetail = () => {
     if (data) {
       dispatch(create(data));
     }
-    console.log(data);
   }, [data]);
 
   useEffect(() => {});

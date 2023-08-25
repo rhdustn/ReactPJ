@@ -111,9 +111,6 @@ const PlanBottomPc = ({
     }
     setPeriodArr(temp);
   }, [attractions]);
-  useEffect(() => {
-    console.log(userOrGuest, "리덕스");
-  }, [userOrGuest]);
 
   return (
     <>
@@ -172,7 +169,6 @@ const PerDayPc = ({ period, index, place, imgSrc, setSelectedPlanIndex }) => {
       return parseInt(el.day) === parseInt(index);
     });
     setDayPlanArr(temp);
-    console.log(selectedUserPlan);
   }, [selectedUserPlan]);
   return (
     <>

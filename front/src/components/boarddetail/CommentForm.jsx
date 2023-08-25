@@ -17,7 +17,6 @@ const CommentForm = ({onCommentSubmit}) => {
       
       onCommentSubmit(inputComment);
       setInputComment('');
-      console.log(inputComment)
 
       try {
         const response = 
@@ -25,7 +24,6 @@ const CommentForm = ({onCommentSubmit}) => {
             `/post/createComment`,{detail :inputComment,board_id:id},{withCredentials:true}
         )
         const data = response.data;
-        console.log(data)
 
       } catch (error) {
         console.log(error)

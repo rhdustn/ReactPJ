@@ -5,7 +5,6 @@ exports.getUserInfo = async (req, res) => {
     try {
         const {front_id} = req.decoded;
         const user = await User.findOne({where : {user_id : front_id}})
-        console.log('로그인 유저 : ', user);
         res.json(user)
     } catch (error) {
         console.log(error);
@@ -32,7 +31,6 @@ exports.getUserPlan = async (req, res) => {
         const {front_id} = req.decoded;
         const user = await User.findOne({where : {user_id : front_id}})
         const planAll = await Plan.findAll({where : {user_id : user.id}})
-        console.log('일정 : ', planAll)
         res.json(planAll);
     } catch (error) {
         console.log(error);
@@ -45,7 +43,6 @@ exports.getUserReview = async (req, res) => {
         const {front_id} = req.decoded;
         const user = await User.findOne({where : {user_id : front_id}})
         const reviewAll = await Board.findAll({where : {users_id : user.id}})
-        console.log('게시글 : ', reviewAll)
         res.json(reviewAll);
     } catch (error) {
         console.log(error);
