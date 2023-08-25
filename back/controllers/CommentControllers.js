@@ -3,12 +3,14 @@ const { User, Board, Comment,Recomment } = require("../models")
 // 댓글을 보여줄 수 있는 컨트롤러
 exports.commentlist = async(req,res)=>{
     try {
+        const userdata = await User.findOne({ where: { id }})
         const data = await Comment.findAll({
             include:[{model:Recomment}]
         })
         console.log("댓글을 보여줄 수 있는 컨트롤러")
-        console.log(data)
-        res.json(data)
+        console.log("sdsdsdsdsdsd",data)
+        console.log("sdsdsdsdsdsd",userdata)
+        res.json(data,userdata)
     } catch (error) {
         console.log("commentlist 오류터짐")
         console.log(error)

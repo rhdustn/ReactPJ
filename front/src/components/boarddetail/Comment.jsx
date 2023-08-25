@@ -3,7 +3,6 @@ import { CommentContainer,CommentMain } from './boarddetail.styled'
 import {CommentList,CommentForm} from './index'
 
 const Comment = ({comments}) => {
-
   console.log(comments)
 
   const CommentSubmit = () => {

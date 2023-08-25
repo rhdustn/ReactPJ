@@ -1,10 +1,12 @@
 const router = require("express").Router();
 const multer = require("multer");
 const path = require("path");
+const {isLogin} = require("../controllers/isLogin")
 
 const {allBoard, createBoard, detailBoard,editBoard, deleteBoard} = require("../controllers/postController")
 const {commentlist,createComment,editComment,deleteComment} =require("../controllers/CommentControllers")
 const {recommentlist,createRecomment, editRecomment,deleteRecomment} = require("../controllers/ReCommentControllers")
+const {likeslist,updateLikes,deleteLikes} = require("../controllers/likecommentController")
 
 // Multer 설정
 const storage = multer.diskStorage({
@@ -19,7 +21,7 @@ const storage = multer.diskStorage({
   });
   
   const upload = multer({ storage: storage });
-router.get('/allboard',allBoard);
+router.get('/allboard',isLogin,allBoard);
 router.post("/write",upload.array("uploadedFiles",5),createBoard);
 router.get('/detail/:id',detailBoard);
 router.post("/edit/:id",upload.array("uploadedFiles",5),editBoard)
@@ -34,5 +36,9 @@ router.get('/recommentlist',recommentlist)
 router.post('/createRecomment',createRecomment)
 router.post('/editRecomment/:id',editRecomment)
 router.get('/deleteRecomment/:id',deleteRecomment)
+
+router.get("/likeslist/:id",isLogin,likeslist)
+router.post("/updatelikes",isLogin,updateLikes)
+router.get("/deleltlikes",isLogin,deleteLikes)
 
 module.exports = router

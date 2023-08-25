@@ -20,6 +20,7 @@ return img.filename
 
     const imgFiles=JSON.stringify(tempImgArr)
 
+
     // const { filename } = req.file
     await Board.create({
         title: title,
@@ -27,7 +28,7 @@ return img.filename
         images: imgFiles,
         likes:0,
         views:0,
-        nickname:"user1"
+
     })
     res.send("create success")
 }
@@ -36,7 +37,6 @@ return img.filename
 exports.detailBoard = async (req, res) => {
     const { id } = req.params
     const data = await Board.findOne({ where: { id: id } });
-    console.log("상세페이지asdasd"+data)
     const commentdata = await Comment.findAll({ where: { board_id: id }, include : [{model:Recomment}] })
    const recommentArr= commentdata.map( async(value, index)=>{
         const recommentdata = await Recomment.findAll({ where: { comment_id:value.dataValues.id } })
