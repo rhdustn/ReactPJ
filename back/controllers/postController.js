@@ -63,19 +63,15 @@ exports.detailBoard = async (req, res) => {
     const data = await Board.findOne({ where: { id: id } });
     const commentdata = await Comment.findAll({ where: { board_id: id }, include: [{ model: Recomment }, { model: User }] })
     const newComment = commentdata.map((value) => {
-        console.log(value.User.dataValues.nickname, '뉴커멘asdawrwqrqw')
         return { ...value.dataValues, User: value.User.dataValues.nickname, Img: value.User.dataValues.profile_img }
     })
    const realNewComment=newComment.map( async(value)=>{
            const recommentdata = await Recomment.findAll({ where: { comment_id: value.id },include: [{ model: User }] })
           
-          console.log(recommentdata,'리코만토오오')
            const newReComment = recommentdata.map((revalue) => {
             //    console.log(revalue.dataValues, 'revaluesdsdsds')
                return { ...revalue.dataValues,User: revalue.User.dataValues.nickname, Img: revalue.User.dataValues.profile_img }
            })
-           console.log(newReComment,'뉴리코맨트')
-           console.log(value,'뉴리코맨트ㅍㅍㅍㅍ')
            return {...value,Recomments:newReComment}
        
    })

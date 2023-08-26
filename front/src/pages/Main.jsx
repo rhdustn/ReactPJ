@@ -9,6 +9,8 @@ import MainMid from "../components/main/MainMid";
 import MainBottom from "../components/main/MainBottom";
 import { useNavigate } from "react-router-dom";
 import { resetSelectedUserPlan } from "../redux/features/selectedUserPlan";
+import { ipUrl } from "../util/util";
+import { useQuery } from "react-query";
 const Main = () => {
   const dispatch = useDispatch();
   const nav = useNavigate();
@@ -36,6 +38,17 @@ const Main = () => {
   const [isDated, setDate] = useState(false);
   // 옵션 선택
   const [isChoiced, setChoice] = useState(false);
+
+  // 현재 로그인한 유저의 정보를 가져오는 로직
+  const getLoginUserInfoHandler= async()=>{
+    
+    const getLoginUserInfo= await ipUrl.get('/user/loginUser');
+    console.log(getLoginUserInfo)
+  }
+
+  // 현재 로그인한 유저의 정보를 가져오는 로직 query
+  const getLoginUserInfoQuery=useQuery(['getLoginUserInfoQuery'],getLoginUserInfoHandler)
+
 
   // 지역 검색
   const locationSearched = (lo) => {
@@ -94,9 +107,12 @@ const Main = () => {
     }
   }, []);
 
+
+
   useEffect(() => {
     dispatch(resetSelectedUserPlan());
     dispatch(resetAttractionsWithImg())
+    
   }, []);
   return (
     <>

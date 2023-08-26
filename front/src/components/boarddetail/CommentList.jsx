@@ -5,7 +5,7 @@ import {
   CommentProflieImg, CommentContain, CommentContain2, Repliesdiv, RelpyInput, RelpyBtn,
   RelpyBtn2, CommentProflieImg2, Reasd, CommentEditInput, CommentEditButton, CommentDelButton,
   HandleEditCheck, InputContain, HandleDeleteCheck, CommentEditImg, ButtonBox, ShowButtonBox2,
-  Xbtn
+  Xbtn,RelpyBtndiv,Nickname
 } from './boarddetail.styled';
 import LikesBtn from './LikesBtn';
 import { ipUrl } from '../../util/util';
@@ -177,17 +177,17 @@ const CommentList = ({ comments }) => {
           <CommentContain >
             <CommentProflieImg   src={ProImgPath+comment.Img} />            
             <CommentContain2>
-              <div>{comment.User}</div>
+              <Nickname>{comment.User}</Nickname>
               <div>{comment.detail}</div>
               <div>
-                <div
+                <RelpyBtndiv
                   onClick={() => {
                     setActiveCommentIndex(commentIndex);
                     setIsReplyVisible(true);
                   }}
                 >
                   답글 달기
-                </div>
+                </RelpyBtndiv>
               </div>
             </CommentContain2>
             <LikesBtn commentIndex={comment.id} />
