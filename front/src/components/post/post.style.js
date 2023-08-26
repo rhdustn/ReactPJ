@@ -52,7 +52,9 @@ const PostBtn = styled.button`
 `
 const UploadImgContain = styled.div`
 position: relative;
-width: 400px;
+width: 50%;
+left: 50%;
+transform: translateX(-50%);
 height: 300px;
 border: 1px solid #E2E2E2;
 display: flex;
@@ -104,7 +106,58 @@ width: 200px;
 height: 300px;
 `
 
+// pc css
+const PostContentPc = styled.textarea`
+ margin-top: 15px;
+  width: 80%;
+  height: 450px; 
+  color: rgba(58, 58, 58, 0.8);
+  font-size: 15px;
+  background-color: white; 
+  border: 1px solid #ccc; 
+  border-radius: 8px; 
+  padding: 10px; 
+  resize: vertical; 
+  outline: none;
+`
+
+const PostTitlePc = styled.input`
+  color: rgb(58, 58, 58);
+  width: 81%; 
+  height: 35px; 
+  padding: 10px;
+  border: 2px solid #ccc; 
+  border-radius: 8px;
+  box-sizing: border-box;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 1.2;
+  letter-spacing: 0px;
+  outline: none;
+  margin-top: 15px;
+
+  &:focus {
+    border-color: #007bff; /* 포커스 시 테두리 색 변경 */
+  }
+`;
+
+const PostBtnPc = styled.button`
+    width: 150px;
+    height: 50px;
+    float: none;
+    font-weight: bold;
+    text-align: center;
+    font-size: 14px;
+    border-radius: 4px;
+    padding: 7px 12px;
+    border: 1px solid rgb(54, 143, 255);
+    background-color: rgb(54, 143, 255);
+    color: white;
+    margin-top: 10px;
+`
+
+
 
 export {PostContent,PostTitle,PostPlanContainer,PostBtn,UploadImgContain,UploadImg
-,ImgInputBtn,ShowImg,UploadBtn,DeleteBtn,ImgContain,ImgStyle
+,ImgInputBtn,ShowImg,UploadBtn,DeleteBtn,ImgContain,ImgStyle, PostContentPc, PostTitlePc, PostBtnPc
 }

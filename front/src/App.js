@@ -27,6 +27,7 @@ import {
   BoardPc,
   LoginPc,
   SignupPc,
+  PostPc
 } from "./pagesPc";
 import { useMediaQuery } from "react-responsive";
 import { styled } from "styled-components";
@@ -193,7 +194,7 @@ const isMobile = useMediaQuery({
             )
           }
         />
-        <Route path="/boardCreate" element={isMobile ? <Post /> : "pc 버전 post"} />
+        <Route path="/boardCreate" element={isMobile ? <Post /> : <PostPc />} />
 
         <Route path="/admin" element={isMobile ? (<Admin />) : (<AdminPc />)} />
       </Routes>
