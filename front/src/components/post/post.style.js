@@ -52,12 +52,12 @@ const PostBtn = styled.button`
 `
 const UploadImgContain = styled.div`
 position: relative;
-width: 50%;
+width: 70%;
 left: 50%;
 transform: translateX(-50%);
 height: 300px;
-border: 1px solid #E2E2E2;
-display: flex;
+border: 1px solid silver;
+display: flex; justify-content: center;
 overflow-x: scroll;
 `
 const UploadImg = styled.div`
@@ -78,20 +78,27 @@ const ImgInputBtn = styled.div`
 `;
 
 const ShowImg = styled.div`
-width: 400px;
+width: auto;
 height: 300px;
+margin: 0 5px 0 0;
 `
-const UploadBtn = styled.button`
-width: 100px;
+const UploadBtn = styled.div`
+position: absolute; left: 50%;
+transform: translateX(-50%);
+display: flex; justify-content: center; align-items: center;
+font-size: 14px; font-weight: bold;
+width: 120px;
 height: 30px;
-border-radius: 10px;
-background-color: rgb(54, 143, 255);
+border-radius: 5px;
+background-color: #277bc0;
 position: absolute;
 transform: translate(-50%);
 color:white;
 border: none;
+cursor: pointer;
 `
 const DeleteBtn = styled.button`
+width: 10px; height: 10px;
 position: absolute;
 border: none;
 font-size: 20px;
@@ -102,7 +109,7 @@ const ImgContain = styled.div`
 position: relative;
 `
 const ImgStyle = styled.img`
-width: 200px;
+width: auto;
 height: 300px;
 `
 
@@ -110,23 +117,25 @@ height: 300px;
 const PostContentPc = styled.textarea`
  margin-top: 15px;
   width: 80%;
-  height: 450px; 
+  height: 350px; 
   color: rgba(58, 58, 58, 0.8);
   font-size: 15px;
   background-color: white; 
-  border: 1px solid #ccc; 
+  border: 1px solid silver; 
   border-radius: 8px; 
   padding: 10px; 
   resize: vertical; 
   outline: none;
+  resize: none;
+  box-sizing: border-box;
 `
 
 const PostTitlePc = styled.input`
   color: rgb(58, 58, 58);
-  width: 81%; 
+  width: 80%; 
   height: 35px; 
   padding: 10px;
-  border: 2px solid #ccc; 
+  border: 1px solid silver; 
   border-radius: 8px;
   box-sizing: border-box;
   font-weight: bold;
@@ -135,25 +144,22 @@ const PostTitlePc = styled.input`
   letter-spacing: 0px;
   outline: none;
   margin-top: 15px;
-
-  &:focus {
-    border-color: #007bff; /* 포커스 시 테두리 색 변경 */
-  }
+  outline: none;
 `;
 
-const PostBtnPc = styled.button`
-    width: 150px;
-    height: 50px;
-    float: none;
-    font-weight: bold;
-    text-align: center;
-    font-size: 14px;
-    border-radius: 4px;
-    padding: 7px 12px;
-    border: 1px solid rgb(54, 143, 255);
-    background-color: rgb(54, 143, 255);
-    color: white;
-    margin-top: 10px;
+const PostBtnPc = styled.div`
+  position: absolute;
+  left: 50%; transform: translateX(-50%);
+  width: 250px;
+  height: 50px;
+  text-align: center;
+  border-radius: 5px;
+  background-color: #277bc0;
+  color: white;
+  font-weight: bold;
+  margin-top: 10px;
+  display: flex; justify-content: center; align-items: center;
+  cursor: pointer;
 `
 
 

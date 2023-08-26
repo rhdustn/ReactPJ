@@ -45,3 +45,5 @@ const BoardPc = () => {
         </>
     )
 }
+
+export default BoardPc

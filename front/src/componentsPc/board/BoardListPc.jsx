@@ -48,10 +48,11 @@ const BoardListPc = () => {
   const planImgPath = "/imgs/userplanimg";
   const profileImgPath = "/imgs/profiles";
 
+  const [load, setLoad] = useState(true)
+
   const list = async () => {
     try {
       const response = await ipUrl.get("/post/allboard");
-      console.log(response.data);
 
       const data = response.data;
       return data;
@@ -59,9 +60,15 @@ const BoardListPc = () => {
       console.log(error);
     }
   };
-  const { data, isLoading } = useQuery(["testdata"], list);
+  const { data, isLoading } = useQuery(["testdata"], list, {
+    enabled : load
+  });
 
-
+  useEffect(() => {
+    if(isLoading == false) {
+      setLoad(false)
+    }
+  }, [isLoading])
 
 
   // const [tda, Settda] = useState([]);
@@ -125,11 +132,15 @@ const BoardListPc = () => {
       <Div_two>
       {data ? (
         data.map((value, index) => {
-          console.log(data);
           const thumbNail = JSON.parse(value.images)[0];
           const handleReviewClick = () => {
             nav(`/boarddetail/${value.id}`);
           };
+
+          let profileImg = value.User;
+          if(value.User == null) {
+            profileImg = 'default_profile.jpeg'
+          }
 
           return (
             <>
@@ -137,7 +148,7 @@ const BoardListPc = () => {
                 <ImgBox>
                   <ShowImg src={planImgPath + "/" + thumbNail} alt="" />
                 </ImgBox>
-                <ProflieImg src={profileImgPath + "/" + value.User} />
+                <ProflieImg src={profileImgPath + "/" + profileImg} />
                 <TextBox>
                   <div>
                     <SmallText>

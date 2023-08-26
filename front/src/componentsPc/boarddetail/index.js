@@ -9,6 +9,7 @@ import AddPlanBtnPc from "./AddPlanBtnPc";
 import CommentPc from "./CommentPc";
 import CommentFormPc from "./CommentFormPc";
 import CommentListPc from "./CommentListPc";
+import BoardLikes from "./BoardLikes";
 
 export {
   AddPlanBtnPc,
@@ -22,4 +23,5 @@ export {
   PlanBtnPc,
   SubContentPc,
   TitlePc,
+  BoardLikes
 };

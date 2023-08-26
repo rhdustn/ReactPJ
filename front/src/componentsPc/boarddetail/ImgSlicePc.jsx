@@ -29,7 +29,7 @@ const ImgSlicePc = () => {
   };
 
   return (
-    <div>
+    <>
       <ImgBoxContainer>
         <ImageBtnPre onClick={prevImage}>◀️</ImageBtnPre>
         <ImgBox
@@ -49,7 +49,7 @@ const ImgSlicePc = () => {
         </ImgBox>
         <ImageBtnNext onClick={nextImage}>▶️</ImageBtnNext>
       </ImgBoxContainer>
-    </div>
+    </>
   );
 };
 

@@ -194,7 +194,7 @@ const isMobile = useMediaQuery({
             )
           }
         />
-        <Route path="/boardCreate" element={isMobile ? <Post /> : <PostPc />} />
+        <Route path="/boardCreate" element={isMobile ? <Post /> : <PcBody><PostPc /></PcBody>} />
 
         <Route path="/admin" element={isMobile ? (<Admin />) : (<AdminPc />)} />
       </Routes>

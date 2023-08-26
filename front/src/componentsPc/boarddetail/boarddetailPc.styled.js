@@ -1,16 +1,69 @@
 import styled, { keyframes } from "styled-components";
 
 const Main = styled.div`
-  width: 600px;
-  height: 800px;
+  width: 70%;
+  min-width: 600px;
+  height: auto;
   margin: auto;
+  padding: 50px 0 0 0;
+  border: 1px solid;
+
+  & .btnBox {
+    border: 1px solid;
+    display: flex; justify-content: center;
+  }
 `;
+
+// header
+const HeaderDivPc = styled.div`
+  width: 100%;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid;
+  position: relative;
+
+  & .likeBtn {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 40px;
+    cursor: pointer;
+  }
+  & .dotBox {
+    position: absolute;
+    width: 70px;
+    height: 90px;
+    background-color:rgba(0, 0, 0, 0.2);
+    z-index: 5;
+    display: flex;
+    position: relative;
+    border-radius: 10px;
+    z-index: 20;
+    top: 30%; right: -70px;
+    display: flex;
+    justify-content: center;
+  }
+  & .dotBox .editDel button {
+    cursor: pointer;
+  }
+`
+const LikeSize2 = styled.img`
+width: 30px;
+height: 30px;
+transform: translate(60px);
+`
+
 const ImgBoxContainer = styled.div`
   width: 600px;
   height: 300px;
   display: flex;
   overflow: hidden;
   position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 `;
 const ImgBox = styled.div`
   /* 나중에 이미지를 넣게 된다면 width를 100%만 주고 height는 안줌  */
@@ -59,6 +112,8 @@ const TitleStyle = styled.div`
   letter-spacing: 0px;
   display: flex;
   justify-content: center;
+  margin: 10px 0 0 0;
+  border: 1px solid;
 `;
 const SubContentStyle = styled.div`
   box-sizing: border-box;
@@ -73,6 +128,7 @@ const SubContentStyle = styled.div`
   letter-spacing: 0px;
   display: flex;
   justify-content: center;
+  border: 1px solid;
 `;
 const Popup = styled.div`
   position: fixed;
@@ -118,7 +174,7 @@ const DayListli = styled.li`
   margin-left: 15px;
 `;
 
-const BtnStyle = styled.button`
+const BtnStyle = styled.div`
   width: 150px;
   height: 30px;
   border: 2px solid LightGray;
@@ -126,6 +182,7 @@ const BtnStyle = styled.button`
   border-radius: 3px;
   margin: 5px;
   cursor: pointer;
+  display: flex; justify-content: center; align-items: center;
 `;
 const BoardLine = styled.div`
   width: 600px;
@@ -167,6 +224,7 @@ const CommentContainer = styled.div`
   margin: auto;
   display: flex;
   justify-content: center;
+  border: 1px solid;
 `;
 const CommentFormdiv = styled.div`
   list-style: none;
@@ -182,25 +240,31 @@ const CommentFormdiv = styled.div`
   align-items: center;
 `;
 const CommentInput = styled.input`
-  width: 300px;
+  width: 500px;
   height: 38px;
   border: none;
+  padding: 0 40px 0 10px;
+  outline: none;
+  box-sizing: border-box;
 `;
 const CommentBtn = styled.button`
   border: none;
   font-size: 15px;
   background-color: white;
   font-weight: bold;
-  color: lightblue;
+  color: #277bc0;
   outline: none;
   position: absolute;
-  right: 1%;
+  right: 0;
   top: 50%;
-  transform: translate(-1%, -50%);
+  transform: translateY(-50%);
 `;
 
 export {
   Main,
+  HeaderDivPc,
+  LikeSize2,
+
   ImgBoxContainer,
   ImgBox,
   Image,

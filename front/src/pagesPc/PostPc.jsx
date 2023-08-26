@@ -5,6 +5,7 @@ import { PostContentPc, PostTitlePc, PostBtnPc } from '../components/post/post.s
 import { PostPlan, ImgUpload } from '../components/post';
 import { ipUrl } from '../util/util';
 import BottomNavPc from "../componentsPc/nav/BottomNavPc";
+import TopNav from '../components/nav/TopNav';
 
 const PostPc = () => {
   const [title, setTitle] = useState('');
@@ -63,10 +64,8 @@ const PostPc = () => {
     navigate("/board")
   }
   return (
-    <div>
-      <br />
-        <MoveBoardBtnPc onClick={MoveBoardClick}>← 게시판으로 이동</MoveBoardBtnPc>
-      <br />
+    <>
+      <TopNav />
       <MainPc>
         <ImgUpload name="images" onUpload={handleFileUpload} files={uploadedFiles} />
         <PostTitlePc
@@ -87,7 +86,7 @@ const PostPc = () => {
       </MainPc>
 
       <BottomNavPc />
-    </div>
+    </>
   );
 };
 

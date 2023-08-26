@@ -8,8 +8,9 @@ height: 800px;
 // pc
 const MainPc = styled.div`
 width: 100%;
-height: 100vh;
+height: auto;
 /* background-color: beige; */
+padding: 50px 0 180px 0;
 `
 
 const MoveBoardBtnPc = styled.div`
@@ -330,6 +331,7 @@ font-size: 20px;
 const ButtonBox = styled.div`
 width: 10px;
 height: 50px;
+cursor: pointer;
 
 `
 const ShowButtonBox = styled.div`

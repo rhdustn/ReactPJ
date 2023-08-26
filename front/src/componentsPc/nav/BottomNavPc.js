@@ -25,6 +25,8 @@ const BottomNavPc = () => {
       return state.userOrGuest;
   }))
 
+  const [profileImg, setProfileImg] = useState('default_profile.jpeg ')
+
   const [icons, setIcon] = useState({
       home : home1,
       plan : plan2,
@@ -117,7 +119,7 @@ const BottomNavPc = () => {
           {userOrGuest.isLogin &&            
               <BottomNavBtn onClick={() => nav('/mypage')}>
                 {!isLoading &&
-                <img src={`${ImgPath}/${data.profile_img}`} className='profile_img'></img>
+                <img src={`${ImgPath}/${profileImg}`} className='profile_img'></img>
                 }
                 <BottomNavText textCol={textCol.my}>마이페이지</BottomNavText>
               </BottomNavBtn>

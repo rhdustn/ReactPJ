@@ -9,13 +9,12 @@ const CommentPc = () => {
     setComment([...comment, newComment]);
   };
   return (
-    <div>
+    <>
       <CommentContainer>
-      Comment
-      <CommentListPc comments={comment}/>
-      <CommentFormPc onCommentSubmit={CommentSubmit}/>
+        <CommentListPc comments={comment}/>
+        <CommentFormPc onCommentSubmit={CommentSubmit}/>
       </CommentContainer>
-      </div>
+    </>
   )
 }
 

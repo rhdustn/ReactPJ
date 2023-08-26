@@ -15,7 +15,7 @@ const CommentFormPc = ({onCommentSubmit}) => {
     <CommentFormdiv>
         <form onSubmit={handleSubmit}>
             <span>
-                <CommentInput 
+            <CommentInput 
                 type="text"
                 value={inputComment}
                 onChange={(e)=>setInputComment(e.target.value)}

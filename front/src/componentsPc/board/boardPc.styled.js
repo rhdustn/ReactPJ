@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const Main = styled.div`
     display: inline-block;
     max-width: 350px;
-    width: 50%;
+    width: calc(50% - 20px);
     height: 270px;
     overflow: hidden;
     border-radius: 6px;
