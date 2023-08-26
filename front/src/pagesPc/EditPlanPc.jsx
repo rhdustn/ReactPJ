@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
-import BottomNav from "../components/nav/BottomNav";
-import TopNav from "../components/nav/TopNav";
+import BottomNavPc from "../componentsPc/nav/BottomNavPc";
+import TopNavPc from "../componentsPc/nav/TopNavPc";
 
-import PlanTop from "../components/plan/PlanTop";
-import PlanMid from "../components/plan/PlanMid";
-import PlanBottomX from "../components/plan/PlanBottomX";
+import PlanTopPc from "../componentsPc/plan/PlanTopPc";
+import PlanMidPc from "../componentsPc/plan/PlanMidPc";
+import PlanBottomXPc from "../componentsPc/plan/PlanBottomXPc";
 
-const EditPlan = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
+const EditPlanPc = () => {
   const getSavedPlan = useSelector((state) => {
     return state.getSavedPlan;
   });
@@ -52,50 +51,32 @@ const EditPlan = () => {
     setUserChoiceSaved(finalArr);
   }, []);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const scrollThreshold = 101;
 
-      if (scrollY > scrollThreshold) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
   return (
     <>
       {gptAnswerSaved && (
         <>
-          <TopNav isScrolled={isScrolled} gptAnswerSaved={gptAnswerSaved} />
+          <TopNavPc  gptAnswerSaved={gptAnswerSaved} />
 
-          <PlanTop gptAnswerSaved={gptAnswerSaved} />
-          <PlanMid
-            isScrolled={isScrolled}
+          <PlanTopPc gptAnswerSaved={gptAnswerSaved} />
+          <PlanMidPc
             gptAnswerSaved={gptAnswerSaved}
             page={"plan"}
             selectedPlanIndex={selectedPlanIndex}
             userChoiceSaved={userChoiceSaved}
           />
-          <PlanBottomX
-            isScrolled={isScrolled}
+          <PlanBottomXPc
             gptAnswerSaved={gptAnswerSaved}
             userChoiceSaved={userChoiceSaved}
             setSelectedPlanIndex={setSelectedPlanIndex}
           />
 
-          <BottomNav page={"plan"} />
+          <BottomNavPc page={"plan"} />
         </>
       )}
     </>
   );
 };
 
-export default EditPlan;
+export default EditPlanPc;
