@@ -29,36 +29,38 @@ const { User, LikeComment, Comment } = require("../models");
 // }
 // 하트가 true 면likeComment에 올라가는 컨트롤러
 exports.updateLikes = async (req, res) => {
-  const comment_id = req.body.comment_id
+  console.log(req.body,'바디');
+  const comment_id = req.body.comment_id;
   const userData = req.decoded;
-  const UserId = userData.front_id
+  const UserId = userData.front_id;
   // req.decoded에 있는 user_id을 이용해서 User.findOne으로 해당 유저의 id를 찾고 그 아이디를 user_id에 삽입
 
   try {
-    const user = await User.findOne({ where: { user_id: UserId } })
+    const user = await User.findOne({ where: { user_id: UserId } });
     const user_id = user.id;
     const likeData = await LikeComment.create({ comment_id, user_id });
-    res.send(likeData)
-
+    res.send(likeData);
   } catch (error) {
-    console.log("updateLikes에서 오류남")
-    console.log(error)
+    console.log("updateLikes에서 오류남");
+    console.log(error);
   }
-}
+};
 // 하트 삭제 컨트롤러
 
 exports.deleteLikes = async (req, res) => {
-  const commentId = req.params.id
-  console.log("666666666",commentId)
+  const commentId = req.params.id;
+  console.log("666666666", commentId);
   const userData = req.decoded;
   const UserId = userData.front_id;
   try {
-    const user = await User.findOne({ where: { user_id: UserId }});
+    const user = await User.findOne({ where: { user_id: UserId } });
     const user_id = user.id;
 
-    await LikeComment.destroy({ where: { user_id: user_id,comment_id:commentId } });
+    await LikeComment.destroy({
+      where: { user_id: user_id, comment_id: commentId },
+    });
     res.send("삭제됨?");
   } catch (error) {
     console.log("삭제 에러:", error);
   }
-}
+};

@@ -51,25 +51,27 @@ const TapMenuPc = ({ user }) => {
     }
   };
 
-  const {data, isLoading} = useQuery(['getAll'], tryGetAll)
+  const { data, isLoading } = useQuery(["getAll"], tryGetAll);
 
   useEffect(() => {
     console.log(isLoading);
     console.log(data);
+    if (data) {
+      setTabArr((tabArr) =>
+        tabArr.map((tab, index) => {
+          if (index == 0) {
+            return { ...tab, content: data.data1 };
+          } else if (index == 1) {
+            return { ...tab, content: data.data2 };
+          } else if (index == 2) {
+            return { ...tab, content: [] };
+          } else if (index == 3) {
+            return { ...tab, content: [] };
+          }
+        })
+      );
+    }
     // setLoad(false)
-    setTabArr((tabArr) =>
-      tabArr.map((tab, index) => {
-        if (index == 0) {
-          return { ...tab, content: data.data1 };
-        } else if (index == 1) {
-          return { ...tab, content: data.data2 };
-        } else if (index == 2) {
-          return { ...tab, content: [] };
-        } else if (index == 3) {
-          return { ...tab, content: [] };
-        }
-      })
-    );
   }, [data]);
 
   useEffect(() => {

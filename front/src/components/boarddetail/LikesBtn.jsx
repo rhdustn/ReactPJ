@@ -1,11 +1,33 @@
-import React, { useEffect, useState } from 'react';
-import { LikeSize } from './boarddetail.styled';
-import { ipUrl } from '../../util/util';
+import React, { useEffect, useState } from "react";
+import { LikeSize } from "./boarddetail.styled";
+import { ipUrl } from "../../util/util";
 
-const LikesBtn = ({ commentIndex }) => {
+const LikesBtn = ({ commentIndex, comments, loginUserInfo, refetch }) => {
   const ImgPath = "/imgs/icons";
-  const [likes, setLikes] = useState(); 
+  const [likes, setLikes] = useState();
+  useEffect(() => {
+    console.log(loginUserInfo, "커멘트2");
+  }, [comments]);
 
+  const duplicateommentLike = () => {
+    console.log(comments, "커멘트");
+
+    if (comments.LikeComments.indexOf(loginUserInfo.id) !== -1) {
+      console.log(loginUserInfo.id, "참");
+      return true;
+    } else {
+      console.log(loginUserInfo.id, "거짓");
+      return false;
+    }
+  };
+
+  useEffect(() => {
+    if (duplicateommentLike()) {
+      setLikes(true);
+    } else {
+      setLikes(false);
+    }
+  }, [comments]);
   const LikesClick = async () => {
     try {
       if (!likes) {
@@ -14,10 +36,13 @@ const LikesBtn = ({ commentIndex }) => {
           { comment_id: commentIndex },
           { withCredentials: true }
         );
-        setLikes(true);
+        refetch();
       } else {
-        await ipUrl.get(`/post/deleltlikes/${commentIndex}`, { withCredentials: true });
-        setLikes(false)
+        console.log(likes, "라이크 클릭");
+        await ipUrl.get(`/post/deleltlikes/${commentIndex}`, {
+          withCredentials: true,
+        });
+        refetch();
       }
     } catch (error) {
       console.log(error);

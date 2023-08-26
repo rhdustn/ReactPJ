@@ -135,7 +135,7 @@ const BoardDetail = () => {
         {popup && <DayPopup onClose={() => setPopup(false)} />}
         <br />
         comments
-        <Comment comments={data.commentdata} setTrigger={setTrigger} />
+        <Comment comments={data.commentdata} setTrigger={setTrigger}  loginUserInfo={loginUserInfo} refetch={refetch}/>
         <BoardLine />
         <BottomNav />
       </Main>
