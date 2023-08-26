@@ -9,6 +9,7 @@ import MypagePc from "./MypagePc";
 import EditProfliePc from "./EditProfliePc";
 import BoardPc from "./BoardPc";
 import BoardDetailPc from "./BoardDetailPc";
+import PostPc from "./PostPc";
 
 export {
   SignupPc,
@@ -20,4 +21,5 @@ export {
   BoardPc,
   BoardDetailPc,
   AddPlacePc,
+  PostPc,
 };

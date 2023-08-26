@@ -29,17 +29,10 @@ const BoardPc = () => {
             
             <BoardMain>
                 <BoardTitlePc />
-                <Link to={"/pc_boardCreate"}><button>글 작성하기</button></Link>
+                <Link to={"/boardCreate"}><button>글 작성하기</button></Link>
 
                 <BoardSubTitlePc />
                 <BoardListPc/>
-
-                {/* 반복 */}
-                {/* <Div_two>
-                    <BoardListPc/>
-                    <BoardListPc/>
-                </Div_two> */}
-                {/* <br /><br /><br /> */}
 
                 
             </BoardMain>
