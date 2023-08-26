@@ -84,6 +84,7 @@ const PostPc = () => {
         {/* <PostPlan /> */}
         <br /><br />
         <PostBtnPc onClick={handlePostSubmit}>등록하기</PostBtnPc>
+        <br /><br /><br /><br /><br /><br /><br /><br />
       </MainPc>
 
       <BottomNavPc />

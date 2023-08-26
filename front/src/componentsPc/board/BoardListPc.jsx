@@ -61,7 +61,7 @@ const BoardListPc = () => {
   },[]);
 
   useEffect(()=>{
-    console.log("뜸?",tda);
+    // console.log("뜸?",tda);
   }, [tda]);
 
   // const data = [

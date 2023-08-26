@@ -9,7 +9,7 @@ import styled from 'styled-components';
     cursor: pointer;
     transform: translate(0,30px);
     position: relative;
-
+    /* background-color: yellow; */
 `
 const ImgBox = styled.div`
 width: 350px;
