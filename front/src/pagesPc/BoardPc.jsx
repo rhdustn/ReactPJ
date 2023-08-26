@@ -1,8 +1,12 @@
-import React, { useEffect } from 'react'
-import styled from 'styled-components';
-import { BoardTitlePc, BoardSubTitlePc,BoardListPc } from '../componentsPc/board'
+import React, { useEffect } from "react";
+import styled from "styled-components";
+import {
+  BoardTitlePc,
+  BoardSubTitlePc,
+  BoardListPc,
+} from "../componentsPc/board";
 import BottomNavPc from "../componentsPc/nav/BottomNavPc";
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link } from "react-router-dom";
 
 
 const BoardMain = styled.div`
@@ -41,5 +45,3 @@ const BoardPc = () => {
         </>
     )
 }
-
-export default BoardPc

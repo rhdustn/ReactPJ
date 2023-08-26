@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useQueries } from "react-query";
 import axios from "axios";
 
-
 import {
   PlanBottomBox,
   PerDayBox,
@@ -20,7 +19,7 @@ import {
 
 import { saveAttractionsWithImg } from "../../redux/features/dataForGpt";
 import { pushPlan } from "../../redux/features/selectedUserPlan";
-import { ipUrl } from '../../util/util';
+import { ipUrl } from "../../util/util";
 
 // 지도 아래 일정 부분
 const PlanBottom = ({
@@ -80,7 +79,9 @@ const PlanBottom = ({
       "&q=" +
       encodeURIComponent(queryKey);
 
-    const getAttPicRes = await ipUrl.get(URL);
+    const getAttPicRes = await ipUrl.get(URL, {
+      withCredentials: false,
+    });
     return getAttPicRes.data;
   };
 
