@@ -13,6 +13,7 @@ import {
   HeaderDiv,
   EditBtnStyle,
   DelBtnStyle,
+  SubContentSpan
 } from "../components/boarddetail/boarddetail.styled";
 import {
   ImgSlice,
@@ -133,16 +134,18 @@ const BoardDetail = () => {
       {data && (
         <Main onClick={XClick}>
           <ImgSlice />
-          <div>작성자 : {data.data.nickname}</div>
+          <SubContentSpan>작성자 : {data.data.nickname}</SubContentSpan>
           <TitleStyle>Title : {data.data.title}</TitleStyle>
-          <SubContentStyle>{data.data.detail}</SubContentStyle>
-          <div>
+          <SubContentStyle>
+            <SubContentSpan>{data.data.detail}</SubContentSpan>
+          </SubContentStyle>
+          {/* <div>
             <DayBtn DayBtnClick={DayBtnClick} />
             <PlanBtn />
-          </div>
+          </div> */}
           {popup && <DayPopup onClose={() => setPopup(false)} />}
-
-          <BoardPlan />
+          <br/>
+          comments
           <Comment comments={data.commentdata}  setTrigger={setTrigger}/>
           <BoardLine />
           <BottomNav />

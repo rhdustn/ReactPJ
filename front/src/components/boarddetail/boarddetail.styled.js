@@ -93,6 +93,10 @@ width: 390px;
   letter-spacing: 0px;
   display: flex;
 `
+const SubContentSpan = styled.span`
+    display: flex;
+    text-align: initial;
+`
 const Popup = styled.div`
 position: fixed;
   top: 0;
@@ -493,5 +497,5 @@ export {
   Recommentbox, CommentContain3, Repliesdiv, RelpyInput, RelpyBtn, RelpyBtn2, Replyspan,
   CommentProflieImg2, MoveBoardBtn, ButtonBox, ShowButtonBox, EditImg, HeaderDiv, EditBtnStyle, DelBtnStyle,
   Reasd, CommentEditInput, CommentEditButton, CommentDelButton, InputContain, HandleEditCheck,
-  HandleDeleteCheck, LikeSize, CommentEditImg, ShowButtonBox2, LikeSize2, MainPc, MoveBoardBtnPc,Xbtn
+  HandleDeleteCheck, LikeSize, CommentEditImg, ShowButtonBox2, LikeSize2, MainPc, MoveBoardBtnPc,Xbtn,SubContentSpan
 }

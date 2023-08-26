@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Main, MoveBoardBtn } from '../components/boarddetail/boarddetail.styled';
 import { PostContent, PostTitle, PostBtn } from '../components/post/post.style';
-import { PostPlan, ImgUpload } from '../components/post';
+import { ImgUpload } from '../components/post';
 import { useSelector } from 'react-redux';
 
 import { ipUrl } from '../util/util';
@@ -16,22 +16,6 @@ const BoardEdit = () => {
   const navigate = useNavigate();
   const boardDetail = useSelector((state) => { return state.BoardDetailSlice })
 
-
-
-  // 게시글 정보를 가져와서 화면에 표시
-  // useEffect(() => {
-  //   const fetchPostData = async () => {
-  //     try {
-  //       // 게시판 정보 가져오기
-  //       const response = await ipUrl.get(`/detail/${id}`); 
-  //       const postData = response.data; 
-  //     } catch (error) {
-  //       console.error('게시글 데이터 가져오기 에러:', error);
-  //     }
-  //   };
-
-  //   fetchPostData();
-  // }, [id]);
 
   const handlePostSubmit = async (e) => {
     e.preventDefault();
@@ -103,7 +87,6 @@ const BoardEdit = () => {
           placeholder={boardDetail.detail}
           onChange={handleDetailChange}
         />
-        <PostPlan />
         <PostBtn onClick={handlePostSubmit}>수정하기</PostBtn>
       </Main>
     </div>
