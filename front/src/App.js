@@ -14,8 +14,7 @@ import {
   BoardDetail,
   Post,
   BoardEdit,
-
-  Admin
+  Admin,
 } from "./pages";
 import {
   EditProfliePc,
@@ -27,16 +26,17 @@ import {
   BoardPc,
   LoginPc,
   SignupPc,
-  PostPc
+  PostPc,
 } from "./pagesPc";
 import { useMediaQuery } from "react-responsive";
 import { styled } from "styled-components";
 import { useEffect, useState } from "react";
 import { LoadingContainer } from "./componentsPc/main/MainPc.styled";
 import AdminPc from "./pagesPc/AdminPc";
+import EditPlanPc from "./pagesPc/EditPlanPc";
 function App() {
-const travel = "/imgs/places/travel.gif";
-const isMobile = useMediaQuery({
+  const travel = "/imgs/places/travel.gif";
+  const isMobile = useMediaQuery({
     query: "(max-width:768px)",
   });
 
@@ -125,13 +125,22 @@ const isMobile = useMediaQuery({
               <EditPlan />
             ) : (
               <PcBody>
+                <EditPlanPc />
               </PcBody>
             )
           }
         />
         <Route
           path="/addPlace/:id"
-          element={isMobile ? <AddPlace /> : <PcBody><AddPlacePc /></PcBody>}
+          element={
+            isMobile ? (
+              <AddPlace />
+            ) : (
+              <PcBody>
+                <AddPlacePc />
+              </PcBody>
+            )
+          }
         />
 
         <Route
@@ -185,18 +194,12 @@ const isMobile = useMediaQuery({
         <Route
           path="/boardedit/:id"
           element={
-            isMobile ? (
-              <BoardEdit />
-            ) : (
-              <PcBody>
-               BoardEdit pc 버전
-              </PcBody>
-            )
+            isMobile ? <BoardEdit /> : <PcBody>BoardEdit pc 버전</PcBody>
           }
         />
         <Route path="/boardCreate" element={isMobile ? <Post /> : <PostPc />} />
 
-        <Route path="/admin" element={isMobile ? (<Admin />) : (<AdminPc />)} />
+        <Route path="/admin" element={isMobile ? <Admin /> : <AdminPc />} />
       </Routes>
     </div>
   );

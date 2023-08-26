@@ -11,14 +11,13 @@ import {
   RouteBox,
   RouteNumber,
   RoutePlace,
-} from "./Plan.styled";
+} from "./PlanPc.styled";
 
 import { saveAttractionsWithImg } from "../../redux/features/dataForGpt";
 import { ipUrl } from "../../util/util";
 
 // 지도 아래 일정 부분
-const PlanBottomX = ({
-  isScrolled,
+const PlanBottomXPc = ({
   gptAnswerSaved,
   userChoiceSaved,
   setSelectedPlanIndex,
@@ -98,17 +97,7 @@ const PlanBottomX = ({
 
   const planPerDay = userChoiceSaved;
 
-  // 스크롤 일정 이상 넘어가면
-  useEffect(() => {
-    const bottomBox = document.getElementById("bottom-box");
-
-    if (isScrolled) {
-      bottomBox.style.padding = "210px 10px 70px 10px";
-    } else {
-      bottomBox.style.padding = "10px 10px 70px 10px";
-    }
-  }, [isScrolled]);
-
+ 
   return (
     <>
       <PlanBottomBox id="bottom-box">
@@ -210,4 +199,4 @@ const PerDay = ({
   );
 };
 
-export default PlanBottomX;
+export default PlanBottomXPc;

@@ -1,5 +1,7 @@
 const { User } = require("../models");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
 exports.SaveUserInfo = async (req, res) => {
   const { user_id, user_pw, nickname, email } = req.body;
 
@@ -62,5 +64,18 @@ exports.ValidateDuplicateNickName = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(404);
+  }
+};
+
+exports.Logout = async (req, res) => {
+  try {
+    console.log(req.decoded, "디코디드");
+    let token = jwt.sign({}, process.env.ACCESSTOKENKEY, {
+      expiresIn: "0",
+    });
+    req.session.access_token = token;
+    res.send("success");
+  } catch (error) {
+    console.log(error);
   }
 };
