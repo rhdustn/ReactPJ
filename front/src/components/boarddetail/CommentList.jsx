@@ -5,10 +5,11 @@ import {
   CommentProflieImg, CommentContain, CommentContain2, Repliesdiv, RelpyInput, RelpyBtn,
   RelpyBtn2, CommentProflieImg2, Reasd, CommentEditInput, CommentEditButton, CommentDelButton,
   HandleEditCheck, InputContain, HandleDeleteCheck, CommentEditImg, ButtonBox, ShowButtonBox2,
-  Xbtn
+  Xbtn, RelpyBtndiv, Nickname
 } from './boarddetail.styled';
 import LikesBtn from './LikesBtn';
 import { ipUrl } from '../../util/util';
+import { useSelector } from "react-redux";
 
 const CommentList = ({ comments }) => {
   const [replies, setReplies] = useState([]);
@@ -20,7 +21,8 @@ const CommentList = ({ comments }) => {
   const [expandedCommentIndex, setExpandedCommentIndex] = useState(null);
   const { id } = useParams();
   const ImgPath = "/imgs/icons";
-
+  const loginUserInfo = useSelector((state) => state.userInfoHandler)
+  console.log("ddddd", loginUserInfo)
   const CommentView = async () => {
     try {
       const response = await ipUrl.get(`/post/commentlist`);
@@ -120,6 +122,7 @@ const CommentList = ({ comments }) => {
 
 
 
+
   // 대댓글등록 Submit
   const handleReplySubmit = async (commentIndex) => {
     if (replyText.trim() !== "") {
@@ -175,19 +178,19 @@ const CommentList = ({ comments }) => {
       {comments.map((comment, commentIndex) => (
         <div key={commentIndex}>
           <CommentContain >
-            <CommentProflieImg   src={ProImgPath+comment.Img} />            
+            <CommentProflieImg src={ProImgPath + comment.Img} />
             <CommentContain2>
-              <div>{comment.User}</div>
+              <Nickname>{comment.User}</Nickname>
               <div>{comment.detail}</div>
               <div>
-                <div
+                <RelpyBtndiv
                   onClick={() => {
                     setActiveCommentIndex(commentIndex);
                     setIsReplyVisible(true);
                   }}
                 >
                   답글 달기
-                </div>
+                </RelpyBtndiv>
               </div>
             </CommentContain2>
             <LikesBtn commentIndex={comment.id} />
@@ -213,12 +216,16 @@ const CommentList = ({ comments }) => {
                 </InputContain>
               )}
             </div>
-            <ButtonBox>
-              <CommentEditImg
-                onClick={() => toggleShowBox(commentIndex)}
-                src={`${ImgPath}/more.png`}
-              />
-            </ButtonBox>
+            <div>{data && <>
+              {loginUserInfo.id === comment.user_id &&
+                <ButtonBox>
+                  <CommentEditImg
+                    onClick={() => toggleShowBox(commentIndex)}
+                    src={`${ImgPath}/more.png`}
+                  />
+                </ButtonBox>}
+            </>}
+            </div>
             {expandedCommentIndex === commentIndex && (
               <ShowButtonBox2 onClose={() => toggleShowBox(commentIndex)}>
                 <div>
@@ -257,13 +264,16 @@ const CommentList = ({ comments }) => {
               {comment.Recomments?.map((value, replyIndex) => (
                 <Repliesdiv key={replyIndex}>
                   ➥
-                  <CommentProflieImg2 src={ProImgPath+value.Img} />
-                  <Reasd> 
-                    {/* 일단 user_id 값만 가져옴 */}
-                    <div>{value.User}</div> 
+                  <CommentProflieImg2 src={ProImgPath + value.Img} />
+                  <Reasd>
+                    <div>{value.User}</div>
                     {value.detail}
                   </Reasd>
-                    <Xbtn  onClick={() => handleReCommentDelete(value.id)}>🗙</Xbtn>
+            
+                  {data && <>
+                    {loginUserInfo.id === value.user_id &&
+                    <Xbtn onClick={() => handleReCommentDelete(value.id)}>🗙</Xbtn>}
+                     </>}
                 </Repliesdiv>
               ))}
             </>

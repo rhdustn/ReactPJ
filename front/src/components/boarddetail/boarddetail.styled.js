@@ -460,7 +460,7 @@ height: 22px;
 const LikeSize2 = styled.img`
 width: 30px;
 height: 30px;
-transform: translate(60px);
+transform: translate(10px,3px);
 `
 
 const CommentEditImg = styled.img`
@@ -489,6 +489,19 @@ position: absolute;
 right: 0;
 `
 
+const RelpyBtndiv = styled.div`
+  color: lightgray; 
+
+
+  &:hover {
+    color: black; 
+  }
+`;
+
+const Nickname = styled.div`
+color: black;
+font-weight: 600;
+`
 
 
 export {
@@ -499,5 +512,6 @@ export {
   Recommentbox, CommentContain3, Repliesdiv, RelpyInput, RelpyBtn, RelpyBtn2, Replyspan,
   CommentProflieImg2, MoveBoardBtn, ButtonBox, ShowButtonBox, EditImg, HeaderDiv, EditBtnStyle, DelBtnStyle,
   Reasd, CommentEditInput, CommentEditButton, CommentDelButton, InputContain, HandleEditCheck,
-  HandleDeleteCheck, LikeSize, CommentEditImg, ShowButtonBox2, LikeSize2, MainPc, MoveBoardBtnPc,Xbtn,SubContentSpan
+  HandleDeleteCheck, LikeSize, CommentEditImg, ShowButtonBox2, LikeSize2, MainPc, MoveBoardBtnPc,Xbtn,SubContentSpan,
+  RelpyBtndiv,Nickname
 }

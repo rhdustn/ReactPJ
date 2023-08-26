@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { useQuery, useQueryClient } from "react-query";
 import {
@@ -33,43 +33,35 @@ const BoardDetail = () => {
   const [trigger, setTrigger] = useState(false);
   const [popup, setPopup] = useState(false);
   const [showBox, setShowBox] = useState(false);
-  // const [currentUser, setCurrentUser] = useState(null);
+
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const loginUserInfo=useSelector((state)=>state.userInfoHandler);
   const ImgPath = "/imgs/icons";
 
   const boardEditClick = () => {
     navigate(`/boardedit/${id}`);
   };
-
   const BoardDetailView = async ({ queryKey }) => {
     try {
       console.log(queryKey);
       const response = await ipUrl.get(`/post/detail/${queryKey[1]}`);
       // setData(response.data);
-      console.log(response.data);
-      return response.data;
+      console.log("fffff", response.data);
+      const data = response.data
+      console.log("66666666666", data.data)
+      return data;
     } catch (error) {
       console.log(error);
     }
   };
-  const likesView = async ({ queryKey }) => {
-    try {
-      const response = await ipUrl.get(`/post/likeslist/${queryKey[1]}`);
-      console.log(response.data);
-      return response.data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  
   const { data, isLoading, refetch } = useQuery(
     ["boardDetail", id],
     BoardDetailView
   );
 
-  const likeData = useQuery(["commentLikes", id], likesView);
 
   const boardDelet = async () => {
     try {
@@ -111,17 +103,14 @@ const BoardDetail = () => {
   const XClick = () => {
     setShowBox(false);
   };
-  // 글을 쓴 유저만 편집 아이콘이 보이게
-  // const writer = currentUser && data && currentUser.id === data.data.user_id;
 
   return (
-    <div>
+    <div>{data && <>
       <HeaderDiv>
-        travel opener 리뷰 게시판
-        <BoardLikes board_id={id} />
-        <ButtonBox onClick={ShowboxClick}>
+        <BoardLikes boardIndex={data.data.id} boardLikeArr={data.data.LikeBoards}  loginUserInfo={loginUserInfo} refetch={refetch}/>
+        {loginUserInfo.id===data.data.user_id && <ButtonBox onClick={ShowboxClick}>
           <EditImg src={`${ImgPath}/more.png`} alt="" srcset="" />
-        </ButtonBox>
+        </ButtonBox>}
         {showBox && (
           <ShowButtonBox onClose={() => setShowBox(false)}>
             <div>
@@ -131,26 +120,28 @@ const BoardDetail = () => {
           </ShowButtonBox>
         )}
       </HeaderDiv>
-      {data && (
-        <Main onClick={XClick}>
-          <ImgSlice />
-          <SubContentSpan>작성자 : {data.data.nickname}</SubContentSpan>
-          <TitleStyle>Title : {data.data.title}</TitleStyle>
-          <SubContentStyle>
-            <SubContentSpan>{data.data.detail}</SubContentSpan>
-          </SubContentStyle>
-          {/* <div>
-            <DayBtn DayBtnClick={DayBtnClick} />
-            <PlanBtn />
-          </div> */}
-          {popup && <DayPopup onClose={() => setPopup(false)} />}
-          <br/>
-          comments
-          <Comment comments={data.commentdata}  setTrigger={setTrigger}/>
-          <BoardLine />
-          <BottomNav />
-        </Main>
-      )}
+      
+      <Main onClick={XClick}>
+        <ImgSlice />
+        <SubContentSpan>작성자 : {data.data.nickname}</SubContentSpan>
+        <TitleStyle>Title : {data.data.title}</TitleStyle>
+        <SubContentStyle>
+          <SubContentSpan>{data.data.detail}</SubContentSpan>
+        </SubContentStyle>
+        {/* <div>
+          <DayBtn DayBtnClick={DayBtnClick} />
+          <PlanBtn />
+        </div> */}
+        {popup && <DayPopup onClose={() => setPopup(false)} />}
+        <br />
+        comments
+        <Comment comments={data.commentdata} setTrigger={setTrigger} />
+        <BoardLine />
+        <BottomNav />
+      </Main>
+    </>
+    }
+
     </div>
   );
 };

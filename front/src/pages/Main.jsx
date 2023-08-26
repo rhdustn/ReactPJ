@@ -9,6 +9,9 @@ import MainMid from "../components/main/MainMid";
 import MainBottom from "../components/main/MainBottom";
 import { useNavigate } from "react-router-dom";
 import { resetSelectedUserPlan } from "../redux/features/selectedUserPlan";
+import { ipUrl } from "../util/util";
+import { useQuery } from "react-query";
+import { saveUser } from "../redux/features/useInfo";
 const Main = () => {
   const dispatch = useDispatch();
   const nav = useNavigate();
@@ -36,6 +39,29 @@ const Main = () => {
   const [isDated, setDate] = useState(false);
   // 옵션 선택
   const [isChoiced, setChoice] = useState(false);
+
+  // 현재 로그인한 유저의 정보를 가져오는 로직
+  const getLoginUserInfoHandler= async()=>{
+    
+    const getLoginUserInfo= await ipUrl.get('/user/loginUser');
+      return getLoginUserInfo.data;
+  }
+
+  // 현재 로그인한 유저의 정보를 가져오는 로직 query
+  const getLoginUserInfoQuery=useQuery(['getLoginUserInfoQuery'],getLoginUserInfoHandler,{
+    onSuccess:(data)=>{
+      if (data==="다시 로그인 해주세요") {
+        alert('현재 로그인이 안되어 있습니다. 추천된 관광지를 저장하려면 로그인 해주세요')
+        // console.log('asd')
+      }else{
+      console.log(data)
+      dispatch(saveUser(data))
+        
+      }
+    },
+    staleTime:5000
+  })
+
 
   // 지역 검색
   const locationSearched = (lo) => {
@@ -94,9 +120,12 @@ const Main = () => {
     }
   }, []);
 
+
+
   useEffect(() => {
     dispatch(resetSelectedUserPlan());
     dispatch(resetAttractionsWithImg())
+    
   }, []);
   return (
     <>

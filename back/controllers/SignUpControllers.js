@@ -64,3 +64,18 @@ exports.ValidateDuplicateNickName = async (req, res) => {
     res.status(404);
   }
 };
+
+exports.GetLoginUser=async(req,res)=>{
+
+
+  try {
+    const {front_id}=req.decoded;
+    const userInfo=await User.findOne({where:{user_id:front_id}});
+    userInfo.user_pw=''
+    res.json(userInfo)
+  } catch (error) {
+    console.log(error)
+    res.send('fail')
+  }
+
+}
