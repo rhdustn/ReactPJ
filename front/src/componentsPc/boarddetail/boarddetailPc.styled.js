@@ -3,13 +3,12 @@ import styled, { keyframes } from "styled-components";
 const Main = styled.div`
   width: 70%;
   min-width: 600px;
-  height: auto;
+  height: calc(100vh - 50px);
   margin: auto;
   padding: 50px 0 0 0;
   border: 1px solid;
 
   & .btnBox {
-    border: 1px solid;
     display: flex; justify-content: center;
   }
 `;
@@ -113,7 +112,6 @@ const TitleStyle = styled.div`
   display: flex;
   justify-content: center;
   margin: 10px 0 0 0;
-  border: 1px solid;
 `;
 const SubContentStyle = styled.div`
   box-sizing: border-box;
@@ -122,13 +120,12 @@ const SubContentStyle = styled.div`
   float: none;
   font-weight: 500;
   white-space: pre-line;
-  padding: 20px 30px 0px;
+  padding: 20px 30px 20px;
   font-size: 16px;
   line-height: 1.62;
   letter-spacing: 0px;
   display: flex;
   justify-content: center;
-  border: 1px solid;
 `;
 const Popup = styled.div`
   position: fixed;
@@ -219,12 +216,12 @@ const imgStyle = {
 
 const CommentContainer = styled.div`
   width: 600px;
-  height: 400px;
+  height: auto;
+  min-height: 200px;
   position: relative;
   margin: auto;
   display: flex;
   justify-content: center;
-  border: 1px solid;
 `;
 const CommentFormdiv = styled.div`
   list-style: none;

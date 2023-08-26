@@ -112,6 +112,7 @@ const BoardDetailPc = () => {
     <>
       <TopNav />
 
+      {!isLoading &&      
       <Main>
 
         <HeaderDivPc>
@@ -132,11 +133,11 @@ const BoardDetailPc = () => {
         </HeaderDivPc>
 
         {/* 이미지 슬라이드 */}
-        <ImgSlicePc />
+        <ImgSlicePc images={JSON.parse(data.data.images)} />
 
         {/* 내용 */}
-        <TitlePc />
-        <SubContentPc />
+        <TitlePc title={data.data.title} />
+        <SubContentPc detail={data.data.detail} />
 
         {/* 버튼 */}
         <div className='btnBox'>
@@ -148,6 +149,7 @@ const BoardDetailPc = () => {
         {/* 댓글 */}
         <CommentPc/>
       </Main>
+      }
     </>
   );
 };

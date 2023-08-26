@@ -26,7 +26,7 @@ const BottomNav = () => {
         return state.userOrGuest;
     }))
 
-    const [profileImg, setProfileImg] = useState('default_profile.jpeg ')
+    const [profileImg, setProfileImg] = useState('default_profile.jpeg')
 
     const [icons, setIcon] = useState({
         home : home1,
@@ -86,6 +86,7 @@ const BottomNav = () => {
         try {
             const response = await ipUrl.get(`/mypage/getInfo`)
             const data = response.data;
+            console.log(data);
             return data;
         }catch (error) {
             console.log(error)
@@ -95,15 +96,10 @@ const BottomNav = () => {
     const {data, isLoading} = useQuery(['getUserNav'], tryGetUserInfo)
 
     useEffect(() => {
-        if(isLoading == false) {
-            console.log(data);
-            if(data.profile_img == null) {
-                setProfileImg('default_profile.jpeg')
-            }else {
-                setProfileImg(data.profile_img)
-            }
+        if(data.profile_img != null) {
+            setProfileImg(data.profile_img)
         }
-    }, [isLoading])
+    }, [data])
 
     return (
         <>
