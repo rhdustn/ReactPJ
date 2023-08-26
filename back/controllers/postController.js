@@ -1,4 +1,4 @@
-const { User, Board, Comment, Recomment } = require("../models")
+const { User, Board, Comment, Recomment, LikeBoard, LikeComment } = require("../models")
 
 // 글 리스트를 보여줄 수 있는 컨트롤러
 exports.allBoard = async (req, res) => {
@@ -60,10 +60,20 @@ exports.createBoard = async (req, res) => {
 // 상세페이지
 exports.detailBoard = async (req, res) => {
     const { id } = req.params
-    const data = await Board.findOne({ where: { id: id } });
-    const commentdata = await Comment.findAll({ where: { board_id: id }, include: [{ model: Recomment }, { model: User }] })
+    
+    const data = await Board.findOne({ where: { id: id } , include:[{model:LikeBoard}] });
+
+    data.dataValues.LikeBoards=data.dataValues.LikeBoards.map((value)=>{
+        return value.dataValues.user_id
+    })
+
+    console.log(data, '뉴커멘')
+    const commentdata = await Comment.findAll({ where: { board_id: id }, include: [{ model: Recomment }, { model: User },{model:LikeComment}] })
     const newComment = commentdata.map((value) => {
-        return { ...value.dataValues, User: value.User.dataValues.nickname, Img: value.User.dataValues.profile_img }
+         const temp=value.LikeComments.map((ele)=>{
+            return ele.dataValues.user_id
+         })
+        return { ...value.dataValues, User: value.User.dataValues.nickname, Img: value.User.dataValues.profile_img,LikeComments:temp }
     })
    const realNewComment=newComment.map( async(value)=>{
            const recommentdata = await Recomment.findAll({ where: { comment_id: value.id },include: [{ model: User }] })
@@ -76,8 +86,7 @@ exports.detailBoard = async (req, res) => {
        
    })
    const realRealNewComment=await Promise.all(realNewComment)
-    console.log(realRealNewComment, '뉴커멘')
-    res.json({ data, commentdata: realRealNewComment,realNewComment })
+    res.json({ data:data.dataValues, commentdata: realRealNewComment,realNewComment })
     // res.json({data,commentdata,recommentArr});
 
 

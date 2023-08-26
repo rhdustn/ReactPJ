@@ -37,7 +37,7 @@ const BoardDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const loginUserInfo=useSelector((state)=>state.userInfoHandler);
   const ImgPath = "/imgs/icons";
 
   const boardEditClick = () => {
@@ -56,21 +56,12 @@ const BoardDetail = () => {
       console.log(error);
     }
   };
-  const likesView = async ({ queryKey }) => {
-    try {
-      const response = await ipUrl.get(`/post/likeslist/${queryKey[1]}`);
-      console.log(response.data);
-      return response.data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  
   const { data, isLoading, refetch } = useQuery(
     ["boardDetail", id],
     BoardDetailView
   );
 
-  const likeData = useQuery(["commentLikes", id], likesView);
 
   const boardDelet = async () => {
     try {
@@ -116,11 +107,10 @@ const BoardDetail = () => {
   return (
     <div>{data && <>
       <HeaderDiv>
-        travel opener 리뷰 게시판
-        <BoardLikes boardIndex={data.data.id} />
-        <ButtonBox onClick={ShowboxClick}>
+        <BoardLikes boardIndex={data.data.id} boardLikeArr={data.data.LikeBoards}  loginUserInfo={loginUserInfo} refetch={refetch}/>
+        {loginUserInfo.id===data.data.user_id && <ButtonBox onClick={ShowboxClick}>
           <EditImg src={`${ImgPath}/more.png`} alt="" srcset="" />
-        </ButtonBox>
+        </ButtonBox>}
         {showBox && (
           <ShowButtonBox onClose={() => setShowBox(false)}>
             <div>

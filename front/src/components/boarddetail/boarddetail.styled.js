@@ -458,7 +458,7 @@ height: 22px;
 const LikeSize2 = styled.img`
 width: 30px;
 height: 30px;
-transform: translate(60px,3px);
+transform: translate(10px,3px);
 `
 
 const CommentEditImg = styled.img`

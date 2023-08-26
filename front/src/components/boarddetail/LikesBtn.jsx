@@ -4,7 +4,7 @@ import { ipUrl } from '../../util/util';
 
 const LikesBtn = ({ commentIndex }) => {
   const ImgPath = "/imgs/icons";
-  const [likes, setLikes] = useState(false); 
+  const [likes, setLikes] = useState(); 
 
   const LikesClick = async () => {
     try {
