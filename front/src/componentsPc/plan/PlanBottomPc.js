@@ -12,13 +12,12 @@ import {
   EditPlanBtn,
 } from "./PlanPc.styled";
 
-
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useQueries, useQuery } from "react-query";
 import { useDispatch, useSelector } from "react-redux";
 import { saveAttractionsWithImg } from "../../redux/features/dataForGpt";
-import { ipUrl } from '../../util/util';
+import { ipUrl } from "../../util/util";
 
 // 지도 아래 일정 부분
 const PlanBottomPc = ({
@@ -79,7 +78,9 @@ const PlanBottomPc = ({
       "&q=" +
       encodeURIComponent(queryKey);
 
-    const getAttPicRes = await ipUrl.get(URL);
+    const getAttPicRes = await ipUrl.get(URL, {
+      withCredentials: false,
+    });
     return getAttPicRes.data;
   };
 
