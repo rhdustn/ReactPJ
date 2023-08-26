@@ -252,6 +252,7 @@ export const NoPlanBtns = styled.div`
   align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
+  cursor: pointer;
 `;
 export const NoPlanBtn = styled.div`
   width: 220px;

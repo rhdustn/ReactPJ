@@ -12,6 +12,7 @@ export const MainTopBox = styled.div`
   align-items: center;
   margin: 0 0 20px 0;
   border: 3px solid white;
+  position: relative;
 `;
 
 export const LogoBox = styled.div`
@@ -32,10 +33,10 @@ export const TextBox = styled.div`
   display: flex;
   /* flex-wrap: wrap; */
   margin: 0 0 20px 0;
-  height: 80vh;
+  height: auto;
 
   & img {
-    width: 80%; height: 80%;
+    width: 80%; height: auto;
   }
 `;
 
@@ -50,6 +51,8 @@ export const InputBox = styled.div`
   padding: 0 30px 0 30px;
   box-sizing: border-box;
   margin: 0px 0 20px 0;
+  position: absolute;
+  bottom: 20px;
 
   & img {
     width: 20px;

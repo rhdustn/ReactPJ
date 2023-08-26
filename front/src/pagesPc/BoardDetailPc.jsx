@@ -54,21 +54,11 @@ const BoardDetailPc = () => {
       console.log(error);
     }
   };
-  const likesView = async ({ queryKey }) => {
-    try {
-      const response = await ipUrl.get(`/post/likeslist/${queryKey[1]}`);
-      console.log(response.data);
-      return response.data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
   const { data, isLoading, refetch } = useQuery(
     ["boardDetail", id],
     BoardDetailView
   );
 
-  const likeData = useQuery(["commentLikes", id], likesView);
 
   const boardDelet = async () => {
     try {

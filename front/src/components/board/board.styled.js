@@ -14,28 +14,42 @@ import styled from 'styled-components';
 `
 const ImgBox = styled.div`
 width: 350px;
-display: grid;
+display: grid; justify-content: center; align-items: center;
 gap: 1px;
 height: 150px;
 border-top-left-radius:10px;
 border-top-right-radius:10px;
-
+overflow: hidden;
 `
 const ShowImg = styled.img`
-width: 350px;
-height: 250px;
+width: 100%;
+height: auto;
 border-top-left-radius:10px;
 border-top-right-radius:10px;
 z-index: -1;
 `
 const Container = styled.div`
-display: flex;
-margin-left: 20px;
+height: 80px;
+display: flex; flex-direction: column;
+align-items: start; justify-content: center;
+padding: 0 30px 0 20px;
+box-sizing: border-box;
+
+& h3 {
+    margin: 0;
+}
+& p {
+    margin: 0;
+    padding: 0;
+    font-size: 12px;
+}
 `
 const MovePost = styled.div`
 position: absolute;
 right: 10%;
-top: 4%;
+top: 3%;
+color: #277bc0;
+font-weight: bold;
 `
 
 const TextBox = styled.div`

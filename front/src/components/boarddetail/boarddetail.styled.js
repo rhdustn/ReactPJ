@@ -1,6 +1,7 @@
 import styled, { keyframes } from 'styled-components';
 
 const Main = styled.div`
+padding: 60px 0 0 0;
 width: 400px;
 height: 800px;
 `
