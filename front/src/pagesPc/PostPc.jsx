@@ -1,54 +1,51 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { Main, MoveBoardBtn } from '../components/boarddetail/boarddetail.styled';
-import { PostContent, PostTitle, PostBtn } from '../components/post/post.style';
-import { ImgUpload } from '../components/post';
-import { useSelector } from 'react-redux';
-
+import { useNavigate } from 'react-router-dom';
+import { MainPc,MoveBoardBtnPc } from '../components/boarddetail/boarddetail.styled';
+import { PostContentPc, PostTitlePc, PostBtnPc } from '../components/post/post.style';
+import { PostPlan, ImgUpload } from '../components/post';
 import { ipUrl } from '../util/util';
+import BottomNavPc from "../componentsPc/nav/BottomNavPc";
 
-
-const BoardEdit = () => {
-  const { id } = useParams();
+const PostPc = () => {
   const [title, setTitle] = useState('');
   const [detail, setDetail] = useState('');
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const navigate = useNavigate();
-  const boardDetail = useSelector((state) => { return state.BoardDetailSlice })
-
 
   const handlePostSubmit = async (e) => {
     e.preventDefault();
     if (uploadedFiles.length === 0 || title.trim() === '' || detail.trim() === '') {
       alert('이미지or제목or내용을 입력하세요!');
-      return;
+      return; 
     }
     const formData = new FormData();
 
     for (let i = 0; i < uploadedFiles.length; i++) {
       formData.append('uploadedFiles', uploadedFiles[i]);
     }
-    formData.append('title', title);
-    formData.append('detail', detail);
+    formData.append('title',title)
+    formData.append('detail',detail)
+    
     try {
       const response = await ipUrl.post(
-        `/post/edit/${id}`,
+        "/post/write",
         formData,
         {
           withCredentials: true,
           headers: {
-            'Content-Type': `multipart/form-data`,
-          },
+            'Content-Type': `multipart/form-data`
+          }
         }
       );
       const data = response.data;
-      if (data === 'success') {
-        navigate(`/boarddetail/${id}`);
+      if (data === "create success") {
+        navigate("/board");
       }
     } catch (error) {
-      console.log('수정하기 에러:', error);
+      console.log("여기 못보내짐 에러");
+      console.log(error);
     }
-  
+    
   };
 
   const handleTitleChange = (e) => {
@@ -62,35 +59,36 @@ const BoardEdit = () => {
   const handleFileUpload = (files) => {
     setUploadedFiles(files);
   };
-
-  const MoveBoardClick = () => {
+  const MoveBoardClick =()=>{
     navigate("/board")
   }
-
   return (
     <div>
-      <MoveBoardBtn onClick={MoveBoardClick}>게시판으로 이동</MoveBoardBtn>
-      <Main>
-        <ImgUpload name="images"
-         onUpload={handleFileUpload} 
-         files={uploadedFiles} />
-        <PostTitle
+      <br />
+        <MoveBoardBtnPc onClick={MoveBoardClick}>← 게시판으로 이동</MoveBoardBtnPc>
+      <br />
+      <MainPc>
+        <ImgUpload name="images" onUpload={handleFileUpload} files={uploadedFiles} />
+        <PostTitlePc
           type="text"
           name="title"
-          placeholder={boardDetail.title}
+          placeholder="제목을 입력하세요"
           onChange={handleTitleChange}
-         
         />
-        <PostContent
+        <PostContentPc
           type="text"
           name="detail"
-          placeholder={boardDetail.detail}
+          placeholder="내용을 입력하세요"
           onChange={handleDetailChange}
         />
-        <PostBtn onClick={handlePostSubmit}>수정하기</PostBtn>
-      </Main>
+        {/* <PostPlan /> */}
+        <br /><br />
+        <PostBtnPc onClick={handlePostSubmit}>등록하기</PostBtnPc>
+      </MainPc>
+
+      <BottomNavPc />
     </div>
   );
 };
 
-export default BoardEdit;
+export default PostPc;

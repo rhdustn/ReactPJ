@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { useQuery } from "react-query";
+import { useQuery, useQueryClient } from "react-query";
 import {
   Main,
   BoardLine,
@@ -13,6 +13,7 @@ import {
   HeaderDiv,
   EditBtnStyle,
   DelBtnStyle,
+  SubContentSpan
 } from "../components/boarddetail/boarddetail.styled";
 import {
   ImgSlice,
@@ -24,11 +25,12 @@ import {
   BoardLikes,
 } from "../components/boarddetail";
 import BottomNav from "../components/nav/BottomNav";
-import axios from "axios";
 import { create } from "../redux/features/post";
 import { ipUrl } from "../util/util";
 
 const BoardDetail = () => {
+  // const [data, setData] = useState("");
+  const [trigger, setTrigger] = useState(false);
   const [popup, setPopup] = useState(false);
   const [showBox, setShowBox] = useState(false);
   // const [currentUser, setCurrentUser] = useState(null);
@@ -44,7 +46,10 @@ const BoardDetail = () => {
 
   const BoardDetailView = async ({ queryKey }) => {
     try {
-      const response = await axios.get(`/post/detail/${queryKey[1]}`);
+      console.log(queryKey);
+      const response = await ipUrl.get(`/post/detail/${queryKey[1]}`);
+      // setData(response.data);
+      console.log(response.data);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -52,13 +57,18 @@ const BoardDetail = () => {
   };
   const likesView = async ({ queryKey }) => {
     try {
-      const response = await axios.get(`/post/likeslist/${queryKey[1]}`);
+      const response = await ipUrl.get(`/post/likeslist/${queryKey[1]}`);
+      console.log(response.data);
       return response.data;
     } catch (error) {
       console.log(error);
     }
   };
-  const { data, isLoading } = useQuery(["boardDetail", id], BoardDetailView);
+  const { data, isLoading, refetch } = useQuery(
+    ["boardDetail", id],
+    BoardDetailView
+  );
+
   const likeData = useQuery(["commentLikes", id], likesView);
 
   const boardDelet = async () => {
@@ -83,10 +93,14 @@ const BoardDetail = () => {
   useEffect(() => {
     if (data) {
       dispatch(create(data));
+      console.log(data, "xmfn");
     }
+    console.log(data);
   }, [data]);
 
-  useEffect(() => {});
+  useEffect(() => {
+    refetch()
+  }, [trigger]);
 
   const DayBtnClick = () => {
     setPopup(true);
@@ -120,17 +134,19 @@ const BoardDetail = () => {
       {data && (
         <Main onClick={XClick}>
           <ImgSlice />
-          <div>작성자 : {data.data.nickname}</div>
+          <SubContentSpan>작성자 : {data.data.nickname}</SubContentSpan>
           <TitleStyle>Title : {data.data.title}</TitleStyle>
-          <SubContentStyle>{data.data.detail}</SubContentStyle>
-          <div>
+          <SubContentStyle>
+            <SubContentSpan>{data.data.detail}</SubContentSpan>
+          </SubContentStyle>
+          {/* <div>
             <DayBtn DayBtnClick={DayBtnClick} />
             <PlanBtn />
-          </div>
+          </div> */}
           {popup && <DayPopup onClose={() => setPopup(false)} />}
-
-          <BoardPlan />
-          <Comment comments={data.commentdata} />
+          <br/>
+          comments
+          <Comment comments={data.commentdata}  setTrigger={setTrigger}/>
           <BoardLine />
           <BottomNav />
         </Main>

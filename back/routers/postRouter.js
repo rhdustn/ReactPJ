@@ -5,7 +5,7 @@ const {isLogin} = require("../controllers/isLogin")
 
 const {allBoard, createBoard, detailBoard,editBoard, deleteBoard} = require("../controllers/postController")
 const {commentlist,createComment,editComment,deleteComment} =require("../controllers/CommentControllers")
-const {recommentlist,createRecomment, editRecomment,deleteRecomment} = require("../controllers/ReCommentControllers")
+const {recommentlist,createRecomment,deleteRecomment} = require("../controllers/ReCommentControllers")
 const {likeslist,updateLikes,deleteLikes} = require("../controllers/likecommentController")
 
 // Multer 설정
@@ -34,7 +34,6 @@ router.get('/commentDelet/:id',isLogin,deleteComment)
 
 router.get('/recommentlist',isLogin,recommentlist)
 router.post('/createRecomment',isLogin,createRecomment)
-router.post('/editRecomment/:id',isLogin,editRecomment)
 router.get('/deleteRecomment/:id',isLogin,deleteRecomment)
 
 router.get("/likeslist/:id",isLogin,likeslist)

@@ -50,7 +50,7 @@ const BottomNavPc = () => {
                 star : '#737373',
                 my : '#737373'
             })
-        }else if(page == '/board') {
+        }else if(page == '/board' || page == '/boardCreate') {
             setIcon({
                 home : home2,
                 plan : plan2,
