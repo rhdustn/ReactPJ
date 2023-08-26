@@ -52,6 +52,21 @@ const TapMenu = ({ user }) => {
   const { data, isLoading } = useQuery(["getAll"], tryGetAll);
 
   useEffect(() => {
+    if (data) {
+      setTabArr((tabArr) =>
+        tabArr.map((tab, index) => {
+          if (index == 0) {
+            return { ...tab, content: data.data1 };
+          } else if (index == 1) {
+            return { ...tab, content: data.data2 };
+          } else if (index == 2) {
+            return { ...tab, content: [] };
+          } else if (index == 3) {
+            return { ...tab, content: [] };
+          }
+        })
+      );
+    }
     setTabArr((tabArr) =>
       tabArr.map((tab, index) => {
         if (index == 0) {

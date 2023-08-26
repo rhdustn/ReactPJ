@@ -2,16 +2,33 @@ import React, { useState } from "react";
 import { useMutation, useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import {
-  CommentProflieImg, CommentContain, CommentContain2, Repliesdiv, RelpyInput, RelpyBtn,
-  RelpyBtn2, CommentProflieImg2, Reasd, CommentEditInput, CommentEditButton, CommentDelButton,
-  HandleEditCheck, InputContain, HandleDeleteCheck, CommentEditImg, ButtonBox, ShowButtonBox2,
-  Xbtn, RelpyBtndiv, Nickname
-} from './boarddetail.styled';
-import LikesBtn from './LikesBtn';
-import { ipUrl } from '../../util/util';
+  CommentProflieImg,
+  CommentContain,
+  CommentContain2,
+  Repliesdiv,
+  RelpyInput,
+  RelpyBtn,
+  RelpyBtn2,
+  CommentProflieImg2,
+  Reasd,
+  CommentEditInput,
+  CommentEditButton,
+  CommentDelButton,
+  HandleEditCheck,
+  InputContain,
+  HandleDeleteCheck,
+  CommentEditImg,
+  ButtonBox,
+  ShowButtonBox2,
+  Xbtn,
+  RelpyBtndiv,
+  Nickname,
+} from "./boarddetail.styled";
+import LikesBtn from "./LikesBtn";
+import { ipUrl } from "../../util/util";
 import { useSelector } from "react-redux";
 
-const CommentList = ({ comments }) => {
+const CommentList = ({ comments, loginUserInfo,refetch }) => {
   const [replies, setReplies] = useState([]);
   const [replyText, setReplyText] = useState("");
   const [activeCommentIndex, setActiveCommentIndex] = useState(null);
@@ -21,8 +38,7 @@ const CommentList = ({ comments }) => {
   const [expandedCommentIndex, setExpandedCommentIndex] = useState(null);
   const { id } = useParams();
   const ImgPath = "/imgs/icons";
-  const loginUserInfo = useSelector((state) => state.userInfoHandler)
-  console.log("ddddd", loginUserInfo)
+  console.log("ddddd", loginUserInfo);
   const CommentView = async () => {
     try {
       const response = await ipUrl.get(`/post/commentlist`);
@@ -97,11 +113,9 @@ const CommentList = ({ comments }) => {
     }
   };
 
-
   // 대댓글 삭제
   const ReCommentDelete = async (replyIndex) => {
     try {
-
       const response = await ipUrl.get(`/post/deleteRecomment/${replyIndex}`);
 
       console.log(response);
@@ -112,16 +126,13 @@ const CommentList = ({ comments }) => {
   };
 
   const handleReCommentDelete = (replyIndex) => {
-    console.log(replyIndex)
-    const delcheck = window.confirm('정말로 댓글을 삭제하실건가요??');
+    console.log(replyIndex);
+    const delcheck = window.confirm("정말로 댓글을 삭제하실건가요??");
 
     if (delcheck) {
       ReCommentDelete(replyIndex);
     }
   };
-
-
-
 
   // 대댓글등록 Submit
   const handleReplySubmit = async (commentIndex) => {
@@ -177,7 +188,7 @@ const CommentList = ({ comments }) => {
     <div>
       {comments.map((comment, commentIndex) => (
         <div key={commentIndex}>
-          <CommentContain >
+          <CommentContain>
             <CommentProflieImg src={ProImgPath + comment.Img} />
             <CommentContain2>
               <Nickname>{comment.User}</Nickname>
@@ -193,7 +204,7 @@ const CommentList = ({ comments }) => {
                 </RelpyBtndiv>
               </div>
             </CommentContain2>
-            <LikesBtn commentIndex={comment.id} />
+            <LikesBtn comments={comments[commentIndex]} commentIndex={comment.id} loginUserInfo={loginUserInfo}  refetch={refetch}/>
             <div>
               {editInputIndex === comment.id && (
                 <InputContain onClose={inputDelClick}>
@@ -216,15 +227,19 @@ const CommentList = ({ comments }) => {
                 </InputContain>
               )}
             </div>
-            <div>{data && <>
-              {loginUserInfo.id === comment.user_id &&
-                <ButtonBox>
-                  <CommentEditImg
-                    onClick={() => toggleShowBox(commentIndex)}
-                    src={`${ImgPath}/more.png`}
-                  />
-                </ButtonBox>}
-            </>}
+            <div>
+              {data && (
+                <>
+                  {loginUserInfo.id === comment.user_id && (
+                    <ButtonBox>
+                      <CommentEditImg
+                        onClick={() => toggleShowBox(commentIndex)}
+                        src={`${ImgPath}/more.png`}
+                      />
+                    </ButtonBox>
+                  )}
+                </>
+              )}
             </div>
             {expandedCommentIndex === commentIndex && (
               <ShowButtonBox2 onClose={() => toggleShowBox(commentIndex)}>
@@ -259,7 +274,7 @@ const CommentList = ({ comments }) => {
               <RelpyBtn2 onClick={handleCancelReply}>취소</RelpyBtn2>
             </div>
           )}
-          {(comment.Recomments && comment.Recomments.length !== 0) && (
+          {comment.Recomments && comment.Recomments.length !== 0 && (
             <>
               {comment.Recomments?.map((value, replyIndex) => (
                 <Repliesdiv key={replyIndex}>
@@ -269,11 +284,15 @@ const CommentList = ({ comments }) => {
                     <div>{value.User}</div>
                     {value.detail}
                   </Reasd>
-            
-                  {data && <>
-                    {loginUserInfo.id === value.user_id &&
-                    <Xbtn onClick={() => handleReCommentDelete(value.id)}>🗙</Xbtn>}
-                     </>}
+                  {data && (
+                    <>
+                      {loginUserInfo.id === value.user_id && (
+                        <Xbtn onClick={() => handleReCommentDelete(value.id)}>
+                          🗙
+                        </Xbtn>
+                      )}
+                    </>
+                  )}
                 </Repliesdiv>
               ))}
             </>
