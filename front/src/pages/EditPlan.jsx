@@ -14,43 +14,43 @@ const EditPlan = () => {
     return state.getSavedPlan;
   });
 
-  const [gptAnswerSaved, setGptAnswerSaved] = useState('')
-  const [userChoiceSaved, setUserChoiceSaved] = useState('')
+  const [gptAnswerSaved, setGptAnswerSaved] = useState("");
+  const [userChoiceSaved, setUserChoiceSaved] = useState("");
 
   // 유저가 클릭한 데이의 인덱스, 즉 해당 플랜을 클릭시 그 플랜안에 있는 장소의 위치를 찍어주기 위해 만든 state 이 값은 plabMidPc에서 쓰며, set함수는 PlanBottomPc에서 사용한다.
   const [selectedPlanIndex, setSelectedPlanIndex] = useState(1);
-//   const userChoiceSaved = useSelector((state) => {
-//     return state.userChoiceSave;
-//   });
+  //   const userChoiceSaved = useSelector((state) => {
+  //     return state.userChoiceSave;
+  //   });
 
   useEffect(() => {
-    const {plan, attraction} = getSavedPlan.savedPlan;
+    const { plan, attraction } = getSavedPlan.savedPlan;
 
     const dateString = plan.duration;
-    const [startDate, endDate] = dateString.split("~").map(date => date);
-    
+    const [startDate, endDate] = dateString.split("~").map((date) => date);
+
     setGptAnswerSaved({
-        location : plan.plan,
-        attractions : attraction,
-        startDate : startDate,
-        endDate : endDate,
-        option1 : [attraction[0].who],
-        option2 : [attraction[0].how]
-    })
-    
+      location: plan.plan,
+      attractions: attraction,
+      startDate: startDate,
+      endDate: endDate,
+      option1: [attraction[0].who],
+      option2: [attraction[0].how],
+    });
 
     let finalArr = [];
 
     attraction.map((value, index) => {
-      let arr = attraction.filter(item => item.day == index+1)
-      finalArr.push(arr)
-    })
+      let arr = attraction.filter((item) => item.day == index + 1);
+      if (arr.length !== 0) {
+        console.log(arr,'준파이널')
+        finalArr.push(arr);
+      }
+    });
 
-
-    setUserChoiceSaved(finalArr)
-
-  }, [])
-
+    console.log(finalArr, "파이널");
+    setUserChoiceSaved(finalArr);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -70,31 +70,31 @@ const EditPlan = () => {
     };
   }, []);
 
-    return (
+  return (
+    <>
+      {gptAnswerSaved && (
         <>
-        {gptAnswerSaved &&
-        <>
-        <TopNav isScrolled={isScrolled} gptAnswerSaved={gptAnswerSaved} />
+          <TopNav isScrolled={isScrolled} gptAnswerSaved={gptAnswerSaved} />
 
-        <PlanTop gptAnswerSaved={gptAnswerSaved} />
-        <PlanMid
+          <PlanTop gptAnswerSaved={gptAnswerSaved} />
+          <PlanMid
             isScrolled={isScrolled}
             gptAnswerSaved={gptAnswerSaved}
             page={"plan"}
             selectedPlanIndex={selectedPlanIndex}
-        />
-        <PlanBottomX
+          />
+          <PlanBottomX
             isScrolled={isScrolled}
             gptAnswerSaved={gptAnswerSaved}
             userChoiceSaved={userChoiceSaved}
             setSelectedPlanIndex={setSelectedPlanIndex}
-        />
+          />
 
-        <BottomNav page={"plan"} />
+          <BottomNav page={"plan"} />
         </>
-        }
-        </>
-    );
-}
+      )}
+    </>
+  );
+};
 
 export default EditPlan;

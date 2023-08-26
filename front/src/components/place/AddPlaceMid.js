@@ -127,8 +127,8 @@ const AddPlaceMid = ({
                         onClick={() => {
                           isChoice(value);
                         }}
-                        back={"#edebeb"}
-                        font={"#9b9a9a"}
+                        back={"#277bc0"}
+                        font={"white"}
                       >
                         선택
                       </SelectBtn>
@@ -157,8 +157,8 @@ const AddPlaceMid = ({
                                   onClick={() => {
                                     isChoice(value2);
                                   }}
-                                  back={"#277bc0"}
-                                  font={"white"}
+                                  back={"#edebeb"}
+                                  font={"#9b9a9a"}
                                 >
                                   선택
                                 </SelectBtn>
