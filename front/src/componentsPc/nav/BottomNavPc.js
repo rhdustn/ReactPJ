@@ -94,8 +94,10 @@ const BottomNavPc = () => {
     const {data, isLoading} = useQuery(['getUserNav'], tryGetUserInfo)
 
     useEffect(() => {
-        if(data.profile_img != null) {
-            setProfileImg(data.profile_img)
+        if (data) {
+            if (data.profile_img != null) {
+                setProfileImg(data.profile_img);
+            }
         }
     }, [data])
 

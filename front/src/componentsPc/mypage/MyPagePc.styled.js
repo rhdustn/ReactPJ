@@ -144,7 +144,7 @@ const TabsContainer = styled.div`
 `;
 
 const TabButton = styled.button`
-  width: 25%;
+  width: 33.33333333%;
   background-color: ${(props) => (props.active ? "white" : "white")};
   color: #676767;
   padding: 10px 20px;

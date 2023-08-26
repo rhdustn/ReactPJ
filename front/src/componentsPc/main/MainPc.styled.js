@@ -174,13 +174,12 @@ export const Select = styled.div`
 export const BtnBox = styled.div`
   width: 100%;
   height: 40px;
-  /* padding: 10px 30px 10px 30px; */
+  padding: 10px 30px 100px 30px;
   box-sizing: border-box;
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  margin-top: 20px;
-  margin-right: 15%;
+  margin: 20px 15% 60px 0;
 `;
 export const MakePlanBtn = styled.div`
   padding: 15px;
