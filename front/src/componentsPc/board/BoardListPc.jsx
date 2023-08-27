@@ -1,16 +1,30 @@
 import React, { useEffect, useState } from 'react'
+import { useQuery } from "react-query";
+import { useNavigate } from "react-router-dom";
+
 import BoardPreviewImg from './BoardPreviewImgPc'
 import BoardText from './BoardTextPc';
 import BoardProflieImg from './BoardProflieImgPc';
 import { Main } from './boardPc.styled';
+import {
+  ImgBox,
+  ShowImg,
+  ProflieImg,
+  TextBox,
+  SmallText,
+  SubTitle,
+} from "../../components/board/board.styled";
+
 import { styled } from 'styled-components';
-import axios from "axios";
 import { ipUrl } from '../../util/util';
 
 const Div_one = styled.div`
-width: 100%;
-height: 800px;
-/* background-color: beige; */
+  width: 100%;
+  height: calc(100% - 140px);
+  overflow-y: scroll;
+  display: flex; flex-wrap: nowrap;
+  padding: 0;
+  justify-content: center; align-items: start;
 `
 
 const TransparentBackground = styled.div`
@@ -19,50 +33,77 @@ const TransparentBackground = styled.div`
 `;
 
 const Div_two = styled.div`
-    width: 100%;
-    height: 350px;
-    /* background-color: yellowgreen; */
-    display: flex;
-    justify-content: space-evenly;
-    align-items: baseline;
+  width: 65%;
+  height: auto;
+  /* background-color: yellowgreen; */
+  display: flex; flex-wrap: wrap;
+  justify-content: start;
+  align-items: baseline;
 `
 // let arr = [["newyork1.jpg", "newyork2.jpg"], ["profile.jpg"], ["유저가 입력한 게시판 내용"], ["게시판 제목"]];
 // 이미지, 프로필정보, 내용, 제목
 
 const BoardListPc = () => {
-  const [tda, Settda] = useState([]);
-  // let tda = [];
-  useEffect(()=>{
-    const boardData = async ()=>{
-      try {
-        const data = await ipUrl.get("/board/boardlist");
-        // console.log("데이터: ", data.data);
-        const boardlistdata = data.data;
-        const list_length = boardlistdata.length;
-        console.log(boardlistdata);
-        // console.log(list_length);
-        let arr_count = 0;
-        let newArray = [];
+  const nav = useNavigate();
+  const planImgPath = "/imgs/userplanimg";
+  const profileImgPath = "/imgs/profiles";
 
-        for(let i=0; i<list_length;i+=2){
-          newArray[arr_count] = [];
-          newArray[arr_count][0] = boardlistdata[i];
-          newArray[arr_count][1] = boardlistdata[i+1];
-          arr_count++;
-        }
-        console.log("what: ", newArray);
-        Settda(newArray);
+  const [load, setLoad] = useState(true)
 
-      } catch (error) {
-        console.log(error);
-      }
+  const list = async () => {
+    try {
+      const response = await ipUrl.get("/post/allboard");
+
+      const data = response.data;
+      return data;
+    } catch (error) {
+      console.log(error);
     }
-    boardData();
-  },[]);
+  };
+  const { data, isLoading } = useQuery(["testdata"], list, {
+    enabled : load
+  });
 
-  useEffect(()=>{
-    // console.log("뜸?",tda);
-  }, [tda]);
+  useEffect(() => {
+    if(isLoading == false) {
+      setLoad(false)
+    }
+  }, [isLoading])
+
+
+  // const [tda, Settda] = useState([]);
+
+  // useEffect(()=>{
+  //   const boardData = async ()=>{
+  //     try {
+  //       const data = await ipUrl.get("/board/boardlist");
+  //       // console.log("데이터: ", data.data);
+  //       const boardlistdata = data.data;
+  //       const list_length = boardlistdata.length;
+  //       console.log(boardlistdata);
+  //       // console.log(list_length);
+  //       let arr_count = 0;
+  //       let newArray = [];
+
+  //       for(let i=0; i<list_length;i+=2){
+  //         newArray[arr_count] = [];
+  //         newArray[arr_count][0] = boardlistdata[i];
+  //         newArray[arr_count][1] = boardlistdata[i+1];
+  //         arr_count++;
+  //       }
+  //       console.log("what: ", newArray);
+  //       Settda(newArray);
+
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  //   boardData();
+  // },[]);
+
+  // useEffect(()=>{
+  //   console.log("뜸?",tda);
+  // }, [tda]);
 
   // const data = [
   //   [{
@@ -83,53 +124,52 @@ const BoardListPc = () => {
   //   }]
   // ];
 
+
+
   return (
     <>
-      <Div_one>
+    <Div_one>
+      <Div_two>
+      {data ? (
+        data.map((value, index) => {
+          const thumbNail = JSON.parse(value.images)[0];
+          const handleReviewClick = () => {
+            nav(`/boarddetail/${value.id}`);
+          };
 
-      {/* 갯수 나눠서 배열을 쪼개놓고 */}
-      {/* [1,2,3,4]  => [[1,2],[3,4]]*/}
-      {/* Div_two */}
+          let profileImg = value.User;
+          if(value.User == null) {
+            profileImg = 'default_profile.jpeg'
+          }
 
-      {tda.map((item, index)=>{
-        return(
-          <Div_two key={index}>
-          {item.map((item2, index2)=>(
-                <Main key={index2}>
-                {/* 이미지 */}
-                {item2 && item2.title !== undefined ? (
-                  <>
-                    <BoardPreviewImg UserUploadImg= {item2?.images} />
-    
-                    {/* 프로필이미지 */}
-                    <BoardProflieImg />
-    
-                    {/* 제목+내용 */}
-                    <BoardText BoardTitle={item2?.title && item2?.title} UploadUserNickname={item2?.nickname && item2?.nickname} />
-                  </>
-
-                ) : (
-                  <>
-                  <BoardPreviewImg  />
-  
-                  {/* 프로필이미지 */}
-                  <BoardProflieImg  />
-
-                  {/* 제목+내용 */}
-                  <BoardText  />
-                  </>
-                )}
-                </Main>
-          ))}
-          </Div_two>
-        )
-      })}
-
-        <br /><br /><br />
-        
-      </Div_one>
+          return (
+            <>
+              <Main onClick={handleReviewClick}>
+                <ImgBox>
+                  <ShowImg src={planImgPath + "/" + thumbNail} alt="" />
+                </ImgBox>
+                <ProflieImg src={profileImgPath + "/" + profileImg} />
+                <TextBox>
+                  <div>
+                    <SmallText>
+                      {/* <span>{nickname}</span>님의 일정 */}
+                      <span>{value.nickname}</span>님의 일정
+                    </SmallText>
+                  </div>
+                  <SubTitle>{value.title}</SubTitle>
+                </TextBox>
+              </Main>
+            </>
+          )
+        })
+      ) : (
+        <>데이터 받아오는 중</>
+      )}
+      </Div_two>
+    </Div_one>
     </>
-  )
+    
+  );
 }
 
 export default BoardListPc

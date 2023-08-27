@@ -22,12 +22,12 @@ const ImgUpload = ({ onUpload, files }) => {
   };
 
   return (
-    <div>
+    <>
       <UploadImgContain>
         {imageFiles.map((file, index) => (
           <ShowImg key={index} style={{ display: 'flex', alignItems: 'center' }}>
             <ImgContain>
-            <DeleteBtn onClick={() => handleImageDelete(index)}>🗙</DeleteBtn>
+            <DeleteBtn onClick={() => handleImageDelete(index)}>x</DeleteBtn>
             <ImgStyle
               src={URL.createObjectURL(file)}
               alt={`Image ${index}`}
@@ -44,10 +44,10 @@ const ImgUpload = ({ onUpload, files }) => {
         />
       </UploadImgContain>
       <br/>
-      <UploadBtn onClick={handleAddButtonClick}>Add Images</UploadBtn>
+      <UploadBtn onClick={handleAddButtonClick}>사진 등록 (최대 5장)</UploadBtn>
       <br/>
       <br/>
-    </div>
+    </>
   );
 };
 

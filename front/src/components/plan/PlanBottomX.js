@@ -14,7 +14,7 @@ import {
 } from "./Plan.styled";
 
 import { saveAttractionsWithImg } from "../../redux/features/dataForGpt";
-import { ipUrl } from '../../util/util';
+import { ipUrl } from "../../util/util";
 
 // 지도 아래 일정 부분
 const PlanBottomX = ({
@@ -51,7 +51,9 @@ const PlanBottomX = ({
       "&q=" +
       encodeURIComponent(queryKey);
 
-    const getAttPicRes = await ipUrl.get(URL);
+    const getAttPicRes = await ipUrl.get(URL, {
+      withCredentials: false,
+    });
     return getAttPicRes.data;
   };
 
@@ -94,9 +96,10 @@ const PlanBottomX = ({
     setPeriodArr(temp);
   }, [attractions]);
 
-
   const planPerDay = userChoiceSaved;
-
+  useEffect(() => {
+    console.log(userChoiceSaved);
+  }, [userChoiceSaved]);
   // 스크롤 일정 이상 넘어가면
   useEffect(() => {
     const bottomBox = document.getElementById("bottom-box");
@@ -112,16 +115,20 @@ const PlanBottomX = ({
     <>
       <PlanBottomBox id="bottom-box">
         {periodArr.map((value, index) => {
-          return (
-            <PerDay
-              key={index}
-              period={periodArr[index]}
-              index={index + 1}
-              place={planPerDay[index]}
-              attractionsWithImg={attractionsWithImg}
-              setSelectedPlanIndex={setSelectedPlanIndex}
-            />
-          );
+          if (planPerDay.length > index) {
+            return (
+              <PerDay
+                key={index}
+                period={periodArr[index]}
+                index={index + 1}
+                place={planPerDay[index]}
+                attractionsWithImg={attractionsWithImg}
+                setSelectedPlanIndex={setSelectedPlanIndex}
+              />
+            );
+          } else {
+            return <></>;
+          }
         })}
       </PlanBottomBox>
     </>
@@ -152,7 +159,9 @@ const PerDay = ({
     });
     setDayPlanArr(temp);
   }, [selectedUserPlan]);
-
+  useEffect(() => {
+    console.log(place, "플레");
+  }, [place]);
 
   return (
     <>

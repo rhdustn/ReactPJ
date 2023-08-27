@@ -19,8 +19,9 @@ exports.likeslist = async (req, res) => {
       }
 
     })
+
     // const data = await LikeComment.findAll()
-    res.json(temp)
+    res.json(data)
   } catch (error) {
     console.log("likeslist 오류터짐")
     console.log(error)

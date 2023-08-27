@@ -8,8 +8,9 @@ height: 800px;
 // pc
 const MainPc = styled.div`
 width: 100%;
-height: 100vh;
+height: auto;
 /* background-color: beige; */
+padding: 50px 0 180px 0;
 `
 
 const MoveBoardBtnPc = styled.div`
@@ -79,6 +80,7 @@ const TitleStyle = styled.div`
   display: flex; align-items: end;
 `
 const SubContentStyle = styled.div`
+width: 390px;
   height: auto;
   box-sizing: border-box;
   overflow-wrap: break-word;
@@ -91,6 +93,10 @@ const SubContentStyle = styled.div`
   line-height: 1.62;
   letter-spacing: 0px;
   display: flex;
+`
+const SubContentSpan = styled.span`
+    display: flex;
+    text-align: initial;
 `
 const Popup = styled.div`
 position: fixed;
@@ -232,7 +238,7 @@ height: 45px;
 border: 1px solid;
 border-radius: 50%;
 `
-const CommentProflieImg2 = styled.div`
+const CommentProflieImg2 = styled.img`
 width: 30px;
 height: 30px;
 border: 1px solid;
@@ -325,6 +331,7 @@ font-size: 20px;
 const ButtonBox = styled.div`
 width: 10px;
 height: 50px;
+cursor: pointer;
 
 `
 const ShowButtonBox = styled.div`
@@ -477,6 +484,10 @@ right: 10%;
 display: flex;
 justify-content: center;
 `
+const Xbtn = styled.div`
+position: absolute;
+right: 0;
+`
 
 
 
@@ -488,5 +499,5 @@ export {
   Recommentbox, CommentContain3, Repliesdiv, RelpyInput, RelpyBtn, RelpyBtn2, Replyspan,
   CommentProflieImg2, MoveBoardBtn, ButtonBox, ShowButtonBox, EditImg, HeaderDiv, EditBtnStyle, DelBtnStyle,
   Reasd, CommentEditInput, CommentEditButton, CommentDelButton, InputContain, HandleEditCheck,
-  HandleDeleteCheck, LikeSize, CommentEditImg, ShowButtonBox2, LikeSize2, MainPc, MoveBoardBtnPc
+  HandleDeleteCheck, LikeSize, CommentEditImg, ShowButtonBox2, LikeSize2, MainPc, MoveBoardBtnPc,Xbtn,SubContentSpan
 }

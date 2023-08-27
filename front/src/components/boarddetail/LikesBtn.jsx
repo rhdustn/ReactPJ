@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios';
 import { LikeSize } from './boarddetail.styled'
-
+import { ipUrl } from '../../util/util';
 
 const LikesBtn = ({commentIndex}) => {
     const ImgPath = "/imgs/icons"
@@ -12,7 +11,7 @@ const LikesBtn = ({commentIndex}) => {
 
     const LikesClick =async()=>{
       try {
-        const response = await axios.post(
+        const response = await ipUrl.post(
             `/post/updateLikes`,{comment_id:commentIndex},{withCredentials:true}
             )
             setLikes(!likes);
@@ -24,14 +23,14 @@ const LikesBtn = ({commentIndex}) => {
       }
       const UnlikeComment = async (comment_id) => {
         try {
-          await axios.delete(`/post/deleltlikes/${comment_id}`, { withCredentials: true });
+          await ipUrl.delete(`/post/deleltlikes/${comment_id}`, { withCredentials: true });
         } catch (error) {
           console.error('Error removing like:', error);
         }
       };
    
 
-      axios.get(`/post/${5}`)
+      ipUrl.get(`/post/${5}`)
     }
 
 

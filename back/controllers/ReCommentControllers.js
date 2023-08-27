@@ -1,9 +1,18 @@
-const {Comment, Recomment} = require("../models")
+const {Comment, Recomment,User} = require("../models")
 
-// 대댓글을 보여줄 수 있는 컨트롤러
+// // 대댓글을 보여줄 수 있는 컨트롤러
 exports.recommentlist =async(req,res)=>{
     try {
-        const data = await Recomment.findAll()
+        // const userdata = await User.findOne({ where: { id }})
+        const temp = await Recomment.findAll({ include: [{ model: User }] })
+        console.log("999999999",temp)
+        const data = temp.map((value) => {
+            
+            return { ...value.dataValues, User: value.dataValues.User.profile_img,
+                UserNickname: value.dataValues.User.nickname }
+        })
+        console.log("98888888888888888",data)
+        
         res.json(data)
     } catch (error) {
         console.log(error)
@@ -14,14 +23,17 @@ exports.createRecomment = async(req,res)=>{
     // const {id} = req.decoded;
     const {comment_id, detail}=req.body
     comment_id.commentIndex
+    const userId = req.decoded
+    const UserFront_id = userId.front_id
+    const userinfo = await User.findOne({where : {user_id:UserFront_id}})
+    const userid = userinfo.id;
 
     try {
         await Recomment.create({
             comment_id :comment_id.commentIndex,
             // nickname : nickname,
             detail : detail,
-            // 로그인을 아직 안해서 정적인 값으로 넣음
-            user_id:"2"
+            user_id:userid,
         })
         res.send("recomment success")
     } catch (error) {
@@ -30,18 +42,6 @@ exports.createRecomment = async(req,res)=>{
     }
 }
 
-// 대댓글 수정 컨트롤러
-exports.editRecomment = async(req,res)=>{
-    const {id}=req.params
-    const {detail}=req.body;
-    try {
-        await Recomment.update({detail},{where :{id}})
-        res.send("Recomment success")
-    } catch (error) {
-        console.log("대댓글 수정 컨트롤러 에서 오류남")
-        console.log(error)
-    }
-}
 
 // 대댓글 삭제 컨트롤러
 exports.deleteRecomment = async(req,res)=>{

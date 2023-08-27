@@ -3,9 +3,8 @@ import { useQuery } from 'react-query';
 import { ipUrl } from '../util/util';
 
 import TopNav from '../components/nav/TopNav';
-import { StyledProfileImg, InputBtn, StyledProfileName, Button } from '../components/mypage/mypage.styled';
-import { EditText } from '../components/mypage';
-
+import { StyledProfileImg, InputBtn, StyledProfileName, Button } from '../componentsPc/mypage/MyPagePc.styled';
+// import { EditText } from '../components/mypage';
 import {
   EditBtnPc,
   EditImgPc,
@@ -166,7 +165,7 @@ const EditProfliePc = () => {
               수정 완료
             </Button>
             
-            <EditText/>
+            <EditTextPc/>
           </>        
         }
       </MypagePcBox>

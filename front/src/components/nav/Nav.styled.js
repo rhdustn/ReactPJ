@@ -51,6 +51,7 @@ export const TopNavBox = styled.div`
 export const TopNavBtn = styled.div`
     width: 50px; height: 100%;
     display: flex; justify-content: center; align-items: center;
+    cursor: pointer;
 
     & img {
         width: 40%;

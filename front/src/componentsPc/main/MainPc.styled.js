@@ -70,13 +70,15 @@ export const InputBox = styled.div`
 
 export const MainMidBox = styled.div`
   width: 100%;
-  height: 50vh;
+  height: 35vh;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 0 0 10px 0;
   margin-top: 20%;
+  justify-content: start;
+  padding-top: 70px;
 `;
 
 export const BigLabel = styled.div`
@@ -122,7 +124,7 @@ export const DateBox = styled.div`
 
 export const MainBottomBox = styled.div`
   width: 100%;
-  height: auto;
+  height: 40vh;
   padding: 10px;
   box-sizing: border-box;
   display: flex;
@@ -130,6 +132,7 @@ export const MainBottomBox = styled.div`
   align-items: center;
   margin: 0 0 10px 0;
   padding: 0 0 70px 0;
+  justify-content: start;
 `;
 
 export const SmallLabel = styled.div`

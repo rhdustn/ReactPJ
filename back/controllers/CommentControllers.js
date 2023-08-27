@@ -18,12 +18,9 @@ exports.commentlist = async(req,res)=>{
 exports.createComment = async (req, res) => {
     const userId = req.decoded
     const UserFront_id = userId.front_id
+    console.log(UserFront_id,'ㅇㅁㄴㄻㅁㄱㅁㅈㄱㅁㅁ')
     const userinfo = await User.findOne({where : {user_id:UserFront_id}})
     const userid = userinfo.id;
-    const usernickname = userinfo.nickname;
-    console.log("sdsdsdsdsds",userid)
-    console.log()
-    console.log("==================")
     const { board_id, detail } = req.body
 
     try {

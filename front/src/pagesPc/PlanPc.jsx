@@ -44,8 +44,6 @@ const PlanPc = () => {
   if (gptAnswerSaved.location === "") {
     return (
       <>
-        <TopNavPc />
-
         <NoPlanPc />
 
         <BottomNavPc page={"plan"} />

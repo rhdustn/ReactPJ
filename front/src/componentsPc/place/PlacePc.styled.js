@@ -7,6 +7,13 @@ const fadeInAni = keyframes`
         opacity: 1;
     }
 `;
+const moveAni = keyframes`
+    from {
+        transform: translateX(50px);
+    }to {
+        transform: translateX(0px);
+    }
+`
 
 // AddPlaceTop
 export const AddPlaceMid2 = styled.div`
@@ -14,6 +21,8 @@ export const AddPlaceMid2 = styled.div`
   height: 50vh;
   /* background-color: skyblue; */
   overflow: scroll;
+  padding: 0 20px 0 0;
+  box-sizing: border-box;
 `;
 export const AddPlaceTopBox = styled.div`
   width: 100%;
@@ -62,13 +71,21 @@ export const AddPlaceMidBox = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 60px 10px 0 10px;
+
+  & h3 {
+    width: 100%;
+    color: #277bc0;
+    text-align: start;
+    border-bottom: 1px solid #277bc0;
+}
 `;
 export const Title = styled.div`
   width: 100%;
   height: 30px;
   text-align: start;
   font-weight: bold;
-  padding: 0 5px 0 5px;
+  font-size: 20px;
+  font-size: ${(props) => props.size || '20px'};
   box-sizing: border-box;
 `;
 export const PlaceBox = styled.div`
@@ -78,9 +95,13 @@ export const PlaceBox = styled.div`
   align-items: center;
   position: relative;
   justify-content: space-between;
+  margin: 0 0 5px 0;
+  border-radius: 5px;
+  padding: 5px;
+  box-sizing: border-box;
 
   &:hover {
-    background-color: #edebeb;
+    background-color: rgba(0, 0, 0, 0.05);
   }
 `;
 export const NearPlaceBox = styled.div`
@@ -158,9 +179,9 @@ export const ShowSelectedBox = styled.div`
   width: 98%;
   height: 100px;
   /* position: fixed; bottom: 400px; */
-  background-color: #edebeb;
+  background-color: rgba(0, 0, 0, 0.03);
 
-  border-radius: 10px;
+  border-radius: 10px 10px 0 0;
   display: flex;
   align-items: center;
   overflow-x: scroll;
@@ -169,9 +190,10 @@ export const ShowSelectedBox = styled.div`
   /* margin-bottom: 20%; */
 `;
 export const Selected = styled.div`
-  width: 70px;
+  width: 80px;
   height: 80px;
   position: relative;
+  animation: ${moveAni} 0.5s ease-in-out;
 
   & img {
     width: 40px;

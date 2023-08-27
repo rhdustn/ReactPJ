@@ -45,13 +45,15 @@ const TapMenuPc = ({user}) => {
     }
   }
 
-  const {data, isLoading} = useQuery(['getAll'], tryGetAll)
+  const {data, isLoading} = useQuery(['getAll'], tryGetAll, {
+    enabled : load
+  })
 
   useEffect(() => {
+    console.log(isLoading)
     if(isLoading == false) {
-      console.log(isLoading)
       console.log(data)
-      // setLoad(false)
+      setLoad(false)
       setTabArr((tabArr => tabArr.map((tab, index) => {
         if(index == 0){
           return {...tab, content: data.data1}

@@ -1,15 +1,16 @@
 import styled from 'styled-components';
 
- const Main = styled.div`
+const Main = styled.div`
     display: inline-block;
-    max-width: 354px;
+    max-width: 350px;
+    width: calc(50% - 20px);
+    height: 270px;
     overflow: hidden;
     border-radius: 6px;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 20px;
     cursor: pointer;
-    transform: translate(0,30px);
     position: relative;
-    /* background-color: yellow; */
+    margin: 10px;
 `
 const ImgBox = styled.div`
 width: 350px;
@@ -18,12 +19,23 @@ gap: 1px;
 height: 150px;
 border-top-left-radius:10px;
 border-top-right-radius:10px;
+overflow: hidden;
  /* 나중에 background에 리뷰 사진 올리기 */
 /* background: url('https://news.airbnb.com/wp-content/uploads/sites/4/2022/04/VILLA-SANGLUNG.jpeg?fit=1024%2C678') center center / cover; */
 `
 const Container = styled.div`
-display: flex;
-margin-left: 20px;
+    width: 100%; height: 140px;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    font-size: 30px;
+
+    & h3 {
+        margin: 0;
+    }
+    & p {
+        font-size: 16px;
+        margin: 5px 0 0 0; padding: 0;
+    }
 `
 
 const TextBox = styled.div`

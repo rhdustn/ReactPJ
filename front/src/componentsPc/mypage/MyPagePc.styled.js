@@ -1,10 +1,8 @@
 import styled from "styled-components";
 
 const MypagePcBox = styled.div`
-  width: 70%; height: calc(100vh);
-  display: flex;
-  position: fixed; left: 50%;
-  transform: translateX(-50%);
+width: 100%;
+height: calc(100vh - 60px);
 `
 
 const StyleArrow = styled.div`
@@ -21,35 +19,42 @@ const StyledImage = styled.img`
 const Button = styled.div`
   position: absolute;
   left: 50%;
-  top: 40%;
+  top: 50%;
   transform: translate(-50%, -40%);
   width: 250px;
-  border-radius: 5px;
+  border-radius:  5px;
   height: 50px;
-  background-color: ${(props) => (props.change ? "#3e7bff" : "#d6d6d6")};
-  color: ${(props) => (props.change ? "white" : "#989898")};
+  background-color: ${props => props.change ? '#277bc0' : '#d6d6d6'};
+  color: ${props =>props.change ? 'white' :'#989898'};
   display: flex;
   justify-content: center;
   align-items: center;
+  font-weight: bold;
+  cursor: ${(props) => props.change ? 'pointer' : 'default'};
 `;
 
 const StyledProfileImg = styled.div`
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
-  background-color: #ffd8de;
-  position: absolute;
+  background-color: white;
+  border: 2px solid #277bc0;
+  position: absolute;  
   left: 50%;
-  top: 15%;
+  top: 20%;
   transform: translate(-50%, -15%);
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  background-image: ${(props) =>
-    props.preview ? `url(${props.preview})` : "none"};
+  cursor: pointer; 
+  background-image: ${(props) => (props.preview ? `url(${props.preview})` : 'none')};
   background-size: cover;
   background-position: center;
+
+  &:hover {
+    border: 4px solid #277bc0;
+    box-sizing: border-box
+  }
 `;
 
 const InputBtn = styled.div`
@@ -62,22 +67,30 @@ const InputBtn = styled.div`
 
 const StyledProfileName = styled.div`
   position: absolute;
-  top: 30%;
+  top: 37%;
   left: 50%;
   transform: translate(-50%, -30%);
   font-weight: 600;
   cursor: pointer;
   border-bottom: 2px solid #64a7fe;
+  font-size: 20px;
+
+  & input {
+    outline: none;
+    border: none;
+    text-align: center;
+    font-size: 20px;
+  }
 `;
 
 const Text = styled.div`
-  position: absolute;
+  position: absolute;  
   left: 50%;
-  top: 45%;
-  transform: translate(-50%, -45%);
+  top: 40%;
+  transform: translateX(-50%);
   width: 250px;
   font-size: 12px;
-`;
+`
 
 const EditNavigate = styled.div`
   position: absolute;
@@ -136,7 +149,7 @@ const TabButton = styled.button`
   color: #676767;
   padding: 10px 20px;
   border: none;
-  border-bottom: 2px solid ${(props) => (props.active ? "#5da0ff" : "white")};
+  border-bottom: 2px solid ${(props) => (props.active ? "#277bc0" : "white")};
   cursor: pointer;
 `;
 

@@ -18,6 +18,7 @@ const planRouter = require("./routers/planRouter");
 const mypageRouter = require("./routers/mypageRouter")
 const adminRouter = require("./routers/adminRouter")
 const boardRouter = require("./routers/boardlistRouter");
+const boardEditRouter = require("./routers/boardEditRouter");
 
 
 // // Multer 설정
@@ -39,7 +40,7 @@ app.use(express.json());
 app.use(
   cors({
     // origin: ["http://13.125.126.65"],
-    origin: ["*","http://localhost:3000"],
+    origin: ["http://localhost:3000"],
     credentials: true,
   })
 );
@@ -75,6 +76,9 @@ app.use("/user", userRouter);
 app.use("/mypage", mypageRouter);
 app.use("/admin", adminRouter);
 app.use("/board", boardRouter);
+app.use("/board", boardEditRouter);
+
+
 
 // gptAPI 테스트 -----20230807 zerohoney
 app.use("/openAI", testGPT);

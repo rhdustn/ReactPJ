@@ -3,13 +3,14 @@ import { createSlice } from "@reduxjs/toolkit";
 export const getSavedPlan = createSlice({
   name: "getSavedPlan",
   initialState: {
-     savedPlan : ''
+    savedPlan: "",
   },
   reducers: {
     getSaved: (state, action) => {
-        state.savedPlan = action.payload;
+      console.log(action.payload,'리덕스');
+      state.savedPlan = action.payload;
     },
   },
 });
 
-export const {getSaved} = getSavedPlan.actions;
+export const { getSaved } = getSavedPlan.actions;

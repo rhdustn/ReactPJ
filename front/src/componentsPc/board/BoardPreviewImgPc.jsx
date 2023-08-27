@@ -3,8 +3,8 @@ import { ImgBox } from './boardPc.styled'
 import styled from 'styled-components';
 
 const ShowImg = styled.img`
-width: 350px;
-height: 150px;
+width: 100%;
+height: auto;
 border-top-left-radius:10px;
 border-top-right-radius:10px;
 z-index: -1;

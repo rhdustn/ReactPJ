@@ -208,7 +208,7 @@ export const Title = styled.div`
   padding: 5px 0 5px 0;
 `;
 export const Date = styled.div`
-  font-size: 30px;
+  font-size: 26px;
   padding: 5px 0 5px 0;
 `;
 export const Selected = styled.div`

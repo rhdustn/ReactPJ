@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { CommentContainer, CommentMain } from "./boarddetail.styled";
 import { CommentList, CommentForm } from "./index";
 
-const Comment = ({ comments }) => {
+const Comment = ({ comments,setTrigger }) => {
   console.log(comments);
 
   const CommentSubmit = () => {};
@@ -12,7 +12,7 @@ const Comment = ({ comments }) => {
         <CommentMain>
           <CommentList comments={comments} />
         </CommentMain>
-        <CommentForm onCommentSubmit={CommentSubmit} />
+        <CommentForm onCommentSubmit={CommentSubmit} setTrigger={setTrigger} />
       </CommentContainer>
     </div>
   );
