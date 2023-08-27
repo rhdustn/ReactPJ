@@ -5,6 +5,7 @@ const session = require("express-session");
 const { sequelize } = require("./models");
 const path = require("path");
 const cors = require("cors");
+const cookieParser = require("cookie-parser");
 const app = express();
 const mainRouter = require("./routers/mainRouter");
 // gptAPI 테스트 -----20230807 zerohoney
@@ -15,10 +16,9 @@ const multer = require("multer");
 const userRouter = require("./routers/user");
 const postRouter = require("./routers/postRouter");
 const planRouter = require("./routers/planRouter");
-const mypageRouter = require("./routers/mypageRouter")
-const adminRouter = require("./routers/adminRouter")
+const mypageRouter = require("./routers/mypageRouter");
+const adminRouter = require("./routers/adminRouter");
 const boardRouter = require("./routers/boardlistRouter");
-
 
 // // Multer 설정
 // const storage = multer.diskStorage({
@@ -35,11 +35,21 @@ const boardRouter = require("./routers/boardlistRouter");
 // 아마 form 데이터
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(cookieParser());
 
 app.use(
   cors({
     // origin: ["http://13.125.126.65"],
-    origin: ["http://localhost:3000"],
+    origin: [
+      "http://localhost:3000",
+      "http://127.0.0.1:8080",
+      "http://52.79.43.68",
+      "http://localhost:8080",
+      "http://127.0.0.1:5500",
+      "https://zerohoney.com",
+      "http://zerohoney.com",
+      "https://zerohoney.site",
+    ],
     credentials: true,
   })
 );
@@ -49,6 +59,8 @@ app.use(
     secret: process.env.SESSION_KEY,
     resave: false,
     saveUninitialized: false,
+    proxy: true,
+    cookie: { sameSite: "none", secure: true, maxAge: 600000, httpOnly: true }, // 이 부분에서 secure 옵션을 true로 설정합니다.
   })
 );
 
@@ -56,9 +68,6 @@ app.use(
 //   res.type('application/javascript');
 //   // 나머지 응답 처리 로직
 // });
-
-
-
 
 sequelize
   .sync({ force: false })
@@ -70,7 +79,7 @@ sequelize
   });
 
 app.use("/", mainRouter);
-app.use("/post",postRouter)
+app.use("/post", postRouter);
 app.use("/user", userRouter);
 app.use("/mypage", mypageRouter);
 app.use("/admin", adminRouter);

@@ -10,6 +10,7 @@ const {likeslist,updateLikes,deleteLikes} = require("../controllers/likecommentC
 const {Boardlikeslist,updatBoardLikes,BoarddeleteLikes} = require("../controllers/boardlikeController")
 
 // Multer 설정
+// 배포시 경로 설정 잘하자
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, path.join("..",'front', "public","imgs","userplanimg"));
