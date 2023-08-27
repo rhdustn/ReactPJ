@@ -11,7 +11,7 @@ exports.isLogin = async (req, res, next) => {
       if (err) {
         console.log(err);
 
-        res.send("다시 로그인 해주세요");
+        res.send("expired token");
       } else {
         req.decoded = decoded;
         next();

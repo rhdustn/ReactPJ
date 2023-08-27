@@ -94,6 +94,7 @@ const BottomNavPc = () => {
 
   useEffect(() => {
     if (data) {
+      console.log(data, "프로필");
       if (data.profile_img) {
         setProfileImg(data.profile_img);
       }
@@ -117,25 +118,26 @@ const BottomNavPc = () => {
         </BottomNavBtn>
 
         {/* 로그인 된 유저 -> 마이페이지 */}
-        {userOrGuest.isLogin && (
+        {data !== "expired token" && (
           <BottomNavBtn onClick={() => nav("/mypage")}>
             {!isLoading && (
               <img
                 src={`${ImgPath}/${profileImg}`}
                 className="profile_img"
+                alt="프로필 이미지"
               ></img>
             )}
             <BottomNavText textCol={textCol.my}>마이페이지</BottomNavText>
           </BottomNavBtn>
         )}
         {/* 게스트 -> 로그인 페이지 */}
-        {!userOrGuest.isLogin && (
+        {data === "expired token" && (
           <BottomNavBtn
             onClick={() => {
               nav("/login");
             }}
           >
-            <img src={default_profile} className="profile_img"></img>
+            <img src={default_profile} className="profile_img" alt="프로필 이미지"></img>
             <BottomNavText>로그인</BottomNavText>
           </BottomNavBtn>
         )}

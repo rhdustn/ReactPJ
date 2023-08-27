@@ -35,7 +35,8 @@ export const TextBox = styled.div`
   height: 80vh;
 
   & img {
-    width: 80%; height: 80%;
+    width: 80%;
+    height: 80%;
   }
 `;
 
@@ -113,7 +114,7 @@ export const DateBox = styled.div`
   border: 1px solid silver;
   border-radius: 20px;
   padding: 0 10px 0 10px;
-  
+
   & input {
     width: 100%;
     border: none;
@@ -124,7 +125,7 @@ export const DateBox = styled.div`
 
 export const MainBottomBox = styled.div`
   width: 100%;
-  height: 40vh;
+  height: auto;
   padding: 10px;
   box-sizing: border-box;
   display: flex;
@@ -206,7 +207,4 @@ export const LoadingContainer = styled.div`
   z-index: 2;
 `;
 
-export const LoadingImg=styled.div`
-
-
-`
+export const LoadingImg = styled.div``;
