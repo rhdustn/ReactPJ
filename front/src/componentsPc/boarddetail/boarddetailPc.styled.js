@@ -58,6 +58,10 @@ const HeaderDivPc = styled.div`
     left: 20px;
     cursor: pointer;
   }
+  & .likesNum {
+    position: absolute;
+    left: 50px;
+  }
   & .dotBox {
     position: absolute;
     width: 70px;
@@ -298,6 +302,7 @@ const CommentFormdiv = styled.div`
   justify-content: center;
   align-items: center;
   position: fixed; bottom: 0;
+  background-color: white;
 `;
 const CommentInput = styled.input`
   width: 600px;
@@ -307,7 +312,7 @@ const CommentInput = styled.input`
   outline: none;
   box-sizing: border-box;
 `;
-const CommentBtn = styled.div`
+const CommentBtn = styled.button`
   border: none;
   font-size: 15px;
   background-color: white;

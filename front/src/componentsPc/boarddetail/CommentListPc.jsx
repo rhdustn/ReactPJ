@@ -39,6 +39,7 @@ const CommentListPc = ({ comments, loginUserInfo,refetch }) => {
   const [expandedCommentIndex, setExpandedCommentIndex] = useState(null);
   const { id } = useParams();
   const ImgPath = "/imgs/icons";
+
   const CommentView = async () => {
     try {
       const response = await ipUrl.get(`/post/commentlist`);
@@ -238,18 +239,16 @@ const CommentListPc = ({ comments, loginUserInfo,refetch }) => {
               {data && (
                 <>
                   {loginUserInfo.id === comment.user_id && (
-                    <ButtonBox>
                       <CommentEditImg
                         onClick={() => toggleShowBox(commentIndex)}
                         src={`${ImgPath}/more.png`}
                       />
-                    </ButtonBox>
                   )}
                 </>
               )}
             </div>
             {expandedCommentIndex === commentIndex && (
-              <ShowButtonBox2 onClose={() => toggleShowBox(commentIndex)}>
+              <ShowButtonBox2 onClose={() => toggleShowBox(commentIndex)} right={'-120px'}>
                 <div>
                   <HandleEditCheck onClick={() => handleEditCheck(comment.id)}>
                     수정

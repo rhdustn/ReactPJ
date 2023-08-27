@@ -25,7 +25,7 @@ const TapMenuPc = ({ user }) => {
   const [tabArr, setTabArr] = useState([
     { name: "내 여행", content: [] },
     { name: "리뷰", content: [] },
-    { name: "댓글", content: [] },
+    { name: "댓글 단 글", content: [] },
   ]);
 
   const selectMenuHandler = (index) => {
@@ -41,8 +41,8 @@ const TapMenuPc = ({ user }) => {
       const response3 = await ipUrl.get(`/mypage/getComment`);
       const data1 = response1.data;
       const data2 = response2.data;
-      // const data3 = response3.data;
-      return { data1, data2 };
+      const data3 = response3.data;
+      return { data1, data2, data3 };
     } catch (error) {
       console.log(error);
     }
@@ -59,7 +59,7 @@ const TapMenuPc = ({ user }) => {
           } else if (index == 1) {
             return { ...tab, content: data.data2 };
           } else if (index == 2) {
-            return { ...tab, content: [] };
+            return { ...tab, content: data.data3 };
           }
         })
     );
@@ -160,7 +160,21 @@ const TapMenuPc = ({ user }) => {
                 </ContentOne>
               );
             } else if (tab == 2) {
-              return <>댓글</>;
+              let firstImg = JSON.parse(value.images);
+              return (
+                <ContentOne
+                  onClick={() => {
+                    nav(`/boarddetail/${value.id}`);
+                  }}
+                >
+                  <div className="index">{index + 1}</div>
+                  <div className="location">{value.title}</div>
+                  <div className="duration">{value.detail}</div>
+                  <div className="imgs">
+                    <img src={`/imgs/userplanimg/${firstImg[0]}`}></img>
+                  </div>
+                </ContentOne>
+              );
             }
           })}
         </Content>

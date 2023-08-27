@@ -115,12 +115,10 @@ const BoardDetailPc = () => {
         <HeaderDivPc>
           {/* 좋아요 */}
           <BoardLikes boardIndex={data.data.id} boardLikeArr={data.data.LikeBoards}  loginUserInfo={loginUserInfo} refetch={refetch}/>
-
+          <div className='likesNum'>{data.data.LikeBoards.length}</div>
           {/* 수정, 삭제 버튼 */}
           {loginUserInfo.id == data.data.user_id &&
-          <ButtonBox onClick={ShowboxClick}>
-            <EditImg src={`${ImgPath}/more.png`} alt="" srcset="" />
-          </ButtonBox>
+            <EditImg src={`${ImgPath}/more.png`} alt="" srcset="" onClick={ShowboxClick} />
           }
           {showBox && (
             <div className='dotBox' onClose={() => setShowBox(false)}>

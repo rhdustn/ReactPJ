@@ -39,6 +39,7 @@ const CommentList = ({ comments, loginUserInfo,refetch }) => {
   const { id } = useParams();
   const ImgPath = "/imgs/icons";
   console.log("ddddd", loginUserInfo);
+
   const CommentView = async () => {
     try {
       const response = await ipUrl.get(`/post/commentlist`);
@@ -94,7 +95,7 @@ const CommentList = ({ comments, loginUserInfo,refetch }) => {
   };
 
   const handleDeleteCheck = (commentIndex) => {
-    const delcheck = window.confirm("정말로 댓글을 삭제하실건가요??");
+    const delcheck = window.confirm("댓글을 삭제하시겠습니까?");
     if (delcheck) {
       CommentDelet(commentIndex);
     }
@@ -127,7 +128,7 @@ const CommentList = ({ comments, loginUserInfo,refetch }) => {
 
   const handleReCommentDelete = (replyIndex) => {
     console.log(replyIndex);
-    const delcheck = window.confirm("정말로 댓글을 삭제하실건가요??");
+    const delcheck = window.confirm("대댓글을 삭제하시겠습니까?");
 
     if (delcheck) {
       ReCommentDelete(replyIndex);
@@ -182,7 +183,7 @@ const CommentList = ({ comments, loginUserInfo,refetch }) => {
   };
 
   // 지금 img = 이미지의 뎡로
-  const ProImgPath = "/imgs/userplanimg/";
+  const ProImgPath = "/imgs/profiles/";
 
   return (
     <div>
@@ -231,20 +232,17 @@ const CommentList = ({ comments, loginUserInfo,refetch }) => {
               {data && (
                 <>
                   {loginUserInfo.id === comment.user_id && (
-                    <ButtonBox>
                       <CommentEditImg
                         onClick={() => toggleShowBox(commentIndex)}
                         src={`${ImgPath}/more.png`}
                       />
-                    </ButtonBox>
                   )}
                 </>
               )}
             </div>
             {expandedCommentIndex === commentIndex && (
-              <ShowButtonBox2 onClose={() => toggleShowBox(commentIndex)}>
+              <ShowButtonBox2 onClose={() => toggleShowBox(commentIndex)} right={'30px'}>
                 <div>
-                  <div onClick={XClick}>🗙</div>
                   <HandleEditCheck onClick={() => handleEditCheck(comment.id)}>
                     수정
                   </HandleEditCheck>
@@ -259,12 +257,13 @@ const CommentList = ({ comments, loginUserInfo,refetch }) => {
             )}
           </CommentContain>
           {activeCommentIndex === commentIndex && isReplyVisible && (
-            <div>
+            <div className="reply-input-box">
               <RelpyInput
                 type="text"
-                placeholder="대댓글 작성하기"
+                placeholder="대댓글을 입력해주세요"
                 value={replyText}
                 onChange={(e) => setReplyText(e.target.value)}
+                width={'150px'}
               />
               <RelpyBtn
                 onClick={() => handleReplySubmit({ commentIndex: comment.id })}

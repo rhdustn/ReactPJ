@@ -1,9 +1,65 @@
 import styled, { keyframes } from 'styled-components';
 
 const Main = styled.div`
-padding: 60px 0 0 0;
+padding: 50px 0 100px 0;
 width: 400px;
-height: 800px;
+height: auto;
+
+& .writer-box {
+    width: 400px; height: 50px;
+    display: flex; align-items: center;
+    padding: 0 10px 0 10px;
+    box-sizing: border-box;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  & .writer-box .nickname {
+    font-weight: bold;
+    font-size: 18px;
+    margin: 0 0 0 10px;
+  }
+  & .writer-box .profile_img {
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    overflow: hidden;
+  }
+  & .writer-box .profile_img img {
+    width: 100%;
+  }
+
+
+  & .title {
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+    color: rgb(58, 58, 58);
+    float: none;
+    font-weight: bold;
+    white-space: pre-line;
+    padding: 0px 15px;
+    font-size: 18px;
+    line-height: 1.2;
+    letter-spacing: 0px;
+    margin: 10px 0 0 0;
+    text-align: start;
+    width: 400px; height: 30px;
+  }
+  & .detail {
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+    color: rgba(58, 58, 58, 0.8);
+    float: none;
+    font-weight: 500;
+    white-space: pre-line;
+    padding: 0 15px;
+    font-size: 14px;
+    letter-spacing: 0px;
+    width: 400px; height: 35px;
+    text-align: start;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 `
 
 // pc
@@ -24,28 +80,32 @@ const ImgBoxContainer = styled.div`
 width: 400px;
 height: 250px;
 display: flex;
-overflow: hidden;
 position: relative;
+overflow: hidden;
 `
 const ImgBox = styled.div`
 /* 나중에 이미지를 넣게 된다면 width를 100%만 주고 height는 안줌  */
-width: 1200px;
+width: auto;
 height: 250px;
 background-color: beige;
 display: flex;
 transition: transform 0.3s ease;
 
-& div {
+/* & div {
   width: 400px; height: 250px;
   overflow: hidden;
   display: flex; justify-content: center; align-items: center;
-}
+} */
 
 `
-const Image = styled.img`
+const Image = styled.div`
   width: 400px;
   height: 250px;
-  overflow-y: hidden;
+  display: flex; align-items: center;
+
+  & img {
+    width: 100%; height: auto;
+  }
 `;
 const ImageBtnPre = styled.button`
 position: absolute;
@@ -186,16 +246,24 @@ const imgStyle = {
 
 const CommentContainer = styled.div`
 width: 400px;
-height: 400px;
+height: auto;
 position: relative;
 `
 
 const CommentMain = styled.div`
 width: 400px;
-height: 340px;
+height: auto;
 overflow: scroll;
 position: relative;
+padding: 10px 10px;
+box-sizing: border-box;
 
+& .reply-input-box {
+    height: 50px;
+    display: flex;
+    padding: 0 0 0 40px;
+    box-sizing: border-box;
+}
 `
 const CommentFormdiv = styled.div`
 list-style: none;
@@ -203,25 +271,27 @@ width: 400px;
 height: 40px;
 border-top: 2px solid;
 border-color: rgb(239, 239, 239);;
-position: absolute;
-bottom: 6%;
 display: flex;
 justify-content: space-between;
 justify-content: center;
 align-items: center;
+position: fixed; bottom: 60px;
+background-color: white;
 `
 const CommentInput = styled.input`
-  width: 300px;
+  width: 400px;
   height: 38px;
   border: none;
-
+  padding: 0 50px 0 10px;
+  outline: none;
+  box-sizing: border-box;
 `
 const CommentBtn = styled.button`
 border: none;
 font-size: 15px;
 background-color: white;
 font-weight: bold;
-color:lightblue;
+color: #277bc0;
 outline: none;
 position: absolute;
 right: 1%;
@@ -234,8 +304,8 @@ transform: translate(-1%,-50%);
 
 `
 const CommentProflieImg = styled.img`
-width: 40px;
-height: 40px;
+width: 35px;
+height: 35px;
 border-radius: 50%;
 `
 const CommentProflieImg2 = styled.img`
@@ -297,7 +367,7 @@ const Repliesdiv = styled.div`
     position: relative;
 `
 const RelpyInput = styled.input`
-  width: 250px;
+  width: ${(props) => props.width || '250px'};
   height: 32px;
   font-size: 13px;
   border: 0;
@@ -336,52 +406,59 @@ font-size: 20px;
 `
 
 const ButtonBox = styled.div`
-width: 20px;
+width: 40px;
 height: 100%;
 cursor: pointer;
+position: relative;
+display: flex; justify-content: center; align-items: center;
 `
 const ShowButtonBox = styled.div`
-width: 100px;
-height: 100px;
-background-color:rgba(255, 255, 255, 0.7);
+width: 70px;
+height: 80px;
+background-color:rgba(0, 0, 0, 0.2);
 z-index: 5;
-display: flex;
+display: flex; justify-content: center; align-items: center;
 position: relative;
 border-radius: 10px;
 position: absolute;
-    top: 5%;
-    right: 8%;
+top: 5%;
+right: 8%;
 `
 const EditImg = styled.img`
 width: 20px;
 height: 20px;
 position: absolute;
-right: 15px;
-top: 15px;
+right: 10px;
 `
 const HeaderDiv = styled.div`
 width: 400px;
-height: 50px;
+height: 40px;
 display: flex;
 flex-direction: row;
 justify-content: space-between;
 align-items: center;
+border-bottom: 1px solid silver;
+position: relative;
+
+& .likesNum {
+  position: absolute; left: 50px;
+}
 `
 const EditBtnStyle = styled.div`
  width: 50px;
- height: 30px;
- background-color: white;
+ height: 25px;
+ background-color: lightblue;
  position: absolute;
  top: 20%;
  left: 50%;
  transform: translate(-50%,-20%);
  border-radius: 5px;
  border: none;
- padding:5px;
+ display: flex; justify-content: center; align-items: center;
 `
-const DelBtnStyle = styled.button`
+const DelBtnStyle = styled.div`
  width: 50px;
- height: 30px;
+ height: 25px;
  background-color:lightcoral;
  position: absolute;
  top: 80%;
@@ -389,7 +466,7 @@ const DelBtnStyle = styled.button`
  transform: translate(-50%,-80%);
  border-radius: 5px;
  border: none;
- padding:5px;
+ display: flex; justify-content: center; align-items: center;
 `
 const Reasd = styled.div`
 width: 80%;
@@ -515,7 +592,7 @@ const CommentEditImg = styled.img`
 width: 20px;
 height: 20px;
 position: absolute;
-right: 15px;
+right: 10px;
 top: 15px;
 `
 const ShowButtonBox2 = styled.div`
@@ -541,7 +618,8 @@ position: relative;
 border-radius: 10px;
 z-index: 20;
 top: 20px;
-right: -110px;
+/* right: -110px; */
+right: ${(props) => props.right || '30px'};
 display: flex;
 flex-direction: column;
 justify-content: center;
