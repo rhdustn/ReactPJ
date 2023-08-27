@@ -1,15 +1,37 @@
 import React, { useState } from 'react'
+import { useParams } from "react-router-dom";
+import { ipUrl } from "../../util/util";
+
 import { CommentFormdiv,CommentInput,CommentBtn } from './boarddetailPc.styled'
 
 
-const CommentFormPc = ({onCommentSubmit}) => {
-    const [inputComment, setInputComment] = useState('');
+const CommentFormPc = ({ onCommentSubmit, setTrigger }) => {
+  const [inputComment, setInputComment] = useState("");
+  const { id } = useParams();
 
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      onCommentSubmit(inputComment);
-      setInputComment('');
-    };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (inputComment === "") {
+      return;
+    }
+
+    onCommentSubmit(inputComment);
+    setInputComment("");
+
+    try {
+      const response = await ipUrl.post(
+        `/post/createComment`,
+        { detail: inputComment, board_id: id },
+        { withCredentials: true }
+      );
+      setTrigger((state) => {
+        return !state;
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
     <CommentFormdiv>

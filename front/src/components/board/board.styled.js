@@ -13,7 +13,7 @@ import styled from 'styled-components';
 
 `
 const ImgBox = styled.div`
-width: 350px;
+width: 100%;
 display: grid; justify-content: center; align-items: center;
 gap: 1px;
 height: 150px;
@@ -55,7 +55,7 @@ font-weight: bold;
 const TextBox = styled.div`
 position: relative;
 border-top: none;
-width: 350px;
+width: 100%;
 display: grid;
 gap: 1px;
 height: 120px;
@@ -64,6 +64,15 @@ border-bottom-right-radius:10px;
 z-index: 5;
 background-color: white;
 
+& .create-date {
+    position: absolute;
+    top: 70%; left: 10%;
+    width: 80%;
+    font-size: 12px;
+    text-align: start;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 `
 const ProflieImg= styled.img`
 position: absolute;
@@ -85,12 +94,15 @@ font-size: 14px;
 
 `
 const SubTitle = styled.div`
+width: 80%;
 position: absolute;
-top: 50%;
+top: 45%;
 left: 10%;
 font-size: 19px;
 font-weight: 600;
-
+text-align: start;
+overflow: hidden;
+text-overflow: ellipsis;
 `
 const BottomBox = styled.div`
 height: 100px;

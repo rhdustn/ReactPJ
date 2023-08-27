@@ -234,36 +234,38 @@ transform: translate(-1%,-50%);
 
 `
 const CommentProflieImg = styled.img`
-width: 45px;
-height: 45px;
-border: 1px solid;
+width: 40px;
+height: 40px;
 border-radius: 50%;
 `
 const CommentProflieImg2 = styled.img`
 width: 30px;
 height: 30px;
-border: 1px solid;
 border-radius: 50%;
 margin-right: 5px;
 `
 
 const CommentContain = styled.div`
-width: 400px;
-border-top: 3px solid lightgray;
+width: 100%;
 position: relative;
-margin: 10px;
 height: 50px;
+margin: 0 0 10px 0;
 align-items: center;
 display: flex;
- 
 `
 const CommentContain2 = styled.div`
     display: flex;
     align-items: flex-start;
-    width: 240px;
+    width: 70%;
     flex-direction: column;
-    margin-left: 15px;
-    
+    margin-left: 10px;
+
+    & .detail {
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: start;
+    }
 `
 const CommentContain3 = styled.div`
 display: flex;
@@ -290,35 +292,39 @@ const Repliesdiv = styled.div`
     align-items: center;
     margin-left: 50px;
     border-bottom: 1px solid lightgray;
-    width: 270px;
+    width: 80%;
     padding: 3px;
     position: relative;
-  
 `
 const RelpyInput = styled.input`
-width: 250px;
+  width: 250px;
   height: 32px;
-  font-size: 15px;
+  font-size: 13px;
   border: 0;
   border-radius: 15px;
   outline: none;
-  padding-left: 10px;
+  padding: 0 10px 0 10px;
   background-color: rgb(233, 233, 233);
 `
-const RelpyBtn = styled.button`
-background: lightblue;
+const RelpyBtn = styled.div`
+width: 35px;
+color: #277bc0;
 border: none;
 height: 32px;
 border-radius: 15px;
-
+display: flex; justify-content: center; align-items: center;
+cursor: pointer;
+font-size: 13px; font-weight: bold;
 `
-const RelpyBtn2 = styled.button`
-background: lightcoral;
+const RelpyBtn2 = styled.div`
+width: 35px;
+color: lightcoral;
 border: none;
 height: 32px;
 border-radius: 15px;
-margin-left: 5px;
-
+display: flex; justify-content: center; align-items: center;
+cursor: pointer;
+font-size: 13px; font-weight: bold;
 `
 const Replyspan = styled.span`
 position: absolute;
@@ -330,10 +336,9 @@ font-size: 20px;
 `
 
 const ButtonBox = styled.div`
-width: 10px;
-height: 50px;
+width: 20px;
+height: 100%;
 cursor: pointer;
-
 `
 const ShowButtonBox = styled.div`
 width: 100px;
@@ -362,7 +367,7 @@ flex-direction: row;
 justify-content: space-between;
 align-items: center;
 `
-const EditBtnStyle = styled.button`
+const EditBtnStyle = styled.div`
  width: 50px;
  height: 30px;
  background-color: white;
@@ -387,9 +392,19 @@ const DelBtnStyle = styled.button`
  padding:5px;
 `
 const Reasd = styled.div`
+width: 80%;
 display: flex;
 flex-direction: column;
 align-items: flex-start;
+& div {
+  width: 100%;
+  text-align: start;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+& .nickname {
+  font-weight: bold;
+}
 `
 const CommentEditInput = styled.input`
 position: absolute;
@@ -431,7 +446,7 @@ const InputContain = styled.div`
 `
 
 const HandleEditCheck = styled.div`
-background: lightblue;
+/* background: lightblue;
 border: none;
 height: 25px;
 width: 35px;
@@ -439,11 +454,25 @@ border-radius: 15px;
 display: flex;
 justify-content: center;
 align-items: center;
-transform: translate(0,1px);
+transform: translate(0,1px); */
+cursor: pointer;
+width: 50px;
+height: 30px;
+background-color: white;
+border-radius: 5px;
+border: none;
+margin: 5px 0 5px 0;
+display: flex;
+justify-content: center;
+align-items: center;
+
+&:hover {
+  background-color: lightblue;
+}
 
 `
 const HandleDeleteCheck = styled.div`
-background: lightcoral;
+/* background: lightcoral;
 border: none;
 height: 25px;
 width: 35px;
@@ -451,28 +480,46 @@ border-radius: 15px;
 display: flex;
 justify-content: center;
 align-items: center;
-transform: translate(0,2px);
+transform: translate(0,2px); */
+cursor: pointer;
+width: 50px;
+height: 30px;
+background-color: white;
+border-radius: 5px;
+border: none;
+margin: 5px 0 5px 0;
+display: flex;
+justify-content: center;
+align-items: center;
+
+&:hover {
+  background-color: lightcoral;
+}
 `
 
 const LikeSize = styled.img`
 width: 22px;
 height: 22px;
+cursor: pointer;
+position: absolute;
+top: 15px; right: 45px;
 `
 const LikeSize2 = styled.img`
 width: 30px;
 height: 30px;
 transform: translate(10px,3px);
+cursor: pointer;
 `
 
 const CommentEditImg = styled.img`
 width: 20px;
 height: 20px;
 position: absolute;
-right: 5%;
-top: 25%;
+right: 15px;
+top: 15px;
 `
 const ShowButtonBox2 = styled.div`
-width: 50px;
+/* width: 50px;
 height: 80px;
 background-color:rgba(0, 0, 0, 0.2);
 z-index: 5;
@@ -483,16 +530,37 @@ z-index: 20;
 top: 30%;
 right: 10%;
 display: flex;
+justify-content: center; */
+position: relative;
+width: 70px;
+height: 90px;
+background-color: rgba(0, 0, 0, 0.2);
+z-index: 5;
+display: flex;
+position: relative;
+border-radius: 10px;
+z-index: 20;
+top: 20px;
+right: -110px;
+display: flex;
+flex-direction: column;
 justify-content: center;
+align-items: center;
 `
 const Xbtn = styled.div`
 position: absolute;
-right: 0;
+right: 10px;
+cursor: pointer;
+
+&:hover {
+  font-weight: bold;
+}
 `
 
 const RelpyBtndiv = styled.div`
   color: lightgray; 
-
+  font-size: 13px;
+  cursor: pointer;
 
   &:hover {
     color: black; 
@@ -500,8 +568,10 @@ const RelpyBtndiv = styled.div`
 `;
 
 const Nickname = styled.div`
+width: 100%;
 color: black;
 font-weight: 600;
+text-align: start;
 `
 
 

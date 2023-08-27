@@ -58,7 +58,7 @@ const BoardList = ({ id }) => {
                   <div>
                     <SmallText>
                       {/* <span>{nickname}</span>님의 일정 */}
-                      <span>{value.nickname}</span>님의 일정
+                      <span>{value.nickname}</span>
                     </SmallText>
                   </div>
                   <SubTitle>{value.title}</SubTitle>
