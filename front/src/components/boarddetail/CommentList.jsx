@@ -287,7 +287,7 @@ const CommentList = ({ comments, loginUserInfo,refetch }) => {
                     <>
                       {loginUserInfo.id === value.user_id && (
                         <Xbtn onClick={() => handleReCommentDelete(value.id)}>
-                          🗙
+                          x
                         </Xbtn>
                       )}
                     </>

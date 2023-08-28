@@ -361,8 +361,8 @@ const Repliesdiv = styled.div`
     flex-direction: row;
     align-items: center;
     margin-left: 50px;
-    border-bottom: 1px solid lightgray;
-    width: 80%;
+    /* border-bottom: 1px solid lightgray; */
+    width: 80%; height: 40px;
     padding: 3px;
     position: relative;
 `
@@ -589,11 +589,11 @@ cursor: pointer;
 `
 
 const CommentEditImg = styled.img`
-width: 20px;
-height: 20px;
+width: 17px;
+height: 17px;
 position: absolute;
 right: 10px;
-top: 15px;
+top: 18px;
 `
 const ShowButtonBox2 = styled.div`
 /* width: 50px;
