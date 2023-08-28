@@ -112,7 +112,15 @@ const BottomNav = () => {
           <img src={icons.plan}></img>
           <BottomNavText textcol={textCol.plan}>일정</BottomNavText>
         </BottomNavBtn>
-        <BottomNavBtn onClick={() => nav("/board")}>
+        <BottomNavBtn
+          onClick={() => {
+            if (data !== "expired token") {
+              nav("/board");
+            } else {
+              alert("로그인을 먼저 진행해주세요");
+            }
+          }}
+        >
           <img src={icons.star}></img>
           <BottomNavText textcol={textCol.star}>리뷰</BottomNavText>
         </BottomNavBtn>

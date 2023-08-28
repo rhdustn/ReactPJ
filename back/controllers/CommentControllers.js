@@ -3,6 +3,7 @@ const { User, Board, Comment,Recomment } = require("../models")
 // 댓글을 보여줄 수 있는 컨트롤러
 exports.commentlist = async(req,res)=>{
     try {
+        
         const userdata = await User.findOne({ where: { id }})
         const data = await Comment.findAll({
             include:[{model:Recomment}]

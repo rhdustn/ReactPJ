@@ -24,12 +24,10 @@ import {
   RelpyBtndiv,
   Nickname,
 } from "../../components/boarddetail/boarddetail.styled";
-import { LikesBtn } from '../../components/boarddetail';
+import { LikesBtn } from "../../components/boarddetail";
 import { ipUrl } from "../../util/util";
 
-
-
-const CommentListPc = ({ comments, loginUserInfo,refetch }) => {
+const CommentListPc = ({ comments, loginUserInfo, refetch, setTrigger }) => {
   const [replies, setReplies] = useState([]);
   const [replyText, setReplyText] = useState("");
   const [activeCommentIndex, setActiveCommentIndex] = useState(null);
@@ -50,7 +48,7 @@ const CommentListPc = ({ comments, loginUserInfo,refetch }) => {
     }
   };
 
-  const { data, isLoading } = useQuery(["boardDetail", id], CommentView);
+  const { data, isLoading } = useQuery(["boardDetailPc", id], CommentView);
 
   const CommentEdit = async ({ commentIndex }) => {
     try {
@@ -60,14 +58,14 @@ const CommentListPc = ({ comments, loginUserInfo,refetch }) => {
         { withCredentials: true }
       );
       const data = response.data;
-      refetch();
+      // refetch();
       return response.data;
     } catch (error) {
       console.log(error);
     }
   };
 
-  const commentEditMutation = useMutation("commentEditMutation", CommentEdit);
+  const commentEditMutation = useMutation("commentEditMutationPc", CommentEdit);
 
   const handleEditCheck = (commentIndex) => {
     const updatedShowBoxes = [...expandedCommentIndex];
@@ -88,7 +86,7 @@ const CommentListPc = ({ comments, loginUserInfo,refetch }) => {
   const CommentDelet = async (commentIndex) => {
     try {
       const response = await ipUrl.get(`/post/commentDelet/${commentIndex}`);
-      refetch()
+      // refetch();
     } catch (error) {
       console.log("댓글 삭제 에러");
       console.log(error);
@@ -105,22 +103,22 @@ const CommentListPc = ({ comments, loginUserInfo,refetch }) => {
   //======================================
   // 대댓글
 
-  // 대댓글 보이기
-  const ReCommentView = async () => {
-    try {
-      const response = await ipUrl.get(`/post/recommentlist`);
-      refetch();
-      return response;
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // // 대댓글 보이기
+  // const ReCommentView = async () => {
+  //   try {
+  //     const response = await ipUrl.get(`/post/recommentlist`);
+  //     // refetch();
+  //     return response;
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   // 대댓글 삭제
   const ReCommentDelete = async (replyIndex) => {
     try {
       const response = await ipUrl.get(`/post/deleteRecomment/${replyIndex}`);
-      refetch();
+      // refetch();
       console.log(response);
     } catch (error) {
       console.log("댓글 삭제 에러");
@@ -157,14 +155,21 @@ const CommentListPc = ({ comments, loginUserInfo,refetch }) => {
         setReplyText("");
         setActiveCommentIndex(null);
         setIsReplyVisible(false);
-        refetch();
+        setTrigger((state) => {
+          return !state;
+        });
+        // refetch();
       } catch (error) {
         console.error("대댓글 오류:", error);
       }
     }
   };
+  const handleReplySubmitMutation = useMutation(
+    ["recommentSubmit"],
+    handleReplySubmit
+  );
 
-  const { data2, isLoading2 } = useQuery(["boardDetail", id], ReCommentView);
+  // cons { data2, isLoading2 } = useQuery(["boardDetail", id], ReCommentView);
 
   const handleCancelReply = () => {
     setReplyText("");
@@ -190,7 +195,7 @@ const CommentListPc = ({ comments, loginUserInfo,refetch }) => {
 
   useEffect(() => {
     console.log(comments);
-  })
+  });
 
   return (
     <>
@@ -212,7 +217,12 @@ const CommentListPc = ({ comments, loginUserInfo,refetch }) => {
                 </RelpyBtndiv>
               </div>
             </CommentContain2>
-            <LikesBtn comments={comments[commentIndex]} commentIndex={comment.id} loginUserInfo={loginUserInfo}  refetch={refetch}/>
+            <LikesBtn
+              comments={comments[commentIndex]}
+              commentIndex={comment.id}
+              loginUserInfo={loginUserInfo}
+              refetch={refetch}
+            />
             <div>
               {editInputIndex === comment.id && (
                 <InputContain onClose={inputDelClick}>
@@ -239,16 +249,19 @@ const CommentListPc = ({ comments, loginUserInfo,refetch }) => {
               {data && (
                 <>
                   {loginUserInfo.id === comment.user_id && (
-                      <CommentEditImg
-                        onClick={() => toggleShowBox(commentIndex)}
-                        src={`${ImgPath}/more.png`}
-                      />
+                    <CommentEditImg
+                      onClick={() => toggleShowBox(commentIndex)}
+                      src={`${ImgPath}/more.png`}
+                    />
                   )}
                 </>
               )}
             </div>
             {expandedCommentIndex === commentIndex && (
-              <ShowButtonBox2 onClose={() => toggleShowBox(commentIndex)} right={'-120px'}>
+              <ShowButtonBox2
+                onClose={() => toggleShowBox(commentIndex)}
+                right={"-120px"}
+              >
                 <div>
                   <HandleEditCheck onClick={() => handleEditCheck(comment.id)}>
                     수정
@@ -272,8 +285,11 @@ const CommentListPc = ({ comments, loginUserInfo,refetch }) => {
                 onChange={(e) => setReplyText(e.target.value)}
               />
               <RelpyBtn
-                onClick={() => handleReplySubmit({ commentIndex: comment.id })}
+                onClick={() =>
+                  handleReplySubmitMutation.mutate({ commentIndex: comment.id })
+                }
               >
+                {" "}
                 등록
               </RelpyBtn>
               <RelpyBtn2 onClick={handleCancelReply}>취소</RelpyBtn2>
