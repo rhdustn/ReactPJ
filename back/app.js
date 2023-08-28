@@ -19,6 +19,7 @@ const planRouter = require("./routers/planRouter");
 const mypageRouter = require("./routers/mypageRouter");
 const adminRouter = require("./routers/adminRouter");
 const boardRouter = require("./routers/boardlistRouter");
+const boardEditRouter = require("./routers/boardEditRouter");
 
 // // Multer 설정
 // const storage = multer.diskStorage({
@@ -103,6 +104,9 @@ app.use("/user", userRouter);
 app.use("/mypage", mypageRouter);
 app.use("/admin", adminRouter);
 app.use("/board", boardRouter);
+app.use("/board", boardEditRouter);
+
+
 
 // gptAPI 테스트 -----20230807 zerohoney
 app.use("/openAI", testGPT);

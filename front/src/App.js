@@ -27,6 +27,7 @@ import {
   LoginPc,
   SignupPc,
   PostPc,
+  BoardEditPc,
 } from "./pagesPc";
 import { useMediaQuery } from "react-responsive";
 import { styled } from "styled-components";
@@ -226,7 +227,7 @@ function App() {
         <Route
           path="/boardedit/:id"
           element={
-            isMobile ? <BoardEdit /> : <PcBody>BoardEdit pc 버전</PcBody>
+            isMobile ? <BoardEdit /> : <PcBody><BoardEditPc /></PcBody>
           }
         />
         <Route

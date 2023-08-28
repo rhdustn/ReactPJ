@@ -80,6 +80,7 @@ const Post = () => {
         />
         <PostPlan />
         <PostBtn onClick={handlePostSubmit}>등록하기</PostBtn>
+        
       </Main>
     </div>
   );
