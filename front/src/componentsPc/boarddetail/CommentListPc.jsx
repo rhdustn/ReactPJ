@@ -38,17 +38,17 @@ const CommentListPc = ({ comments, loginUserInfo, refetch, setTrigger }) => {
   const { id } = useParams();
   const ImgPath = "/imgs/icons";
 
-  const CommentView = async () => {
-    try {
-      const response = await ipUrl.get(`/post/commentlist`);
-      console.log(response);
-      return response;
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const CommentView = async () => {
+  //   try {
+  //     const response = await ipUrl.get(`/post/commentlist`);
+  //     console.log(response);
+  //     return response;
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  const { data, isLoading } = useQuery(["boardDetailPc", id], CommentView);
+  // const { data, isLoading } = useQuery(["boardDetailPc", id], CommentView);
 
   const CommentEdit = async ({ commentIndex }) => {
     try {
@@ -246,7 +246,7 @@ const CommentListPc = ({ comments, loginUserInfo, refetch, setTrigger }) => {
               )}
             </div>
             <div>
-              {data && (
+              {comment && (
                 <>
                   {loginUserInfo.id === comment.user_id && (
                     <CommentEditImg
@@ -305,7 +305,7 @@ const CommentListPc = ({ comments, loginUserInfo, refetch, setTrigger }) => {
                     <div className="nickname">{value.User}</div>
                     <div>{value.detail}</div>
                   </Reasd>
-                  {data && (
+                  {comment && (
                     <>
                       {loginUserInfo.id === value.user_id && (
                         <Xbtn onClick={() => handleReCommentDelete(value.id)}>

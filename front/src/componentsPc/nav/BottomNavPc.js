@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useQuery } from "react-query";
+import { saveUser } from "../../redux/features/useInfo";
 
 import { ipUrl } from "../../util/util";
 
@@ -16,6 +17,7 @@ const BottomNavPc = () => {
   const star2 = "/imgs/icons/star2.png";
   const default_profile = "/imgs/profiles/default_profile.jpeg";
   const ImgPath = "/imgs/profiles";
+  const dispatch = useDispatch();
 
   const nav = useNavigate();
 
@@ -84,6 +86,8 @@ const BottomNavPc = () => {
     try {
       const response = await ipUrl.get(`/mypage/getInfo`);
       const data = response.data;
+      dispatch(saveUser(data));
+
       return data;
     } catch (error) {
       console.log(error);
@@ -116,8 +120,8 @@ const BottomNavPc = () => {
           onClick={() => {
             if (data !== "expired token") {
               nav("/board");
-            }else{
-              alert('로그인을 먼저 진행해주세요')
+            } else {
+              alert("로그인을 먼저 진행해주세요");
             }
           }}
         >

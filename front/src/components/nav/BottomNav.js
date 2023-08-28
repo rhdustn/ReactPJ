@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useQuery } from "react-query";
 import axios from "axios";
 import { ipUrl } from "../../util/util";
+import { saveUser } from "../../redux/features/useInfo";
 
 import { BottomNavBox, BottomNavBtn, BottomNavText } from "./Nav.styled";
 
@@ -18,6 +19,7 @@ const BottomNav = () => {
   const ImgPath = "/imgs/profiles";
 
   const nav = useNavigate();
+  const dispatch = useDispatch();
 
   const page = useLocation().pathname;
 
@@ -84,7 +86,8 @@ const BottomNav = () => {
     try {
       const response = await ipUrl.get(`/mypage/getInfo`);
       const data = response.data;
-      console.log(data);
+      dispatch(saveUser(data));
+
       return data;
     } catch (error) {
       console.log(error);
