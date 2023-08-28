@@ -26,7 +26,7 @@ exports.loginClick = async (req, res) => {
           },
           process.env.ACCESSTOKENKEY,
           {
-            expiresIn: "1h",
+            expiresIn: "2h",
           }
         );
         // req.session.access_token = token;

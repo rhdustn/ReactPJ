@@ -63,6 +63,7 @@ exports.detailBoard = async (req, res) => {
     const { id } = req.params
     
     const data = await Board.findOne({ where: { id: id } , include:[{model:LikeBoard}] });
+    const writer = await User.findOne({where : {id : data.user_id}})
 
     data.dataValues.LikeBoards=data.dataValues.LikeBoards.map((value)=>{
         return value.dataValues.user_id
@@ -87,7 +88,7 @@ exports.detailBoard = async (req, res) => {
        
    })
    const realRealNewComment=await Promise.all(realNewComment)
-    res.json({ data:data.dataValues, commentdata: realRealNewComment,realNewComment })
+    res.json({ data:data.dataValues, commentdata: realRealNewComment,realNewComment, writer:writer })
     // res.json({data,commentdata,recommentArr});
 
 

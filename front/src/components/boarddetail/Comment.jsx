@@ -7,14 +7,14 @@ const Comment = ({ comments,setTrigger,loginUserInfo,refetch }) => {
 
   const CommentSubmit = () => {};
   return (
-    <div>
+    <>
       <CommentContainer>
         <CommentMain>
           <CommentList comments={comments} loginUserInfo={loginUserInfo}  refetch={refetch}/>
         </CommentMain>
         <CommentForm onCommentSubmit={CommentSubmit} setTrigger={setTrigger} />
       </CommentContainer>
-    </div>
+    </>
   );
 };
 

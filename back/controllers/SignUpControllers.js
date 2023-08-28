@@ -25,6 +25,7 @@ exports.SaveUserInfo = async (req, res) => {
             nickname,
             email,
             is_accept: false,
+            profile_img : 'default_profile.jpeg'
           });
           res.send("user signUp success");
         }

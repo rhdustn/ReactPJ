@@ -47,6 +47,7 @@ function App() {
 
   const PcBody = styled.div`
     width: 80%;
+    min-width: 600px;
     margin: auto;
     position: relative;
     min-height: 100vh;

@@ -23,10 +23,13 @@ import {
   BoardPlan,
   Comment,
   BoardLikes,
+  Title,
 } from "../components/boarddetail";
 import BottomNav from "../components/nav/BottomNav";
 import { create } from "../redux/features/post";
 import { ipUrl } from "../util/util";
+import TopNav from "../components/nav/TopNav";
+import { ImgSlicePc } from "../componentsPc/boarddetail";
 
 const BoardDetail = () => {
   // const [data, setData] = useState("");
@@ -76,7 +79,7 @@ const BoardDetail = () => {
     }
   };
   const handleDeleteCheck = () => {
-    const check = window.confirm("정말로 게시글을 삭제하실건가요??");
+    const check = window.confirm("게시글을 삭제하시겠습니까?");
     if (check) {
       boardDelet();
     }
@@ -98,51 +101,55 @@ const BoardDetail = () => {
     setPopup(true);
   };
   const ShowboxClick = () => {
-    setShowBox(true);
+    setShowBox(!showBox);
   };
   const XClick = () => {
     setShowBox(false);
   };
 
   return (
-    <div>{data && <>
-      <HeaderDiv>
-        <BoardLikes boardIndex={data.data.id} boardLikeArr={data.data.LikeBoards}  loginUserInfo={loginUserInfo} refetch={refetch}/>
-        {loginUserInfo.id===data.data.user_id && <ButtonBox onClick={ShowboxClick}>
-          <EditImg src={`${ImgPath}/more.png`} alt="" srcset="" />
-        </ButtonBox>}
-        {showBox && (
-          <ShowButtonBox onClose={() => setShowBox(false)}>
-            <div>
-              <EditBtnStyle onClick={boardEditClick}>수정</EditBtnStyle>
-              <DelBtnStyle onClick={handleDeleteCheck}>삭제</DelBtnStyle>
-            </div>
-          </ShowButtonBox>
-        )}
-      </HeaderDiv>
-      
-      <Main onClick={XClick}>
-        <ImgSlice />
-        <SubContentSpan>작성자 : {data.data.nickname}</SubContentSpan>
-        <TitleStyle>Title : {data.data.title}</TitleStyle>
-        <SubContentStyle>
-          <SubContentSpan>{data.data.detail}</SubContentSpan>
-        </SubContentStyle>
-        {/* <div>
-          <DayBtn DayBtnClick={DayBtnClick} />
-          <PlanBtn />
-        </div> */}
-        {popup && <DayPopup onClose={() => setPopup(false)} />}
-        <br />
-        comments
+    <>
+      <TopNav />
+      {data && <>
+      <Main>
+
+        <HeaderDiv>
+          <BoardLikes boardIndex={data.data.id} boardLikeArr={data.data.LikeBoards}  loginUserInfo={loginUserInfo} refetch={refetch}/>
+          <div className='likesNum'>{data.data.LikeBoards.length}</div>
+
+          {loginUserInfo.id===data.data.user_id &&
+          <ButtonBox onClick={ShowboxClick}>
+            <EditImg src={`${ImgPath}/more.png`} alt="" srcset="" />
+          </ButtonBox>}
+          {showBox && (
+            <ShowButtonBox onClose={() => setShowBox(false)}>
+                <EditBtnStyle onClick={boardEditClick}>수정</EditBtnStyle>
+                <DelBtnStyle onClick={handleDeleteCheck}>삭제</DelBtnStyle>
+            </ShowButtonBox>
+          )}
+        </HeaderDiv>
+
+        {/* 게시글 쓴 유저 */}
+        <div className='writer-box'>
+          <div className='profile_img'>
+            <img src={`/imgs/profiles/${data.writer.profile_img}`}></img>
+          </div>
+          <div className='nickname'>{data.writer.nickname}</div>
+        </div>
+
+        <ImgSlice images={JSON.parse(data.data.images)} />
+        
+        <div className="title">{data.data.title}</div>
+        <div className="detail">{data.data.detail}</div>
+
         <Comment comments={data.commentdata} setTrigger={setTrigger}  loginUserInfo={loginUserInfo} refetch={refetch}/>
-        <BoardLine />
-        <BottomNav />
       </Main>
+
+      <BottomNav />
     </>
     }
 
-    </div>
+    </>
   );
 };
 

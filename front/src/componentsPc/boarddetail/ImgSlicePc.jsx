@@ -46,11 +46,13 @@ const ImgSlicePc = ({images}) => {
           }}
         >
           {images.map((image, index) => (
-            <Image
-              key={index}
-              src={`${imgPath}/${image}`}
-              alt={`Image ${index + 1}`}
-            />
+            <Image>
+              <img
+                key={index}
+                src={`${imgPath}/${image}`}
+                alt={`Image ${index + 1}`}
+              />
+            </Image>
           ))}
         </ImgBox>
         <ImageBtnNext onClick={nextImage}>▶️</ImageBtnNext>
