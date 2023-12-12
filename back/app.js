@@ -69,6 +69,7 @@ app.use(
       "https://zerohoney.com",
       "http://zerohoney.com",
       "https://zerohoney.site",
+      "http://54.180.79.214"
     ],
     credentials: true,
   })

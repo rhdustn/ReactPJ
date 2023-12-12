@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const ipUrl = axios.create({
-  baseURL: "http://localhost:8080",
+  baseURL: "http://54.180.79.214:8080",
   withCredentials: true,
 });
 export { ipUrl };
